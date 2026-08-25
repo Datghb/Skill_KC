@@ -47,6 +47,7 @@ def validate_kc_response(
     if not isinstance(items, list) or not items:
         raise ValueError("KC response has no knowledge_items")
     unit_index = {unit.content_unit_id: unit for unit in bundle.content_units}
+    source_index = {source.source_id: source for source in bundle.sources}
     seen_codes: set[str] = set()
     normalized = []
     for index, raw in enumerate(items, start=1):
@@ -81,7 +82,24 @@ def validate_kc_response(
         if unknown:
             raise ValueError(f"{code}: unknown evidence {unknown}")
         item["evidence_section_ids"] = evidence_ids
-        item["resolved_evidence"] = [unit_index[value].as_dict() for value in evidence_ids]
+        resolved_evidence = []
+        for value in evidence_ids:
+            unit = unit_index[value]
+            source = source_index.get(unit.source_id)
+            resolved_evidence.append(
+                {
+                    **unit.as_dict(),
+                    "source_sha256": source.sha256 if source else None,
+                }
+            )
+        dispositions = {
+            evidence["source_disposition"] for evidence in resolved_evidence
+        }
+        quality_flags = []
+        if dispositions and dispositions <= {"lab", "assessment"}:
+            quality_flags.append("assessment_evidence_only")
+        item["resolved_evidence"] = resolved_evidence
+        item["quality_flags"] = quality_flags
         normalized.append(item)
     return {
         "schema_version": "vlearn_kc_inventory_v1",
@@ -89,4 +107,3 @@ def validate_kc_response(
         "material_bundle_sha256": bundle.bundle_sha256,
         "knowledge_items": normalized,
     }
-

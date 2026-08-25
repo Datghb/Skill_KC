@@ -25,3 +25,9 @@ def test_day01_fixture_matches_public_json_schemas() -> None:
     _validate("kc-inventory.schema.json", recorded / "kc-candidates.json")
     _validate("parent-topics.schema.json", recorded / "parent-topics.json")
 
+
+def test_teacher_review_template_matches_review_schema() -> None:
+    _validate(
+        "teacher-review.schema.json",
+        ROOT / "artifacts/teacher-reviews/inbox/review-template.json",
+    )

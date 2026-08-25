@@ -45,6 +45,35 @@ def test_replay_command_prints_replay_result(monkeypatch, capsys, tmp_path) -> N
     assert calls == [(str(tmp_path / "bundle"), str(tmp_path / "run"))]
 
 
+def test_review_audit_returns_nonzero_for_inactionable_review(
+    tmp_path, capsys
+) -> None:
+    review_path = tmp_path / "reviews.json"
+    review_path.write_text(
+        json.dumps(
+            {
+                "reviews": [
+                    {
+                        "kc_code": "missing_reason",
+                        "decision": "reject",
+                        "scores": {"accuracy": 1},
+                        "criterion_notes": {},
+                        "review_note": None,
+                        "suggested_actions": [],
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    exit_code = main(["review-audit", str(review_path)])
+    output = json.loads(capsys.readouterr().out)
+
+    assert exit_code == 2
+    assert output["issue_counts"]["missing_rationale"] == 1
+
+
 @pytest.mark.parametrize(
     ("environment", "message"),
     [

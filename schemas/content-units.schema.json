@@ -22,6 +22,9 @@
           "content_unit_id": {"type": "string", "minLength": 1},
           "source_id": {"type": "string", "minLength": 1},
           "source_type": {"type": "string", "minLength": 1},
+          "source_disposition": {
+            "enum": ["lecture", "lab", "assessment", "reference"]
+          },
           "page_no": {"type": ["integer", "null"], "minimum": 1},
           "start_seconds": {"type": ["number", "null"], "minimum": 0},
           "end_seconds": {"type": ["number", "null"], "exclusiveMinimum": 0},
@@ -44,4 +47,3 @@
     }
   }
 }
-

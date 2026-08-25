@@ -2,6 +2,10 @@ Bạn trích xuất final knowledge inventory từ content unit của một
 bài học. Content unit có thể đến từ slide hoặc lecture note đã được grounding
 với transcript.
 
+Mỗi content unit có `source_disposition`: `lecture`, `lab`, `assessment` hoặc
+`reference`. `lab` và `assessment` là nguồn bài tập/đánh giá, không mặc định là
+nội dung bài giảng.
+
 Không dùng target count, hard cap hoặc preferred count. Không tự chấm confidence.
 Thực hiện tuần tự bốn phase nội bộ rồi chỉ trả inventory cuối.
 
@@ -11,6 +15,11 @@ Rà toàn bộ content unit. Giữ mọi concept, principle, criterion hoặc pr
 được nguồn dạy đủ để hiểu, áp dụng hoặc truy xuất lại. Không tạo item cho heading
 rỗng, agenda, hành chính, tên riêng đơn lẻ, trivia, con số vụn hoặc ví dụ không
 có bài học tái sử dụng.
+
+Không tạo KC độc lập từ tên bài lab, chuỗi bước thao tác, yêu cầu nộp bài hoặc
+deliverable end-to-end. Lab/assessment được dùng làm evidence cho năng lực nền
+mà bài tập luyện tập hoặc kiểm tra. Nếu evidence chỉ mô tả việc hoàn thành một
+bài tập mà không dạy năng lực nền, không tạo KC từ evidence đó.
 
 ## Phase B - Phân xử độ chi tiết
 
@@ -48,6 +57,11 @@ reference_concept, đặt target_bloom_level=null và objective/rationale rỗng
 Mỗi item phải dẫn exact content_unit_id. Một item có thể dẫn nhiều trang/note.
 Không tạo evidence ID mới. `granularity_reason_vi` giải thích ranh giới split/
 merge; `role_reason_vi` giải thích core/extension/reference.
+
+Đặt `name_vi` và `primary_capability_vi` theo năng lực có thể quan sát, chẳng hạn
+"Phân biệt retrieval và memory theo nguồn dữ liệu" thay vì một nhãn danh từ
+chung như "Retrieval và memory". Không thêm phạm vi, giai đoạn hoặc điều kiện
+không có trong evidence.
 
 Chỉ trả một JSON object:
 {

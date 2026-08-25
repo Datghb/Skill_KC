@@ -8,9 +8,11 @@ from pathlib import Path
 from typing import Sequence
 
 from .contracts import load_material_bundle
+from .io import read_json
 from .pipeline import KCPipeline
 from .providers import GatewayJsonGenerator, GeminiEmbedder
 from .replay import replay_run
+from .review_quality import audit_teacher_reviews
 
 
 def _prompt(name: str, override: str | None) -> str:
@@ -40,6 +42,11 @@ def build_parser() -> argparse.ArgumentParser:
     replay = subparsers.add_parser("replay", help="Replay and verify recorded artifacts")
     replay.add_argument("input")
     replay.add_argument("recorded")
+
+    review_audit = subparsers.add_parser(
+        "review-audit", help="Audit teacher reviews for actionable rationale"
+    )
+    review_audit.add_argument("input")
 
     run = subparsers.add_parser("run", help="Run extraction and clustering")
     run.add_argument("input")
@@ -94,6 +101,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "replay":
         _print(replay_run(input_dir=args.input, recorded_dir=args.recorded))
         return 0
+    if args.command == "review-audit":
+        report = audit_teacher_reviews(read_json(Path(args.input)))
+        _print(report)
+        return 0 if report["quality_gate_pass"] else 2
 
     api_key = os.getenv(args.gateway_key_env, "").strip()
     if not api_key:

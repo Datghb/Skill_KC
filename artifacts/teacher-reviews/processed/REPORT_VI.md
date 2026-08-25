@@ -167,8 +167,22 @@ OpenAI trực tiếp Day 06, Day 10 và Day 14 đã dùng trong benchmark V1. V�
 5. Review trực tiếp một mẫu thuộc benchmark OpenAI Day 06, Day 10 và Day 14 trước
    khi quyết định production.
 
+## Quality gate tự động
+
+Pipeline hiện có lệnh `vlearn-kc review-audit <review.json>`. Khi áp dụng quy tắc
+chặt hơn lên 90 KC phân tích được, gate phát hiện 16 review chưa có rationale có
+thể hành động, bốn action chuyển nhóm chưa có nhóm đích và một quyết định revise
+4/4/4 không có giải thích. Kết quả nằm trong `review-quality-audit.json`.
+
+Con số 16 không thay thế nhóm tám case “hoàn toàn thiếu tín hiệu” trong phân tích
+lỗi. Nó dùng chuẩn vận hành mới: action dạng cũ như `rename_component` cũng phải
+có `reason_tag` hoặc ghi chú trước khi được dùng để sửa pipeline.
+
 ## Artifact đầu ra
 
+- `ERROR_ANALYSIS_VI.md` và `error-analysis.json`: phân tích 16 reject và 5
+  revise theo mức độ bằng chứng.
+- `review-quality-audit.json`: kết quả quality gate tự động trên 90 review.
 - `analysis-ready-reviews.json`: 90 KC không có xung đột, dùng cho KPI tạm thời.
 - `normalized-reviews.json`: 120 review hoàn tất, ba review dở và 25 group review
   đã được chuẩn hóa; reviewer được thay bằng mã nội bộ.

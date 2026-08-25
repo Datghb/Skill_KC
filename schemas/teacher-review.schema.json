@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vlearn.local/schemas/teacher-review.schema.json",
+  "title": "VLearn Teacher KC Review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_day", "reviewer_id", "reviewed_at", "reviews"],
+  "properties": {
+    "schema_version": {"const": "teacher_review_v2"},
+    "source_day": {"type": "string", "minLength": 1},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "reviewed_at": {"type": "string", "format": "date"},
+    "reviews": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kc_code", "decision", "scores", "edited_name_vi",
+          "edited_description_vi", "edited_learning_objective_vi",
+          "issue_tags", "comment_vi", "suggested_actions"
+        ],
+        "properties": {
+          "kc_code": {"type": "string", "minLength": 1},
+          "decision": {"enum": ["accept", "revise", "reject"]},
+          "scores": {
+            "type": "object",
+            "additionalProperties": {"type": "integer", "minimum": 1, "maximum": 5}
+          },
+          "edited_name_vi": {"type": ["string", "null"]},
+          "edited_description_vi": {"type": ["string", "null"]},
+          "edited_learning_objective_vi": {"type": ["string", "null"]},
+          "issue_tags": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "comment_vi": {"type": "string"},
+          "suggested_actions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["action", "reason_tag"],
+              "properties": {
+                "action": {
+                  "enum": ["rename_component", "edit_content", "move_component", "remove_component"]
+                },
+                "reason_tag": {"type": "string", "minLength": 1},
+                "target_group_code": {"type": "string", "minLength": 1},
+                "note_vi": {"type": "string"}
+              },
+              "allOf": [
+                {
+                  "if": {"properties": {"action": {"const": "move_component"}}},
+                  "then": {"required": ["target_group_code"]}
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

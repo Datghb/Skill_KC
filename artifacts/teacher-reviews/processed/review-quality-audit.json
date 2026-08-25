@@ -1,0 +1,33 @@
+{
+  "schema_version": "vlearn_teacher_review_audit_v1",
+  "review_count": 90,
+  "quality_gate_pass": false,
+  "issue_counts": {
+    "missing_rationale": 16,
+    "missing_move_target": 4,
+    "score_decision_mismatch": 1
+  },
+  "issues": [
+    {"kc_code": "dynamic_few_shot_retrieval", "issue": "missing_rationale"},
+    {"kc_code": "dynamic_few_shot_retrieval", "issue": "missing_move_target"},
+    {"kc_code": "generated_knowledge_prompting", "issue": "missing_rationale"},
+    {"kc_code": "generated_knowledge_prompting", "issue": "missing_move_target"},
+    {"kc_code": "tool_declaration_with_decorator", "issue": "missing_rationale"},
+    {"kc_code": "build_grounded_tool_agent", "issue": "missing_rationale"},
+    {"kc_code": "agent_behavior_contracts", "issue": "missing_rationale"},
+    {"kc_code": "create_agent_tool_loop", "issue": "missing_rationale"},
+    {"kc_code": "tool_use_control_flow_patterns", "issue": "missing_rationale"},
+    {"kc_code": "tool_use_control_flow_patterns", "issue": "missing_move_target"},
+    {"kc_code": "embedding_generation_pipeline", "issue": "missing_rationale"},
+    {"kc_code": "grounded_answer_source_fallback", "issue": "missing_rationale"},
+    {"kc_code": "ai_data_inventory", "issue": "missing_rationale"},
+    {"kc_code": "vector_store_data_model", "issue": "missing_rationale"},
+    {"kc_code": "vector_store_data_model", "issue": "missing_move_target"},
+    {"kc_code": "metadata_guided_retrieval", "issue": "missing_rationale"},
+    {"kc_code": "metadata_guided_retrieval", "issue": "score_decision_mismatch"},
+    {"kc_code": "data_quality_first_retrieval_principle", "issue": "missing_rationale"},
+    {"kc_code": "retrieval_vs_memory", "issue": "missing_rationale"},
+    {"kc_code": "mcp_capability_surface", "issue": "missing_rationale"},
+    {"kc_code": "mcp_tool_discovery_and_invocation", "issue": "missing_rationale"}
+  ]
+}

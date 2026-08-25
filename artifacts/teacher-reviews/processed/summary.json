@@ -62,6 +62,21 @@
       "pass_plus_revise": 0.822222
     }
   },
+  "error_analysis": {
+    "non_pass_kcs": 21,
+    "missing_rationale": 8,
+    "placement_or_removal": 5,
+    "naming_or_content": 4,
+    "kc_assessment_boundary": 2,
+    "evidence_visibility_or_version_mismatch": 2
+  },
+  "review_quality_gate": {
+    "quality_gate_pass": false,
+    "review_count": 90,
+    "missing_rationale": 16,
+    "missing_move_target": 4,
+    "score_decision_mismatch": 1
+  },
   "per_reviewer": [
     {
       "reviewer_key": "reviewer-01",

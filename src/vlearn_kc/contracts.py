@@ -9,6 +9,7 @@ from .io import read_json, sha256_json, sha256_text
 
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+SOURCE_DISPOSITIONS = {"lecture", "lab", "assessment", "reference"}
 
 
 class ContractError(ValueError):
@@ -21,6 +22,7 @@ class SourceArtifact:
     source_type: str
     sha256: str
     uri: str | None = None
+    source_disposition: str = "lecture"
 
 
 @dataclass(frozen=True)
@@ -34,12 +36,14 @@ class ContentUnit:
     start_seconds: float | None
     end_seconds: float | None
     locator: str | None = None
+    source_disposition: str = "lecture"
 
     def as_dict(self) -> dict[str, Any]:
         return {
             "content_unit_id": self.content_unit_id,
             "source_id": self.source_id,
             "source_type": self.source_type,
+            "source_disposition": self.source_disposition,
             "page_no": self.page_no,
             "start_seconds": self.start_seconds,
             "end_seconds": self.end_seconds,
@@ -80,12 +84,30 @@ def _validate_source(raw: dict[str, Any], index: int) -> SourceArtifact:
     digest = _required_text(raw, "sha256", context)
     if not SHA256_RE.fullmatch(digest):
         raise ContractError(f"{context}: sha256 must be 64 lowercase hex chars")
+    source_type = _required_text(raw, "source_type", context)
+    disposition = str(raw.get("source_disposition") or "").strip()
+    if not disposition:
+        disposition = _default_disposition(source_type)
+    if disposition not in SOURCE_DISPOSITIONS:
+        raise ContractError(f"{context}: invalid source_disposition {disposition!r}")
     return SourceArtifact(
         source_id=_required_text(raw, "source_id", context),
-        source_type=_required_text(raw, "source_type", context),
+        source_type=source_type,
         sha256=digest,
         uri=str(raw.get("uri") or "").strip() or None,
+        source_disposition=disposition,
     )
+
+
+def _default_disposition(source_type: str) -> str:
+    normalized = source_type.strip().lower()
+    if normalized in {"lab", "hands_on", "exercise"}:
+        return "lab"
+    if normalized in {"assessment", "quiz", "exam"}:
+        return "assessment"
+    if normalized in {"reference", "reading"}:
+        return "reference"
+    return "lecture"
 
 
 def _optional_number(value: Any, field: str, context: str) -> float | None:
@@ -97,11 +119,11 @@ def _optional_number(value: Any, field: str, context: str) -> float | None:
 
 
 def _validate_unit(
-    raw: dict[str, Any], index: int, source_ids: set[str]
+    raw: dict[str, Any], index: int, sources: dict[str, SourceArtifact]
 ) -> ContentUnit:
     context = f"content_units[{index}]"
     source_id = _required_text(raw, "source_id", context)
-    if source_id not in source_ids:
+    if source_id not in sources:
         raise ContractError(f"{context}: unknown source_id {source_id!r}")
     content = _required_text(raw, "content", context)
     digest = _required_text(raw, "content_sha256", context)
@@ -123,6 +145,11 @@ def _validate_unit(
         raise ContractError(
             f"{context}: page_no, timestamp range or stable locator is required"
         )
+    disposition = str(raw.get("source_disposition") or "").strip()
+    if not disposition:
+        disposition = sources[source_id].source_disposition
+    if disposition not in SOURCE_DISPOSITIONS:
+        raise ContractError(f"{context}: invalid source_disposition {disposition!r}")
     return ContentUnit(
         content_unit_id=_required_text(raw, "content_unit_id", context),
         source_id=source_id,
@@ -133,6 +160,7 @@ def _validate_unit(
         start_seconds=start,
         end_seconds=end,
         locator=locator,
+        source_disposition=disposition,
     )
 
 
@@ -167,8 +195,9 @@ def load_material_bundle(root: Path | str) -> MaterialBundle:
     raw_units = unit_payload.get("content_units")
     if not isinstance(raw_units, list) or not raw_units:
         raise ContractError("content_units: non-empty content_units list is required")
+    source_index = {source.source_id: source for source in sources}
     units = tuple(
-        _validate_unit(raw, index, set(source_ids)) for index, raw in enumerate(raw_units)
+        _validate_unit(raw, index, source_index) for index, raw in enumerate(raw_units)
     )
     unit_ids = [unit.content_unit_id for unit in units]
     if len(unit_ids) != len(set(unit_ids)):

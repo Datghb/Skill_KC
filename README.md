@@ -55,6 +55,16 @@ Expected Day 1 replay:
 verified: true
 ```
 
+Audit teacher review files before using revise/reject labels to tune extraction:
+
+```bash
+.venv/bin/vlearn-kc review-audit path/to/reviews.json
+```
+
+The audit fails its quality gate when a non-pass decision lacks an actionable
+rationale, a move lacks a target group, or high scores conflict with an
+unexplained non-pass decision.
+
 ## Run with providers
 
 Export configuration explicitly; the package does not load `.env` by itself.

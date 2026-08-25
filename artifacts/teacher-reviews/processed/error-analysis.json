@@ -1,0 +1,72 @@
+{
+  "schema_version": "teacher_review_error_analysis_v1",
+  "source_dataset_id": "phase1_mixed_source_deepseek_2026_08_19",
+  "analysis_ready_kcs": 90,
+  "pass": 69,
+  "revise": 5,
+  "reject": 16,
+  "non_pass": 21,
+  "signal_taxonomy": {
+    "missing_rationale": 8,
+    "placement_or_removal": 5,
+    "naming_or_content": 4,
+    "kc_assessment_boundary": 2,
+    "evidence_visibility_or_version_mismatch": 2
+  },
+  "by_day": [
+    {"day": 4, "total": 40, "pass": 32, "revise": 0, "reject": 8},
+    {"day": 7, "total": 30, "pass": 19, "revise": 5, "reject": 6},
+    {"day": 9, "total": 20, "pass": 18, "revise": 0, "reject": 2}
+  ],
+  "cases": {
+    "kc_assessment_boundary": [
+      "tool_output_grounding",
+      "mini_retrieval_integration"
+    ],
+    "evidence_visibility_or_version_mismatch": [
+      "embedding_model_selection",
+      "ai_data_strategy_selection"
+    ],
+    "naming_or_content": [
+      "vector_database_selection",
+      "embedding_generation_pipeline",
+      "data_quality_first_retrieval_principle",
+      "retrieval_vs_memory"
+    ],
+    "placement_or_removal": [
+      "dynamic_few_shot_retrieval",
+      "generated_knowledge_prompting",
+      "tool_declaration_with_decorator",
+      "tool_use_control_flow_patterns",
+      "vector_store_data_model"
+    ],
+    "missing_rationale": [
+      "build_grounded_tool_agent",
+      "agent_behavior_contracts",
+      "create_agent_tool_loop",
+      "grounded_answer_source_fallback",
+      "ai_data_inventory",
+      "metadata_guided_retrieval",
+      "mcp_capability_surface",
+      "mcp_tool_discovery_and_invocation"
+    ]
+  },
+  "independent_judge_disagreement": {
+    "human_non_pass_cases": 21,
+    "judge_recommendation_mismatch": 21,
+    "judge_status": "independent_uncalibrated"
+  },
+  "lab_resolution": {
+    "policy": "Lab and hands-on content are assessment sources. Do not create standalone KCs from exercise names, steps, or deliverables; link assessment tasks to underlying KCs.",
+    "tool_output_grounding": "retain_as_underlying_kc",
+    "mini_retrieval_integration": "reclassify_as_assessment_task"
+  },
+  "recommended_sequence": [
+    "Tag lab sources as assessment and map assessment tasks to underlying KCs.",
+    "Verify review UI evidence excerpts and source hashes.",
+    "Require reason tags for revise and reject decisions.",
+    "Require target group and rationale for move actions.",
+    "Approve naming revisions before changing extraction prompts.",
+    "Re-review missing-rationale cases before prompt tuning."
+  ]
+}

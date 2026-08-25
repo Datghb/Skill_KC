@@ -17,3 +17,7 @@ hoặc thông tin cá nhân không cần thiết, hãy loại bỏ trước khi 
 File review nên có `kc_code` hoặc một mã KC tương đương để đối chiếu với output
 gốc. Có thể tham khảo `review-template.json`; tuy nhiên vẫn giữ nguyên file giảng
 viên gửi nếu cấu trúc của họ khác mẫu.
+
+Với review mới, revise/reject phải có `issue_tags` hoặc `comment_vi`. Action
+`move_component` phải ghi `target_group_code` và `reason_tag`. Chạy
+`vlearn-kc review-audit <review.json>` để phát hiện review chưa đủ dữ liệu xử lý.

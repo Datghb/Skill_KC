@@ -4,7 +4,7 @@ from dataclasses import replace
 
 import pytest
 
-from vlearn_kc.contracts import ContentUnit, MaterialBundle
+from vlearn_kc.contracts import ContentUnit, MaterialBundle, SourceArtifact
 from vlearn_kc.extraction import validate_kc_response
 
 
@@ -18,13 +18,21 @@ def _bundle() -> MaterialBundle:
         page_no=1,
         start_seconds=None,
         end_seconds=None,
+        source_disposition="lab",
     )
     return MaterialBundle(
         lesson_id="phase1-day01",
         source_slug="day01-source",
         day=1,
         title="Day 1",
-        sources=(),
+        sources=(
+            SourceArtifact(
+                source_id="slide-v1",
+                source_type="slide",
+                sha256="c" * 64,
+                source_disposition="lab",
+            ),
+        ),
         content_units=(unit,),
         bundle_sha256="b" * 64,
     )
@@ -55,6 +63,12 @@ def test_validate_kc_response_resolves_only_bundle_evidence() -> None:
     )
 
     assert result["knowledge_items"][0]["resolved_evidence"][0]["page_no"] == 1
+    evidence = result["knowledge_items"][0]["resolved_evidence"][0]
+    assert evidence["source_sha256"] == "c" * 64
+    assert evidence["source_disposition"] == "lab"
+    assert result["knowledge_items"][0]["quality_flags"] == [
+        "assessment_evidence_only"
+    ]
 
 
 def test_validate_kc_response_rejects_unknown_evidence() -> None:
@@ -68,4 +82,3 @@ def test_validate_kc_response_rejects_duplicate_code() -> None:
 
     with pytest.raises(ValueError, match="duplicate KC code"):
         validate_kc_response(response, _bundle())
-

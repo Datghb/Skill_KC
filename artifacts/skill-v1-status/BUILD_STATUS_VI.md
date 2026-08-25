@@ -9,10 +9,10 @@
 
 | Nhóm | Chỉ số | Kết quả |
 |---|---|---:|
-| Build | Hạng mục kỹ thuật V1 hoàn thành | 7/7 |
+| Build | Hạng mục kỹ thuật V1 hoàn thành | 8/8 |
 | Build | Skill validator | PASS |
-| Kiểm thử | Automated tests | 58 PASS |
-| Kiểm thử | Code coverage | 82% |
+| Kiểm thử | Automated tests | 65 PASS |
+| Kiểm thử | Code coverage | 83% |
 | Chạy thực tế | Bộ slide chạy thành công | 3/3 |
 | Chạy thực tế | Content unit đã xử lý | 137 |
 | Đầu ra | Knowledge item | 82 |
@@ -40,6 +40,7 @@
 | Embedding và Ward clustering | Hoàn thành |
 | Parent refinement | Hoàn thành |
 | Validation, bounded repair và replay | Hoàn thành |
+| Review quality gate và evidence provenance | Hoàn thành |
 | Wheel, checksum, test và tài liệu vận hành | Hoàn thành |
 
 **Tiến độ phạm vi kỹ thuật V1: 100%.** Con số này chỉ nói về các hạng mục đã
@@ -107,8 +108,8 @@ trong 78 KC của ba live run OpenAI Day 06, Day 10 và Day 14. Vì vậy số l
 
 ## Câu báo cáo ngắn
 
-> Skill trích xuất KC V1 đã hoàn thành 100% phạm vi kỹ thuật, vượt qua 58 test với
-> coverage 82% và chạy thành công 3/3 bộ slide. Hệ thống đã xử lý 137 content
+> Skill trích xuất KC V1 đã hoàn thành 100% phạm vi kỹ thuật, vượt qua 65 test với
+> coverage 83% và chạy thành công 3/3 bộ slide. Hệ thống đã xử lý 137 content
 > unit, tạo 78 KC có thể theo dõi và 100% item có evidence. Hiện Skill sẵn sàng
 > demo hoặc pilot có giảng viên kiểm duyệt; bước còn lại trước production là bổ
 > sung human review trên đúng benchmark mới và nâng độ ổn định first-pass.

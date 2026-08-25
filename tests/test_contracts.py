@@ -107,3 +107,27 @@ def test_load_material_bundle_accepts_stable_derived_locator(tmp_path: Path) -> 
     bundle = load_material_bundle(root)
 
     assert bundle.content_units[0].locator == "supplemental:001"
+
+
+def test_load_material_bundle_inherits_source_disposition(tmp_path: Path) -> None:
+    root = build_bundle(tmp_path / "bundle")
+    sources = json.loads((root / "sources.json").read_text(encoding="utf-8"))
+    sources["sources"][0]["source_disposition"] = "lab"
+    _write_json(root / "sources.json", sources)
+
+    bundle = load_material_bundle(root)
+
+    assert bundle.sources[0].source_disposition == "lab"
+    assert bundle.content_units[0].source_disposition == "lab"
+
+
+def test_load_material_bundle_rejects_invalid_source_disposition(
+    tmp_path: Path,
+) -> None:
+    root = build_bundle(tmp_path / "bundle")
+    sources = json.loads((root / "sources.json").read_text(encoding="utf-8"))
+    sources["sources"][0]["source_disposition"] = "homework-ish"
+    _write_json(root / "sources.json", sources)
+
+    with pytest.raises(ContractError, match="invalid source_disposition"):
+        load_material_bundle(root)

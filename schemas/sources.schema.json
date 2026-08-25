@@ -18,6 +18,9 @@
         "properties": {
           "source_id": {"type": "string", "minLength": 1},
           "source_type": {"type": "string", "minLength": 1},
+          "source_disposition": {
+            "enum": ["lecture", "lab", "assessment", "reference"]
+          },
           "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
           "uri": {"type": "string", "minLength": 1}
         }
@@ -25,4 +28,3 @@
     }
   }
 }
-

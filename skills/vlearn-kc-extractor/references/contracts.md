@@ -5,8 +5,12 @@
 A material bundle is one directory containing:
 
 - `lesson.json`: lesson identity and `source_slug`.
-- `sources.json`: stable source IDs and hashes.
-- `content_units.json`: grounded text units with stable IDs and content hashes.
+- `sources.json`: stable source IDs, hashes, and optional `source_disposition`.
+- `content_units.json`: grounded text units with stable IDs, content hashes, and
+  an optional disposition override.
+
+The supported dispositions are `lecture`, `lab`, `assessment`, and `reference`.
+When omitted, the loader infers a backward-compatible default from source type.
 
 All three files must use the same `source_slug`. Source locators must be stable and must not be absolute local paths. This skill does not convert raw PDF, presentation, audio, video, or transcript files.
 
