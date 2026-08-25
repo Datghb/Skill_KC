@@ -1,0 +1,195 @@
+{
+  "schema_version": "teacher_review_disagreements_v1",
+  "items": [
+    {
+      "kc_key": "9:human_in_the_loop_placement",
+      "reviewer-01": {
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        }
+      },
+      "reviewer-02": {
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        }
+      }
+    },
+    {
+      "kc_key": "9:langgraph_orchestration_model",
+      "reviewer-01": {
+        "decision": "revise",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        }
+      },
+      "reviewer-02": {
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        }
+      }
+    },
+    {
+      "kc_key": "9:multi_agent_shared_state_schema",
+      "reviewer-01": {
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        }
+      },
+      "reviewer-02": {
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        }
+      }
+    },
+    {
+      "kc_key": "9:single_agent_reliability_failure_propagation",
+      "reviewer-01": {
+        "decision": "revise",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        }
+      },
+      "reviewer-02": {
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        }
+      }
+    },
+    {
+      "kc_key": "9:supervisor_responsibility_boundary",
+      "reviewer-01": {
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        }
+      },
+      "reviewer-02": {
+        "decision": "revise",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 3,
+          "naming_clarity": 4
+        }
+      }
+    },
+    {
+      "kc_key": "9:supervisor_worker_anti_patterns",
+      "reviewer-01": {
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        }
+      },
+      "reviewer-02": {
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        }
+      }
+    },
+    {
+      "kc_key": "9:supervisor_worker_architecture",
+      "reviewer-01": {
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        }
+      },
+      "reviewer-02": {
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        }
+      }
+    },
+    {
+      "kc_key": "9:upgrade_rag_artifact_to_supervisor_worker_system",
+      "reviewer-01": {
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        }
+      },
+      "reviewer-02": {
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        }
+      }
+    },
+    {
+      "kc_key": "9:worker_design_boundary",
+      "reviewer-01": {
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        }
+      },
+      "reviewer-02": {
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        }
+      }
+    },
+    {
+      "kc_key": "9:worker_failure_handling_and_graceful_degradation",
+      "reviewer-01": {
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        }
+      },
+      "reviewer-02": {
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        }
+      }
+    }
+  ]
+}

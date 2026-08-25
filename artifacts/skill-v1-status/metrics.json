@@ -57,12 +57,28 @@
   },
   "teacher_review": {
     "source_dataset_matches_current_benchmark": false,
-    "completed_judgments": 10,
-    "unique_reviewed_kcs": 7,
-    "dataset_total_kcs": 501,
-    "pass_judgments": 10,
-    "mean_accuracy": 4.0,
-    "mean_granularity": 4.0,
-    "mean_naming_clarity": 4.0
+    "completed_judgments": 120,
+    "partial_judgments": 3,
+    "unique_reviewed_kcs": 100,
+    "dataset_total_kcs": 500,
+    "unique_kc_coverage": 0.2,
+    "reference_reviewer_decisions": {
+      "pass": 75,
+      "revise": 6,
+      "reject": 19
+    },
+    "overlap_kcs": 20,
+    "decision_exact_match_rate": 0.5,
+    "cohens_kappa": 0.004975,
+    "completed_group_reviews": 25,
+    "analysis_policy": "exclude_disputed_overlap",
+    "analysis_ready_kcs": 90,
+    "excluded_disputed_kcs": 10,
+    "analysis_ready_decisions": {
+      "pass": 69,
+      "revise": 5,
+      "reject": 16
+    },
+    "analysis_ready_pass_plus_revise_rate": 0.822222
   }
 }

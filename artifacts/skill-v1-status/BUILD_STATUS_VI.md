@@ -25,10 +25,10 @@
 | Độ bền | Parent refinement thành công lần đầu | 3/3 |
 | Vận hành | Tổng thời gian ba run | 807,84 giây |
 | Vận hành | Chi phí ba run thành công | $0,141489 |
-| Human review | Lượt chấm hoàn tất | 10 |
-| Human review | KC duy nhất đã chấm | 7/501 |
-| Human review | Quyết định pass | 10/10 |
-| Human review | Điểm trung bình ba tiêu chí | 4,0/5 |
+| Human review | Lượt chấm hoàn tất | 120 |
+| Human review | KC duy nhất đã chấm | 100/500 |
+| Human review | KC dùng cho KPI sau loại xung đột | 90/100 |
+| Human review | Phân bố KPI | 69 pass / 5 revise / 16 reject |
 
 ## Tiến độ build
 
@@ -79,12 +79,12 @@ mastery. Báo cáo chi tiết riêng nằm tại `KC_TYPE_METRICS_VI.md`.
 
 ## Human review hiện có
 
-Hai file review cung cấp tín hiệu ban đầu tốt: 10/10 lượt chấm là `pass`, điểm
-accuracy, granularity và naming clarity cùng đạt trung bình 4/5. Ba KC được hai
-người cùng chấm có kết quả khớp hoàn toàn.
+Hai file mới có 120 lượt chấm hoàn tất trên 100 KC duy nhất. Mười KC có đánh giá
+bất đồng được giữ riêng và loại khỏi KPI chính. Bộ phân tích còn 90 KC, gồm 69
+pass, 5 revise và 16 reject; `pass + revise` đạt 82,2%.
 
-Tuy nhiên, bảy KC đã chấm thuộc dataset phase1 cũ. Chúng không nằm trong 78 KC
-của ba live run Day 06, Day 10 và Day 14. Vì vậy số liệu human review hiện tại
+Các KC đã chấm thuộc dataset `phase1_mixed_source_deepseek_2026_08_19`, không nằm
+trong 78 KC của ba live run OpenAI Day 06, Day 10 và Day 14. Vì vậy số liệu này
 **không được dùng để khẳng định chất lượng của benchmark mới**.
 
 ## Đọc trạng thái đúng cách

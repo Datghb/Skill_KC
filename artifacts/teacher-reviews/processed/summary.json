@@ -1,54 +1,137 @@
 {
-  "schema_version": "teacher_review_summary_v1",
-  "source_dataset_id": "phase1_full15_kc_clustering_luna_2026_08_03",
+  "schema_version": "teacher_review_summary_v2",
+  "source_dataset_id": "phase1_mixed_source_deepseek_2026-08-19",
   "input_files": 2,
   "reviewers": 2,
-  "dataset_total_kcs": 501,
-  "completed_review_judgments": 10,
-  "unique_reviewed_kcs": 7,
-  "unique_kc_coverage": 0.013972,
-  "covered_lesson_days": [1, 3, 9],
-  "lesson_day_coverage": 0.2,
-  "completed_group_reviews": 0,
-  "decisions": {
-    "pass": 10,
-    "edit": 0,
-    "reject": 0
+  "dataset_total_kcs": 500,
+  "dataset_total_groups": 132,
+  "completed_review_judgments": 120,
+  "partial_review_judgments": 3,
+  "unique_reviewed_kcs": 100,
+  "unique_kc_coverage": 0.2,
+  "completed_group_reviews": 25,
+  "decisions_all_judgments": {
+    "pass": 86,
+    "reject": 26,
+    "revise": 8
   },
-  "decision_rates": {
-    "pass": 1.0,
-    "edit": 0.0,
-    "reject": 0.0
+  "mean_scores_all_judgments": {
+    "accuracy": 3.35,
+    "granularity": 3.3417,
+    "naming_clarity": 3.3083
   },
-  "mean_dimension_scores": {
-    "accuracy": 4.0,
-    "granularity": 4.0,
-    "naming_clarity": 4.0
+  "kc_suggested_action_counts": {
+    "edit_content": 1,
+    "move_component": 4,
+    "remove_component": 3,
+    "rename_component": 4,
+    "unsure": 1
   },
-  "double_reviewed_kcs": 3,
-  "overlap_agreement": {
-    "decision_exact_match": 1.0,
-    "dimension_scores_exact_match": 1.0,
-    "importance_exact_match": 1.0,
-    "cohens_kappa": null,
-    "cohens_kappa_reason": "All overlapping decisions are pass, so kappa is not informative."
+  "group_decisions": {
+    "pass": 16,
+    "reject": 3,
+    "revise": 6
   },
-  "source_metadata_mismatches": [
+  "mean_group_scores": {
+    "grouping_fit": 3.64,
+    "topic_name_fit": 3.48,
+    "topic_distinctness": 3.64,
+    "learning_objective_alignment": 3.64
+  },
+  "group_suggested_action_counts": {
+    "clarify_boundary": 1,
+    "rename_topic": 4
+  },
+  "analysis_policy": {
+    "exclude_disputed_overlap_from_quality_kpis": true,
+    "retain_disputed_reviews_for_adjudication": true,
+    "reference_reviewer": "reviewer-02"
+  },
+  "analysis_ready": {
+    "kcs": 90,
+    "excluded_disputed_kcs": 10,
+    "decisions": {
+      "pass": 69,
+      "revise": 5,
+      "reject": 16
+    },
+    "decision_rates": {
+      "pass": 0.766667,
+      "revise": 0.055556,
+      "reject": 0.177778,
+      "pass_plus_revise": 0.822222
+    }
+  },
+  "per_reviewer": [
     {
-      "source_file": "kc-review-phase1-duonggg-2026-08-25.json",
-      "reported_reviewed_kcs": 4,
-      "detected_completed_reviews": 7
+      "reviewer_key": "reviewer-01",
+      "reported_reviewed_kcs": 20,
+      "completed_kc_reviews": 20,
+      "partial_kc_reviews": 0,
+      "decisions": {
+        "pass": 11,
+        "reject": 7,
+        "revise": 2
+      },
+      "mean_scores": {
+        "accuracy": 2.95,
+        "granularity": 2.95,
+        "naming_clarity": 2.95
+      },
+      "completed_group_reviews": 0,
+      "group_decisions": {},
+      "covered_lesson_days": [
+        9
+      ]
     },
     {
-      "source_file": "kc-review-phase1-hieu-2026-08-25.json",
-      "reported_reviewed_kcs": 0,
-      "detected_completed_reviews": 3
+      "reviewer_key": "reviewer-02",
+      "reported_reviewed_kcs": 100,
+      "completed_kc_reviews": 100,
+      "partial_kc_reviews": 3,
+      "decisions": {
+        "pass": 75,
+        "reject": 19,
+        "revise": 6
+      },
+      "mean_scores": {
+        "accuracy": 3.43,
+        "granularity": 3.42,
+        "naming_clarity": 3.38
+      },
+      "completed_group_reviews": 25,
+      "group_decisions": {
+        "pass": 16,
+        "reject": 3,
+        "revise": 6
+      },
+      "covered_lesson_days": [
+        4,
+        7,
+        9
+      ]
     }
   ],
-  "artifact_linkage": {
-    "matched_unique_kcs_in_available_phase1_snapshot": 3,
-    "unmatched_unique_kcs_in_available_phase1_snapshot": 4,
-    "matched_unique_kcs_in_current_day06_day10_day14_benchmark": 0
-  },
-  "quality_conclusion": "Positive signal only; sample coverage is insufficient for production acceptance or for updating the current benchmark human-quality status."
+  "pairwise_agreement": [
+    {
+      "reviewers": [
+        "reviewer-01",
+        "reviewer-02"
+      ],
+      "overlap_kcs": 20,
+      "decision_exact_matches": 10,
+      "decision_exact_match_rate": 0.5,
+      "score_exact_matches": 10,
+      "score_exact_match_rate": 0.5,
+      "cohens_kappa": 0.004975
+    }
+  ],
+  "disagreement_count": 10,
+  "covered_lesson_days": [
+    4,
+    7,
+    9
+  ],
+  "source_metadata_matches_completed_counts": true,
+  "current_openai_benchmark_match": false
 }

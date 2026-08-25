@@ -1,0 +1,2034 @@
+{
+  "schema_version": "analysis_ready_teacher_reviews_v1",
+  "source_dataset_id": "phase1_mixed_source_deepseek_2026-08-19",
+  "policy": {
+    "reference_reviewer": "reviewer-02",
+    "exclude_disputed_overlap": true,
+    "retain_raw_and_disagreement_artifacts": true
+  },
+  "counts": {
+    "reference_reviewer_completed_kcs": 100,
+    "excluded_disputed_kcs": 10,
+    "analysis_ready_kcs": 90,
+    "decisions": {
+      "pass": 69,
+      "reject": 16,
+      "revise": 5
+    }
+  },
+  "excluded_disputed_kc_keys": [
+    "9:human_in_the_loop_placement",
+    "9:langgraph_orchestration_model",
+    "9:multi_agent_shared_state_schema",
+    "9:single_agent_reliability_failure_propagation",
+    "9:supervisor_responsibility_boundary",
+    "9:supervisor_worker_anti_patterns",
+    "9:supervisor_worker_architecture",
+    "9:upgrade_rag_artifact_to_supervisor_worker_system",
+    "9:worker_design_boundary",
+    "9:worker_failure_handling_and_graceful_degradation"
+  ],
+  "reviews": [
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "react_thought_action_observation_loop",
+      "kc_name_vi": "Vòng lặp ReAct Thought–Action–Observation",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:04:46.518Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tool_calling_flow",
+      "kc_name_vi": "Vòng lặp tool calling thủ công",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:05:03.579Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "prompt_scope_types",
+      "kc_name_vi": "Phân biệt instruction, conversation và system prompt",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:05:13.182Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "prompt_quality_specificity",
+      "kc_name_vi": "Nguyên tắc prompt cụ thể và rõ nghĩa",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:05:48.716Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "prompt_evaluation_versioning",
+      "kc_name_vi": "Version, test và refine prompt",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:06:18.447Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "prompt_four_components",
+      "kc_name_vi": "Bốn thành phần của prompt",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:06:28.154Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "structured_prompting",
+      "kc_name_vi": "Structured prompting bằng tag hoặc section",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:06:29.959Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "token_budget_context_rot",
+      "kc_name_vi": "Quản lý độ dài prompt và context rot",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:06:40.112Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "system_prompt_contract",
+      "kc_name_vi": "System prompt production-grade như contract",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:06:45.117Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "system_prompt_antipatterns",
+      "kc_name_vi": "Nhận diện anti-pattern của system prompt",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:06:47.762Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "dynamic_few_shot_retrieval",
+      "kc_name_vi": "Few-shot động theo độ tương đồng input",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [
+        "move_component"
+      ],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:08:23.101Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "context_engineering",
+      "kc_name_vi": "Context engineering",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:10:07.866Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "context_compression",
+      "kc_name_vi": "Context compression cho history",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:10:17.151Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "context_window_management",
+      "kc_name_vi": "Phân bổ ngân sách context window",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:10:26.733Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "memory_injection",
+      "kc_name_vi": "Memory injection có chọn lọc",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:10:52.991Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "prompt_caching_static_prefix",
+      "kc_name_vi": "Prompt caching với static prefix",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:11:00.919Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "least_to_most_decomposition",
+      "kc_name_vi": "Least-to-most prompting",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:11:41.230Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "pal_program_aided_reasoning",
+      "kc_name_vi": "PAL/PoT",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:11:43.504Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "prompt_chaining",
+      "kc_name_vi": "Prompt chaining",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:11:45.438Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "zero_one_few_shot_selection",
+      "kc_name_vi": "Lựa chọn zero-shot, one-shot, few-shot và CoT",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:11:48.483Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "generated_knowledge_prompting",
+      "kc_name_vi": "Generated knowledge prompting",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [
+        "remove_component",
+        "move_component"
+      ],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:12:09.924Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "self_consistency",
+      "kc_name_vi": "Self-consistency",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:12:12.819Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tree_of_thought",
+      "kc_name_vi": "Tree-of-Thought",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:12:15.283Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "plan_and_solve",
+      "kc_name_vi": "Plan-and-Solve",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:01:29.704Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "reflexion",
+      "kc_name_vi": "Reflexion",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:01:31.107Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "self_refine",
+      "kc_name_vi": "Self-Refine",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:01:32.361Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "cot_task_fit",
+      "kc_name_vi": "Đánh giá khi CoT giúp hoặc gây hại",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:02:08.123Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "reasoning_model_and_budget",
+      "kc_name_vi": "Sử dụng reasoning model và reasoning budget",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:02:10.786Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "reliable_tool_design_principles",
+      "kc_name_vi": "Nguyên tắc thiết kế tool đáng tin cậy",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:02:40.944Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tool_granularity",
+      "kc_name_vi": "Chọn granularity của tool",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:02:59.107Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tool_creation_criterion",
+      "kc_name_vi": "Tiêu chí khi tạo tool",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:03:09.216Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tool_schema_contract",
+      "kc_name_vi": "Thiết kế tool schema như contract",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:03:30.346Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tool_declaration_with_decorator",
+      "kc_name_vi": "Khai báo tool bằng @tool",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [
+        "unsure",
+        "remove_component"
+      ],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:03:43.746Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "harness_engineering",
+      "kc_name_vi": "Harness engineering",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:04:06.773Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "harness_error_remediation",
+      "kc_name_vi": "Vá lỗi lặp lại bằng harness",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:04:18.765Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "build_grounded_tool_agent",
+      "kc_name_vi": "Xây dựng agent tool-calling grounded",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:05:13.947Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "agent_behavior_contracts",
+      "kc_name_vi": "Xử lý bốn hành vi agent theo contract",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:05:25.252Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "create_agent_tool_loop",
+      "kc_name_vi": "Dựng agent bằng create_agent",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:05:28.785Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tool_use_control_flow_patterns",
+      "kc_name_vi": "Chọn control flow cho tool use",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [
+        "move_component"
+      ],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:05:54.210Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tool_output_grounding",
+      "kc_name_vi": "Grounding câu trả lời bằng output tool",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": "Trong bài lab không phải bài giảng",
+      "confirmed_at": "2026-08-21T15:06:18.084Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "context_window_token_budget",
+      "kc_name_vi": "Phân bổ ngân sách context window",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:07:57.266Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "chunking_design",
+      "kc_name_vi": "Thiết kế chunk giữ trọn ngữ cảnh",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:07:59.063Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "chunking_strategy_selection",
+      "kc_name_vi": "Chọn chiến lược chunking theo loại tài liệu",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:08:04.520Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "embedding_model_selection",
+      "kc_name_vi": "Chọn embedding model theo use case",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": "Không thấy grouding",
+      "confirmed_at": "2026-08-21T15:09:10.961Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "vector_database_selection",
+      "kc_name_vi": "Chọn vector database theo giai đoạn sản phẩm",
+      "decision": "revise",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 3
+      },
+      "importance_level": null,
+      "suggested_actions": [
+        "rename_component"
+      ],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": "sai ở \"giai đoạn\""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:09:44.588Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "rag_use_case_decision",
+      "kc_name_vi": "Quyết định khi nào dùng RAG",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:10:58.521Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "hosted_vs_self_managed_retrieval",
+      "kc_name_vi": "Hosted retrieval và self-managed retrieval",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:11:03.661Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "embedding_semantic_representation",
+      "kc_name_vi": "Embedding như lớp biểu diễn ngữ nghĩa",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:11:27.094Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "embedding_use_cases",
+      "kc_name_vi": "Các ứng dụng của embedding",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:11:30.019Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "embedding_generation_pipeline",
+      "kc_name_vi": "Pipeline tạo embedding bên trong model",
+      "decision": "revise",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 3
+      },
+      "importance_level": null,
+      "suggested_actions": [
+        "rename_component"
+      ],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:11:45.778Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "standard_retrieval_pipeline",
+      "kc_name_vi": "Pipeline Document đến Inject",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:12:30.567Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "topk_threshold_attribute_filtering",
+      "kc_name_vi": "Điều chỉnh top-k, score threshold và attribute filter",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:13:00.053Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "grounded_answer_source_fallback",
+      "kc_name_vi": "Đánh giá câu trả lời grounded và fallback",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:13:49.342Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "retrieval_failure_debugging",
+      "kc_name_vi": "Debug các failure pattern của retrieval",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:14:04.685Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "retrieval_quality_evaluation",
+      "kc_name_vi": "Đo lường retrieval quality",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:14:25.052Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "mini_retrieval_integration",
+      "kc_name_vi": "Xây mini retrieval integration",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": "Trong bài lab không phải bài giảng",
+      "confirmed_at": "2026-08-21T15:14:35.515Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "ai_data_inventory",
+      "kc_name_vi": "Lập data inventory cho AI product",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:14:55.119Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "data_governance_for_retrieval",
+      "kc_name_vi": "Governance dữ liệu cho retrieval",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:15:01.935Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "pii_masking_before_embedding",
+      "kc_name_vi": "Mask PII trước khi embedding",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:15:05.863Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "vector_store_data_model",
+      "kc_name_vi": "Mô hình dữ liệu của vector store",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [
+        "move_component"
+      ],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:15:15.672Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "metadata_guided_retrieval",
+      "kc_name_vi": "Dùng metadata để kiểm soát retrieval",
+      "decision": "revise",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:15:28.658Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "ai_data_strategy_selection",
+      "kc_name_vi": "Chiến lược chọn dữ liệu cho sản phẩm AI",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": "Not grounding",
+      "confirmed_at": "2026-08-21T15:16:25.008Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "data_quality_first_retrieval_principle",
+      "kc_name_vi": "Ưu tiên chất lượng dữ liệu trước đổi model",
+      "decision": "revise",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 3
+      },
+      "importance_level": null,
+      "suggested_actions": [
+        "edit_content",
+        "rename_component"
+      ],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:16:50.083Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "agent_data_type_access_pattern",
+      "kc_name_vi": "Phân loại dữ liệu theo cách agent truy cập",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:16:55.869Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "data_quality_processing_pyramid",
+      "kc_name_vi": "Các tầng xử lý chất lượng dữ liệu",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:17:01.621Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "short_term_long_term_memory",
+      "kc_name_vi": "Short-term memory và long-term memory",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:17:32.874Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "retrieval_vs_memory",
+      "kc_name_vi": "Phân biệt retrieval và memory",
+      "decision": "revise",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 2
+      },
+      "importance_level": null,
+      "suggested_actions": [
+        "rename_component"
+      ],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:17:44.693Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "memory_lifecycle_policy",
+      "kc_name_vi": "Vòng đời memory có chính sách",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:17:55.131Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "cosine_similarity",
+      "kc_name_vi": "Cosine similarity",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:18:10.874Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "distance_metric_selection",
+      "kc_name_vi": "Lựa chọn distance metric cho vector search",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:18:17.520Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "single_agent_context_bottleneck",
+      "kc_name_vi": "Nút thắt context của single agent",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:21:47.589Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "single_agent_parallelism_limit",
+      "kc_name_vi": "Giới hạn chạy song song của single agent",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:21:50.044Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "single_agent_specialization_tradeoff",
+      "kc_name_vi": "Đánh đổi chuyên môn hóa của single agent",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:21:59.788Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "system_first_responsibility_decomposition",
+      "kc_name_vi": "Tư duy hệ thống để chia trách nhiệm",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:26:15.162Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "multi_agent_observability_diagnosis",
+      "kc_name_vi": "Quan sát và chẩn đoán hệ multi-agent",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:26:22.773Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "multi_agent_adoption_criteria",
+      "kc_name_vi": "Tiêu chí quyết định dùng multi-agent",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:26:47.770Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "multi_agent_pattern_selection",
+      "kc_name_vi": "Chọn pattern điều phối multi-agent",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:26:52.428Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "sync_async_agent_coordination",
+      "kc_name_vi": "Lựa chọn sync hay async giữa agents",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:26:59.235Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "multi_agent_cost_latency_tradeoff",
+      "kc_name_vi": "Tradeoff cost và latency của multi-agent",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:27:01.679Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "langgraph_conditional_routing",
+      "kc_name_vi": "Triển khai conditional routing trong LangGraph",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:29:37.735Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "shared_state_vs_message_passing",
+      "kc_name_vi": "Lựa chọn shared state và message passing",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:31:09.660Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "trace_log_schema_design",
+      "kc_name_vi": "Thiết kế trace log có thể hành động",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:06.965Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "trace_driven_system_improvement",
+      "kc_name_vi": "Cải thiện hệ thống dựa trên trace",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:11.230Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "mcp_external_capability_standard",
+      "kc_name_vi": "MCP như chuẩn kết nối capability bên ngoài",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:24.660Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "mcp_capability_surface",
+      "kc_name_vi": "Capability surface của MCP server",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:31.717Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "mcp_tool_discovery_and_invocation",
+      "kc_name_vi": "Discovery và invocation tool qua MCP",
+      "decision": "reject",
+      "scores": {
+        "accuracy": 1,
+        "granularity": 1,
+        "naming_clarity": 1
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:38.451Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "mcp_vs_a2a_boundary",
+      "kc_name_vi": "Phân biệt MCP và A2A",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:46.080Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "a2a_message_contract_design",
+      "kc_name_vi": "Thiết kế message contract cho A2A",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:47.784Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "a2a_need_to_know_context",
+      "kc_name_vi": "Nguyên tắc need-to-know trong A2A",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:51.697Z"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "agent_communication_security_boundary",
+      "kc_name_vi": "Trust boundary và bảo mật khi agents giao tiếp",
+      "decision": "pass",
+      "scores": {
+        "accuracy": 4,
+        "granularity": 4,
+        "naming_clarity": 4
+      },
+      "importance_level": null,
+      "suggested_actions": [],
+      "criterion_notes": {
+        "accuracy": "",
+        "granularity": "",
+        "naming_clarity": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:53.842Z"
+    }
+  ]
+}
