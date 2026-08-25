@@ -1,0 +1,106 @@
+{
+  "schema_version": "normalized_teacher_reviews_v1",
+  "source_dataset_id": "phase1_full15_kc_clustering_luna_2026_08_03",
+  "reviewers": [
+    {
+      "reviewer_key": "reviewer-01",
+      "source_file": "kc-review-phase1-duonggg-2026-08-25.json"
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "source_file": "kc-review-phase1-hieu-2026-08-25.json"
+    }
+  ],
+  "reviews": [
+    {
+      "reviewer_key": "reviewer-01",
+      "lesson_day": 1,
+      "kc_code": "ai_taxonomy_classification",
+      "decision": "pass",
+      "scores": {"accuracy": 4, "granularity": 4, "naming_clarity": 4},
+      "importance_level": "core",
+      "suggested_actions": []
+    },
+    {
+      "reviewer_key": "reviewer-01",
+      "lesson_day": 1,
+      "kc_code": "api_cost_calculation",
+      "decision": "pass",
+      "scores": {"accuracy": 4, "granularity": 4, "naming_clarity": 4},
+      "importance_level": "core",
+      "suggested_actions": []
+    },
+    {
+      "reviewer_key": "reviewer-01",
+      "lesson_day": 3,
+      "kc_code": "classify_ai_system_levels",
+      "decision": "pass",
+      "scores": {"accuracy": 4, "granularity": 4, "naming_clarity": 4},
+      "importance_level": "core",
+      "suggested_actions": []
+    },
+    {
+      "reviewer_key": "reviewer-01",
+      "lesson_day": 3,
+      "kc_code": "weigh_agent_cost_against_accuracy",
+      "decision": "pass",
+      "scores": {"accuracy": 4, "granularity": 4, "naming_clarity": 4},
+      "importance_level": "core",
+      "suggested_actions": []
+    },
+    {
+      "reviewer_key": "reviewer-01",
+      "lesson_day": 9,
+      "kc_code": "single_agent_context_bottleneck",
+      "decision": "pass",
+      "scores": {"accuracy": 4, "granularity": 4, "naming_clarity": 4},
+      "importance_level": "core",
+      "suggested_actions": []
+    },
+    {
+      "reviewer_key": "reviewer-01",
+      "lesson_day": 9,
+      "kc_code": "single_agent_specialization_tradeoff",
+      "decision": "pass",
+      "scores": {"accuracy": 4, "granularity": 4, "naming_clarity": 4},
+      "importance_level": "core",
+      "suggested_actions": []
+    },
+    {
+      "reviewer_key": "reviewer-01",
+      "lesson_day": 9,
+      "kc_code": "single_agent_parallelism_limit",
+      "decision": "pass",
+      "scores": {"accuracy": 4, "granularity": 4, "naming_clarity": 4},
+      "importance_level": "core",
+      "suggested_actions": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "kc_code": "single_agent_context_bottleneck",
+      "decision": "pass",
+      "scores": {"accuracy": 4, "granularity": 4, "naming_clarity": 4},
+      "importance_level": "core",
+      "suggested_actions": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "kc_code": "single_agent_specialization_tradeoff",
+      "decision": "pass",
+      "scores": {"accuracy": 4, "granularity": 4, "naming_clarity": 4},
+      "importance_level": "core",
+      "suggested_actions": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "kc_code": "single_agent_parallelism_limit",
+      "decision": "pass",
+      "scores": {"accuracy": 4, "granularity": 4, "naming_clarity": 4},
+      "importance_level": "core",
+      "suggested_actions": []
+    }
+  ]
+}

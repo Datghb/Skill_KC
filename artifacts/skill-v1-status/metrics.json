@@ -1,0 +1,68 @@
+{
+  "schema_version": "skill_build_status_v1",
+  "updated_at": "2026-08-25",
+  "status": {
+    "v1_technical_scope_completed": true,
+    "v1_completed_items": 7,
+    "v1_total_items": 7,
+    "internal_readiness_score": 86,
+    "demo_ready": true,
+    "controlled_pilot_ready": true,
+    "unreviewed_production_ready": false
+  },
+  "verification": {
+    "skill_validator": "pass",
+    "tests_passed": 58,
+    "code_coverage_percent": 82,
+    "verified_live_runs": 3,
+    "total_live_runs": 3
+  },
+  "benchmark": {
+    "content_units": 137,
+    "knowledge_items": 82,
+    "trackable_kcs": 78,
+    "parent_topics": 29,
+    "items_with_resolved_evidence": 82,
+    "wall_seconds": 807.84,
+    "successful_run_cost_usd": 0.141489,
+    "extraction_first_pass_successes": 1,
+    "extraction_runs": 3,
+    "repair_successes": 2,
+    "repair_attempts": 2,
+    "parent_refinement_first_pass_successes": 3
+  },
+  "kc_role_distribution": {
+    "core_kc": {
+      "count": 66,
+      "share": 0.804878
+    },
+    "extension_kc": {
+      "count": 12,
+      "share": 0.146341
+    },
+    "reference_kc": {
+      "count": 4,
+      "share": 0.04878
+    },
+    "trackable_kc": {
+      "count": 78,
+      "share": 0.95122,
+      "formula": "core_kc + extension_kc"
+    },
+    "by_run": [
+      {"day": 6, "core_kc": 9, "extension_kc": 1, "reference_kc": 4, "total": 14},
+      {"day": 10, "core_kc": 22, "extension_kc": 6, "reference_kc": 0, "total": 28},
+      {"day": 14, "core_kc": 35, "extension_kc": 5, "reference_kc": 0, "total": 40}
+    ]
+  },
+  "teacher_review": {
+    "source_dataset_matches_current_benchmark": false,
+    "completed_judgments": 10,
+    "unique_reviewed_kcs": 7,
+    "dataset_total_kcs": 501,
+    "pass_judgments": 10,
+    "mean_accuracy": 4.0,
+    "mean_granularity": 4.0,
+    "mean_naming_clarity": 4.0
+  }
+}

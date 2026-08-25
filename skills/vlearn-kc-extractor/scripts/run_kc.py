@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 from importlib.util import find_spec
 import json
 from os import environ as process_environ
@@ -147,7 +148,7 @@ def build_summary(manifest: Mapping[str, Any]) -> dict[str, Any]:
     release = manifest.get("release") or {}
     if release.get("auto_publish") is not False or release.get("production_write") is not False:
         raise RuntimeError("run manifest release safety flags are missing or unsafe")
-    return {
+    summary = {
         "source_slug": manifest.get("source_slug"),
         "content_units": counts.get("content_units", 0),
         "knowledge_items": counts.get("knowledge_items", 0),
@@ -156,6 +157,15 @@ def build_summary(manifest: Mapping[str, Any]) -> dict[str, Any]:
         "review_required": True,
         "publish_allowed": False,
     }
+    role_count_keys = ("core_kcs", "extension_kcs", "reference_concepts")
+    if all(key in counts for key in role_count_keys):
+        summary = {**summary, **{key: counts[key] for key in role_count_keys}}
+    if "knowledge_roles" in manifest:
+        summary = {
+            **summary,
+            "knowledge_roles": deepcopy(manifest["knowledge_roles"]),
+        }
+    return summary
 
 
 def _ensure_fresh_output(output: Path) -> None:

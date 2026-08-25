@@ -10,6 +10,7 @@ from .contracts import load_material_bundle
 from .extraction import validate_kc_response
 from .io import read_json, sha256_json
 from .refinement import validate_move_without_merge
+from .reporting import summarize_knowledge_roles
 
 def _ward_candidates_match(
     recorded: dict[str, Any], recomputed: dict[str, Any]
@@ -111,12 +112,26 @@ def replay_run(
     }
     if expected_hashes != actual_hashes:
         raise ValueError("run manifest artifact hash mismatch")
+    knowledge_roles = summarize_knowledge_roles(inventory["knowledge_items"])
+    role_counts = {
+        "core_kcs": knowledge_roles["core_kc"]["count"],
+        "extension_kcs": knowledge_roles["extension_kc"]["count"],
+        "reference_concepts": knowledge_roles["reference_concept"]["count"],
+    }
+    manifest_counts = manifest.get("counts") or {}
+    for key, value in role_counts.items():
+        if key in manifest_counts and manifest_counts[key] != value:
+            raise ValueError(f"run manifest {key} does not match KC inventory")
+    if "knowledge_roles" in manifest and manifest["knowledge_roles"] != knowledge_roles:
+        raise ValueError("run manifest knowledge_roles do not match KC inventory")
     return {
         "schema_version": "vlearn_kc_replay_result_v1",
         "source_slug": bundle.source_slug,
         "content_units": len(bundle.content_units),
         "knowledge_items": len(inventory["knowledge_items"]),
         "trackable_kcs": len(items),
+        **role_counts,
+        "knowledge_roles": knowledge_roles,
         "parent_topics": topics["final_k"],
         "leaf_moves": len(topics["move_lineage"]),
         "verified": True,

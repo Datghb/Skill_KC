@@ -11,6 +11,7 @@ from .extraction import build_extraction_request, validate_kc_response
 from .io import sha256_json, sha256_text, write_json
 from .providers import Embedder, JsonGenerator
 from .refinement import validate_move_without_merge
+from .reporting import summarize_knowledge_roles
 
 
 def build_refinement_request(
@@ -140,6 +141,7 @@ class KCPipeline:
                 stage="kc_extraction",
             )
         items = trackable_items(list(inventory["knowledge_items"]))
+        knowledge_roles = summarize_knowledge_roles(inventory["knowledge_items"])
         if len(items) < 3:
             raise ValueError("at least three trackable KCs are required for clustering")
         texts = [embedding_text(item) for item in items]
@@ -223,9 +225,13 @@ class KCPipeline:
                 "content_units": len(bundle.content_units),
                 "knowledge_items": len(inventory["knowledge_items"]),
                 "trackable_kcs": len(items),
+                "core_kcs": knowledge_roles["core_kc"]["count"],
+                "extension_kcs": knowledge_roles["extension_kc"]["count"],
+                "reference_concepts": knowledge_roles["reference_concept"]["count"],
                 "parent_topics": topics["final_k"],
                 "leaf_moves": len(topics["move_lineage"]),
             },
+            "knowledge_roles": knowledge_roles,
             "telemetry": {
                 "kc_extraction": extraction_telemetry,
                 "embedding": embedding_telemetry,

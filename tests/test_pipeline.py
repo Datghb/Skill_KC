@@ -145,6 +145,27 @@ class FakeGenerator:
         )
 
 
+class RoleAwareFakeGenerator(FakeGenerator):
+    def generate(self, *, prompt: str, request: dict, stage: str):
+        response, telemetry = super().generate(
+            prompt=prompt,
+            request=request,
+            stage=stage,
+        )
+        if stage == "kc_extraction":
+            response["knowledge_items"][3]["knowledge_role"] = "extension_kc"
+            response["knowledge_items"].append(
+                {
+                    **_kc("reference"),
+                    "knowledge_role": "reference_concept",
+                    "item_form": "reference_topic",
+                    "target_bloom_level": None,
+                    "role_reason_vi": "Useful context, but mastery is not required.",
+                }
+            )
+        return response, telemetry
+
+
 class FakeEmbedder:
     def embed(self, texts: list[str], *, kind: str):
         assert kind == "document"
@@ -229,6 +250,51 @@ def test_pipeline_runs_without_repo_or_hidden_input_paths(tmp_path: Path) -> Non
     assert replay["parent_topics"] == 2
 
 
+def test_pipeline_reports_detailed_knowledge_role_statistics(tmp_path: Path) -> None:
+    input_dir = _material_bundle(tmp_path / "material")
+    output_dir = tmp_path / "run"
+    pipeline = KCPipeline(
+        generator=RoleAwareFakeGenerator(),
+        embedder=FakeEmbedder(),
+        extraction_prompt="extract",
+        refinement_prompt="refine",
+    )
+
+    result = pipeline.run(input_dir=input_dir, output_dir=output_dir)
+
+    manifest = result["manifest"]
+    assert manifest["counts"] == {
+        "content_units": 1,
+        "knowledge_items": 5,
+        "trackable_kcs": 4,
+        "core_kcs": 3,
+        "extension_kcs": 1,
+        "reference_concepts": 1,
+        "parent_topics": 2,
+        "leaf_moves": 0,
+    }
+    assert manifest["knowledge_roles"]["reference_concept"] == {
+        "count": 1,
+        "items": [
+            {
+                "code": "reference",
+                "name_vi": "KC reference",
+                "description_vi": "Description reference",
+                "primary_capability_vi": "Capability reference",
+                "item_form": "reference_topic",
+                "target_bloom_level": None,
+                "bloom_learning_objective_vi": "",
+                "role_reason_vi": "Useful context, but mastery is not required.",
+                "evidence_section_ids": ["unit-1"],
+            }
+        ],
+    }
+    assert [
+        item["code"] for item in manifest["knowledge_roles"]["extension_kc"]["items"]
+    ] == ["d"]
+    assert "resolved_evidence" not in manifest["knowledge_roles"]["core_kc"]["items"][0]
+
+
 def test_pipeline_repairs_invalid_parent_refinement_once(tmp_path: Path) -> None:
     input_dir = _material_bundle(tmp_path / "material")
     output_dir = tmp_path / "run"
@@ -296,6 +362,24 @@ def test_replay_detects_tampered_parent_membership(tmp_path: Path) -> None:
         assert "missing leaf codes" in str(exc)
     else:
         raise AssertionError("tampered replay must fail")
+
+
+def test_replay_rejects_tampered_knowledge_role_statistics(tmp_path: Path) -> None:
+    input_dir = _material_bundle(tmp_path / "material")
+    output_dir = tmp_path / "run"
+    pipeline = KCPipeline(
+        generator=RoleAwareFakeGenerator(),
+        embedder=FakeEmbedder(),
+        extraction_prompt="extract",
+        refinement_prompt="refine",
+    )
+    pipeline.run(input_dir=input_dir, output_dir=output_dir)
+    manifest = json.loads((output_dir / "run-manifest.json").read_text(encoding="utf-8"))
+    manifest["counts"]["core_kcs"] += 1
+    _write_json(output_dir / "run-manifest.json", manifest)
+
+    with pytest.raises(ValueError, match="core_kcs does not match"):
+        replay_run(input_dir=input_dir, recorded_dir=output_dir)
 
 def test_replay_tolerates_machine_precision_in_ward_linkage(tmp_path: Path) -> None:
     input_dir = _material_bundle(tmp_path / "material")

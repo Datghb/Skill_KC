@@ -94,7 +94,10 @@ run/
 ```
 
 `run-manifest.json` records input, prompt and artifact hashes along with provider
-telemetry. It always contains:
+telemetry. Its `counts` section reports `core_kcs`, `extension_kcs`, and
+`reference_concepts` separately. The `knowledge_roles` section groups compact KC
+details by role; full source evidence remains in `kc-candidates.json` to avoid
+duplicating large content. It always contains:
 
 ```json
 {

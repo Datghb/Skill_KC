@@ -351,8 +351,22 @@ def test_build_summary_always_requires_human_review_and_disallows_publish(
             "content_units": 18,
             "knowledge_items": 7,
             "trackable_kcs": 6,
+            "core_kcs": 4,
+            "extension_kcs": 2,
+            "reference_concepts": 1,
             "parent_topics": 3,
             "leaf_moves": 1,
+        },
+        "knowledge_roles": {
+            "core_kc": {"count": 4, "items": [{"code": "core-a"}]},
+            "extension_kc": {
+                "count": 2,
+                "items": [{"code": "extension-a"}],
+            },
+            "reference_concept": {
+                "count": 1,
+                "items": [{"code": "reference-a"}],
+            },
         },
         "release": {"auto_publish": False, "production_write": False},
     }
@@ -364,10 +378,32 @@ def test_build_summary_always_requires_human_review_and_disallows_publish(
         "content_units": 18,
         "knowledge_items": 7,
         "trackable_kcs": 6,
+        "core_kcs": 4,
+        "extension_kcs": 2,
+        "reference_concepts": 1,
+        "knowledge_roles": manifest["knowledge_roles"],
         "parent_topics": 3,
         "review_required": True,
         "publish_allowed": False,
     }
+    assert summary["knowledge_roles"] is not manifest["knowledge_roles"]
+
+
+def test_build_summary_does_not_invent_legacy_role_statistics(
+    runner_module,
+) -> None:
+    summary = runner_module.build_summary(
+        {
+            "source_slug": "legacy-course",
+            "counts": {"knowledge_items": 3, "trackable_kcs": 2},
+            "release": {"auto_publish": False, "production_write": False},
+        }
+    )
+
+    assert "core_kcs" not in summary
+    assert "extension_kcs" not in summary
+    assert "reference_concepts" not in summary
+    assert "knowledge_roles" not in summary
 
 def test_build_summary_rejects_manifest_that_allows_release(runner_module) -> None:
     with pytest.raises(RuntimeError, match="release safety flags"):

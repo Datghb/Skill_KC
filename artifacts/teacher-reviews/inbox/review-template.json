@@ -1,0 +1,24 @@
+{
+  "schema_version": "teacher_review_v1",
+  "source_day": "day06",
+  "reviewer_id": "teacher-01",
+  "reviewed_at": "2026-08-25",
+  "reviews": [
+    {
+      "kc_code": "mini_ai_spec_checklist",
+      "decision": "accept",
+      "scores": {
+        "source_accuracy": 5,
+        "mastery_observability": 5,
+        "granularity": 4,
+        "bloom_alignment": 4,
+        "non_duplication": 5
+      },
+      "edited_name_vi": null,
+      "edited_description_vi": null,
+      "edited_learning_objective_vi": null,
+      "issue_tags": [],
+      "comment_vi": ""
+    }
+  ]
+}
