@@ -1,0 +1,18 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day05-ai-product-thinking-and-requirement-selected",
+  "sources": [
+    {
+      "source_id": "slide-day05",
+      "source_type": "slide",
+      "sha256": "50410b098fea0299c2d3af69f72a538c3c184424e2185724c3f3710fcc7a533b",
+      "uri": "source://phase1/day05/slide"
+    },
+    {
+      "source_id": "lecture-notes-day05",
+      "source_type": "lecture_note",
+      "sha256": "b184e64393928625c8535c9bc06aa9f2c4bd653f95ae70d7261c6de4ef3cec60",
+      "uri": "artifact://phase1/day05/grounded-lecture-notes"
+    }
+  ]
+}

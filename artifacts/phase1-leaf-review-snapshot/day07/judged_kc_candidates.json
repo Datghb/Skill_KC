@@ -1,0 +1,2814 @@
+{
+  "schema_version": "mixed_source_deepseek_kc_judge_v1",
+  "source_slug": "day07-data-foundations-embedding-vector-store",
+  "source_mode": "slide_only",
+  "summary": {
+    "candidate_count": 33,
+    "levels": {
+      "high": 33
+    },
+    "actions": {
+      "keep": 33
+    },
+    "mean_score": 3.995
+  },
+  "metadata": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-v4-flash",
+    "reasoning_effort": "low",
+    "provider_order": [
+      "gmicloud/fp8",
+      "streamlake/fp8",
+      "digitalocean"
+    ],
+    "allow_fallbacks": true,
+    "api_calls": 4,
+    "latency_seconds": 265.865,
+    "usage": {
+      "input_tokens": 69892,
+      "output_tokens": 29388,
+      "reasoning_tokens": 20358,
+      "total_tokens": 99280,
+      "cost_usd": 0.01056378
+    },
+    "upstream_providers": {
+      "GMICloud": 4
+    }
+  },
+  "candidates": [
+    {
+      "code": "ai_data_strategy_selection",
+      "name_vi": "Chiến lược chọn dữ liệu cho sản phẩm AI",
+      "description_vi": "Xác định dữ liệu nào agent được phép biết và cần truy xuất, thay vì đưa toàn bộ dữ liệu vào hệ thống; ưu tiên dữ liệu đúng, sạch, cập nhật và truy cập được.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá và chọn tập dữ liệu phù hợp cho một use case AI cụ thể.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể lập quyết định đưa hoặc không đưa một loại dữ liệu vào agent dựa trên giá trị, độ phù hợp, độ mới và rủi ro.",
+      "bloom_rationale_vi": "Nguồn yêu cầu chọn đúng dữ liệu, nhấn mạnh data quality và cảnh báo không nên nạp mọi thứ vào agent.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ riêng như một criterion vì đây là quyết định cấp chiến lược, khác với việc phân loại hoặc xử lý từng loại dữ liệu.",
+      "role_reason_vi": "Đây là nguyên tắc nền tảng của bài học và ảnh hưởng trực tiếp đến thiết kế retrieval, memory và chất lượng answer.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p006:l32-35",
+        "day07-data-foundations-embedding-vector-store:p007:l36-47",
+        "day07-data-foundations-embedding-vector-store:p008:l48-65",
+        "day07-data-foundations-embedding-vector-store:p064:l760-768"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p006:l32-35",
+          "source_type": "slide",
+          "page_no": 6,
+          "content": "## Page 6: Data Strategy Cho Sản Phẩm AI\nPage 6: Data Strategy Cho Sản Phẩm AI Text Extract Không phải dữ liệu nào cũng nên đưa vào agent; chọn đúng dữ liệu quan trọng hơn nạp thật nhiều",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p007:l36-47",
+          "source_type": "slide",
+          "page_no": 7,
+          "content": "## Page 7: Vì Sao Day 07 Quan Trọng Với AI Product?\nPage 7: Vì Sao Day 07 Quan Trọng Với AI Product? Image Caption Biểu đồ cột bên trái cho thấy AI adoption tăng nhanh qua 2023 và 2024. Các cột so sánh AI use và GenAI theo phần trăm / $B. Bên phải nhấn mạnh: khi tổ chức dùng AI nhiều hơn, câu hỏi chuyển từ “dùng model nào” sang “agent được phép biết gì”. Nếu dữ liệu sai, cũ, bẩn, hoặc không truy được đúng lúc, output sẽ yếu dù model mạnh. Text Extract AI adoption đã tăng rất nhanh. Khi tổ chức dùng AI nhiều hơn, câu hỏi chuyển từ \"dùng model nào\" sang \"agent được phép biết gì\". Nếu dữ liệu sai, cũ, bẩn, hoặc không truy được đúng lúc, output sẽ yếu dù model mạnh.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p008:l48-65",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Garbage In, Garbage Out - Tại Sao Data Quyết Định Output\nPage 8: Garbage In, Garbage Out Tại Sao Data Quyết Định Output Text Extract Dữ liệu bẩn / thiếu PDF scan lỗi OCR Policy cũ 2 năm chưa cập nhật Chunk cắt giữa câu Không có metadata Kết quả: Agent hallucinate, trả lời sai, user mất niềm tin. Dữ liệu sạch / đầy đủ Text đã chuẩn hóa, metadata đầy đủ Nguồn rõ ràng, có version Chunk theo section hợp lý Filter theo category + freshness Kết quả: Retrieve đúng, answer grounded, có trích nguồn. Lưu ý: Đổi model đắt hơn không sửa được data bẩn. Hãy sửa data trước.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p064:l760-768",
+          "source_type": "slide",
+          "page_no": 64,
+          "content": "## Page 64: Quay Lại Câu Hỏi Đầu Bài\nPage 64: Quay Lại Câu Hỏi Đầu Bài Text Extract \"Agent trả lời sai vì model yếu, hay vì nó không có đúng dữ liệu để suy luận?\" Hầu hết trường hợp: vì data, không phải vì model. Data bẩn + chunk sai + không metadata → model mạnh nhất cũng hallucinate. Pipeline tốt (clean → chunk → embed → store → retrieve → inject) giải quyết 80% vấn đề. Đầu tư vào data quality và retrieval pipeline trước khi nghĩ đến đổi model.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "ai_data_strategy_selection",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ, disposition core_kc phù hợp, scope hợp lý, không overlap đáng kể với code khác."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "ai_data_strategy_selection",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Nội dung chính xác, evidence hỗ trợ trực tiếp từ nhiều slide, disposition core_kc phù hợp, scope không overlap với các code khác trong inventory.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "agent_data_type_access_pattern",
+      "name_vi": "Phân loại dữ liệu theo cách agent truy cập",
+      "description_vi": "Phân biệt knowledge data, operational data và contextual data; knowledge thường dùng retrieval, operational thường query có kiểm soát qua API/SQL, contextual thường lookup hoặc inject trực tiếp.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Phân loại một nguồn dữ liệu và chọn cơ chế đưa dữ liệu đó vào agent.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Có thể so sánh một nguồn dữ liệu với ba loại data và giải thích vì sao nên dùng semantic search, API/SQL query hay direct injection.",
+      "bloom_rationale_vi": "Mục tiêu ngày học yêu cầu phân biệt ba loại data; các trang chi tiết mô tả đặc điểm, freshness, cấu trúc và retrieval fit của từng loại.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp ba loại thành một taxonomy vì năng lực đánh giá chính là phân biệt và chọn access pattern; tách từng loại sẽ lặp lại cùng một task.",
+      "role_reason_vi": "Đây là kiến thức cốt lõi để thiết kế data inventory và retrieval architecture.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p009:l66-78",
+        "day07-data-foundations-embedding-vector-store:p010:l79-94",
+        "day07-data-foundations-embedding-vector-store:p011:l95-110",
+        "day07-data-foundations-embedding-vector-store:p012:l111-126"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p009:l66-78",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: 3 Loại Data Agent Cần\nPage 9: 3 Loại Data Agent Cần Text Extract Knowledge Data Tài liệu, policy, SOP, FAQ, manual, hợp đồng, bài viết nội bộ. Operational Data Database, trạng thái đơn hàng, ticket, CRM records, logs, transactions. Contextual Data Session history, user profile, preferences, recent actions, channel context. Knowledge data phù hợp với retrieval; operational data thường cần query có kiểm soát; contextual data nên được inject ngắn và đúng lúc.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p010:l79-94",
+          "source_type": "slide",
+          "page_no": 10,
+          "content": "## Page 10: Knowledge Data - Chi Tiết\nPage 10: Knowledge Data Chi Tiết Text Extract Đặc điểm Ít thay đổi (static hoặc versioned) Dạng text dài: tài liệu, hướng dẫn, hợp đồng Cần chunk + embed để agent truy xuất Nguồn sự thật chính cho retrieval Ví dụ thực tế FAQ / SOP nội bộ công ty Chính sách bảo hành, đổi trả Tài liệu kỹ thuật sản phẩm Legal contracts, compliance docs Retrieval fit: Rất cao đây là kiểu data lý tưởng cho vector store.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p011:l95-110",
+          "source_type": "slide",
+          "page_no": 11,
+          "content": "## Page 11: Operational Data - Chi Tiết\nPage 11: Operational Data Chi Tiết Text Extract Đặc điểm Thay đổi liên tục (real time hoặc near real time) Dạng structured: SQL rows, JSON, logs Thường truy bằng API / SQL, không embed Cần access control chặt chẽ Ví dụ thực tế Trạng thái đơn hàng, tracking CRM records, ticket history Server logs, transaction records Inventory levels, pricing Retrieval fit: Thấp dùng function calling / SQL query thay vì semantic search.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p012:l111-126",
+          "source_type": "slide",
+          "page_no": 12,
+          "content": "## Page 12: Contextual Data - Chi Tiết\nPage 12: Contextual Data Chi Tiết Text Extract Đặc điểm Gắn liền với session / user hiện tại Thường ngắn gọn, inject trực tiếp vào prompt Có thể đến từ profile store hoặc session state Giúp agent cá nhân hóa câu trả lời Ví dụ thực tế User profile: tên, ngôn ngữ, vai trò Lịch sử hội thoại gần nhất Giỏ hàng hiện tại, trang đang xem Kênh liên hệ (chat, email, phone) Retrieval fit: Trung bình inject trực tiếp hoặc lookup đơn giản, ít khi cần semantic search.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "agent_data_type_access_pattern",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence hỗ trợ rõ ràng, phân loại ba loại data có cơ sở từ slide, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "agent_data_type_access_pattern",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Phân loại ba loại data rõ ràng, evidence từ p009-p012 hỗ trợ đầy đủ, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "data_quality_processing_pyramid",
+      "name_vi": "Các tầng xử lý chất lượng dữ liệu",
+      "description_vi": "Dữ liệu được nâng cấp tuần tự từ Raw sang Cleaned, Structured và Enriched: làm sạch text, chuẩn hóa metadata, tổ chức chunk/section/source/timestamp rồi bổ sung tag, owner, access và quality label.",
+      "item_form": "concept",
+      "primary_capability_vi": "Mô tả và xác định mức xử lý cần thiết của một tập dữ liệu trước retrieval.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Có thể giải thích sự khác nhau giữa bốn tầng Raw, Cleaned, Structured và Enriched.",
+      "bloom_rationale_vi": "Nguồn trình bày trực tiếp mô hình bốn tầng và nội dung xử lý tương ứng ở mỗi tầng.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp các tầng vì chúng tạo thành một mô hình chất lượng liên tục; từng thao tác làm sạch hoặc enrich không có mastery state riêng trong bài.",
+      "role_reason_vi": "Mô hình này là nền tảng để chuẩn bị dữ liệu trước khi chunk, embed và index.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p013:l127-139"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p013:l127-139",
+          "source_type": "slide",
+          "page_no": 13,
+          "content": "## Page 13: Data Quality Pyramid\nPage 13: Data Quality Pyramid Image Caption Kim tự tháp chất lượng dữ liệu gồm 4 tầng tăng dần: Raw → Cleaned → Structured → Enriched . Mỗi tầng mô tả mức độ xử lý dữ liệu, từ PDF/HTML/OCR lỗi đến gắn tags, owner, access, quality label. Lưu ý nhấn mạnh: không nên index ngay dữ liệu raw rồi kỳ vọng retrieval tự chữa mọi vấn đề. Text Extract Raw PDF lộn xộn, HTML bẩn, OCR lỗi Cleaned bỏ nhiễu, chuẩn hóa text, metadata cơ bản Structured chunk, section, source, timestamps Enriched tags, owner, access, quality label Lưu ý: Sai lầm phổ biến: index ngay dữ liệu raw rồi kỳ vọng retrieval sẽ tự chữa mọi vấn đề.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "data_quality_processing_pyramid",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence p013 mô tả đủ các tầng, gộp thành một KC là hợp lý do tính liên tục, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "data_quality_processing_pyramid",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Mô tả bốn tầng pyramid chính xác, evidence p013 hỗ trợ trực tiếp, gộp thành một KC hợp lý.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "data_quality_first_retrieval_principle",
+      "name_vi": "Ưu tiên chất lượng dữ liệu trước đổi model",
+      "description_vi": "Retrieval và answer bị giới hạn bởi dữ liệu bẩn, thiếu, cũ, OCR lỗi, chunk sai hoặc thiếu metadata; đổi sang model đắt hơn không tự sửa được các lỗi đầu vào.",
+      "item_form": "principle",
+      "primary_capability_vi": "Chẩn đoán và ưu tiên remediation cho lỗi chất lượng dữ liệu trong hệ thống AI.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Có thể phân tích một answer kém chất lượng để xác định khi nào cần sửa data, chunking hoặc metadata trước khi đổi model.",
+      "bloom_rationale_vi": "Nguồn đưa ra so sánh trước/sau khi clean cùng model và nêu rõ data quality thường quan trọng hơn model đắt.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi data quality pyramid vì pyramid mô tả các tầng xử lý, còn item này là nguyên tắc chẩn đoán nguyên nhân và thứ tự ưu tiên remediation.",
+      "role_reason_vi": "Đây là thông điệp trung tâm của bài và là cách tư duy cần dùng khi debug retrieval.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p008:l48-65",
+        "day07-data-foundations-embedding-vector-store:p014:l140-159",
+        "day07-data-foundations-embedding-vector-store:p064:l760-768",
+        "day07-data-foundations-embedding-vector-store:p067:l780-791"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p008:l48-65",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Garbage In, Garbage Out - Tại Sao Data Quyết Định Output\nPage 8: Garbage In, Garbage Out Tại Sao Data Quyết Định Output Text Extract Dữ liệu bẩn / thiếu PDF scan lỗi OCR Policy cũ 2 năm chưa cập nhật Chunk cắt giữa câu Không có metadata Kết quả: Agent hallucinate, trả lời sai, user mất niềm tin. Dữ liệu sạch / đầy đủ Text đã chuẩn hóa, metadata đầy đủ Nguồn rõ ràng, có version Chunk theo section hợp lý Filter theo category + freshness Kết quả: Retrieve đúng, answer grounded, có trích nguồn. Lưu ý: Đổi model đắt hơn không sửa được data bẩn. Hãy sửa data trước.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p014:l140-159",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: Ví Dụ: Data Quality Ảnh Hưởng Retrieval Như Thế Nào?\nPage 14: Ví Dụ: Data Quality Ảnh Hưởng Retrieval Như Thế Nào? Text Extract Trước khi clean Query: \"thời hạn đổi trả\" Top 1 retrieved: \"...trang 3... header lặp... mục lục... 30 ngày... xem thêm trang 7...\" Answer: Hallucinate vì context quá nhiễu, agent lấy thông tin sai. Sau khi clean + chunk Query: \"thời hạn đổi trả\" Top 1 retrieved: \"Khách hàng có 30 ngày kể từ ngày nhận hàng để yêu cầu đổi trả. Sản phẩm phải còn nguyên seal.\" Answer: Chính xác, grounded, có trích nguồn. Cùng một model, cùng một query chỉ khác data quality đã tạo ra kết quả hoàn toàn khác.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p064:l760-768",
+          "source_type": "slide",
+          "page_no": 64,
+          "content": "## Page 64: Quay Lại Câu Hỏi Đầu Bài\nPage 64: Quay Lại Câu Hỏi Đầu Bài Text Extract \"Agent trả lời sai vì model yếu, hay vì nó không có đúng dữ liệu để suy luận?\" Hầu hết trường hợp: vì data, không phải vì model. Data bẩn + chunk sai + không metadata → model mạnh nhất cũng hallucinate. Pipeline tốt (clean → chunk → embed → store → retrieve → inject) giải quyết 80% vấn đề. Đầu tư vào data quality và retrieval pipeline trước khi nghĩ đến đổi model.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p067:l780-791",
+          "source_type": "slide",
+          "page_no": 67,
+          "content": "## Page 67: Mental Model: Từ Data Đến Grounded Answer\nPage 67: Mental Model: Từ Data Đến Grounded Answer Image Caption Sơ đồ nhân quả từ trái sang phải: Clean Data → Smart Chunks → Rich Embeddings → Indexed Store → Grounded Answer . Các nhãn trên mũi tên lần lượt là quality, structure, meaning. Cảnh báo: mỗi bước yếu sẽ kéo toàn bộ pipeline xuống; cần đầu tư đều vào từng bước thay vì chỉ tối ưu phần cuối. Text Extract quality structure meaning Lưu ý: Mỗi bước yếu sẽ kéo toàn bộ pipeline xuống. Hãy đầu tư đều vào từng bước thay vì chỉ tối ưu phần cuối.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "data_quality_first_retrieval_principle",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence từ nhiều trang hỗ trợ nguyên tắc, disposition core_kc đúng, scope không quá rộng."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "data_quality_first_retrieval_principle",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Nguyên tắc ưu tiên chất lượng dữ liệu được evidence từ nhiều trang hỗ trợ, disposition core_kc đúng, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "ai_data_inventory",
+      "name_vi": "Lập data inventory cho AI product",
+      "description_vi": "Lập bảng nguồn dữ liệu gồm loại data, owner, freshness, PII và retrieval fit; ghi rõ nguồn gốc, category, ngày cập nhật và ngôn ngữ để làm cơ sở thiết kế pipeline.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tạo data inventory có thể dùng để quyết định cách ingest và truy cập dữ liệu.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể lập inventory cho một knowledge base nhỏ và điền các trường owner, source, freshness, PII, retrieval fit cùng metadata tối thiểu.",
+      "bloom_rationale_vi": "Nguồn cung cấp template inventory và yêu cầu lab cụ thể về nguồn, category, date, language, owner và retrieval fit.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ như một procedure tổng hợp; các trường inventory là thuộc tính của cùng một deliverable, không phải năng lực độc lập.",
+      "role_reason_vi": "Đây là deliverable trực tiếp của lab và giúp kiểm soát các quyết định data strategy, governance và retrieval.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p005:l25-31",
+        "day07-data-foundations-embedding-vector-store:p049:l533-546",
+        "day07-data-foundations-embedding-vector-store:p054:l631-643",
+        "day07-data-foundations-embedding-vector-store:p056:l652-663"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p005:l25-31",
+          "source_type": "slide",
+          "page_no": 5,
+          "content": "## Page 5: Deliverable Cuối Ngày\nPage 5: Deliverable Cuối Ngày Text Extract Data inventory + chunking / embedding script + vector store index + semantic search demo + retrieval enabled answer function 1 bộ dữ liệu mẫu đã được chunk và index 1 script truy vấn semantic search có trả kết quả liên quan 1 hàm trả lời sử dụng context retrieve được thay vì hỏi LLM \"chay\"",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p049:l533-546",
+          "source_type": "slide",
+          "page_no": 49,
+          "content": "## Page 49: Lab Step 1: Chọn & Chuẩn Bị Data\nPage 49: Lab Step 1: Chọn & Chuẩn Bị Data Text Extract Yêu cầu tối thiểu 5 15 tài liệu (FAQ, SOP, policy) Mỗi tài liệu 1 5 trang Text đã extract sạch (không còn header/footer lặp) Ghi lại nguồn gốc mỗi file Metadata tối thiểu cần ghi source: tên file gốc category: domain / loại tài liệu date: ngày tạo hoặc cập nhật language: vi / en",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p054:l631-643",
+          "source_type": "slide",
+          "page_no": 54,
+          "content": "## Page 54: Deliverable Và Assessment\nPage 54: Deliverable Và Assessment Text Extract Deliverable Data inventory 1 trang Script chunk + embed + index Query demo với 3 câu hỏi test Mini answer function có dùng retrieved context Query có retrieve đúng tài liệu không? Metadata có giúp lọc tốt hơn không? Câu trả lời có grounded hơn baseline không? Có biết chỉ ra failure case không?",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p056:l652-663",
+          "source_type": "slide",
+          "page_no": 56,
+          "content": "## Page 56: Data Inventory - Mẫu Template\nPage 56: Data Inventory Mẫu Template Tables | Tài liệu | Loại | Owner | Freshness | PII? | Retrieval fit | | | | | | | | | FAQ v3.pdf | Knowledge | Support | Monthly | Không | Cao | | Order status API | Operational | Eng | Real time | Có | Thấp (API) | | User profile | Contextual | Product | Per session | Có | Inject trực tiếp | | Legal contracts | Knowledge | Legal | Quarterly | Có | Cao (cần mask) | Text Extract Template gợi ý điều chỉnh theo domain thực tế",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "ai_data_inventory",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ, inventory là procedure tổng hợp, không có overlap đáng kể với code khác."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "ai_data_inventory",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Procedure lập inventory được evidence từ p005, p049, p054, p056 hỗ trợ đầy đủ, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "data_governance_for_retrieval",
+      "name_vi": "Governance dữ liệu cho retrieval",
+      "description_vi": "Thiết lập owner chịu trách nhiệm cập nhật, chính sách freshness và re-index, quyền truy cập/ACL, phạm vi public nội bộ và xử lý dữ liệu nhạy cảm trước khi index.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá và xác định yêu cầu governance, access control và vòng đời cập nhật của nguồn dữ liệu.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể chỉ ra owner, lịch freshness, quyền truy cập và yêu cầu bảo vệ dữ liệu cho một nguồn trước khi đưa vào vector store.",
+      "bloom_rationale_vi": "Nguồn nêu trực tiếp các câu hỏi về ownership, freshness, ACL, public/internal access và PII.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi PII masking vì governance là tập quyết định về quyền và vòng đời dữ liệu, còn masking là thao tác biến đổi PII cụ thể.",
+      "role_reason_vi": "Governance quyết định dữ liệu nào được index và ai được phép retrieve, nên ảnh hưởng trực tiếp đến an toàn và tính đúng của hệ thống.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p015:l160-167",
+        "day07-data-foundations-embedding-vector-store:p032:l336-348",
+        "day07-data-foundations-embedding-vector-store:p056:l652-663"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p015:l160-167",
+          "source_type": "slide",
+          "page_no": 15,
+          "content": "## Page 15: Data Ownership Và Governance\nPage 15: Data Ownership Và Governance Text Extract Ai sở hữu dữ liệu? team nào chịu trách nhiệm cập nhật? Data freshness bao lâu phải re index? Ai được phép truy cập? dữ liệu nào cần ACL, dữ liệu nào public nội bộ? PII / sensitive fields có cần mask trước khi embed không? Không index mọi thứ theo kiểu \"cứ nạp hết vào vector DB đã\".",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p032:l336-348",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Metadata Quan Trọng Không Kém Similarity\nPage 32: Metadata Quan Trọng Không Kém Similarity Tables | Trường metadata | Ví dụ | Tác dụng | | | | | | Source / file name | refund policy v3.pdf | truy vết và hiển thị nguồn | | Category | finance, support, legal | lọc đúng domain trước khi search | | Time / freshness | 2026 03 01 | tránh dùng nội dung cũ | | Access level | public internal, restricted | giới hạn truy cập | | Section / chunk id | returns.section.4 | debug và cite chính xác hơn | Text Extract Retrieval tốt cần semantic similarity kết hợp metadata filtering",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p056:l652-663",
+          "source_type": "slide",
+          "page_no": 56,
+          "content": "## Page 56: Data Inventory - Mẫu Template\nPage 56: Data Inventory Mẫu Template Tables | Tài liệu | Loại | Owner | Freshness | PII? | Retrieval fit | | | | | | | | | FAQ v3.pdf | Knowledge | Support | Monthly | Không | Cao | | Order status API | Operational | Eng | Real time | Có | Thấp (API) | | User profile | Contextual | Product | Per session | Có | Inject trực tiếp | | Legal contracts | Knowledge | Legal | Quarterly | Có | Cao (cần mask) | Text Extract Template gợi ý điều chỉnh theo domain thực tế",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "data_governance_for_retrieval",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence hỗ trợ, governance tách biệt khỏi PII masking, không có overlap rõ rệt."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "data_governance_for_retrieval",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Nội dung về governance, access control, freshness được evidence hỗ trợ, tách biệt khỏi PII masking, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "pii_masking_before_embedding",
+      "name_vi": "Mask PII trước khi embedding",
+      "description_vi": "Nhận diện và biến đổi dữ liệu định danh trước khi embed: thay thế tên, regex cho email/số điện thoại, xóa hoàn toàn số định danh và khái quát hóa địa chỉ theo mức rủi ro.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tiền xử lý dữ liệu PII để tránh lưu raw PII trong vector store.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể chọn kỹ thuật masking phù hợp cho từng loại PII trước bước embedding.",
+      "bloom_rationale_vi": "Nguồn cung cấp bảng loại PII, ví dụ, kỹ thuật mask và mức rủi ro; đồng thời nêu yêu cầu không lưu raw PII.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách riêng vì masking có task, failure và remediation về privacy khác với các bước clean/chunk/embed thông thường.",
+      "role_reason_vi": "Đây là yêu cầu an toàn bắt buộc trước khi đưa dữ liệu vào vector store.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p015:l160-167",
+        "day07-data-foundations-embedding-vector-store:p016:l168-179",
+        "day07-data-foundations-embedding-vector-store:p057:l664-672"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p015:l160-167",
+          "source_type": "slide",
+          "page_no": 15,
+          "content": "## Page 15: Data Ownership Và Governance\nPage 15: Data Ownership Và Governance Text Extract Ai sở hữu dữ liệu? team nào chịu trách nhiệm cập nhật? Data freshness bao lâu phải re index? Ai được phép truy cập? dữ liệu nào cần ACL, dữ liệu nào public nội bộ? PII / sensitive fields có cần mask trước khi embed không? Không index mọi thứ theo kiểu \"cứ nạp hết vào vector DB đã\".",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p016:l168-179",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: PII Masking Trước Khi Embed\nPage 16: PII Masking Trước Khi Embed Text Extract Mask trước khi embed không bao giờ lưu raw PII trong vector store Tables | Loại PII | Ví dụ | Kỹ thuật mask | Mức rủi ro | | | | | | | Tên cá nhân / Số điện thoại / Email | \"Nguyễn Văn A\" | Thay bằng [PERSON] | Trung bình | | Tên cá nhân / Số điện thoại / Email | \"0912 xxx xxx\" | Regex replace | Cao | | CMND / CCCD | \"012345678901\" | Xóa hoàn toàn | Rất cao | | Địa chỉ | \"123 Lê Lợi, Q.1\" | Generalize \"Q.1, HCM\" | Trung bình |",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p057:l664-672",
+          "source_type": "slide",
+          "page_no": 57,
+          "content": "## Page 57: Anti-patterns: Những Gì Không Nên Làm\nPage 57: Anti patterns: Những Gì Không Nên Làm Text Extract \"Nạp hết vào vector DB rồi tính sau\" Garbage in, garbage out. Clean trước, index sau. Chunk cố định 500 chars cho mọi loại tài liệu Mỗi loại doc cần strategy khác nhau. Không có metadata Không filter được → retrieve lẫn domain → answer sai. Không eval retrieval Chỉ eval generation mà bỏ qua retrieval → debug mù. Embed raw PII Vi phạm privacy, rủi ro pháp lý, khó thu hồi. Top k = 10 \"cho chắc\" Inject quá nhiều context → nhiễu, tốn token, chậm.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "pii_masking_before_embedding",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence mô tả kỹ thuật masking, disposition core_kc phù hợp, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "pii_masking_before_embedding",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Kỹ thuật masking được mô tả chi tiết trong evidence, disposition core_kc phù hợp, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "short_term_long_term_memory",
+      "name_vi": "Short-term memory và long-term memory",
+      "description_vi": "Short-term memory nằm trong context window, giữ lịch sử gần và task hiện tại; long-term memory nằm ngoài context window trong vector store, DB hoặc profile store và phải được truy xuất khi cần.",
+      "item_form": "concept",
+      "primary_capability_vi": "Phân biệt cơ chế, phạm vi và trade-off của hai loại memory.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Có thể giải thích vì sao context window không tự là vector store và khi nào cần lưu trữ ngoài context.",
+      "bloom_rationale_vi": "Nguồn mô tả rõ vị trí, mục đích, chi phí và giới hạn của short-term và long-term memory.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp hai loại vì chúng được dạy như một cặp đối sánh; thuộc tính token, storage và use case không có mastery state riêng.",
+      "role_reason_vi": "Agent memory architecture là một mục tiêu chính của ngày học.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p017:l180-183",
+        "day07-data-foundations-embedding-vector-store:p018:l184-199"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p017:l180-183",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: Agent Memory Architecture\nPage 17: Agent Memory Architecture Text Extract Memory không chỉ là lưu nhiều hơn; nó là quyết định xem agent được nhớ gì, quên gì, và truy gì khi cần",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p018:l184-199",
+          "source_type": "slide",
+          "page_no": 18,
+          "content": "## Page 18: Short-term Memory vs Long-term Memory\nPage 18: Short term Memory vs Long term Memory Text Extract Short term Memory Nằm trong context window Giữ lịch sử gần đây và task hiện tại Rẻ để dùng, nhưng dễ đầy token Phù hợp cho session logic ngắn Long term Memory Nằm ngoài context window Thường là vector store, DB, profile store Phải truy xuất khi cần Phù hợp cho tri thức tích lũy và user history chọn lọc Context window không phải là vector store. Agent chỉ \"nhớ dài hạn\" khi có cơ chế truy xuất hoặc lưu trữ bên ngoài.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "short_term_long_term_memory",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence từ p017-p018 hỗ trợ, gộp hai loại là hợp lý, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "short_term_long_term_memory",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Phân biệt hai loại memory rõ ràng, evidence từ p017-p018 hỗ trợ, gộp hợp lý, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "memory_lifecycle_policy",
+      "name_vi": "Vòng đời memory có chính sách",
+      "description_vi": "Memory lifecycle gồm Capture, Filter, Store và Retrieve; cần quyết định sự kiện đáng lưu, kiểm tra PII/chất lượng/relevance, chọn nơi lưu và chỉ truy xuất khi hữu ích cho câu hỏi hiện tại.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế chính sách chọn, lưu và truy xuất memory.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể mô tả chính sách memory từ lúc bắt sự kiện đến lúc retrieve, bao gồm các bước lọc privacy, quality và relevance.",
+      "bloom_rationale_vi": "Nguồn trình bày trực tiếp pipeline bốn bước và cảnh báo rằng lưu tất cả làm tăng chi phí, nhiễu và rủi ro riêng tư.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ bốn bước trong một procedure vì chúng cùng phục vụ mục tiêu quản lý memory và có failure chung là lưu thừa hoặc truy xuất không đúng lúc.",
+      "role_reason_vi": "Memory có chính sách là nền tảng để agent nhớ có kiểm soát thay vì chỉ tích lũy dữ liệu.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p019:l200-212",
+        "day07-data-foundations-embedding-vector-store:p020:l213-221"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p019:l200-212",
+          "source_type": "slide",
+          "page_no": 19,
+          "content": "## Page 19: Memory Lifecycle\nPage 19: Memory Lifecycle Image Caption Quy trình 4 bước nối từ trái sang phải: Capture → Filter → Store → Retrieve . Bên dưới mỗi bước có mô tả: sự kiện nào đáng lưu, kiểm tra PII/quality/relevance, lưu vào vector/DB/profile, chỉ truy khi có ích cho câu hỏi hiện tại. Cảnh báo: memory tốt là memory có chính sách; lưu tất cả thường làm tăng chi phí, nhiễu, và rủi ro quyền riêng tư. Text Extract Sự kiện nào đáng lưu? PII? quality? relevance? vector / DB / profile chỉ truy khi có ích cho câu hỏi hiện tại Lưu ý: Memory tốt là memory có chính sách. Lưu tất cả thường làm tăng chi phí, nhiễu, và rủi ro quyền riêng tư.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p020:l213-221",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Cái Gì Không Nên Gọi Là Memory?\nPage 20: Cái Gì Không Nên Gọi Là Memory? Text Extract Một prompt dài hơn không tự biến thành memory. Một file PDF upload một lần không phải memory nếu agent không truy được lại có chủ đích. Toàn bộ chat history không phải lúc nào cũng đáng inject. \"Lưu cho chắc\" thường tạo ra context nhiễu hơn là context hữu ích. Memory là data + policy + retrieval. Thiếu một trong ba thứ đó thì hệ thống khó ổn định.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "memory_lifecycle_policy",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence mô tả 4 bước, scope gộp phù hợp, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "memory_lifecycle_policy",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Bốn bước lifecycle được evidence mô tả, gộp thành một KC phù hợp, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "retrieval_vs_memory",
+      "name_vi": "Phân biệt retrieval và memory",
+      "description_vi": "Retrieval tìm domain context liên quan cho câu hỏi hiện tại, tập trung vào relevance và grounding; memory lưu trạng thái, sở thích và lịch sử chọn lọc, tập trung vào continuity và personalization.",
+      "item_form": "concept",
+      "primary_capability_vi": "Phân biệt mục đích và nguồn dữ liệu của retrieval với memory trong một agent.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Có thể quyết định một thông tin nên được xử lý như retrieved knowledge hay user memory và giải thích lý do.",
+      "bloom_rationale_vi": "Nguồn đặt hai cơ chế cạnh nhau theo mục đích, loại dữ liệu và cách sử dụng, đồng thời mô tả cách kết hợp chúng.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi short/long-term memory vì trục phân biệt ở đây là chức năng grounding so với personalization, không phải vị trí lưu trữ.",
+      "role_reason_vi": "Năng lực này giúp tránh gọi mọi dữ liệu được lưu là memory và thiết kế đúng kiến trúc agent.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p018:l184-199",
+        "day07-data-foundations-embedding-vector-store:p020:l213-221",
+        "day07-data-foundations-embedding-vector-store:p041:l434-447"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p018:l184-199",
+          "source_type": "slide",
+          "page_no": 18,
+          "content": "## Page 18: Short-term Memory vs Long-term Memory\nPage 18: Short term Memory vs Long term Memory Text Extract Short term Memory Nằm trong context window Giữ lịch sử gần đây và task hiện tại Rẻ để dùng, nhưng dễ đầy token Phù hợp cho session logic ngắn Long term Memory Nằm ngoài context window Thường là vector store, DB, profile store Phải truy xuất khi cần Phù hợp cho tri thức tích lũy và user history chọn lọc Context window không phải là vector store. Agent chỉ \"nhớ dài hạn\" khi có cơ chế truy xuất hoặc lưu trữ bên ngoài.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p020:l213-221",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Cái Gì Không Nên Gọi Là Memory?\nPage 20: Cái Gì Không Nên Gọi Là Memory? Text Extract Một prompt dài hơn không tự biến thành memory. Một file PDF upload một lần không phải memory nếu agent không truy được lại có chủ đích. Toàn bộ chat history không phải lúc nào cũng đáng inject. \"Lưu cho chắc\" thường tạo ra context nhiễu hơn là context hữu ích. Memory là data + policy + retrieval. Thiếu một trong ba thứ đó thì hệ thống khó ổn định.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p041:l434-447",
+          "source_type": "slide",
+          "page_no": 41,
+          "content": "## Page 41: Retrieval Khác Gì Memory?\nPage 41: Retrieval Khác Gì Memory? Text Extract Retrieval tìm context liên quan cho câu hỏi hiện tại thường đọc từ knowledge base trọng tâm là relevance và grounding Memory lưu trạng thái, sở thích, lịch sử chọn lọc có thể từ user profile hoặc interaction history trọng tâm là continuity và personalization Lưu ý: Nhiều hệ thống dùng cả hai: retrieval để biết domain facts, memory để biết user này là ai và đã làm gì trước đó.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "retrieval_vs_memory",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence phân biệt rõ, không overlap với short/long-term memory vì trục khác."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "retrieval_vs_memory",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Phân biệt retrieval và memory dựa trên chức năng, evidence từ p018, p020, p041 hỗ trợ, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "context_window_token_budget",
+      "name_vi": "Phân bổ ngân sách context window",
+      "description_vi": "Phân bổ token cho system prompt, retrieved context, conversation history và generation budget; cần giới hạn retrieved context để còn đủ token cho việc trả lời.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá và điều chỉnh lượng context được inject vào mỗi request.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể lập ngân sách token và nhận diện khi top-k hoặc conversation history chiếm quá nhiều context.",
+      "bloom_rationale_vi": "Nguồn đưa ra các thành phần budget và cảnh báo retrieved context quá lớn làm giảm chất lượng generation.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi retrieval controls vì token budgeting điều phối toàn bộ context window, không chỉ chọn top-k theo relevance.",
+      "role_reason_vi": "Đây là capability tái sử dụng để vận hành agent ổn định nhưng không phải trọng tâm bắt buộc của mini integration.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p021:l222-234"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p021:l222-234",
+          "source_type": "slide",
+          "page_no": 21,
+          "content": "## Page 21: Context Window Budget - Phân Bổ Token\nPage 21: Context Window Budget Phân Bổ Token Image Caption Biểu đồ phân bổ token budget gồm 4 khối: System Prompt (~15%), Retrieved Context (~35%), Conversation History (~25%), Generation Budget (~25%). Các khối minh họa phần token dành cho instruction, context truy xuất, lịch sử hội thoại và phần tạo câu trả lời. Lưu ý: nếu retrieved context chiếm quá nhiều, agent sẽ không đủ token để trả lời tốt; cần budget trước khi inject. Text Extract System prompt: instructions, persona, guardrails cố định mỗi request Retrieved context: top k chunks inject vào chiếm nhiều token nhất Conversation history: các turn gần nhất cắt bớt khi dài Generation budg",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "context_window_token_budget",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence p021 đủ, disposition performance_kc đúng, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "context_window_token_budget",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Nội dung về phân bổ token được evidence p021 hỗ trợ trực tiếp, disposition performance_kc đúng, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "embedding_semantic_representation",
+      "name_vi": "Embedding như lớp biểu diễn ngữ nghĩa",
+      "description_vi": "Embedding biến text thành vector nhiều chiều trong một không gian toán học, trong đó các câu gần nhau về nghĩa có vị trí gần nhau hơn, không chỉ dựa trên trùng khớp từ.",
+      "item_form": "concept",
+      "primary_capability_vi": "Giải thích embedding dùng để biểu diễn và so sánh nghĩa của ngôn ngữ.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Có thể giải thích vì sao semantic search tìm được đoạn liên quan dù query không trùng keyword với tài liệu.",
+      "bloom_rationale_vi": "Mục tiêu bài học và các trang embedding mô tả trực tiếp việc dịch ngôn ngữ sang không gian có thể so sánh nghĩa.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ khái niệm biểu diễn ngữ nghĩa riêng khỏi cosine similarity vì embedding trả lời vector biểu diễn gì, còn similarity trả lời đo độ gần thế nào.",
+      "role_reason_vi": "Đây là khái niệm trung tâm để hiểu toàn bộ semantic search và vector store.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p004:l17-24",
+        "day07-data-foundations-embedding-vector-store:p022:l235-238",
+        "day07-data-foundations-embedding-vector-store:p023:l239-249"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p004:l17-24",
+          "source_type": "slide",
+          "page_no": 4,
+          "content": "## Page 4: Mục Tiêu Ngày 7\nPage 4: Mục Tiêu Ngày 7 Text Extract Phân biệt được knowledge data, operational data, contextual data Hiểu embedding là lớp biểu diễn nghĩa, không chỉ là một API call Hiểu vector store lưu gì, tìm gì, và lọc bằng metadata ra sao Mô tả được pipeline Document → Chunk → Embed → Store → Query → Inject Build được một mini retrieval integration để nối agent với dữ liệu riêng",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p022:l235-238",
+          "source_type": "slide",
+          "page_no": 22,
+          "content": "## Page 22: Embeddings\nPage 22: Embeddings Text Extract Embedding biến ngôn ngữ thành không gian toán học để máy có thể so sánh nghĩa thay vì chỉ so chữ",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p023:l239-249",
+          "source_type": "slide",
+          "page_no": 23,
+          "content": "## Page 23: Embedding Là Gì?\nPage 23: Embedding Là Gì? Image Caption Minh họa trực quan bằng scatter plot 2D: các điểm gần nhau theo nghĩa. Cụm hoàn tiền / refund và trả hàng nằm gần nhau, trong khi vận chuyển / shipping ở xa hơn. Ý chính: câu có nghĩa gần nhau sẽ ở gần nhau hơn trong vector space. Text Extract Text được biến thành vector nhiều chiều. Từ đó, máy có thể đo độ gần về nghĩa. Đây là nền tảng cho semantic search, clustering, dedup, recommendation.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "embedding_semantic_representation",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence hỗ trợ khái niệm, tách biệt với cosine similarity và pipeline, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "embedding_semantic_representation",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Giải thích embedding là biểu diễn ngữ nghĩa, evidence từ p004, p022, p023 hỗ trợ, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "embedding_generation_pipeline",
+      "name_vi": "Pipeline tạo embedding bên trong model",
+      "description_vi": "Text đi qua tokenize thành subword units, transformer layers dùng self-attention, pooling gom biểu diễn token thành một vector; contrastive learning kéo câu tương tự lại gần và đẩy câu khác nghĩa ra xa.",
+      "item_form": "concept",
+      "primary_capability_vi": "Mô tả các giai đoạn chính tạo ra embedding và vai trò của chúng.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Có thể trình bày luồng Input Text → Tokenize → Transformer → Pooling → Output Vector và giải thích mục đích của từng giai đoạn.",
+      "bloom_rationale_vi": "Nguồn mô tả chi tiết pipeline dưới hood, tokenizer, self-attention, pooling và contrastive learning.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp tokenizer, transformer, pooling và training vì chúng là các thành phần liên tiếp của cùng một cơ chế; không tách thành các KC nhỏ hơn.",
+      "role_reason_vi": "Mục tiêu bài học nhấn mạnh embedding không chỉ là một API call.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p029:l314-325"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p029:l314-325",
+          "source_type": "slide",
+          "page_no": 29,
+          "content": "## Page 29: Embedding Dưới Hood - Không Chỉ Là API Call\nPage 29: Embedding Dưới Hood Không Chỉ Là API Call Image Caption Pipeline tạo embedding: Input Text → Tokenize → Transformer Layers → Pooling → Output Vector . Tokenizer chia text thành subword units; Transformer layers dùng self attention; Pooling gom token representations thành 1 vector. Training dùng contrastive learning để câu giống nhau gần, câu khác nhau xa. Text Extract Tokenizer: chia text thành subword units (BPE / SentencePiece) Transformer layers: self attention giúp mỗi token \"nhìn\" toàn bộ context Pooling: gom tất cả token representations thành 1 vector duy nhất Training: contrastive learning câu giống nhau gần, câu khác nhau xa",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "embedding_generation_pipeline",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence p029 mô tả pipeline, gộp các bước là hợp lý, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "embedding_generation_pipeline",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Pipeline tạo embedding được mô tả trong p029, gộp các bước hợp lý, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "embedding_use_cases",
+      "name_vi": "Các ứng dụng của embedding",
+      "description_vi": "Embedding hỗ trợ semantic search, clustering, deduplication và recommendation bằng cách so sánh hoặc nhóm các vector gần nhau về nghĩa, hành vi hoặc intent.",
+      "item_form": "concept",
+      "primary_capability_vi": "Nhận diện bài toán phù hợp để áp dụng embedding.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Có thể chọn embedding như một kỹ thuật phù hợp cho semantic search, clustering, dedup hoặc recommendation.",
+      "bloom_rationale_vi": "Nguồn liệt kê và giải thích bốn nhóm ứng dụng, đồng thời cảnh báo embedding không tự tạo ra sự thật.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp các ứng dụng vì chúng dùng chung năng lực biểu diễn và đo độ gần; không tách từng use case khi bài không dạy quy trình riêng cho từng loại.",
+      "role_reason_vi": "Đây là capability tái sử dụng ngoài retrieval pipeline chính của bài.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p023:l239-249",
+        "day07-data-foundations-embedding-vector-store:p025:l264-273"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p023:l239-249",
+          "source_type": "slide",
+          "page_no": 23,
+          "content": "## Page 23: Embedding Là Gì?\nPage 23: Embedding Là Gì? Image Caption Minh họa trực quan bằng scatter plot 2D: các điểm gần nhau theo nghĩa. Cụm hoàn tiền / refund và trả hàng nằm gần nhau, trong khi vận chuyển / shipping ở xa hơn. Ý chính: câu có nghĩa gần nhau sẽ ở gần nhau hơn trong vector space. Text Extract Text được biến thành vector nhiều chiều. Từ đó, máy có thể đo độ gần về nghĩa. Đây là nền tảng cho semantic search, clustering, dedup, recommendation.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p025:l264-273",
+          "source_type": "slide",
+          "page_no": 25,
+          "content": "## Page 25: Embedding Dùng Để Làm Gì Trong AI Product?\nPage 25: Embedding Dùng Để Làm Gì Trong AI Product? Text Extract Semantic search: tìm đoạn liên quan dù không trùng keyword Clustering: gom nội dung gần nghĩa Dedup: phát hiện đoạn tương tự nhau Recommendation: tìm item gần hành vi / intent Sai lầm phổ biến Embedding không tự tạo ra \"sự thật\". Nếu text nguồn sai, thiếu, hoặc chunk xấu thì retrieval vẫn tệ.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "embedding_use_cases",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence liệt kê ứng dụng, gộp use cases phù hợp, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "embedding_use_cases",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Các ứng dụng embedding được liệt kê trong evidence, gộp use cases phù hợp, disposition performance_kc đúng.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "cosine_similarity",
+      "name_vi": "Cosine similarity",
+      "description_vi": "Cosine similarity đo góc giữa hai vector để biểu diễn độ gần về hướng/nghĩa, không phụ thuộc độ dài vector; cùng hướng có similarity cao, vuông góc gần không liên quan và ngược hướng có giá trị thấp.",
+      "item_form": "concept",
+      "primary_capability_vi": "Diễn giải và sử dụng cosine similarity làm metric semantic search.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Có thể giải thích ý nghĩa của điểm cosine similarity và vì sao metric này phù hợp với embedding search.",
+      "bloom_rationale_vi": "Nguồn minh họa góc giữa hai vector, các mức độ gần và đặc tính không phụ thuộc magnitude.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ riêng vì hiểu metric similarity là năng lực độc lập với việc tạo embedding và lưu vector.",
+      "role_reason_vi": "Cosine similarity là cơ sở trực tiếp để hiểu kết quả semantic search và score.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p024:l250-263",
+        "day07-data-foundations-embedding-vector-store:p059:l683-700"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p024:l250-263",
+          "source_type": "slide",
+          "page_no": 24,
+          "content": "## Page 24: Cosine Similarity - Đo Độ Gần Về Nghĩa\nPage 24: Cosine Similarity Đo Độ Gần Về Nghĩa Image Caption Hình 2 vector từ gốc với góc θ giữa chúng. Ý nghĩa cosine similarity: 1.0 cùng hướng, 0.0 vuông góc, 1.0 ngược hướng. Không phụ thuộc vào độ dài vector. Hầu hết vector DB dùng cosine similarity làm metric mặc định cho semantic search. Text Extract 1.0 = hoàn toàn cùng hướng (cùng nghĩa) 0.0 = vuông góc (không liên quan) 1.0 = ngược hướng (nghĩa đối lập) Không phụ thuộc vào độ dài vector Hầu hết vector DB dùng cosine similarity làm metric mặc định cho semantic search.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p059:l683-700",
+          "source_type": "slide",
+          "page_no": 59,
+          "content": "## Page 59: Distance Metrics: Cosine vs Euclidean vs Dot Product\nPage 59: Distance Metrics: Cosine vs Euclidean vs Dot Product Text Extract Cosine Đo góc giữa 2 vector. Không phụ thuộc độ dài. Mặc định cho hầu hết embedding models. Euclidean (L2) Khoảng cách \"đường chim bay\". Phụ thuộc magnitude. Phù hợp khi vectors đã normalize. Dot Product Nhanh nhất. Kết hợp direction + magnitude. Tốt khi cần ưu tiên \"confidence\". Với OpenAI embeddings (đã normalized), cosine ≈ dot product. Bắt đầu với cosine, chỉ đổi khi có lý do cụ thể.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "cosine_similarity",
+        "overlap_codes": [
+          "distance_metric_selection"
+        ],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "minor",
+        "rationale_vi": "Có overlap với code 'distance_metric_selection' vì cả hai đều mô tả cosine similarity; tuy nhiên scope cosine_similarity chỉ tập trung vào một metric, nên overlap không hoàn toàn."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "cosine_similarity",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Nội dung chính xác, evidence hỗ trợ tốt, nhưng có overlap nhẹ với code distance_metric_selection (trong inventory_index) vì cả hai đều đề cập đến cosine similarity, làm giảm granularity dù scope của candidate này hẹp hơn.",
+        "issues_vi": [
+          "Overlap nhẹ với distance_metric_selection (performance_kc) trong inventory_index"
+        ],
+        "recommended_action": "keep",
+        "overall_score": 3.833,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "embedding_model_selection",
+      "name_vi": "Chọn embedding model theo use case",
+      "description_vi": "Lựa chọn model dựa trên quality, latency, storage/dimension, chi phí và language coverage; không chọn chỉ theo benchmark score và không có model tốt nhất cho mọi use case.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá trade-off và chọn embedding model cho bối cảnh sản phẩm.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Có thể so sánh các lựa chọn embedding model theo yêu cầu chất lượng, tốc độ, chi phí, kích thước lưu trữ và ngôn ngữ.",
+      "bloom_rationale_vi": "Nguồn nêu rõ các tiêu chí lựa chọn và trade-off fast, balanced, high quality; bảng model chỉ minh họa việc chọn theo use case.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp các model và thuộc tính dimensions/token limit vì đây là dữ liệu tham chiếu phục vụ cùng một quyết định lựa chọn.",
+      "role_reason_vi": "Năng lực hữu ích trong triển khai thực tế nhưng lab ngày học không yêu cầu benchmark hoặc tối ưu model.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p026:l274-285",
+        "day07-data-foundations-embedding-vector-store:p027:l286-298"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p026:l274-285",
+          "source_type": "slide",
+          "page_no": 26,
+          "content": "## Page 26: Benchmark Framing: Quality, Speed, Size\nPage 26: Benchmark Framing: Quality, Speed, Size Image Caption Biểu đồ trade off giữa Điểm benchmark và Tốc độ . Ba nhóm model/thiết lập được đặt trên đường chéo: Fast / low cost , Balanced , High quality . Thông điệp: không có model embedding tốt nhất cho mọi use case; cần chọn theo quality, latency, storage, language coverage. Với product thực tế, model cân bằng thường tốt hơn model mạnh nhất nhưng chậm và đắt. Text Extract Không có model embedding \"tốt nhất\" cho mọi use case. Chọn model theo quality, latency, storage, language coverage. Với product thực tế, một model cân bằng thường tốt hơn model mạnh nhất nhưng chậm và đắt.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p027:l286-298",
+          "source_type": "slide",
+          "page_no": 27,
+          "content": "## Page 27: Các Embedding Model Phổ Biến (2025-2026)\nPage 27: Các Embedding Model Phổ Biến (2025 2026) Tables | Model | Dims | Max tokens | Provider | Ghi chú | | | | | | | | text embedding 3 small | 1536 | 8191 | OpenAI | Rẻ, nhanh, baseline tốt | | text embedding 3 large | 3072 | 8191 | OpenAI | Quality cao hơn | | voyage 3 | 1024 | 32000 | Voyage AI | Code & multilingual mạnh | | Cohere embed v4 | 1024 | 512 | Cohere | Multilingual, search tuned | | bge m3 | 1024 | 8192 | BAAI (open) | Open source, MTEB top tier | Text Extract Chọn model theo use case, không chỉ theo MTEB score",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "embedding_model_selection",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ, gộp các model là hợp lý, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "embedding_model_selection",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Tiêu chí chọn model được evidence hỗ trợ, gộp các model hợp lý, disposition performance_kc đúng, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "vector_store_data_model",
+      "name_vi": "Mô hình dữ liệu của vector store",
+      "description_vi": "Vector store lưu đồng thời original chunk, embedding vector và metadata như source, owner, date, ACL, section; kết quả truy xuất gồm các chunk top-k, score và thông tin filter.",
+      "item_form": "concept",
+      "primary_capability_vi": "Mô tả những gì vector store lưu và trả về cho retrieval.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Có thể giải thích vai trò của text gốc, vector và metadata trong một bản ghi vector store.",
+      "bloom_rationale_vi": "Nguồn mô tả trực tiếp data model và luồng Original chunk → Embedding vector → Metadata → Search results.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp text, vector, metadata và search result vì chúng tạo thành một đơn vị dữ liệu và vòng truy xuất hoàn chỉnh.",
+      "role_reason_vi": "Đây là kiến thức cốt lõi để triển khai index và inject context.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p030:l326-329",
+        "day07-data-foundations-embedding-vector-store:p031:l330-335"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p030:l326-329",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Vector Store\nPage 30: Vector Store Text Extract Vector store không chỉ lưu vector; nó lưu cả nguồn, metadata, và khả năng lọc để retrieval có ngữ cảnh đúng",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p031:l330-335",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Vector Store Lưu Những Gì?\nPage 31: Vector Store Lưu Những Gì? Image Caption Sơ đồ từ Original chunk → Embedding vector → Metadata → Search results . Vector store giữ text gốc để inject lại vào prompt, vector phục vụ semantic similarity, metadata gồm source/owner/date/ACL/section. Kết quả truy xuất là top k chunks kèm scores và filters.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "vector_store_data_model",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence mô tả cấu trúc, gộp text/vector/metadata là hợp lý, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "vector_store_data_model",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Mô tả cấu trúc vector store rõ ràng, evidence từ p030-p031 hỗ trợ, gộp text/vector/metadata hợp lý, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "metadata_guided_retrieval",
+      "name_vi": "Dùng metadata để kiểm soát retrieval",
+      "description_vi": "Kết hợp semantic similarity với metadata như source, category, freshness, access level và section/chunk id để truy vết nguồn, lọc domain, tránh tài liệu cũ, giới hạn quyền và cite chính xác.",
+      "item_form": "principle",
+      "primary_capability_vi": "Thiết kế metadata và kết hợp metadata filtering với semantic search.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể chọn các trường metadata hữu ích và giải thích chúng cải thiện relevance, freshness, access control hoặc citation như thế nào.",
+      "bloom_rationale_vi": "Nguồn nêu rõ từng trường metadata và kết luận retrieval tốt cần semantic similarity kết hợp metadata filtering.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp các trường metadata vì chúng là các thuộc tính phục vụ cùng một nguyên tắc retrieval; tác dụng riêng của từng trường là ví dụ ứng dụng.",
+      "role_reason_vi": "Metadata là năng lực trọng tâm của vector store và được đánh giá trực tiếp trong lab.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p031:l330-335",
+        "day07-data-foundations-embedding-vector-store:p032:l336-348",
+        "day07-data-foundations-embedding-vector-store:p054:l631-643"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p031:l330-335",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Vector Store Lưu Những Gì?\nPage 31: Vector Store Lưu Những Gì? Image Caption Sơ đồ từ Original chunk → Embedding vector → Metadata → Search results . Vector store giữ text gốc để inject lại vào prompt, vector phục vụ semantic similarity, metadata gồm source/owner/date/ACL/section. Kết quả truy xuất là top k chunks kèm scores và filters.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p032:l336-348",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Metadata Quan Trọng Không Kém Similarity\nPage 32: Metadata Quan Trọng Không Kém Similarity Tables | Trường metadata | Ví dụ | Tác dụng | | | | | | Source / file name | refund policy v3.pdf | truy vết và hiển thị nguồn | | Category | finance, support, legal | lọc đúng domain trước khi search | | Time / freshness | 2026 03 01 | tránh dùng nội dung cũ | | Access level | public internal, restricted | giới hạn truy cập | | Section / chunk id | returns.section.4 | debug và cite chính xác hơn | Text Extract Retrieval tốt cần semantic similarity kết hợp metadata filtering",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p054:l631-643",
+          "source_type": "slide",
+          "page_no": 54,
+          "content": "## Page 54: Deliverable Và Assessment\nPage 54: Deliverable Và Assessment Text Extract Deliverable Data inventory 1 trang Script chunk + embed + index Query demo với 3 câu hỏi test Mini answer function có dùng retrieved context Query có retrieve đúng tài liệu không? Metadata có giúp lọc tốt hơn không? Câu trả lời có grounded hơn baseline không? Có biết chỉ ra failure case không?",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "metadata_guided_retrieval",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence hỗ trợ, tách biệt với topk/threshold, không overlap đáng kể."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "metadata_guided_retrieval",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Nội dung về metadata filtering được evidence hỗ trợ, tách biệt với topk/threshold, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "topk_threshold_attribute_filtering",
+      "name_vi": "Điều chỉnh top-k, score threshold và attribute filter",
+      "description_vi": "Top-k cân bằng giữa thiếu context và nhiễu; score threshold loại chunk liên quan yếu; attribute filter giới hạn theo region, team, thời gian hoặc loại tài liệu; khi cần có thể kết hợp keyword với semantic search.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Điều chỉnh các tham số và bộ lọc để kiểm soát chất lượng context truy xuất.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể chọn top-k, threshold và metadata filter phù hợp cho một truy vấn, đồng thời nhận diện khi context bị thiếu hoặc quá nhiễu.",
+      "bloom_rationale_vi": "Nguồn mô tả trực tiếp tác dụng và trade-off của top-k, threshold, attribute filter và hybrid thinking.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp ba cơ chế vì chúng cùng điều khiển tập kết quả retrieval và có chung failure là thiếu context hoặc inject quá nhiều context.",
+      "role_reason_vi": "Đây là năng lực vận hành trực tiếp cần cho semantic search demo và answer function.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p033:l349-357",
+        "day07-data-foundations-embedding-vector-store:p052:l594-608"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p033:l349-357",
+          "source_type": "slide",
+          "page_no": 33,
+          "content": "## Page 33: Top-k, Score Threshold, Filter\nPage 33: Top k, Score Threshold, Filter Text Extract Top k: lấy quá ít thì thiếu context, lấy quá nhiều thì nhiễu. Score threshold: giúp bỏ các chunk liên quan yếu. Attribute filter: lọc theo region, team, thời gian, loại tài liệu. Hybrid thinking: semantic similarity tốt, nhưng nhiều bài toán vẫn cần keyword / metadata song song. Retrieval tốt hiếm khi đến từ \"đổi model\" trước tiên; thường đến từ chunk đúng + metadata đủ + filter hợp lý.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p052:l594-608",
+          "source_type": "slide",
+          "page_no": 52,
+          "content": "## Page 52: Lab Step 4: Semantic Search Demo\nPage 52: Lab Step 4: Semantic Search Demo Text Extract python query = \"thoi han doi tra san pham\" \"thời hạn đổi trả sản phẩm\" results = collection.query( query texts=[query], n results=3, where={\"category\": \"support\"} metadata filter ) for i, doc in enumerate(results[\"documents\"][0]): score = results[\"distances\"][0][i] print(f\"[{i+1}] score={score:.3f}\") print(f\" {doc[:120]}...\")",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "topk_threshold_attribute_filtering",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence mô tả ba cơ chế, gộp phù hợp, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "topk_threshold_attribute_filtering",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Ba cơ chế điều chỉnh retrieval được evidence mô tả, gộp phù hợp, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "vector_database_selection",
+      "name_vi": "Chọn vector database theo giai đoạn sản phẩm",
+      "description_vi": "Chọn Chroma, Pinecone, Weaviate, Qdrant, pgvector hoặc FAISS theo yêu cầu hosting, ngôn ngữ, filtering, scale, SQL integration và mục đích prototype, production hay research.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá lựa chọn vector database theo yêu cầu vận hành.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Có thể chọn loại vector database phù hợp cho prototype hoặc production dựa trên scale, filtering và yêu cầu kiểm soát hạ tầng.",
+      "bloom_rationale_vi": "Nguồn cung cấp bảng so sánh theo hosting, language, filtering, scale và best-for, cùng nguyên tắc chọn theo giai đoạn sản phẩm.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp các database và thuộc tính vì chúng chỉ là các phương án trong cùng một quyết định kiến trúc.",
+      "role_reason_vi": "Năng lực này hữu ích khi triển khai nhưng ngày học chỉ yêu cầu hiểu trade-off, không phải trọng tâm mastery.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p034:l358-371"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p034:l358-371",
+          "source_type": "slide",
+          "page_no": 34,
+          "content": "## Page 34: Vector Database Landscape\nPage 34: Vector Database Landscape Tables | DB | Hosting | Language | Filtering | Scale | Best for | | | | | | | | | Chroma | Local | Python | Basic | Small | Prototype, học tập | | Pinecone | Cloud | Any | Tốt | Large | Production SaaS | | Weaviate | Hybrid | Any | Tốt | Large | Hybrid search | | Qdrant | Hybrid | Rust | Rất tốt | Large | Filtering phức tạp | | pgvector | DB addon | SQL | SQL where | Medium | Team đã dùng Postgres | | FAISS | Local lib | C++/Py | Không | Any | Research, benchmark | Text Extract Chọn DB theo giai đoạn sản phẩm và yêu cầu vận hành",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "vector_database_selection",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence p034 đủ, disposition performance_kc đúng, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "vector_database_selection",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "So sánh các vector database trong evidence p034, gộp các lựa chọn hợp lý, disposition performance_kc đúng, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "standard_retrieval_pipeline",
+      "name_vi": "Pipeline Document đến Inject",
+      "description_vi": "Pipeline retrieval chuẩn gồm Document → Chunk → Embed → Store → Query → Inject: lấy tài liệu, chia chunk, vector hóa, index kèm metadata, tìm kiếm và đưa context vào prompt grounded.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Mô tả đúng thứ tự và chức năng của các bước trong retrieval pipeline.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Có thể trình bày pipeline sáu bước và giải thích đầu vào/đầu ra chính của từng bước.",
+      "bloom_rationale_vi": "Mục tiêu ngày học yêu cầu mô tả chính xác pipeline Document → Chunk → Embed → Store → Query → Inject.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ pipeline như một procedure cấp hệ thống; các bước có thể được học và đánh giá sâu hơn ở các item chunking, indexing và answer function.",
+      "role_reason_vi": "Đây là mental model trung tâm nối dữ liệu riêng với hành vi grounded của agent.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p004:l17-24",
+        "day07-data-foundations-embedding-vector-store:p036:l386-389",
+        "day07-data-foundations-embedding-vector-store:p037:l390-395"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p004:l17-24",
+          "source_type": "slide",
+          "page_no": 4,
+          "content": "## Page 4: Mục Tiêu Ngày 7\nPage 4: Mục Tiêu Ngày 7 Text Extract Phân biệt được knowledge data, operational data, contextual data Hiểu embedding là lớp biểu diễn nghĩa, không chỉ là một API call Hiểu vector store lưu gì, tìm gì, và lọc bằng metadata ra sao Mô tả được pipeline Document → Chunk → Embed → Store → Query → Inject Build được một mini retrieval integration để nối agent với dữ liệu riêng",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p036:l386-389",
+          "source_type": "slide",
+          "page_no": 36,
+          "content": "## Page 36: Kết Nối Agent Với Data\nPage 36: Kết Nối Agent Với Data Text Extract Retrieval pipeline là chiếc cầu nối giữa dữ liệu riêng và hành vi của agent",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p037:l390-395",
+          "source_type": "slide",
+          "page_no": 37,
+          "content": "## Page 37: Retrieval Pipeline Chuẩn\nPage 37: Retrieval Pipeline Chuẩn Image Caption Pipeline chuẩn gồm 6 bước: Document → Chunk → Embed → Store → Query → Inject . Mỗi bước tương ứng với PDF/docs/HTML, chia theo section/token, vector hóa, index + metadata, semantic search, prompt grounded. Ghi chú tham chiếu đến OpenAI Retrieval / File Search guides.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "standard_retrieval_pipeline",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả pipeline đúng 6 bước với evidence hỗ trợ từ slide p004, p036, p037. Disposition core_kc phù hợp. Granularity vừa phải không quá rộng cũng không quá vụn. Measurable outcome có thể đánh giá được. Không có overlap đáng kể với code khác."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "standard_retrieval_pipeline",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Pipeline 6 bước được mô tả chính xác, evidence trực tiếp từ slide p004, p036, p037. Disposition core_kc phù hợp. Granularity vừa phải, measurable outcome có thể đánh giá. Không phát hiện overlap hay lỗi nào.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "chunking_design",
+      "name_vi": "Thiết kế chunk giữ trọn ngữ cảnh",
+      "description_vi": "Chunk nên chứa một ý hoặc một section tương đối trọn vẹn, tránh quá to gây nhiễu và quá nhỏ làm mất ngữ cảnh; thường bắt đầu theo heading/section và dùng overlap vừa đủ.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Chia tài liệu thành các chunk phù hợp cho embedding và retrieval.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể chunk một tập tài liệu theo cấu trúc nội dung và giải thích vì sao ranh giới chunk giữ được nghĩa.",
+      "bloom_rationale_vi": "Nguồn mô tả trực tiếp hậu quả của chunk quá to/quá nhỏ và khuyến nghị chunk theo section/heading.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp kích thước chunk và overlap vì chúng cùng quyết định tính liên tục của context; không tách từng tham số thành KC riêng.",
+      "role_reason_vi": "Chunking là một trong các yếu tố chính quyết định retrieval quality và là bước bắt buộc của lab.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p038:l396-408",
+        "day07-data-foundations-embedding-vector-store:p040:l422-433",
+        "day07-data-foundations-embedding-vector-store:p050:l547-570",
+        "day07-data-foundations-embedding-vector-store:p058:l673-682"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p038:l396-408",
+          "source_type": "slide",
+          "page_no": 38,
+          "content": "## Page 38: Chunking: Quá To Hay Quá Nhỏ Đều Trả Giá\nPage 38: Chunking: Quá To Hay Quá Nhỏ Đều Trả Giá Text Extract Chunk quá to Dính nhiều chủ đề vào cùng một vector, retrieve trúng nhưng inject rất nhiễu. Chunk hợp lý Một ý / một section tương đối trọn vẹn, có overlap vừa đủ để giữ nghĩa. Chunk quá nhỏ Mất ngữ cảnh, retrieve nhiều mảnh rời rạc, khó tổng hợp thành câu trả lời tốt. Bắt đầu đơn giản với chunk theo section / heading, rồi tối ưu sau bằng eval thay vì đoán cảm tính.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p040:l422-433",
+          "source_type": "slide",
+          "page_no": 40,
+          "content": "## Page 40: Chunk Overlap - Tại Sao Cần?\nPage 40: Chunk Overlap Tại Sao Cần? Image Caption Minh họa 2 chunk chồng lấn nhau với vùng overlap ở ranh giới. Không overlap sẽ mất nghĩa ở biên chunk. Có overlap giúp giữ liên tục ngữ cảnh. Overlap thường 10 20% kích thước chunk; quá nhiều thì duplicate context và tốn storage, quá ít thì mất nghĩa ở ranh giới. Text Extract Overlap thường 10 20% kích thước chunk (e.g., 50 100 tokens cho chunk 512 tokens) Quá nhiều overlap → duplicate context, tốn storage, nhiễu kết quả Quá ít overlap → mất nghĩa ở ranh giới giữa hai chunk",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p050:l547-570",
+          "source_type": "slide",
+          "page_no": 50,
+          "content": "## Page 50: Lab Step 2: Chunking Code Example\nPage 50: Lab Step 2: Chunking Code Example Text Extract python from langchain.text splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter( chunk size=512, chunk overlap=64, separators=[\"\\n\\n\", \"\\n\", \". \", \" \"] ) docs = load documents(\"./data/\") your loader chunks = [] for doc in docs: parts = splitter.split text(doc[\"text\"]) for i, part in enumerate(parts): chunks.append({ \"id\": f\"{doc['source']} chunk {i}\", \"text\": part, \"metadata\": {\"source\": doc[\"source\"], \"category\": doc[\"category\"]} })",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p058:l673-682",
+          "source_type": "slide",
+          "page_no": 58,
+          "content": "## Page 58: Best Practices: Tổng Hợp\nPage 58: Best Practices: Tổng Hợp Text Extract Clean data trước khi embed bỏ header/footer lặp, chuẩn hóa encoding Thêm metadata ít nhất: source, category, date Chunk theo structure (heading, section) thay vì fixed size Overlap 10 20% giữa các chunk liền kề Start small: 10 20 docs, 3 5 test queries, iterate Eval retrieval riêng trước khi eval end to end Không fine tune embedding model trước khi đã tối ưu hết data + chunking + metadata",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "chunking_design",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Các claim về chunk hợp lý, overlap, ranh giới được hỗ trợ bởi evidence p038, p040, p050, p058. Disposition core_kc phù hợp. Granularity tốt. Measurable outcome có thể đánh giá. Không overlap đáng kể."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "chunking_design",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Thiết kế chunk giữ ngữ cảnh, overlap, ranh giới đều được evidence hỗ trợ từ p038, p040, p050, p058. Disposition core_kc đúng. Granularity tốt, không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "chunking_strategy_selection",
+      "name_vi": "Chọn chiến lược chunking theo loại tài liệu",
+      "description_vi": "Fixed-size đơn giản nhưng dễ cắt giữa ý; sentence-based giữ câu; section/heading giữ ý trọn vẹn; recursive linh hoạt theo separator; semantic gom câu cùng chủ đề nhưng chậm và cần embedding.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Lựa chọn chiến lược chunking dựa trên cấu trúc và đặc điểm tài liệu.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Có thể phân tích một loại tài liệu và chọn chiến lược chunking phù hợp, nêu rõ trade-off của lựa chọn.",
+      "bloom_rationale_vi": "Nguồn trình bày bảng phương pháp, ưu nhược điểm và kết luận không có một chiến lược tốt nhất cho mọi tài liệu.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi procedure chunking vì chọn strategy là task thiết kế có failure/remediation riêng, khác với thao tác thực thi việc chia chunk.",
+      "role_reason_vi": "Khả năng chọn strategy giúp tránh anti-pattern fixed-size cho mọi tài liệu và được yêu cầu trong lab.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p039:l409-421",
+        "day07-data-foundations-embedding-vector-store:p057:l664-672"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p039:l409-421",
+          "source_type": "slide",
+          "page_no": 39,
+          "content": "## Page 39: Các Phương Pháp Chunking Phổ Biến\nPage 39: Các Phương Pháp Chunking Phổ Biến Tables | Phương pháp | Cách hoạt động | Ưu điểm | Nhược điểm | | | | | | | Fixed size token | Cắt mỗi N tokens | Đơn giản, dễ implement | Cắt giữa câu / ý | | Sentence based | Tách theo câu hoàn chỉnh | Giữ nghĩa câu | Câu dài / ngắn không đều | | Section / heading | Tách theo heading (H1, H2) | Chunk trọn vẹn về ý | Cần tài liệu có structure | | Recursive | Thử separator lớn → nhỏ | Linh hoạt | Phức tạp hơn | | Semantic | Gom câu cùng chủ đề | Chất lượng cao nhất | Chậm, cần embedding | Text Extract Không có \"best\" strategy chọn theo đặc điểm tài liệu",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p057:l664-672",
+          "source_type": "slide",
+          "page_no": 57,
+          "content": "## Page 57: Anti-patterns: Những Gì Không Nên Làm\nPage 57: Anti patterns: Những Gì Không Nên Làm Text Extract \"Nạp hết vào vector DB rồi tính sau\" Garbage in, garbage out. Clean trước, index sau. Chunk cố định 500 chars cho mọi loại tài liệu Mỗi loại doc cần strategy khác nhau. Không có metadata Không filter được → retrieve lẫn domain → answer sai. Không eval retrieval Chỉ eval generation mà bỏ qua retrieval → debug mù. Embed raw PII Vi phạm privacy, rủi ro pháp lý, khó thu hồi. Top k = 10 \"cho chắc\" Inject quá nhiều context → nhiễu, tốn token, chậm.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "chunking_strategy_selection",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Các chiến lược chunking được mô tả trong evidence p039, p057. Disposition core_kc phù hợp. Granularity vừa phải. Measurable outcome có thể đánh giá. Không overlap đáng kể với code khác (chunking_design có focus khác)."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "chunking_strategy_selection",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Các chiến lược chunking được mô tả đúng (p039), kèm anti-pattern (p057). Disposition core_kc phù hợp. Granularity vừa phải, không overlap đáng kể với chunking_design.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "retrieve_and_inject_context",
+      "name_vi": "Retrieve rồi inject context vào answer",
+      "description_vi": "Dùng query để lấy các chunk liên quan, nối chúng thành context và đưa context cùng câu hỏi vào prompt để LLM trả lời dựa trên nguồn thay vì chỉ dùng training data.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thực hiện retrieval và truyền kết quả vào hàm trả lời hoặc agent.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể viết hoặc mô tả một answer function lấy top-k documents, tạo context và inject context vào prompt.",
+      "bloom_rationale_vi": "Nguồn có ví dụ Python retrieve-then-inject và yêu cầu deliverable là answer function dùng retrieved context.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi pipeline cấp khái niệm vì triển khai retrieve/inject có task lập trình và failure riêng, nhưng không tách query, join context hay prompt thành các item nhỏ.",
+      "role_reason_vi": "Đây là bước trực tiếp biến retrieval thành câu trả lời grounded và là deliverable chính của lab.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p042:l448-462",
+        "day07-data-foundations-embedding-vector-store:p053:l609-630"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p042:l448-462",
+          "source_type": "slide",
+          "page_no": 42,
+          "content": "## Page 42: Retrieve Rồi Inject - Python Example\nPage 42: Retrieve Rồi Inject Python Example Text Extract python query = \"Chinh sach doi tra ap dung trong bao lau?\" \"Chính sách đổi trả áp dụng trong bao lâu?\" results = collection.query(query texts=[query], n results=3) context = \"\\n\".join(results[\"documents\"][0]) prompt = f\"\"\"Dua tren nguon sau, hay tra loi ngan gon. \"Dựa trên nguồn sau, hãy trả lời ngắn gọn.\" Nguon: {context} Cau hoi: {query} \"\"\"",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p053:l609-630",
+          "source_type": "slide",
+          "page_no": 53,
+          "content": "## Page 53: Lab Step 5: Answer Function Có Retrieved Context\nPage 53: Lab Step 5: Answer Function Có Retrieved Context Text Extract python def answer with context(query, collection, model=\"gpt 4o mini\"): results = collection.query(query texts=[query], n results=3) context = \"\\n \\n\".join(results[\"documents\"][0]) response = client ai.chat.completions.create( model=model, messages=[{ \"role\": \"user\", \"content\": f\"\"\"Dua tren nguon sau, tra loi ngan gon. Neu khong tim thay, noi 'Khong co thong tin'. \"Dựa trên nguồn sau, trả lời ngắn gọn. Nếu không tìm thấy, nói 'Không có thông tin'.\" Nguon: {context} Cau hoi: {query}\"\"\" }] ) return response.choices[0].message.content",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "retrieve_and_inject_context",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Claim về retrieval và inject được hỗ trợ bởi evidence p042, p053. Disposition core_kc phù hợp. Granularity tốt. Measurable outcome có thể đánh giá. Không overlap đáng kể."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "retrieve_and_inject_context",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence từ p042 và p053 hỗ trợ trực tiếp claim về retrieval và inject. Disposition core_kc đúng. Không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "rag_use_case_decision",
+      "name_vi": "Quyết định khi nào dùng RAG",
+      "description_vi": "Không cần RAG cho general knowledge đã nằm trong training data, dữ liệu nhỏ fit trong context, reasoning/tính toán hoặc creative task; nên dùng khi cần proprietary/domain knowledge, dữ liệu mới, citation, knowledge base lớn hoặc ACL.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá sự phù hợp của RAG với một bài toán AI.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Có thể quyết định dùng hoặc không dùng RAG cho một use case và biện minh bằng nhu cầu external knowledge, freshness, citation, scale hoặc access control.",
+      "bloom_rationale_vi": "Nguồn liệt kê rõ các trường hợp nên và không nên dùng RAG, cùng trade-off latency và complexity.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp điều kiện nên dùng và không nên dùng vì chúng là hai phía của cùng một decision criterion.",
+      "role_reason_vi": "Năng lực này ngăn việc dùng RAG như silver bullet và định hướng kiến trúc của sản phẩm.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p043:l463-478",
+        "day07-data-foundations-embedding-vector-store:p062:l728-744"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p043:l463-478",
+          "source_type": "slide",
+          "page_no": 43,
+          "content": "## Page 43: So Sánh: LLM Chay vs RAG-Enhanced\nPage 43: So Sánh: LLM Chay vs RAG Enhanced Text Extract LLM Chay (No Retrieval) Chỉ dựa vào training data Dễ hallucinate với domain specific Không cite được nguồn cụ thể Không cập nhật được data mới RAG Enhanced Grounded trên dữ liệu thật Giảm hallucination đáng kể Trích nguồn cho user verify Cập nhật bằng re index, không retrain RAG thêm latency (retrieve step) và complexity (pipeline), nhưng đổi lại accuracy và trustworthiness cao hơn nhiều.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p062:l728-744",
+          "source_type": "slide",
+          "page_no": 62,
+          "content": "## Page 62: Khi Nào KHÔNG Cần RAG?\nPage 62: Khi Nào KHÔNG Cần RAG? Text Extract Không nên dùng RAG khi: Câu hỏi hoàn toàn nằm trong training data (general knowledge) Data đã fit trong context window (đủ nhỏ để inject hết) Cần reasoning / tính toán, không cần factual lookup Task là creative writing, brainstorming Nên dùng RAG khi: Cần domain specific, proprietary knowledge Data thay đổi thường xuyên Cần cite nguồn, trích dẫn cụ thể Knowledge base quá lớn để fit trong context Cần kiểm soát access (ACL per doc) Lưu ý: RAG không phải silver bullet. Nếu bài toán không cần external knowledge, RAG chỉ thêm latency và complexity.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "rag_use_case_decision",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Các điều kiện nên dùng/không dùng RAG được hỗ trợ bởi evidence p043, p062. Disposition core_kc phù hợp. Granularity vừa phải. Measurable outcome có thể đánh giá. Không overlap đáng kể."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "rag_use_case_decision",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Điều kiện nên/không nên dùng RAG từ p043 và p062 được hỗ trợ đầy đủ. Disposition core_kc phù hợp. Không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "grounded_answer_source_fallback",
+      "name_vi": "Đánh giá câu trả lời grounded và fallback",
+      "description_vi": "Câu trả lời cần dựa trên retrieved source, có thể chỉ ra nguồn để người dùng kiểm chứng và phải fallback rõ ràng khi không tìm thấy thông tin thay vì bịa.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Kiểm tra tính grounded, khả năng cite nguồn và hành vi fallback của answer.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Có thể đánh giá một answer so với context nguồn, xác định hallucination và kiểm tra câu trả lời có fallback khi thiếu thông tin.",
+      "bloom_rationale_vi": "Nguồn đối chiếu LLM chay với RAG-enhanced, yêu cầu cite nguồn, fallback và không chấp nhận câu trả lời chỉ nghe hay.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi thao tác retrieve/inject vì đánh giá output là task kiểm định với failure signal là unsupported claim hoặc thiếu citation.",
+      "role_reason_vi": "Groundedness và trustworthiness là kết quả học tập trực tiếp của retrieval-enabled answer.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p043:l463-478",
+        "day07-data-foundations-embedding-vector-store:p053:l609-630",
+        "day07-data-foundations-embedding-vector-store:p055:l644-651",
+        "day07-data-foundations-embedding-vector-store:p063:l745-759"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p043:l463-478",
+          "source_type": "slide",
+          "page_no": 43,
+          "content": "## Page 43: So Sánh: LLM Chay vs RAG-Enhanced\nPage 43: So Sánh: LLM Chay vs RAG Enhanced Text Extract LLM Chay (No Retrieval) Chỉ dựa vào training data Dễ hallucinate với domain specific Không cite được nguồn cụ thể Không cập nhật được data mới RAG Enhanced Grounded trên dữ liệu thật Giảm hallucination đáng kể Trích nguồn cho user verify Cập nhật bằng re index, không retrain RAG thêm latency (retrieve step) và complexity (pipeline), nhưng đổi lại accuracy và trustworthiness cao hơn nhiều.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p053:l609-630",
+          "source_type": "slide",
+          "page_no": 53,
+          "content": "## Page 53: Lab Step 5: Answer Function Có Retrieved Context\nPage 53: Lab Step 5: Answer Function Có Retrieved Context Text Extract python def answer with context(query, collection, model=\"gpt 4o mini\"): results = collection.query(query texts=[query], n results=3) context = \"\\n \\n\".join(results[\"documents\"][0]) response = client ai.chat.completions.create( model=model, messages=[{ \"role\": \"user\", \"content\": f\"\"\"Dua tren nguon sau, tra loi ngan gon. Neu khong tim thay, noi 'Khong co thong tin'. \"Dựa trên nguồn sau, trả lời ngắn gọn. Nếu không tìm thấy, nói 'Không có thông tin'.\" Nguon: {context} Cau hoi: {query}\"\"\" }] ) return response.choices[0].message.content",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p055:l644-651",
+          "source_type": "slide",
+          "page_no": 55,
+          "content": "## Page 55: Checklist Trước Khi Chốt Lab\nPage 55: Checklist Trước Khi Chốt Lab Text Extract Dữ liệu có owner và source rõ ràng Metadata có ít nhất 2 trường hữu ích Chunking có lý do, không cắt bừa theo số ký tự Có test query semantic, không chỉ test exact keyword Không chấp nhận câu trả lời nghe hay nhưng không chỉ ra được nguồn",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p063:l745-759",
+          "source_type": "slide",
+          "page_no": 63,
+          "content": "## Page 63: Ví Dụ End-to-End: Customer Support Bot\nPage 63: Ví Dụ End to End: Customer Support Bot Image Caption Pipeline end to end từ User Query đến Response + Sources qua Intent Router , Retrieve (Vector DB) , Rerank + Filter , Generate (LLM) . Nguồn dữ liệu gồm knowledge, operational, contextual data. Cấu hình nhấn mạnh chunking theo section heading, metadata như category/language/version, eval với 20 test queries, và fallback khi không tìm thấy thông tin. Text Extract Knowledge data: FAQ đổi trả, chính sách bảo hành, hướng dẫn sử dụng Operational data: trạng thái đơn hàng (qua API) Contextual data: lịch sử chat, user tier (VIP/regular) Chunking: theo section heading Metadata: category, l",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "grounded_answer_source_fallback",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Claim về grounded answer, citation và fallback được hỗ trợ bởi evidence p043, p053, p055, p063. Disposition core_kc phù hợp. Granularity tốt. Measurable outcome có thể đánh giá. Không overlap đáng kể."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "grounded_answer_source_fallback",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence từ p043, p053, p055, p063 hỗ trợ grounded answer, citation và fallback. Disposition core_kc đúng. Không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "hosted_vs_self_managed_retrieval",
+      "name_vi": "Hosted retrieval và self-managed retrieval",
+      "description_vi": "Hosted/managed retrieval giúp triển khai nhanh và giảm hạ tầng, phù hợp demo/PoC; self-managed dùng Chroma, FAISS hoặc vector DB khi cần kiểm soát chi tiết chunking, metadata, pipeline và chi phí.",
+      "item_form": "criterion",
+      "primary_capability_vi": "So sánh và chọn mô hình vận hành retrieval phù hợp.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Có thể chọn hosted hoặc self-managed retrieval dựa trên nhu cầu tốc độ triển khai, kiểm soát và chi phí.",
+      "bloom_rationale_vi": "Nguồn trình bày trực tiếp trade-off và phạm vi sử dụng của hai mô hình.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp hai mô hình vì chúng là hai phương án trong cùng một quyết định triển khai, không cần tách từng sản phẩm.",
+      "role_reason_vi": "Đây là capability kiến trúc hữu ích nhưng nguồn xác định chỉ cần hiểu trade-off trong Day 7.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p044:l479-488"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p044:l479-488",
+          "source_type": "slide",
+          "page_no": 44,
+          "content": "## Page 44: Hosted Retrieval vs Self-managed Retrieval\nPage 44: Hosted Retrieval vs Self managed Retrieval Text Extract Hosted / managed File Search / managed retrieval giúp đi nhanh, giảm code hạ tầng, phù hợp demo và PoC. Self managed Dùng Chroma / Faiss / vector DB khi cần kiểm soát chunking, metadata, pipeline, hoặc cost path chi tiết hơn. Ngày 7 chỉ cần hiểu trade off. Chưa cần sa sâu vào vector DB war hay tối ưu indexing nâng cao.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "hosted_vs_self_managed_retrieval",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "So sánh được hỗ trợ bởi evidence p044. Disposition performance_kc phù hợp vì là quyết định triển khai. Granularity vừa phải. Measurable outcome có thể đánh giá. Không overlap đáng kể."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "hosted_vs_self_managed_retrieval",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "So sánh trade-off từ p044 được hỗ trợ. Disposition performance_kc phù hợp (quyết định triển khai). Không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "retrieval_failure_debugging",
+      "name_vi": "Debug các failure pattern của retrieval",
+      "description_vi": "Nhận diện và khắc phục các lỗi chunk quá to, thiếu metadata, top-k quá cao, data stale và query mơ hồ bằng cách điều chỉnh chunk, metadata, threshold, re-index, version tracking hoặc query rewriting.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Phân tích failure case và đề xuất remediation cho retrieval.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Có thể truy từ biểu hiện lỗi đến nguyên nhân retrieval và chọn biện pháp khắc phục phù hợp.",
+      "bloom_rationale_vi": "Nguồn cung cấp bảng pattern–symptom–fix và nhấn mạnh debug bắt đầu từ nhận diện pattern lỗi.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp các failure pattern vì chúng cùng phục vụ một procedure debug; từng pattern là nhánh chẩn đoán, không phải mastery goal độc lập.",
+      "role_reason_vi": "Lab yêu cầu chỉ ra failure case và retrieval quality phụ thuộc vào khả năng debug pipeline.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p045:l489-501",
+        "day07-data-foundations-embedding-vector-store:p057:l664-672",
+        "day07-data-foundations-embedding-vector-store:p069:l803-812"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p045:l489-501",
+          "source_type": "slide",
+          "page_no": 45,
+          "content": "## Page 45: Common Failure Patterns Trong Retrieval\nPage 45: Common Failure Patterns Trong Retrieval Tables | Pattern | Biểu hiện | Cách khắc phục | | | | | | Chunk quá to | Retrieve trúng nhưng answer nhiễu | Chunk nhỏ hơn, theo section | | Thiếu metadata | Không filter được, lẫn domain | Thêm category, source, date | | Top k quá cao | Inject quá nhiều context | Giảm k, thêm score threshold | | Data cũ / stale | Trả lời đúng... nhưng outdated | Re index định kỳ, version tracking | | Query mơ hồ | Retrieve sai hoàn toàn | Query rewriting / expansion | Text Extract Debug retrieval bắt đầu từ nhận diện pattern lỗi",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p057:l664-672",
+          "source_type": "slide",
+          "page_no": 57,
+          "content": "## Page 57: Anti-patterns: Những Gì Không Nên Làm\nPage 57: Anti patterns: Những Gì Không Nên Làm Text Extract \"Nạp hết vào vector DB rồi tính sau\" Garbage in, garbage out. Clean trước, index sau. Chunk cố định 500 chars cho mọi loại tài liệu Mỗi loại doc cần strategy khác nhau. Không có metadata Không filter được → retrieve lẫn domain → answer sai. Không eval retrieval Chỉ eval generation mà bỏ qua retrieval → debug mù. Embed raw PII Vi phạm privacy, rủi ro pháp lý, khó thu hồi. Top k = 10 \"cho chắc\" Inject quá nhiều context → nhiễu, tốn token, chậm.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p069:l803-812",
+          "source_type": "slide",
+          "page_no": 69,
+          "content": "## Page 69: Tiếp Theo & Bài Tập\nPage 69: Tiếp Theo & Bài Tập Text Extract Bài tập sau buổi Rà lại knowledge base của nhóm và bỏ 20% nội dung nhiễu nhất Viết 5 test query để đo retrieval quality Chỉ ra 2 failure cases do chunking hoặc metadata Thử thay đổi chunk size và overlap, ghi nhận sự khác biệt Preview Day 08 Ngày 8 đi tiếp sang RAG pipeline: indexing, retrieval, generation, evaluation.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "retrieval_failure_debugging",
+        "overlap_codes": [
+          "chunking_design",
+          "topk_threshold_attribute_filtering"
+        ],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "minor",
+        "rationale_vi": "Code này gộp nhiều failure pattern, trong đó có chunking design và top-k/threshold, trùng với hai code riêng trong inventory_index. Tuy nhiên, boundary notes đã giải thích đây là gộp có chủ ý để phục vụ procedure debug. Overlap là minor vì focus khác (diagnostic tổng hợp so với design/tuning riêng)."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "retrieval_failure_debugging",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p045, p057, p069 hỗ trợ các failure pattern và remediation. Disposition core_kc phù hợp. Có overlap nhẹ với chunking_design và topk_threshold_attribute_filtering nhưng do focus khác (debug tổng hợp), không ảnh hưởng đáng kể.",
+        "issues_vi": [
+          "Overlap nhẹ với chunking_design và topk_threshold_attribute_filtering do cùng đề cập chunk và top-k, nhưng đã được ghi nhận trong boundary notes."
+        ],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "retrieval_quality_evaluation",
+      "name_vi": "Đo lường retrieval quality",
+      "description_vi": "Đánh giá retrieval bằng Precision@k, Recall@k, MRR và NDCG; tạo test queries có expected documents, so sánh top-k với ground truth và eval retrieval trước generation.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế và thực hiện đánh giá định lượng cho retrieval.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Có thể tạo tập query kiểm thử, đối chiếu kết quả với expected docs và tính hoặc báo cáo các metric retrieval cơ bản.",
+      "bloom_rationale_vi": "Nguồn nêu định nghĩa các metrics và quy trình lab gồm 10–20 queries, Precision@3, Recall@3 và ghi nhận failure cases.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp các metric và quy trình test vì chúng cùng tạo thành capability eval retrieval; không tách từng metric khi nguồn không dạy workflow riêng.",
+      "role_reason_vi": "Đánh giá retrieval trước generation là yêu cầu trực tiếp để kiểm chứng pipeline và deliverable.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p046:l502-517",
+        "day07-data-foundations-embedding-vector-store:p054:l631-643",
+        "day07-data-foundations-embedding-vector-store:p069:l803-812"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p046:l502-517",
+          "source_type": "slide",
+          "page_no": 46,
+          "content": "## Page 46: Đo Lường Retrieval Quality\nPage 46: Đo Lường Retrieval Quality Text Extract Metrics quan trọng Precision@k: trong k kết quả, bao nhiêu thực sự relevant? Recall@k: trong tất cả docs relevant, bao nhiêu nằm trong top k? MRR (Mean Reciprocal Rank): kết quả relevant đầu tiên ở vị trí nào? NDCG: thứ tự rank có tốt không? Cách eval đơn giản cho lab Viết 10 20 test queries với expected docs Chạy retrieval, so sánh top k vs expected Tính Precision@3 và Recall@3 Ghi nhận failure cases: query nào retrieve sai? Eval retrieval trước khi eval generation nếu retrieve sai thì generate không thể đúng.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p054:l631-643",
+          "source_type": "slide",
+          "page_no": 54,
+          "content": "## Page 54: Deliverable Và Assessment\nPage 54: Deliverable Và Assessment Text Extract Deliverable Data inventory 1 trang Script chunk + embed + index Query demo với 3 câu hỏi test Mini answer function có dùng retrieved context Query có retrieve đúng tài liệu không? Metadata có giúp lọc tốt hơn không? Câu trả lời có grounded hơn baseline không? Có biết chỉ ra failure case không?",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p069:l803-812",
+          "source_type": "slide",
+          "page_no": 69,
+          "content": "## Page 69: Tiếp Theo & Bài Tập\nPage 69: Tiếp Theo & Bài Tập Text Extract Bài tập sau buổi Rà lại knowledge base của nhóm và bỏ 20% nội dung nhiễu nhất Viết 5 test query để đo retrieval quality Chỉ ra 2 failure cases do chunking hoặc metadata Thử thay đổi chunk size và overlap, ghi nhận sự khác biệt Preview Day 08 Ngày 8 đi tiếp sang RAG pipeline: indexing, retrieval, generation, evaluation.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "retrieval_quality_evaluation",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Các metric và quy trình eval được hỗ trợ bởi evidence p046, p054, p069. Disposition core_kc phù hợp. Granularity vừa phải. Measurable outcome có thể đánh giá. Không overlap đáng kể."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "retrieval_quality_evaluation",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p046, p054, p069 hỗ trợ metrics và quy trình eval. Disposition core_kc đúng. Không overlap.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "mini_retrieval_integration",
+      "name_vi": "Xây mini retrieval integration",
+      "description_vi": "Xây hệ thống tối thiểu từ bộ tài liệu nhỏ: làm sạch và gắn metadata, chunk, embed, lưu index, chạy semantic search và dùng top-k context trong answer function hoặc mini agent.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tạo một integration retrieval end-to-end cho dữ liệu riêng.",
+      "target_bloom_level": "create",
+      "bloom_learning_objective_vi": "Có thể xây và trình diễn một mini retrieval integration có data inventory, index, semantic search và grounded answer function.",
+      "bloom_rationale_vi": "Mục tiêu ngày học yêu cầu build mini retrieval integration; các bước lab 1–5 cung cấp quy trình triển khai và deliverable cụ thể.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ như procedure tổng hợp cấp deliverable; các item pipeline, chunking, search và answer function mô tả các năng lực con có thể kiểm tra độc lập.",
+      "role_reason_vi": "Đây là năng lực thực hành và deliverable cuối ngày, trực tiếp chứng minh người học nối được dữ liệu riêng vào agent.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p047:l518-521",
+        "day07-data-foundations-embedding-vector-store:p048:l522-532",
+        "day07-data-foundations-embedding-vector-store:p049:l533-546",
+        "day07-data-foundations-embedding-vector-store:p050:l547-570",
+        "day07-data-foundations-embedding-vector-store:p051:l571-593",
+        "day07-data-foundations-embedding-vector-store:p052:l594-608",
+        "day07-data-foundations-embedding-vector-store:p053:l609-630"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p047:l518-521",
+          "source_type": "slide",
+          "page_no": 47,
+          "content": "## Page 47: Hands-on 7\nPage 47: Hands on 7 Text Extract Mục tiêu của lab là nối được dữ liệu riêng vào hệ thống AI theo pipeline tối thiểu nhưng đúng bản chất",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p048:l522-532",
+          "source_type": "slide",
+          "page_no": 48,
+          "content": "## Page 48: Lab 7: Vector Store Integration - Overview\nPage 48: Lab 7: Vector Store Integration Overview Text Extract Chọn một bộ tài liệu nhỏ: FAQ, SOP, policy, internal docs Chuẩn hóa text và quyết định metadata tối thiểu Chunk dữ liệu theo section Embed và lưu vào vector store Viết semantic search demo Inject top k results vào answer function hoặc mini agent Một knowledge base nhỏ nhưng truy đúng và trả lời grounded tốt có giá trị học tập hơn một data set lớn nhưng nhiễu.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p049:l533-546",
+          "source_type": "slide",
+          "page_no": 49,
+          "content": "## Page 49: Lab Step 1: Chọn & Chuẩn Bị Data\nPage 49: Lab Step 1: Chọn & Chuẩn Bị Data Text Extract Yêu cầu tối thiểu 5 15 tài liệu (FAQ, SOP, policy) Mỗi tài liệu 1 5 trang Text đã extract sạch (không còn header/footer lặp) Ghi lại nguồn gốc mỗi file Metadata tối thiểu cần ghi source: tên file gốc category: domain / loại tài liệu date: ngày tạo hoặc cập nhật language: vi / en",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p050:l547-570",
+          "source_type": "slide",
+          "page_no": 50,
+          "content": "## Page 50: Lab Step 2: Chunking Code Example\nPage 50: Lab Step 2: Chunking Code Example Text Extract python from langchain.text splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter( chunk size=512, chunk overlap=64, separators=[\"\\n\\n\", \"\\n\", \". \", \" \"] ) docs = load documents(\"./data/\") your loader chunks = [] for doc in docs: parts = splitter.split text(doc[\"text\"]) for i, part in enumerate(parts): chunks.append({ \"id\": f\"{doc['source']} chunk {i}\", \"text\": part, \"metadata\": {\"source\": doc[\"source\"], \"category\": doc[\"category\"]} })",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p051:l571-593",
+          "source_type": "slide",
+          "page_no": 51,
+          "content": "## Page 51: Lab Step 3: Embed & Store\nPage 51: Lab Step 3: Embed & Store Text Extract python import chromadb from openai import OpenAI client ai = OpenAI() client db = chromadb.Client() collection = client db.create collection(\"lab7 kb\") for chunk in chunks: resp = client ai.embeddings.create( model=\"text embedding 3 small\", input=[chunk[\"text\"]] ) collection.add( ids=[chunk[\"id\"]], embeddings=[resp.data[0].embedding], documents=[chunk[\"text\"]], metadatas=[chunk[\"metadata\"]] )",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p052:l594-608",
+          "source_type": "slide",
+          "page_no": 52,
+          "content": "## Page 52: Lab Step 4: Semantic Search Demo\nPage 52: Lab Step 4: Semantic Search Demo Text Extract python query = \"thoi han doi tra san pham\" \"thời hạn đổi trả sản phẩm\" results = collection.query( query texts=[query], n results=3, where={\"category\": \"support\"} metadata filter ) for i, doc in enumerate(results[\"documents\"][0]): score = results[\"distances\"][0][i] print(f\"[{i+1}] score={score:.3f}\") print(f\" {doc[:120]}...\")",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p053:l609-630",
+          "source_type": "slide",
+          "page_no": 53,
+          "content": "## Page 53: Lab Step 5: Answer Function Có Retrieved Context\nPage 53: Lab Step 5: Answer Function Có Retrieved Context Text Extract python def answer with context(query, collection, model=\"gpt 4o mini\"): results = collection.query(query texts=[query], n results=3) context = \"\\n \\n\".join(results[\"documents\"][0]) response = client ai.chat.completions.create( model=model, messages=[{ \"role\": \"user\", \"content\": f\"\"\"Dua tren nguon sau, tra loi ngan gon. Neu khong tim thay, noi 'Khong co thong tin'. \"Dựa trên nguồn sau, trả lời ngắn gọn. Nếu không tìm thấy, nói 'Không có thông tin'.\" Nguon: {context} Cau hoi: {query}\"\"\" }] ) return response.choices[0].message.content",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "mini_retrieval_integration",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả lab tổng hợp được hỗ trợ bởi nhiều evidence (p047-p053). Disposition core_kc phù hợp. Granularity phù hợp với deliverable. Measurable outcome có thể đánh giá. Mặc dù bao gồm nhiều bước từ các code khác, nhưng boundary notes đã xác định đây là tổng hợp cấp deliverable, không phải overlap vấn đề."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "mini_retrieval_integration",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Lab tổng hợp được hỗ trợ bởi nhiều evidence (p047-p053). Disposition core_kc phù hợp. Granularity đúng với deliverable, không phải overlap vấn đề.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "distance_metric_selection",
+      "name_vi": "Lựa chọn distance metric cho vector search",
+      "description_vi": "Cosine đo hướng và không phụ thuộc độ dài, Euclidean đo khoảng cách và phụ thuộc magnitude, còn dot product kết hợp hướng với magnitude; với vector đã normalize, cosine gần tương đương dot product.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn distance metric dựa trên đặc tính vector và mục tiêu search.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Có thể chọn cosine, Euclidean hoặc dot product và nêu lý do thay đổi metric mặc định.",
+      "bloom_rationale_vi": "Nguồn so sánh trực tiếp ba metric và khuyến nghị bắt đầu với cosine, chỉ đổi khi có lý do cụ thể.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi cosine similarity vì item này là quyết định lựa chọn giữa nhiều metric, không chỉ hiểu một metric cụ thể.",
+      "role_reason_vi": "Đây là kiến thức mở rộng cho tối ưu vector search, không cần thiết để hoàn thành lab cơ bản.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p059:l683-700"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p059:l683-700",
+          "source_type": "slide",
+          "page_no": 59,
+          "content": "## Page 59: Distance Metrics: Cosine vs Euclidean vs Dot Product\nPage 59: Distance Metrics: Cosine vs Euclidean vs Dot Product Text Extract Cosine Đo góc giữa 2 vector. Không phụ thuộc độ dài. Mặc định cho hầu hết embedding models. Euclidean (L2) Khoảng cách \"đường chim bay\". Phụ thuộc magnitude. Phù hợp khi vectors đã normalize. Dot Product Nhanh nhất. Kết hợp direction + magnitude. Tốt khi cần ưu tiên \"confidence\". Với OpenAI embeddings (đã normalized), cosine ≈ dot product. Bắt đầu với cosine, chỉ đổi khi có lý do cụ thể.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "distance_metric_selection",
+        "overlap_codes": [
+          "cosine_similarity"
+        ],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "minor",
+        "rationale_vi": "Mô tả cosine similarity trong code này trùng với nội dung của code 'cosine_similarity' trong inventory_index. Tuy nhiên, primary capability là lựa chọn metric, không chỉ hiểu cosine, nên overlap là minor. Các metric khác (Euclidean, dot product) không bị overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "distance_metric_selection",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p059 hỗ trợ các metric và lựa chọn. Disposition performance_kc phù hợp. Có overlap nhẹ với cosine_similarity (mô tả cosine), nhưng primary capability là lựa chọn, không chỉ hiểu cosine.",
+        "issues_vi": [
+          "Overlap nhẹ với cosine_similarity do mô tả cosine metric, nhưng đã được ghi nhận trong critic."
+        ],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "ann_indexing_basics",
+      "name_vi": "Khái niệm Approximate Nearest Neighbor",
+      "description_vi": "ANN tăng tốc tìm kiếm vector quy mô lớn bằng cách đánh đổi một phần accuracy; các hướng phổ biến gồm HNSW, IVF và Product Quantization, trong khi quy mô lab nhỏ có thể dùng brute force.",
+      "item_form": "reference_topic",
+      "primary_capability_vi": "",
+      "target_bloom_level": null,
+      "bloom_learning_objective_vi": "",
+      "bloom_rationale_vi": "",
+      "knowledge_role": "reference_concept",
+      "granularity_reason_vi": "Gộp brute force, HNSW, IVF và PQ vì nguồn chỉ giới thiệu vai trò và trade-off cấp nền tảng, không dạy triển khai.",
+      "role_reason_vi": "Nguồn xác định đây là kiến thức nền, không cần implement ở Day 7; hữu ích cho chủ đề scaling sau này.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p060:l701-711"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p060:l701-711",
+          "source_type": "slide",
+          "page_no": 60,
+          "content": "## Page 60: Indexing Algorithms - Approximate Nearest Neighbor\nPage 60: Indexing Algorithms Approximate Nearest Neighbor Text Extract Vấn đề: Brute force search O(n) quá chậm khi có hàng triệu vectors. Giải pháp: ANN algorithms đánh đổi một chút accuracy để được tốc độ gấp 100 1000x. Các thuật toán phổ biến: HNSW (Hierarchical Navigable Small World) mặc định ở hầu hết DB IVF (Inverted File Index) phân cụm rồi search trong cluster PQ (Product Quantization) nén vector để tiết kiệm RAM Ở quy mô lab (< 10K vectors), brute force vẫn đủ nhanh. ANN chỉ cần khi scale lên production. Lưu ý: Đây là kiến thức nền. Không cần implement ANN ở Day 7 chỉ cần biết nó tồn tại.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "ann_indexing_basics",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Giới thiệu ANN và các thuật toán được hỗ trợ bởi evidence p060. Disposition supporting_info phù hợp. Granularity phù hợp với kiến thức nền. Không có measurable outcome nên không cần đánh giá. Không overlap đáng kể."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "ann_indexing_basics",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": null,
+          "assessability": null,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Giới thiệu ANN và các thuật toán từ p060. Disposition supporting_info phù hợp. Granularity và assessability không áp dụng.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "multimodal_embeddings",
+      "name_vi": "Embedding đa phương thức",
+      "description_vi": "Ngoài text embedding còn có image, audio, code và cross-modal embeddings, cho phép truy vấn hoặc tìm kiếm tương đồng giữa các modality khác nhau.",
+      "item_form": "reference_topic",
+      "primary_capability_vi": "",
+      "target_bloom_level": null,
+      "bloom_learning_objective_vi": "",
+      "bloom_rationale_vi": "",
+      "knowledge_role": "reference_concept",
+      "granularity_reason_vi": "Gộp các modality và ứng dụng vì nguồn chỉ giới thiệu hướng mở rộng, không dạy quy trình hay mastery riêng cho từng modality.",
+      "role_reason_vi": "Nguồn ghi rõ trọng tâm Day 7 là text embedding và multimodal là hướng mở rộng sau.",
+      "evidence_section_ids": [
+        "day07-data-foundations-embedding-vector-store:p061:l712-727"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day07-data-foundations-embedding-vector-store:p061:l712-727",
+          "source_type": "slide",
+          "page_no": 61,
+          "content": "## Page 61: Bonus: Multi-modal Embeddings\nPage 61: Bonus: Multi modal Embeddings Text Extract Không chỉ text Image embeddings: CLIP, SigLIP Audio embeddings: CLAP, Whisper Code embeddings: Voyage Code, CodeBERT Cross modal: tìm ảnh bằng text query và ngược lại Ứng dụng thực tế E commerce: search sản phẩm bằng ảnh Medical: tìm X ray tương tự Code: semantic code search Creative: text to image retrieval Day 7 focus vào text embedding. Multi modal là hướng mở rộng sau.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "multimodal_embeddings",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Giới thiệu các loại embedding đa phương thức được hỗ trợ bởi evidence p061. Disposition supporting_info phù hợp. Granularity phù hợp với kiến thức nền. Không có measurable outcome nên không cần đánh giá. Không overlap đáng kể."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "multimodal_embeddings",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": null,
+          "assessability": null,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Giới thiệu embedding đa phương thức từ p061. Disposition supporting_info phù hợp. Granularity và assessability không áp dụng.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    }
+  ],
+  "evidence_sections": [
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p002:l1-5",
+      "page_no": 2,
+      "heading": "slide",
+      "snippet": "## Page 2: HÃY SUY NGHĨ...\nPage 2: HÃY SUY NGHĨ... Text Extract \"Agent trả lời sai vì model yếu, hay vì nó không có đúng dữ liệu để suy luận?\" Giữ câu hỏi này trong đầu khi học bài hôm nay",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p003:l6-16",
+      "page_no": 3,
+      "heading": "slide",
+      "snippet": "## Page 3: Nội Dung Bài Học\nPage 3: Nội Dung Bài Học Text Extract Data strategy cho AI product Agent memory architecture Embeddings Vector store Kết nối agent với data Chunking & retrieval basics Lab 7 + deliverable Preview Day 08",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p004:l17-24",
+      "page_no": 4,
+      "heading": "slide",
+      "snippet": "## Page 4: Mục Tiêu Ngày 7\nPage 4: Mục Tiêu Ngày 7 Text Extract Phân biệt được knowledge data, operational data, contextual data Hiểu embedding là lớp biểu diễn nghĩa, không chỉ là một API call Hiểu vector store lưu gì, tìm gì, và lọc bằng metadata ra sao Mô tả được pipeline Document → Chunk → Embed → Store → Query → Inject Build được một mini retrieval integration để nối agent với dữ liệu riêng",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p005:l25-31",
+      "page_no": 5,
+      "heading": "slide",
+      "snippet": "## Page 5: Deliverable Cuối Ngày\nPage 5: Deliverable Cuối Ngày Text Extract Data inventory + chunking / embedding script + vector store index + semantic search demo + retrieval enabled answer function 1 bộ dữ liệu mẫu đã được chunk và index 1 script truy vấn semantic search có trả kết quả liên quan 1 hàm trả lời sử dụng context retrieve được thay vì hỏi LLM \"chay\"",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p006:l32-35",
+      "page_no": 6,
+      "heading": "slide",
+      "snippet": "## Page 6: Data Strategy Cho Sản Phẩm AI\nPage 6: Data Strategy Cho Sản Phẩm AI Text Extract Không phải dữ liệu nào cũng nên đưa vào agent; chọn đúng dữ liệu quan trọng hơn nạp thật nhiều",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p007:l36-47",
+      "page_no": 7,
+      "heading": "slide",
+      "snippet": "## Page 7: Vì Sao Day 07 Quan Trọng Với AI Product?\nPage 7: Vì Sao Day 07 Quan Trọng Với AI Product? Image Caption Biểu đồ cột bên trái cho thấy AI adoption tăng nhanh qua 2023 và 2024. Các cột so sánh AI use và GenAI theo phần trăm / $B. Bên phải nhấn mạnh: khi tổ chức dùng AI nhiều hơn, câu hỏi chuyển từ “dùng model nào” sang “agent được phép biết gì”. Nếu dữ liệu sai, cũ, bẩn, hoặc không truy được đúng lúc, output sẽ yếu dù model mạnh. Text Extract AI adoption đã tăng rất nhanh. Khi tổ chức dùng AI nhiều hơn, câu hỏi chuyển từ \"dùng model nào\" sang \"agent được phép biết gì\". Nếu dữ liệu sai, cũ, bẩn, hoặc không truy được đúng lúc, output sẽ yếu dù model mạnh.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p008:l48-65",
+      "page_no": 8,
+      "heading": "slide",
+      "snippet": "## Page 8: Garbage In, Garbage Out - Tại Sao Data Quyết Định Output\nPage 8: Garbage In, Garbage Out Tại Sao Data Quyết Định Output Text Extract Dữ liệu bẩn / thiếu PDF scan lỗi OCR Policy cũ 2 năm chưa cập nhật Chunk cắt giữa câu Không có metadata Kết quả: Agent hallucinate, trả lời sai, user mất niềm tin. Dữ liệu sạch / đầy đủ Text đã chuẩn hóa, metadata đầy đủ Nguồn rõ ràng, có version Chunk theo section hợp lý Filter theo category + freshness Kết quả: Retrieve đúng, answer grounded, có trích nguồn. Lưu ý: Đổi model đắt hơn không sửa được data bẩn. Hãy sửa data trước.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p009:l66-78",
+      "page_no": 9,
+      "heading": "slide",
+      "snippet": "## Page 9: 3 Loại Data Agent Cần\nPage 9: 3 Loại Data Agent Cần Text Extract Knowledge Data Tài liệu, policy, SOP, FAQ, manual, hợp đồng, bài viết nội bộ. Operational Data Database, trạng thái đơn hàng, ticket, CRM records, logs, transactions. Contextual Data Session history, user profile, preferences, recent actions, channel context. Knowledge data phù hợp với retrieval; operational data thường cần query có kiểm soát; contextual data nên được inject ngắn và đúng lúc.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p010:l79-94",
+      "page_no": 10,
+      "heading": "slide",
+      "snippet": "## Page 10: Knowledge Data - Chi Tiết\nPage 10: Knowledge Data Chi Tiết Text Extract Đặc điểm Ít thay đổi (static hoặc versioned) Dạng text dài: tài liệu, hướng dẫn, hợp đồng Cần chunk + embed để agent truy xuất Nguồn sự thật chính cho retrieval Ví dụ thực tế FAQ / SOP nội bộ công ty Chính sách bảo hành, đổi trả Tài liệu kỹ thuật sản phẩm Legal contracts, compliance docs Retrieval fit: Rất cao đây là kiểu data lý tưởng cho vector store.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p011:l95-110",
+      "page_no": 11,
+      "heading": "slide",
+      "snippet": "## Page 11: Operational Data - Chi Tiết\nPage 11: Operational Data Chi Tiết Text Extract Đặc điểm Thay đổi liên tục (real time hoặc near real time) Dạng structured: SQL rows, JSON, logs Thường truy bằng API / SQL, không embed Cần access control chặt chẽ Ví dụ thực tế Trạng thái đơn hàng, tracking CRM records, ticket history Server logs, transaction records Inventory levels, pricing Retrieval fit: Thấp dùng function calling / SQL query thay vì semantic search.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p012:l111-126",
+      "page_no": 12,
+      "heading": "slide",
+      "snippet": "## Page 12: Contextual Data - Chi Tiết\nPage 12: Contextual Data Chi Tiết Text Extract Đặc điểm Gắn liền với session / user hiện tại Thường ngắn gọn, inject trực tiếp vào prompt Có thể đến từ profile store hoặc session state Giúp agent cá nhân hóa câu trả lời Ví dụ thực tế User profile: tên, ngôn ngữ, vai trò Lịch sử hội thoại gần nhất Giỏ hàng hiện tại, trang đang xem Kênh liên hệ (chat, email, phone) Retrieval fit: Trung bình inject trực tiếp hoặc lookup đơn giản, ít khi cần semantic search.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p013:l127-139",
+      "page_no": 13,
+      "heading": "slide",
+      "snippet": "## Page 13: Data Quality Pyramid\nPage 13: Data Quality Pyramid Image Caption Kim tự tháp chất lượng dữ liệu gồm 4 tầng tăng dần: Raw → Cleaned → Structured → Enriched . Mỗi tầng mô tả mức độ xử lý dữ liệu, từ PDF/HTML/OCR lỗi đến gắn tags, owner, access, quality label. Lưu ý nhấn mạnh: không nên index ngay dữ liệu raw rồi kỳ vọng retrieval tự chữa mọi vấn đề. Text Extract Raw PDF lộn xộn, HTML bẩn, OCR lỗi Cleaned bỏ nhiễu, chuẩn hóa text, metadata cơ bản Structured chunk, section, source, timestamps Enriched tags, owner, access, quality label Lưu ý: Sai lầm phổ biến: index ngay dữ liệu raw rồi kỳ vọng retrieval sẽ tự chữa mọi vấn đề.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p014:l140-159",
+      "page_no": 14,
+      "heading": "slide",
+      "snippet": "## Page 14: Ví Dụ: Data Quality Ảnh Hưởng Retrieval Như Thế Nào?\nPage 14: Ví Dụ: Data Quality Ảnh Hưởng Retrieval Như Thế Nào? Text Extract Trước khi clean Query: \"thời hạn đổi trả\" Top 1 retrieved: \"...trang 3... header lặp... mục lục... 30 ngày... xem thêm trang 7...\" Answer: Hallucinate vì context quá nhiễu, agent lấy thông tin sai. Sau khi clean + chunk Query: \"thời hạn đổi trả\" Top 1 retrieved: \"Khách hàng có 30 ngày kể từ ngày nhận hàng để yêu cầu đổi trả. Sản phẩm phải còn nguyên seal.\" Answer: Chính xác, grounded, có trích nguồn. Cùng một model, cùng một query chỉ khác data quality đã tạo ra kết quả hoàn toàn khác.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p015:l160-167",
+      "page_no": 15,
+      "heading": "slide",
+      "snippet": "## Page 15: Data Ownership Và Governance\nPage 15: Data Ownership Và Governance Text Extract Ai sở hữu dữ liệu? team nào chịu trách nhiệm cập nhật? Data freshness bao lâu phải re index? Ai được phép truy cập? dữ liệu nào cần ACL, dữ liệu nào public nội bộ? PII / sensitive fields có cần mask trước khi embed không? Không index mọi thứ theo kiểu \"cứ nạp hết vào vector DB đã\".",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p016:l168-179",
+      "page_no": 16,
+      "heading": "slide",
+      "snippet": "## Page 16: PII Masking Trước Khi Embed\nPage 16: PII Masking Trước Khi Embed Text Extract Mask trước khi embed không bao giờ lưu raw PII trong vector store Tables | Loại PII | Ví dụ | Kỹ thuật mask | Mức rủi ro | | | | | | | Tên cá nhân / Số điện thoại / Email | \"Nguyễn Văn A\" | Thay bằng [PERSON] | Trung bình | | Tên cá nhân / Số điện thoại / Email | \"0912 xxx xxx\" | Regex replace | Cao | | CMND / CCCD | \"012345678901\" | Xóa hoàn toàn | Rất cao | | Địa chỉ | \"123 Lê Lợi, Q.1\" | Generalize \"Q.1, HCM\" | Trung bình |",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p017:l180-183",
+      "page_no": 17,
+      "heading": "slide",
+      "snippet": "## Page 17: Agent Memory Architecture\nPage 17: Agent Memory Architecture Text Extract Memory không chỉ là lưu nhiều hơn; nó là quyết định xem agent được nhớ gì, quên gì, và truy gì khi cần",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p018:l184-199",
+      "page_no": 18,
+      "heading": "slide",
+      "snippet": "## Page 18: Short-term Memory vs Long-term Memory\nPage 18: Short term Memory vs Long term Memory Text Extract Short term Memory Nằm trong context window Giữ lịch sử gần đây và task hiện tại Rẻ để dùng, nhưng dễ đầy token Phù hợp cho session logic ngắn Long term Memory Nằm ngoài context window Thường là vector store, DB, profile store Phải truy xuất khi cần Phù hợp cho tri thức tích lũy và user history chọn lọc Context window không phải là vector store. Agent chỉ \"nhớ dài hạn\" khi có cơ chế truy xuất hoặc lưu trữ bên ngoài.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p019:l200-212",
+      "page_no": 19,
+      "heading": "slide",
+      "snippet": "## Page 19: Memory Lifecycle\nPage 19: Memory Lifecycle Image Caption Quy trình 4 bước nối từ trái sang phải: Capture → Filter → Store → Retrieve . Bên dưới mỗi bước có mô tả: sự kiện nào đáng lưu, kiểm tra PII/quality/relevance, lưu vào vector/DB/profile, chỉ truy khi có ích cho câu hỏi hiện tại. Cảnh báo: memory tốt là memory có chính sách; lưu tất cả thường làm tăng chi phí, nhiễu, và rủi ro quyền riêng tư. Text Extract Sự kiện nào đáng lưu? PII? quality? relevance? vector / DB / profile chỉ truy khi có ích cho câu hỏi hiện tại Lưu ý: Memory tốt là memory có chính sách. Lưu tất cả thường làm tăng chi phí, nhiễu, và rủi ro quyền riêng tư.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p020:l213-221",
+      "page_no": 20,
+      "heading": "slide",
+      "snippet": "## Page 20: Cái Gì Không Nên Gọi Là Memory?\nPage 20: Cái Gì Không Nên Gọi Là Memory? Text Extract Một prompt dài hơn không tự biến thành memory. Một file PDF upload một lần không phải memory nếu agent không truy được lại có chủ đích. Toàn bộ chat history không phải lúc nào cũng đáng inject. \"Lưu cho chắc\" thường tạo ra context nhiễu hơn là context hữu ích. Memory là data + policy + retrieval. Thiếu một trong ba thứ đó thì hệ thống khó ổn định.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p021:l222-234",
+      "page_no": 21,
+      "heading": "slide",
+      "snippet": "## Page 21: Context Window Budget - Phân Bổ Token\nPage 21: Context Window Budget Phân Bổ Token Image Caption Biểu đồ phân bổ token budget gồm 4 khối: System Prompt (~15%), Retrieved Context (~35%), Conversation History (~25%), Generation Budget (~25%). Các khối minh họa phần token dành cho instruction, context truy xuất, lịch sử hội thoại và phần tạo câu trả lời. Lưu ý: nếu retrieved context chiếm quá nhiều, agent sẽ không đủ token để trả lời tốt; cần budget trước khi inject. Text Extract System prompt: instructions, persona, guardrails cố định mỗi request Retrieved context: top k chunks inject vào chiếm nhiều token nhất Conversation history: các turn gần nhất cắt bớt khi dài Generation budg",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p022:l235-238",
+      "page_no": 22,
+      "heading": "slide",
+      "snippet": "## Page 22: Embeddings\nPage 22: Embeddings Text Extract Embedding biến ngôn ngữ thành không gian toán học để máy có thể so sánh nghĩa thay vì chỉ so chữ",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p023:l239-249",
+      "page_no": 23,
+      "heading": "slide",
+      "snippet": "## Page 23: Embedding Là Gì?\nPage 23: Embedding Là Gì? Image Caption Minh họa trực quan bằng scatter plot 2D: các điểm gần nhau theo nghĩa. Cụm hoàn tiền / refund và trả hàng nằm gần nhau, trong khi vận chuyển / shipping ở xa hơn. Ý chính: câu có nghĩa gần nhau sẽ ở gần nhau hơn trong vector space. Text Extract Text được biến thành vector nhiều chiều. Từ đó, máy có thể đo độ gần về nghĩa. Đây là nền tảng cho semantic search, clustering, dedup, recommendation.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p024:l250-263",
+      "page_no": 24,
+      "heading": "slide",
+      "snippet": "## Page 24: Cosine Similarity - Đo Độ Gần Về Nghĩa\nPage 24: Cosine Similarity Đo Độ Gần Về Nghĩa Image Caption Hình 2 vector từ gốc với góc θ giữa chúng. Ý nghĩa cosine similarity: 1.0 cùng hướng, 0.0 vuông góc, 1.0 ngược hướng. Không phụ thuộc vào độ dài vector. Hầu hết vector DB dùng cosine similarity làm metric mặc định cho semantic search. Text Extract 1.0 = hoàn toàn cùng hướng (cùng nghĩa) 0.0 = vuông góc (không liên quan) 1.0 = ngược hướng (nghĩa đối lập) Không phụ thuộc vào độ dài vector Hầu hết vector DB dùng cosine similarity làm metric mặc định cho semantic search.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p025:l264-273",
+      "page_no": 25,
+      "heading": "slide",
+      "snippet": "## Page 25: Embedding Dùng Để Làm Gì Trong AI Product?\nPage 25: Embedding Dùng Để Làm Gì Trong AI Product? Text Extract Semantic search: tìm đoạn liên quan dù không trùng keyword Clustering: gom nội dung gần nghĩa Dedup: phát hiện đoạn tương tự nhau Recommendation: tìm item gần hành vi / intent Sai lầm phổ biến Embedding không tự tạo ra \"sự thật\". Nếu text nguồn sai, thiếu, hoặc chunk xấu thì retrieval vẫn tệ.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p026:l274-285",
+      "page_no": 26,
+      "heading": "slide",
+      "snippet": "## Page 26: Benchmark Framing: Quality, Speed, Size\nPage 26: Benchmark Framing: Quality, Speed, Size Image Caption Biểu đồ trade off giữa Điểm benchmark và Tốc độ . Ba nhóm model/thiết lập được đặt trên đường chéo: Fast / low cost , Balanced , High quality . Thông điệp: không có model embedding tốt nhất cho mọi use case; cần chọn theo quality, latency, storage, language coverage. Với product thực tế, model cân bằng thường tốt hơn model mạnh nhất nhưng chậm và đắt. Text Extract Không có model embedding \"tốt nhất\" cho mọi use case. Chọn model theo quality, latency, storage, language coverage. Với product thực tế, một model cân bằng thường tốt hơn model mạnh nhất nhưng chậm và đắt.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p027:l286-298",
+      "page_no": 27,
+      "heading": "slide",
+      "snippet": "## Page 27: Các Embedding Model Phổ Biến (2025-2026)\nPage 27: Các Embedding Model Phổ Biến (2025 2026) Tables | Model | Dims | Max tokens | Provider | Ghi chú | | | | | | | | text embedding 3 small | 1536 | 8191 | OpenAI | Rẻ, nhanh, baseline tốt | | text embedding 3 large | 3072 | 8191 | OpenAI | Quality cao hơn | | voyage 3 | 1024 | 32000 | Voyage AI | Code & multilingual mạnh | | Cohere embed v4 | 1024 | 512 | Cohere | Multilingual, search tuned | | bge m3 | 1024 | 8192 | BAAI (open) | Open source, MTEB top tier | Text Extract Chọn model theo use case, không chỉ theo MTEB score",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p028:l299-313",
+      "page_no": 28,
+      "heading": "slide",
+      "snippet": "## Page 28: Embeddings - Python Example\nPage 28: Embeddings Python Example Text Extract python from openai import OpenAI client = OpenAI() resp = client.embeddings.create( model=\"text embedding 3 small\", input=[ \"Chinh sach hoan tien\", Chính sách hoàn tiền \"Quy dinh doi tra\" Quy định đổi trả ] ) print(len(resp.data[0].embedding))",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p029:l314-325",
+      "page_no": 29,
+      "heading": "slide",
+      "snippet": "## Page 29: Embedding Dưới Hood - Không Chỉ Là API Call\nPage 29: Embedding Dưới Hood Không Chỉ Là API Call Image Caption Pipeline tạo embedding: Input Text → Tokenize → Transformer Layers → Pooling → Output Vector . Tokenizer chia text thành subword units; Transformer layers dùng self attention; Pooling gom token representations thành 1 vector. Training dùng contrastive learning để câu giống nhau gần, câu khác nhau xa. Text Extract Tokenizer: chia text thành subword units (BPE / SentencePiece) Transformer layers: self attention giúp mỗi token \"nhìn\" toàn bộ context Pooling: gom tất cả token representations thành 1 vector duy nhất Training: contrastive learning câu giống nhau gần, câu khác nhau xa",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p030:l326-329",
+      "page_no": 30,
+      "heading": "slide",
+      "snippet": "## Page 30: Vector Store\nPage 30: Vector Store Text Extract Vector store không chỉ lưu vector; nó lưu cả nguồn, metadata, và khả năng lọc để retrieval có ngữ cảnh đúng",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p031:l330-335",
+      "page_no": 31,
+      "heading": "slide",
+      "snippet": "## Page 31: Vector Store Lưu Những Gì?\nPage 31: Vector Store Lưu Những Gì? Image Caption Sơ đồ từ Original chunk → Embedding vector → Metadata → Search results . Vector store giữ text gốc để inject lại vào prompt, vector phục vụ semantic similarity, metadata gồm source/owner/date/ACL/section. Kết quả truy xuất là top k chunks kèm scores và filters.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p032:l336-348",
+      "page_no": 32,
+      "heading": "slide",
+      "snippet": "## Page 32: Metadata Quan Trọng Không Kém Similarity\nPage 32: Metadata Quan Trọng Không Kém Similarity Tables | Trường metadata | Ví dụ | Tác dụng | | | | | | Source / file name | refund policy v3.pdf | truy vết và hiển thị nguồn | | Category | finance, support, legal | lọc đúng domain trước khi search | | Time / freshness | 2026 03 01 | tránh dùng nội dung cũ | | Access level | public internal, restricted | giới hạn truy cập | | Section / chunk id | returns.section.4 | debug và cite chính xác hơn | Text Extract Retrieval tốt cần semantic similarity kết hợp metadata filtering",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p033:l349-357",
+      "page_no": 33,
+      "heading": "slide",
+      "snippet": "## Page 33: Top-k, Score Threshold, Filter\nPage 33: Top k, Score Threshold, Filter Text Extract Top k: lấy quá ít thì thiếu context, lấy quá nhiều thì nhiễu. Score threshold: giúp bỏ các chunk liên quan yếu. Attribute filter: lọc theo region, team, thời gian, loại tài liệu. Hybrid thinking: semantic similarity tốt, nhưng nhiều bài toán vẫn cần keyword / metadata song song. Retrieval tốt hiếm khi đến từ \"đổi model\" trước tiên; thường đến từ chunk đúng + metadata đủ + filter hợp lý.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p034:l358-371",
+      "page_no": 34,
+      "heading": "slide",
+      "snippet": "## Page 34: Vector Database Landscape\nPage 34: Vector Database Landscape Tables | DB | Hosting | Language | Filtering | Scale | Best for | | | | | | | | | Chroma | Local | Python | Basic | Small | Prototype, học tập | | Pinecone | Cloud | Any | Tốt | Large | Production SaaS | | Weaviate | Hybrid | Any | Tốt | Large | Hybrid search | | Qdrant | Hybrid | Rust | Rất tốt | Large | Filtering phức tạp | | pgvector | DB addon | SQL | SQL where | Medium | Team đã dùng Postgres | | FAISS | Local lib | C++/Py | Không | Any | Research, benchmark | Text Extract Chọn DB theo giai đoạn sản phẩm và yêu cầu vận hành",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p035:l372-385",
+      "page_no": 35,
+      "heading": "slide",
+      "snippet": "## Page 35: Chroma - Local Vector Store Example\nPage 35: Chroma Local Vector Store Example Text Extract python import chromadb client = chromadb.Client() collection = client.create collection(\"policies\") collection.add( ids=[\"p1\"], documents=[\"Khach hang co 30 ngay de doi tra san pham.\"], \"Khách hàng có 30 ngày để đổi trả sản phẩm.\" metadatas=[{\"category\": \"support\", \"lang\": \"vi\"}], )",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p036:l386-389",
+      "page_no": 36,
+      "heading": "slide",
+      "snippet": "## Page 36: Kết Nối Agent Với Data\nPage 36: Kết Nối Agent Với Data Text Extract Retrieval pipeline là chiếc cầu nối giữa dữ liệu riêng và hành vi của agent",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p037:l390-395",
+      "page_no": 37,
+      "heading": "slide",
+      "snippet": "## Page 37: Retrieval Pipeline Chuẩn\nPage 37: Retrieval Pipeline Chuẩn Image Caption Pipeline chuẩn gồm 6 bước: Document → Chunk → Embed → Store → Query → Inject . Mỗi bước tương ứng với PDF/docs/HTML, chia theo section/token, vector hóa, index + metadata, semantic search, prompt grounded. Ghi chú tham chiếu đến OpenAI Retrieval / File Search guides.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p038:l396-408",
+      "page_no": 38,
+      "heading": "slide",
+      "snippet": "## Page 38: Chunking: Quá To Hay Quá Nhỏ Đều Trả Giá\nPage 38: Chunking: Quá To Hay Quá Nhỏ Đều Trả Giá Text Extract Chunk quá to Dính nhiều chủ đề vào cùng một vector, retrieve trúng nhưng inject rất nhiễu. Chunk hợp lý Một ý / một section tương đối trọn vẹn, có overlap vừa đủ để giữ nghĩa. Chunk quá nhỏ Mất ngữ cảnh, retrieve nhiều mảnh rời rạc, khó tổng hợp thành câu trả lời tốt. Bắt đầu đơn giản với chunk theo section / heading, rồi tối ưu sau bằng eval thay vì đoán cảm tính.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p039:l409-421",
+      "page_no": 39,
+      "heading": "slide",
+      "snippet": "## Page 39: Các Phương Pháp Chunking Phổ Biến\nPage 39: Các Phương Pháp Chunking Phổ Biến Tables | Phương pháp | Cách hoạt động | Ưu điểm | Nhược điểm | | | | | | | Fixed size token | Cắt mỗi N tokens | Đơn giản, dễ implement | Cắt giữa câu / ý | | Sentence based | Tách theo câu hoàn chỉnh | Giữ nghĩa câu | Câu dài / ngắn không đều | | Section / heading | Tách theo heading (H1, H2) | Chunk trọn vẹn về ý | Cần tài liệu có structure | | Recursive | Thử separator lớn → nhỏ | Linh hoạt | Phức tạp hơn | | Semantic | Gom câu cùng chủ đề | Chất lượng cao nhất | Chậm, cần embedding | Text Extract Không có \"best\" strategy chọn theo đặc điểm tài liệu",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p040:l422-433",
+      "page_no": 40,
+      "heading": "slide",
+      "snippet": "## Page 40: Chunk Overlap - Tại Sao Cần?\nPage 40: Chunk Overlap Tại Sao Cần? Image Caption Minh họa 2 chunk chồng lấn nhau với vùng overlap ở ranh giới. Không overlap sẽ mất nghĩa ở biên chunk. Có overlap giúp giữ liên tục ngữ cảnh. Overlap thường 10 20% kích thước chunk; quá nhiều thì duplicate context và tốn storage, quá ít thì mất nghĩa ở ranh giới. Text Extract Overlap thường 10 20% kích thước chunk (e.g., 50 100 tokens cho chunk 512 tokens) Quá nhiều overlap → duplicate context, tốn storage, nhiễu kết quả Quá ít overlap → mất nghĩa ở ranh giới giữa hai chunk",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p041:l434-447",
+      "page_no": 41,
+      "heading": "slide",
+      "snippet": "## Page 41: Retrieval Khác Gì Memory?\nPage 41: Retrieval Khác Gì Memory? Text Extract Retrieval tìm context liên quan cho câu hỏi hiện tại thường đọc từ knowledge base trọng tâm là relevance và grounding Memory lưu trạng thái, sở thích, lịch sử chọn lọc có thể từ user profile hoặc interaction history trọng tâm là continuity và personalization Lưu ý: Nhiều hệ thống dùng cả hai: retrieval để biết domain facts, memory để biết user này là ai và đã làm gì trước đó.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p042:l448-462",
+      "page_no": 42,
+      "heading": "slide",
+      "snippet": "## Page 42: Retrieve Rồi Inject - Python Example\nPage 42: Retrieve Rồi Inject Python Example Text Extract python query = \"Chinh sach doi tra ap dung trong bao lau?\" \"Chính sách đổi trả áp dụng trong bao lâu?\" results = collection.query(query texts=[query], n results=3) context = \"\\n\".join(results[\"documents\"][0]) prompt = f\"\"\"Dua tren nguon sau, hay tra loi ngan gon. \"Dựa trên nguồn sau, hãy trả lời ngắn gọn.\" Nguon: {context} Cau hoi: {query} \"\"\"",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p043:l463-478",
+      "page_no": 43,
+      "heading": "slide",
+      "snippet": "## Page 43: So Sánh: LLM Chay vs RAG-Enhanced\nPage 43: So Sánh: LLM Chay vs RAG Enhanced Text Extract LLM Chay (No Retrieval) Chỉ dựa vào training data Dễ hallucinate với domain specific Không cite được nguồn cụ thể Không cập nhật được data mới RAG Enhanced Grounded trên dữ liệu thật Giảm hallucination đáng kể Trích nguồn cho user verify Cập nhật bằng re index, không retrain RAG thêm latency (retrieve step) và complexity (pipeline), nhưng đổi lại accuracy và trustworthiness cao hơn nhiều.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p044:l479-488",
+      "page_no": 44,
+      "heading": "slide",
+      "snippet": "## Page 44: Hosted Retrieval vs Self-managed Retrieval\nPage 44: Hosted Retrieval vs Self managed Retrieval Text Extract Hosted / managed File Search / managed retrieval giúp đi nhanh, giảm code hạ tầng, phù hợp demo và PoC. Self managed Dùng Chroma / Faiss / vector DB khi cần kiểm soát chunking, metadata, pipeline, hoặc cost path chi tiết hơn. Ngày 7 chỉ cần hiểu trade off. Chưa cần sa sâu vào vector DB war hay tối ưu indexing nâng cao.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p045:l489-501",
+      "page_no": 45,
+      "heading": "slide",
+      "snippet": "## Page 45: Common Failure Patterns Trong Retrieval\nPage 45: Common Failure Patterns Trong Retrieval Tables | Pattern | Biểu hiện | Cách khắc phục | | | | | | Chunk quá to | Retrieve trúng nhưng answer nhiễu | Chunk nhỏ hơn, theo section | | Thiếu metadata | Không filter được, lẫn domain | Thêm category, source, date | | Top k quá cao | Inject quá nhiều context | Giảm k, thêm score threshold | | Data cũ / stale | Trả lời đúng... nhưng outdated | Re index định kỳ, version tracking | | Query mơ hồ | Retrieve sai hoàn toàn | Query rewriting / expansion | Text Extract Debug retrieval bắt đầu từ nhận diện pattern lỗi",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p046:l502-517",
+      "page_no": 46,
+      "heading": "slide",
+      "snippet": "## Page 46: Đo Lường Retrieval Quality\nPage 46: Đo Lường Retrieval Quality Text Extract Metrics quan trọng Precision@k: trong k kết quả, bao nhiêu thực sự relevant? Recall@k: trong tất cả docs relevant, bao nhiêu nằm trong top k? MRR (Mean Reciprocal Rank): kết quả relevant đầu tiên ở vị trí nào? NDCG: thứ tự rank có tốt không? Cách eval đơn giản cho lab Viết 10 20 test queries với expected docs Chạy retrieval, so sánh top k vs expected Tính Precision@3 và Recall@3 Ghi nhận failure cases: query nào retrieve sai? Eval retrieval trước khi eval generation nếu retrieve sai thì generate không thể đúng.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p047:l518-521",
+      "page_no": 47,
+      "heading": "slide",
+      "snippet": "## Page 47: Hands-on 7\nPage 47: Hands on 7 Text Extract Mục tiêu của lab là nối được dữ liệu riêng vào hệ thống AI theo pipeline tối thiểu nhưng đúng bản chất",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p048:l522-532",
+      "page_no": 48,
+      "heading": "slide",
+      "snippet": "## Page 48: Lab 7: Vector Store Integration - Overview\nPage 48: Lab 7: Vector Store Integration Overview Text Extract Chọn một bộ tài liệu nhỏ: FAQ, SOP, policy, internal docs Chuẩn hóa text và quyết định metadata tối thiểu Chunk dữ liệu theo section Embed và lưu vào vector store Viết semantic search demo Inject top k results vào answer function hoặc mini agent Một knowledge base nhỏ nhưng truy đúng và trả lời grounded tốt có giá trị học tập hơn một data set lớn nhưng nhiễu.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p049:l533-546",
+      "page_no": 49,
+      "heading": "slide",
+      "snippet": "## Page 49: Lab Step 1: Chọn & Chuẩn Bị Data\nPage 49: Lab Step 1: Chọn & Chuẩn Bị Data Text Extract Yêu cầu tối thiểu 5 15 tài liệu (FAQ, SOP, policy) Mỗi tài liệu 1 5 trang Text đã extract sạch (không còn header/footer lặp) Ghi lại nguồn gốc mỗi file Metadata tối thiểu cần ghi source: tên file gốc category: domain / loại tài liệu date: ngày tạo hoặc cập nhật language: vi / en",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p050:l547-570",
+      "page_no": 50,
+      "heading": "slide",
+      "snippet": "## Page 50: Lab Step 2: Chunking Code Example\nPage 50: Lab Step 2: Chunking Code Example Text Extract python from langchain.text splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter( chunk size=512, chunk overlap=64, separators=[\"\\n\\n\", \"\\n\", \". \", \" \"] ) docs = load documents(\"./data/\") your loader chunks = [] for doc in docs: parts = splitter.split text(doc[\"text\"]) for i, part in enumerate(parts): chunks.append({ \"id\": f\"{doc['source']} chunk {i}\", \"text\": part, \"metadata\": {\"source\": doc[\"source\"], \"category\": doc[\"category\"]} })",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p051:l571-593",
+      "page_no": 51,
+      "heading": "slide",
+      "snippet": "## Page 51: Lab Step 3: Embed & Store\nPage 51: Lab Step 3: Embed & Store Text Extract python import chromadb from openai import OpenAI client ai = OpenAI() client db = chromadb.Client() collection = client db.create collection(\"lab7 kb\") for chunk in chunks: resp = client ai.embeddings.create( model=\"text embedding 3 small\", input=[chunk[\"text\"]] ) collection.add( ids=[chunk[\"id\"]], embeddings=[resp.data[0].embedding], documents=[chunk[\"text\"]], metadatas=[chunk[\"metadata\"]] )",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p052:l594-608",
+      "page_no": 52,
+      "heading": "slide",
+      "snippet": "## Page 52: Lab Step 4: Semantic Search Demo\nPage 52: Lab Step 4: Semantic Search Demo Text Extract python query = \"thoi han doi tra san pham\" \"thời hạn đổi trả sản phẩm\" results = collection.query( query texts=[query], n results=3, where={\"category\": \"support\"} metadata filter ) for i, doc in enumerate(results[\"documents\"][0]): score = results[\"distances\"][0][i] print(f\"[{i+1}] score={score:.3f}\") print(f\" {doc[:120]}...\")",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p053:l609-630",
+      "page_no": 53,
+      "heading": "slide",
+      "snippet": "## Page 53: Lab Step 5: Answer Function Có Retrieved Context\nPage 53: Lab Step 5: Answer Function Có Retrieved Context Text Extract python def answer with context(query, collection, model=\"gpt 4o mini\"): results = collection.query(query texts=[query], n results=3) context = \"\\n \\n\".join(results[\"documents\"][0]) response = client ai.chat.completions.create( model=model, messages=[{ \"role\": \"user\", \"content\": f\"\"\"Dua tren nguon sau, tra loi ngan gon. Neu khong tim thay, noi 'Khong co thong tin'. \"Dựa trên nguồn sau, trả lời ngắn gọn. Nếu không tìm thấy, nói 'Không có thông tin'.\" Nguon: {context} Cau hoi: {query}\"\"\" }] ) return response.choices[0].message.content",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p054:l631-643",
+      "page_no": 54,
+      "heading": "slide",
+      "snippet": "## Page 54: Deliverable Và Assessment\nPage 54: Deliverable Và Assessment Text Extract Deliverable Data inventory 1 trang Script chunk + embed + index Query demo với 3 câu hỏi test Mini answer function có dùng retrieved context Query có retrieve đúng tài liệu không? Metadata có giúp lọc tốt hơn không? Câu trả lời có grounded hơn baseline không? Có biết chỉ ra failure case không?",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p055:l644-651",
+      "page_no": 55,
+      "heading": "slide",
+      "snippet": "## Page 55: Checklist Trước Khi Chốt Lab\nPage 55: Checklist Trước Khi Chốt Lab Text Extract Dữ liệu có owner và source rõ ràng Metadata có ít nhất 2 trường hữu ích Chunking có lý do, không cắt bừa theo số ký tự Có test query semantic, không chỉ test exact keyword Không chấp nhận câu trả lời nghe hay nhưng không chỉ ra được nguồn",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p056:l652-663",
+      "page_no": 56,
+      "heading": "slide",
+      "snippet": "## Page 56: Data Inventory - Mẫu Template\nPage 56: Data Inventory Mẫu Template Tables | Tài liệu | Loại | Owner | Freshness | PII? | Retrieval fit | | | | | | | | | FAQ v3.pdf | Knowledge | Support | Monthly | Không | Cao | | Order status API | Operational | Eng | Real time | Có | Thấp (API) | | User profile | Contextual | Product | Per session | Có | Inject trực tiếp | | Legal contracts | Knowledge | Legal | Quarterly | Có | Cao (cần mask) | Text Extract Template gợi ý điều chỉnh theo domain thực tế",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p057:l664-672",
+      "page_no": 57,
+      "heading": "slide",
+      "snippet": "## Page 57: Anti-patterns: Những Gì Không Nên Làm\nPage 57: Anti patterns: Những Gì Không Nên Làm Text Extract \"Nạp hết vào vector DB rồi tính sau\" Garbage in, garbage out. Clean trước, index sau. Chunk cố định 500 chars cho mọi loại tài liệu Mỗi loại doc cần strategy khác nhau. Không có metadata Không filter được → retrieve lẫn domain → answer sai. Không eval retrieval Chỉ eval generation mà bỏ qua retrieval → debug mù. Embed raw PII Vi phạm privacy, rủi ro pháp lý, khó thu hồi. Top k = 10 \"cho chắc\" Inject quá nhiều context → nhiễu, tốn token, chậm.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p058:l673-682",
+      "page_no": 58,
+      "heading": "slide",
+      "snippet": "## Page 58: Best Practices: Tổng Hợp\nPage 58: Best Practices: Tổng Hợp Text Extract Clean data trước khi embed bỏ header/footer lặp, chuẩn hóa encoding Thêm metadata ít nhất: source, category, date Chunk theo structure (heading, section) thay vì fixed size Overlap 10 20% giữa các chunk liền kề Start small: 10 20 docs, 3 5 test queries, iterate Eval retrieval riêng trước khi eval end to end Không fine tune embedding model trước khi đã tối ưu hết data + chunking + metadata",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p059:l683-700",
+      "page_no": 59,
+      "heading": "slide",
+      "snippet": "## Page 59: Distance Metrics: Cosine vs Euclidean vs Dot Product\nPage 59: Distance Metrics: Cosine vs Euclidean vs Dot Product Text Extract Cosine Đo góc giữa 2 vector. Không phụ thuộc độ dài. Mặc định cho hầu hết embedding models. Euclidean (L2) Khoảng cách \"đường chim bay\". Phụ thuộc magnitude. Phù hợp khi vectors đã normalize. Dot Product Nhanh nhất. Kết hợp direction + magnitude. Tốt khi cần ưu tiên \"confidence\". Với OpenAI embeddings (đã normalized), cosine ≈ dot product. Bắt đầu với cosine, chỉ đổi khi có lý do cụ thể.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p060:l701-711",
+      "page_no": 60,
+      "heading": "slide",
+      "snippet": "## Page 60: Indexing Algorithms - Approximate Nearest Neighbor\nPage 60: Indexing Algorithms Approximate Nearest Neighbor Text Extract Vấn đề: Brute force search O(n) quá chậm khi có hàng triệu vectors. Giải pháp: ANN algorithms đánh đổi một chút accuracy để được tốc độ gấp 100 1000x. Các thuật toán phổ biến: HNSW (Hierarchical Navigable Small World) mặc định ở hầu hết DB IVF (Inverted File Index) phân cụm rồi search trong cluster PQ (Product Quantization) nén vector để tiết kiệm RAM Ở quy mô lab (< 10K vectors), brute force vẫn đủ nhanh. ANN chỉ cần khi scale lên production. Lưu ý: Đây là kiến thức nền. Không cần implement ANN ở Day 7 chỉ cần biết nó tồn tại.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p061:l712-727",
+      "page_no": 61,
+      "heading": "slide",
+      "snippet": "## Page 61: Bonus: Multi-modal Embeddings\nPage 61: Bonus: Multi modal Embeddings Text Extract Không chỉ text Image embeddings: CLIP, SigLIP Audio embeddings: CLAP, Whisper Code embeddings: Voyage Code, CodeBERT Cross modal: tìm ảnh bằng text query và ngược lại Ứng dụng thực tế E commerce: search sản phẩm bằng ảnh Medical: tìm X ray tương tự Code: semantic code search Creative: text to image retrieval Day 7 focus vào text embedding. Multi modal là hướng mở rộng sau.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p062:l728-744",
+      "page_no": 62,
+      "heading": "slide",
+      "snippet": "## Page 62: Khi Nào KHÔNG Cần RAG?\nPage 62: Khi Nào KHÔNG Cần RAG? Text Extract Không nên dùng RAG khi: Câu hỏi hoàn toàn nằm trong training data (general knowledge) Data đã fit trong context window (đủ nhỏ để inject hết) Cần reasoning / tính toán, không cần factual lookup Task là creative writing, brainstorming Nên dùng RAG khi: Cần domain specific, proprietary knowledge Data thay đổi thường xuyên Cần cite nguồn, trích dẫn cụ thể Knowledge base quá lớn để fit trong context Cần kiểm soát access (ACL per doc) Lưu ý: RAG không phải silver bullet. Nếu bài toán không cần external knowledge, RAG chỉ thêm latency và complexity.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p063:l745-759",
+      "page_no": 63,
+      "heading": "slide",
+      "snippet": "## Page 63: Ví Dụ End-to-End: Customer Support Bot\nPage 63: Ví Dụ End to End: Customer Support Bot Image Caption Pipeline end to end từ User Query đến Response + Sources qua Intent Router , Retrieve (Vector DB) , Rerank + Filter , Generate (LLM) . Nguồn dữ liệu gồm knowledge, operational, contextual data. Cấu hình nhấn mạnh chunking theo section heading, metadata như category/language/version, eval với 20 test queries, và fallback khi không tìm thấy thông tin. Text Extract Knowledge data: FAQ đổi trả, chính sách bảo hành, hướng dẫn sử dụng Operational data: trạng thái đơn hàng (qua API) Contextual data: lịch sử chat, user tier (VIP/regular) Chunking: theo section heading Metadata: category, l",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p064:l760-768",
+      "page_no": 64,
+      "heading": "slide",
+      "snippet": "## Page 64: Quay Lại Câu Hỏi Đầu Bài\nPage 64: Quay Lại Câu Hỏi Đầu Bài Text Extract \"Agent trả lời sai vì model yếu, hay vì nó không có đúng dữ liệu để suy luận?\" Hầu hết trường hợp: vì data, không phải vì model. Data bẩn + chunk sai + không metadata → model mạnh nhất cũng hallucinate. Pipeline tốt (clean → chunk → embed → store → retrieve → inject) giải quyết 80% vấn đề. Đầu tư vào data quality và retrieval pipeline trước khi nghĩ đến đổi model.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p065:l769-772",
+      "page_no": 65,
+      "heading": "slide",
+      "snippet": "## Page 65: Key Takeaways\nPage 65: Key Takeaways Text Extract Day 07 đặt nền cho RAG và mọi hệ thống AI dùng tri thức riêng",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p066:l773-779",
+      "page_no": 66,
+      "heading": "slide",
+      "snippet": "## Page 66: 4 Ý Cần Nhớ Sau Buổi Học\nPage 66: 4 Ý Cần Nhớ Sau Buổi Học Text Extract Data quality thường quan trọng hơn đổi sang model đắt hơn. Embedding là lớp dịch ngôn ngữ sang không gian có thể so sánh nghĩa. Vector store là bộ nhớ dài hạn có thể tìm kiếm bằng ngữ nghĩa và metadata. Retrieval pipeline là cầu nối từ dữ liệu riêng tới câu trả lời grounded của agent.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p067:l780-791",
+      "page_no": 67,
+      "heading": "slide",
+      "snippet": "## Page 67: Mental Model: Từ Data Đến Grounded Answer\nPage 67: Mental Model: Từ Data Đến Grounded Answer Image Caption Sơ đồ nhân quả từ trái sang phải: Clean Data → Smart Chunks → Rich Embeddings → Indexed Store → Grounded Answer . Các nhãn trên mũi tên lần lượt là quality, structure, meaning. Cảnh báo: mỗi bước yếu sẽ kéo toàn bộ pipeline xuống; cần đầu tư đều vào từng bước thay vì chỉ tối ưu phần cuối. Text Extract quality structure meaning Lưu ý: Mỗi bước yếu sẽ kéo toàn bộ pipeline xuống. Hãy đầu tư đều vào từng bước thay vì chỉ tối ưu phần cuối.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p068:l792-802",
+      "page_no": 68,
+      "heading": "slide",
+      "snippet": "## Page 68: Tài Liệu Tham Khảo\nPage 68: Tài Liệu Tham Khảo Text Extract Stanford HAI. The 2025 AI Index Report. https://hai.stanford.edu/ai index/2025 ai index report OpenAI Docs. Embeddings Guide. https://platform.openai.com/docs/guides/embeddings OpenAI Docs. Retrieval Guide. https://platform.openai.com/docs/guides/retrieval OpenAI Docs. File Search Guide. https://platform.openai.com/docs/guides/tools file search Hugging Face. MTEB: Massive Text Embedding Benchmark. https://huggingface.co/blog/mteb Chroma Documentation. Getting Started / Collections / Query. https://docs.trychroma.com/ Karpukhin et al. Dense Passage Retrieval for Open Domain QA. arXiv:2004.04906 Malkov &",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day07-data-foundations-embedding-vector-store:p069:l803-812",
+      "page_no": 69,
+      "heading": "slide",
+      "snippet": "## Page 69: Tiếp Theo & Bài Tập\nPage 69: Tiếp Theo & Bài Tập Text Extract Bài tập sau buổi Rà lại knowledge base của nhóm và bỏ 20% nội dung nhiễu nhất Viết 5 test query để đo retrieval quality Chỉ ra 2 failure cases do chunking hoặc metadata Thử thay đổi chunk size và overlap, ghi nhận sự khác biệt Preview Day 08 Ngày 8 đi tiếp sang RAG pipeline: indexing, retrieval, generation, evaluation.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    }
+  ]
+}

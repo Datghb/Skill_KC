@@ -1,0 +1,12 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day11-guardrails-ai-safety",
+  "sources": [
+    {
+      "source_id": "slide-day11",
+      "source_type": "slide",
+      "sha256": "f7f5a130fefad1a5271d817bd3b74da04c557d1ffbccde0e9bd7c8224fbe574e",
+      "uri": "source://phase1/day11/slide"
+    }
+  ]
+}

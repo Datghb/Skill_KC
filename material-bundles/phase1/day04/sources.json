@@ -1,0 +1,18 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day04-prompt-engineering-tool-calling-selected",
+  "sources": [
+    {
+      "source_id": "slide-day04",
+      "source_type": "slide",
+      "sha256": "911d8d909fb88fc70c23105ef39156c944b0ecf9156fc56678cac870bb08ec62",
+      "uri": "source://phase1/day04/slide"
+    },
+    {
+      "source_id": "lecture-notes-day04",
+      "source_type": "lecture_note",
+      "sha256": "f5333c559eeaeb519e3fc9bfe3ff08023e25d6e604aaf37bdd60a106fe33f95a",
+      "uri": "artifact://phase1/day04/grounded-lecture-notes"
+    }
+  ]
+}

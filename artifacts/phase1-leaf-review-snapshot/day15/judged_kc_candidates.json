@@ -1,0 +1,1738 @@
+{
+  "schema_version": "mixed_source_deepseek_kc_judge_v1",
+  "source_slug": "day15-trien-khai-thuc-te-dinh-huong",
+  "source_mode": "slide_only",
+  "summary": {
+    "candidate_count": 22,
+    "levels": {
+      "high": 20,
+      "review": 2
+    },
+    "actions": {
+      "keep": 20,
+      "remove": 2
+    },
+    "mean_score": 3.652
+  },
+  "metadata": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-v4-flash",
+    "reasoning_effort": "low",
+    "provider_order": [
+      "gmicloud/fp8",
+      "streamlake/fp8",
+      "digitalocean"
+    ],
+    "allow_fallbacks": true,
+    "api_calls": 4,
+    "latency_seconds": 171.679,
+    "usage": {
+      "input_tokens": 38442,
+      "output_tokens": 18287,
+      "reasoning_tokens": 12232,
+      "total_tokens": 56729,
+      "cost_usd": 0.00610208
+    },
+    "upstream_providers": {
+      "GMICloud": 4
+    }
+  },
+  "candidates": [
+    {
+      "code": "enterprise_deployment_constraints",
+      "name_vi": "Các ràng buộc khi triển khai AI trong enterprise",
+      "description_vi": "Nhận diện và mô tả các ràng buộc enterprise gồm bảo mật và tuân thủ dữ liệu, dữ liệu không được rời khỏi quốc gia, mã hóa PII khi lưu trữ, audit trail cho quyết định AI, yêu cầu PDPA hoặc quy định ngành, hệ thống legacy/mainframe, mạng hạn chế hoặc air-gapped, hạ tầng on-premise và tài nguyên GPU giới hạn.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Phân tích các ràng buộc enterprise trước khi thiết kế phương án triển khai AI",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Giải thích được vì sao triển khai enterprise khác triển khai startup và chỉ ra các nhóm ràng buộc cần xem xét.",
+      "bloom_rationale_vi": "Nguồn trực tiếp liệt kê các thách thức security, compliance, legacy systems, network restrictions, on-premise và limited GPU; mục tiêu bài học yêu cầu hiểu các thách thức này.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi lựa chọn cloud/on-premise/hybrid vì người học có thể nhận diện ràng buộc nhưng chưa chắc chọn được kiến trúc phù hợp; hai năng lực có tiêu chí đánh giá và lỗi thiết kế khác nhau.",
+      "role_reason_vi": "Đây là nền tảng trực tiếp cho mục tiêu triển khai enterprise và là đầu vào bắt buộc trước khi chọn architecture.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p008:l55-58",
+        "day15-trien-khai-thuc-te-dinh-huong:p009:l59-74",
+        "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p008:l55-58",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Triển Khai Enterprise 02 Lab deploy lên Railway là bước đầu. Enterprise có thêm security policies, c\nPage 8: Triển Khai Enterprise 02 Lab deploy lên Railway là bước đầu. Enterprise có thêm security policies, c Text Extract Triển Khai Enterprise 02 Lab deploy lên Railway là bước đầu. Enterprise có thêm security policies, compliance, legacy systems, và network restrictions",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p009:l59-74",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: Enterprise Challenges\nPage 9: Enterprise Challenges Text Extract Security & Compliance Data không được rời khỏi VN PII phải encrypted at rest Audit trail cho mọi AI decision Compliance: PDPA, ngành tài chính Technical Constraints Legacy systems, mainframe Network restrictions, air gapped On premise infrastructure only Limited GPU resources Lưu ý: Enterprise deploy khác startup deploy. Không phải mọi thứ đều 'push lên cloud' được. Đôi khi LLM phải chạy on premise.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Tổng kết - Key Takeaways\nPage 32: Tổng kết Key Takeaways Text Extract Những ý chính cần nhớ trước khi sang bài tiếp theo 1. Enterprise deploy khác startup: security, compliance, on premise, hybrid. Hiểu context trước khi chọn architecture. 2. Cost optimization: model routing, semantic caching, prompt compression. API tokens chiếm 40 60% cost optimize đúng chỗ. 3. 3 pillars, 3 tracks: CP1 (Business) → Track 1, CP2 (Infra) → Track 2, CP3 (Application) → Track 3. Chọn theo mục tiêu. 4. You are no longer beginners you are builders. 15 ngày, 15 labs, 1 deployed product. Phase 2 đi sâu hơn.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "enterprise_deployment_constraints",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "enterprise_deployment_constraints",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence trực tiếp hỗ trợ mọi claim (security, compliance, legacy, network restrictions). Disposition core_kc phù hợp vì đây là kiến thức nền tảng. Scope không quá rộng so với inventory. Measurable outcome có thể đánh giá qua giải thích. Tên và mô tả rõ ràng.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "deployment_architecture_tradeoffs",
+      "name_vi": "Đánh đổi giữa cloud, on-premise và hybrid",
+      "description_vi": "So sánh cloud API, on-premise và hybrid theo mức kiểm soát dữ liệu, thời gian setup, mô hình chi phí, hiệu năng và bối cảnh phù hợp; trong hybrid, dữ liệu nhạy cảm được xử lý on-premise còn dữ liệu không nhạy cảm có thể đi qua cloud API.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn mô hình triển khai dựa trên độ nhạy dữ liệu, yêu cầu kiểm soát, nguồn lực và nhu cầu vận hành",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Chọn và biện giải được phương án cloud, on-premise hoặc hybrid cho một bối cảnh triển khai cụ thể.",
+      "bloom_rationale_vi": "Bảng nguồn cung cấp các tiêu chí so sánh và phần tổng kết yêu cầu hiểu context trước khi chọn architecture; ví dụ hybrid cho sensitive và non-sensitive data chuẩn bị cho việc áp dụng vào tình huống.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi việc nhận diện enterprise constraints vì đây là năng lực ra quyết định kiến trúc, không chỉ liệt kê vấn đề; gộp các thuộc tính so sánh vào cùng một criterion vì chúng cùng phục vụ một quyết định.",
+      "role_reason_vi": "Chọn architecture là trọng tâm của triển khai enterprise và được nhấn mạnh trong key takeaways của bài.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p010:l75-87",
+        "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p010:l75-87",
+          "source_type": "slide",
+          "page_no": 10,
+          "content": "## Page 10: On-Premise vs Cloud vs Hybrid\nPage 10: On Premise vs Cloud vs Hybrid Tables | | Cloud API | On Premise | Hybrid | | | | | | | Data control | Thấp | Cao nhất | Tùy chọn | | Setup time | Phút | Tuần tháng | Tuần | | Cost model | Per token | Capex + GPU | Mixed | | Performance | Nhanh | Tùy hardware | Tùy routing | | Best for | MVP, startup | Bank, gov | Enterprise | Text Extract Hybrid đang trở thành default cho enterprise VN: sensitive data on prem, non sensitive qua cloud API.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Tổng kết - Key Takeaways\nPage 32: Tổng kết Key Takeaways Text Extract Những ý chính cần nhớ trước khi sang bài tiếp theo 1. Enterprise deploy khác startup: security, compliance, on premise, hybrid. Hiểu context trước khi chọn architecture. 2. Cost optimization: model routing, semantic caching, prompt compression. API tokens chiếm 40 60% cost optimize đúng chỗ. 3. 3 pillars, 3 tracks: CP1 (Business) → Track 1, CP2 (Infra) → Track 2, CP3 (Application) → Track 3. Chọn theo mục tiêu. 4. You are no longer beginners you are builders. 15 ngày, 15 labs, 1 deployed product. Phase 2 đi sâu hơn.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "deployment_architecture_tradeoffs",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "deployment_architecture_tradeoffs",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Bảng so sánh cloud/on-prem/hybrid được evidence hỗ trợ chi tiết. Disposition core_kc hợp lý. Scope phù hợp, không overlap với candidates khác. Có thể đánh giá qua bài tập chọn mô hình. Mô tả rõ ràng.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "self_hosted_llm_inference",
+      "name_vi": "Inference LLM self-hosted với vLLM và Ollama",
+      "description_vi": "Phân biệt và sử dụng hai hướng self-hosted được nêu: vLLM cho inference production cần throughput cao với PagedAttention, continuous batching và GPU server; Ollama cho chạy model local, setup đơn giản, development, demo hoặc edge deployment.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Chọn và triển khai hình thức inference self-hosted phù hợp với nhu cầu throughput và môi trường chạy",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Chọn được vLLM hoặc Ollama cho một bối cảnh cụ thể và mô tả cách đưa model chạy local hoặc production inference.",
+      "bloom_rationale_vi": "Nguồn nêu trực tiếp công dụng, đặc tính vận hành và bối cảnh dùng của vLLM và Ollama, bao gồm việc download model và chạy local.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp vLLM và Ollama vì chúng là hai lựa chọn trong cùng capability self-hosted inference; tách khỏi tiêu chí chi phí vì biết cách dùng công cụ không đồng nghĩa biết khi nào self-hosted có lợi về kinh tế.",
+      "role_reason_vi": "Self-hosted là một phương án triển khai quan trọng cho enterprise và cũng là một chiến lược tối ưu chi phí ở lưu lượng cao.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p011:l88-99",
+        "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150",
+        "day15-trien-khai-thuc-te-dinh-huong:p025:l230-242"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p011:l88-99",
+          "source_type": "slide",
+          "page_no": 11,
+          "content": "## Page 11: Self-Hosted LLM: vLLM & Ollama\nPage 11: Self Hosted LLM: vLLM & Ollama Text Extract Production grade inference. PagedAttention, continuous batching. Dùng khi: cần throughput cao, có GPU server. Run models locally, dễ setup. Download model, chạy 1 lệnh. Dùng khi: dev, demo, edge deployment Lưu ý: Self hosted tiết kiệm khi volume cao ( 1M tokens/ngày). Dưới mức đó, cloud API rẻ hơn khi tính cả chi phí GPU, ops, và maintenance.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: 4Strategies Chính\nPage 17: 4Strategies Chính Text Extract Cheap model (Haiku) cho simple tasks. Expensive model (Opus) chỉ cho complex. Tiết kiệm: 40 60% token cost. Cache LLM responses cho similar queries. Dùng embedding similarity để match. Tiết kiệm: 20 40% nếu queries lặp. Tóm tắt context trước khi gửi LLM. Giảm token count mà giữ thông tin. Tiết kiệm: 15 30% input tokens. vLLM, Ollama cho high volume. Break even: khoảng 1M+ tokens/ngày. Tiết kiệm: 50 80% so với API khi scale lớn.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p025:l230-242",
+          "source_type": "slide",
+          "page_no": 25,
+          "content": "## Page 25: Track 2 - AI Infrastructure & Data\nPage 25: Track 2 AI Infrastructure & Data Text Extract Nội dung chính Lakehouse & Feature Store vLLM deployment & optimization CI/CD cho AI (LLMOps) GPU FinOps & cost management Production data pipeline Người muốn làm: AI Data Engineer, Platform Engineer, MLOps Engineer Production grade data pipeline + self hosted LLM + CI/CD pipeline + monitoring dashboard.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "self_hosted_llm_inference",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "self_hosted_llm_inference",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence từ slide vLLM và Ollama hỗ trợ đầy đủ. Disposition core_kc đúng. Scope gộp hai công cụ là hợp lý theo boundary note. Có thể đánh giá qua lựa chọn công cụ phù hợp. Tên và mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "ai_system_cost_anatomy",
+      "name_vi": "Cấu trúc chi phí của AI system",
+      "description_vi": "Phân rã tổng chi phí AI production thành API tokens đầu vào và đầu ra, compute CPU/GPU, storage/vector database, human review và operations/monitoring; token là thành phần lớn nhất trong cơ cấu được trình bày và thường là điểm tối ưu có ROI cao.",
+      "item_form": "concept",
+      "primary_capability_vi": "Phân loại và xác định các thành phần chi phí của một AI system production",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Giải thích được vì sao phân tích đầy đủ cost structure cần bao gồm token, compute, storage, human review và operations thay vì chỉ tính phí API.",
+      "bloom_rationale_vi": "Nguồn trình bày trực tiếp cost anatomy, năm nhóm chi phí và kết luận rằng AI agent production không chỉ tốn tiền token.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp các nhóm chi phí vì chúng cùng tạo thành một mô hình cost anatomy; tách khỏi procedure tính API vì nhận diện cấu trúc và thực hiện phép tính là hai trạng thái mastery khác nhau.",
+      "role_reason_vi": "Phân tích cost anatomy là mục tiêu chính của bài và là cơ sở để tối ưu đúng chỗ.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p012:l100-103",
+        "day15-trien-khai-thuc-te-dinh-huong:p013:l104-113"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p012:l100-103",
+          "source_type": "slide",
+          "page_no": 12,
+          "content": "## Page 12: Cost Anatomy Của AI System\nPage 12: Cost Anatomy Của AI System Text Extract AI agent production không chỉ tốn tiền token. Hiểu đầy đủ cost structure mới optimize đúng chỗ",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p013:l104-113",
+          "source_type": "slide",
+          "page_no": 13,
+          "content": "## Page 13: Cost Breakdown\nPage 13: Cost Breakdown Image Caption A horizontal cost breakdown graphic with five colored rounded boxes across the slide, each with a percentage below. API Tokens / Input + Output: 40–60% (red box) Compute / CPU/GPU: 15–25% (blue box) Storage / Vector DB: 5–10% (slate blue box) Human / Review: 10–15% (gray box) Ops / Monitor: 5–10% (green box) Bottom note: API tokens chiếm 40–60% cost. Optimize token usage là ROI cao nhất cho hầu hết AI systems.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "ai_system_cost_anatomy",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "ai_system_cost_anatomy",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence cost breakdown graphic xác nhận các thành phần chi phí. Disposition core_kc phù hợp. Scope gộp các nhóm chi phí là hợp lý. Measurable outcome có thể đánh giá qua giải thích. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "monthly_llm_api_cost_estimation",
+      "name_vi": "Ước tính chi phí LLM API hàng tháng",
+      "description_vi": "Tính chi phí API hàng tháng bằng tổng số input và output tokens trung bình mỗi request, nhân với đơn giá mỗi token, số request mỗi ngày và 30 ngày; kết quả là chi phí LLM API trước các chi phí vận hành ẩn.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tính và ước tính chi phí LLM API theo traffic, token usage và pricing",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Tính được monthly LLM API cost cho một workload khi biết token trung bình, giá token và số request mỗi ngày.",
+      "bloom_rationale_vi": "Nguồn đưa công thức đầy đủ và một phép tính mẫu, trực tiếp chuẩn bị cho việc áp dụng công thức vào workload khác.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi cost anatomy vì người học có thể biết các nhóm chi phí nhưng không thực hiện được phép tính; tách khỏi hidden cost vì công thức này chỉ tính API cost.",
+      "role_reason_vi": "Đây là năng lực trực tiếp cần cho cost analysis của agent và được yêu cầu trong final assignment.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p014:l114-120",
+        "day15-trien-khai-thuc-te-dinh-huong:p031:l291-302"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p014:l114-120",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: LLMAPI Cost Calculator\nPage 14: LLMAPI Cost Calculator Image Caption Two panel formula slide. Left panel shows the formula: Monthly cost = (avg input tokens + avg output tokens) × price per token × requests per day × 30 ngày Right panel shows an example calculation: 1000 tokens/request; $3/1M input tokens (Sonnet); 500 requests/ngày; = 1000 × $0.000003 × 500 × 30; = $45/tháng chỉ LLM API Bottom warning note: Hidden costs thường gấp 1.5–2x API cost: retry overhead, guardrails LLM calls, monitoring, eval pipeline. Budget phải tính tổng, không chỉ API.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p031:l291-302",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Final Assignment\nPage 31: Final Assignment Text Extract Hoàn thành track selection form Submit portfolio link (GitHub/demo URL) Cost analysis cho agent (Lab 15) Final presentation (10 phút) Deployed agent URL Monitoring dashboard screenshot Evaluation report + RAGAS scores README giải thích architecture Cost analysis",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "monthly_llm_api_cost_estimation",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "monthly_llm_api_cost_estimation",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Formula và example từ evidence hỗ trợ trực tiếp. Disposition core_kc đúng. Scope tách biệt với cost anatomy. Có thể đánh giá qua bài toán tính cost. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "total_ai_budget_with_hidden_costs",
+      "name_vi": "Lập ngân sách AI bao gồm chi phí ẩn",
+      "description_vi": "Lập ngân sách tổng thay vì chỉ dùng API cost, bằng cách tính đến retry overhead, các lần gọi LLM cho guardrails, monitoring, evaluation pipeline và các chi phí vận hành liên quan.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Kiểm tra một dự toán AI có bao gồm đầy đủ chi phí vận hành ngoài API hay chưa",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Điều chỉnh được ngân sách từ API-only estimate thành total budget có tính đến các chi phí ẩn phù hợp.",
+      "bloom_rationale_vi": "Nguồn cảnh báo trực tiếp rằng hidden costs thường gấp 1.5–2 lần API cost và nêu các thành phần phải đưa vào budget.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi phép tính API vì failure signal khác nhau: một bên sai công thức hoặc tham số, bên kia bỏ sót các thành phần ngoài API.",
+      "role_reason_vi": "Lập budget đầy đủ là phần thiết yếu của cost analysis production và được yêu cầu trong final assignment.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p014:l114-120",
+        "day15-trien-khai-thuc-te-dinh-huong:p031:l291-302"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p014:l114-120",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: LLMAPI Cost Calculator\nPage 14: LLMAPI Cost Calculator Image Caption Two panel formula slide. Left panel shows the formula: Monthly cost = (avg input tokens + avg output tokens) × price per token × requests per day × 30 ngày Right panel shows an example calculation: 1000 tokens/request; $3/1M input tokens (Sonnet); 500 requests/ngày; = 1000 × $0.000003 × 500 × 30; = $45/tháng chỉ LLM API Bottom warning note: Hidden costs thường gấp 1.5–2x API cost: retry overhead, guardrails LLM calls, monitoring, eval pipeline. Budget phải tính tổng, không chỉ API.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p031:l291-302",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Final Assignment\nPage 31: Final Assignment Text Extract Hoàn thành track selection form Submit portfolio link (GitHub/demo URL) Cost analysis cho agent (Lab 15) Final presentation (10 phút) Deployed agent URL Monitoring dashboard screenshot Evaluation report + RAGAS scores README giải thích architecture Cost analysis",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "total_ai_budget_with_hidden_costs",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "total_ai_budget_with_hidden_costs",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence cảnh báo hidden costs và yêu cầu tính tổng ngân sách. Disposition core_kc phù hợp. Scope tách biệt với API cost estimation. Có thể đánh giá qua bài điều chỉnh ngân sách. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "budget_tier_selection",
+      "name_vi": "Lựa chọn tier ngân sách theo traffic",
+      "description_vi": "Dùng mô hình ba tier để định hướng stack và ngân sách: MVP với traffic thấp dùng cloud API và Railway, Growth dùng cloud API cùng ECS hoặc Cloud Run, Scale dùng hybrid hoặc self-hosted; chỉ nâng tier khi traffic thực tế đòi hỏi.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn tier triển khai và mức đầu tư tương ứng với traffic thực tế",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Phân loại workload vào MVP, Growth hoặc Scale và chọn stack/budget tương ứng mà không tối ưu hạ tầng quá sớm.",
+      "bloom_rationale_vi": "Bảng nguồn liên kết traffic, estimated cost và stack cho từng tier; hướng dẫn bắt đầu ở MVP và chỉ upgrade khi traffic yêu cầu là quy tắc ra quyết định trực tiếp.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi total budget vì budget tier là quyết định chọn mức hạ tầng theo traffic, không chỉ là kiểm tra đã tính đủ chi phí; các ngưỡng và stack được gộp vì là tham số của cùng một criterion.",
+      "role_reason_vi": "Đây là cách vận dụng cost analysis vào quyết định triển khai thực tế và phù hợp với trọng tâm tối ưu chi phí.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p015:l121-131"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p015:l121-131",
+          "source_type": "slide",
+          "page_no": 15,
+          "content": "## Page 15: Budget Planning: 3-Tier Model\nPage 15: Budget Planning: 3 Tier Model Tables | Tier | Traffic | Estimated cost | Stack | | | | | | | MVP | <100 req/ngày | \\$50–200/tháng | Cloud API + Railway | | Growth | 100–5K req/ngày | \\$200–2K/tháng | Cloud API + ECS/Cloud Run | | Scale | 5K req/ngày | \\$2K+/tháng | Hybrid / self hosted | Text Extract Bắt đầu MVP tier. Chỉ upgrade khi traffic thật sự đòi hỏi. Premature optimization is the root of all evil.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "budget_tier_selection",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "budget_tier_selection",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "3-tier model được evidence hỗ trợ đầy đủ. Disposition core_kc hợp lý. Scope không overlap với architecture tradeoffs. Có thể đánh giá qua phân loại workload. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "model_routing_by_complexity",
+      "name_vi": "Model routing theo độ phức tạp request",
+      "description_vi": "Đưa request qua complexity classifier, route task đơn giản tới model nhanh và rẻ như Haiku hoặc GPT-4o mini, còn task phức tạp tới model mạnh và đắt như Opus hoặc GPT-4o.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế và áp dụng routing request giữa các model theo độ phức tạp",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Xây dựng được luồng phân loại request và định tuyến mỗi lớp tới model có chi phí và năng lực phù hợp.",
+      "bloom_rationale_vi": "Sơ đồ nguồn mô tả đầy đủ các bước User Request, Complexity Classifier và hai nhánh simple/complex cùng mục tiêu giảm cost mà giữ quality trên task đơn giản.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi các chiến lược caching và compression vì mỗi chiến lược biến đổi một điểm khác nhau của pipeline, có thiết kế và failure signal riêng.",
+      "role_reason_vi": "Model routing là một trong các cost optimization strategies được nêu trực tiếp trong mục tiêu và key takeaways.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p016:l132-135",
+        "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150",
+        "day15-trien-khai-thuc-te-dinh-huong:p018:l151-159",
+        "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p016:l132-135",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: Cost Optimization Strategies\nPage 16: Cost Optimization Strategies Text Extract Khi cost bắt đầu đáng kể, 4 strategies sau giúp giảm 30 70% chi phí mà không ảnh hưởng chất lượng",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: 4Strategies Chính\nPage 17: 4Strategies Chính Text Extract Cheap model (Haiku) cho simple tasks. Expensive model (Opus) chỉ cho complex. Tiết kiệm: 40 60% token cost. Cache LLM responses cho similar queries. Dùng embedding similarity để match. Tiết kiệm: 20 40% nếu queries lặp. Tóm tắt context trước khi gửi LLM. Giảm token count mà giữ thông tin. Tiết kiệm: 15 30% input tokens. vLLM, Ollama cho high volume. Break even: khoảng 1M+ tokens/ngày. Tiết kiệm: 50 80% so với API khi scale lớn.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p018:l151-159",
+          "source_type": "slide",
+          "page_no": 18,
+          "content": "## Page 18: Model Routing - Chi Tiết\nPage 18: Model Routing Chi Tiết Image Caption Flow diagram showing request routing by complexity. Left gray box: “User Request” Arrow to red box: “Complexity Classifier” From classifier, a top right arrow labeled “simple” goes to a green box: “Haiku / GPT 4o mini / Fast + Cheap” with “70% traffic” shown on the right. From classifier, a bottom right arrow labeled “complex” goes to a blue box: “Opus / GPT 4o / Strong + Expensive” with “30% traffic” shown on the right. Bottom note: Nếu 70% requests dùng cheap model (10x rẻ hơn), tổng cost giảm khoảng 50% mà quality gần như không đổi trên simple tasks.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Tổng kết - Key Takeaways\nPage 32: Tổng kết Key Takeaways Text Extract Những ý chính cần nhớ trước khi sang bài tiếp theo 1. Enterprise deploy khác startup: security, compliance, on premise, hybrid. Hiểu context trước khi chọn architecture. 2. Cost optimization: model routing, semantic caching, prompt compression. API tokens chiếm 40 60% cost optimize đúng chỗ. 3. 3 pillars, 3 tracks: CP1 (Business) → Track 1, CP2 (Infra) → Track 2, CP3 (Application) → Track 3. Chọn theo mục tiêu. 4. You are no longer beginners you are builders. 15 ngày, 15 labs, 1 deployed product. Phase 2 đi sâu hơn.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "model_routing_by_complexity",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "model_routing_by_complexity",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence từ sơ đồ routing và mô tả chi tiết. Disposition core_kc đúng. Scope tách biệt với caching và compression. Có thể đánh giá qua thiết kế luồng routing. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "semantic_caching_for_repeated_queries",
+      "name_vi": "Semantic caching cho query lặp hoặc tương tự",
+      "description_vi": "Cache response của LLM và dùng embedding similarity để nhận diện query tương tự, từ đó trả lại kết quả đã cache thay vì gọi model mới.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế cơ chế semantic cache để giảm các LLM call trùng lặp",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Áp dụng embedding similarity để tìm cache hit cho các query có cùng hoặc gần cùng ngữ nghĩa.",
+      "bloom_rationale_vi": "Nguồn nêu trực tiếp việc cache response, dùng embedding similarity để match và bối cảnh query lặp.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi model routing vì semantic caching quyết định có cần gọi model hay không, trong khi routing quyết định gọi model nào; hai cơ chế có failure signal khác nhau.",
+      "role_reason_vi": "Semantic caching là một trong ba chiến lược tối ưu chi phí được mục tiêu và tổng kết bài nhấn mạnh.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p016:l132-135",
+        "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150",
+        "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p016:l132-135",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: Cost Optimization Strategies\nPage 16: Cost Optimization Strategies Text Extract Khi cost bắt đầu đáng kể, 4 strategies sau giúp giảm 30 70% chi phí mà không ảnh hưởng chất lượng",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: 4Strategies Chính\nPage 17: 4Strategies Chính Text Extract Cheap model (Haiku) cho simple tasks. Expensive model (Opus) chỉ cho complex. Tiết kiệm: 40 60% token cost. Cache LLM responses cho similar queries. Dùng embedding similarity để match. Tiết kiệm: 20 40% nếu queries lặp. Tóm tắt context trước khi gửi LLM. Giảm token count mà giữ thông tin. Tiết kiệm: 15 30% input tokens. vLLM, Ollama cho high volume. Break even: khoảng 1M+ tokens/ngày. Tiết kiệm: 50 80% so với API khi scale lớn.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Tổng kết - Key Takeaways\nPage 32: Tổng kết Key Takeaways Text Extract Những ý chính cần nhớ trước khi sang bài tiếp theo 1. Enterprise deploy khác startup: security, compliance, on premise, hybrid. Hiểu context trước khi chọn architecture. 2. Cost optimization: model routing, semantic caching, prompt compression. API tokens chiếm 40 60% cost optimize đúng chỗ. 3. 3 pillars, 3 tracks: CP1 (Business) → Track 1, CP2 (Infra) → Track 2, CP3 (Application) → Track 3. Chọn theo mục tiêu. 4. You are no longer beginners you are builders. 15 ngày, 15 labs, 1 deployed product. Phase 2 đi sâu hơn.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "semantic_caching_for_repeated_queries",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "semantic_caching_for_repeated_queries",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence đề cập caching với embedding similarity. Disposition core_kc phù hợp. Scope tách biệt với routing. Có thể đánh giá qua áp dụng cache hit. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "prompt_compression",
+      "name_vi": "Prompt compression bằng tóm tắt context",
+      "description_vi": "Tóm tắt context trước khi gửi tới LLM để giảm input token trong khi vẫn giữ lại thông tin cần thiết cho nhiệm vụ.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Rút gọn context đầu vào mà vẫn bảo toàn thông tin cần cho chất lượng response",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Áp dụng bước tóm tắt hoặc nén context trước LLM call và kiểm tra rằng thông tin thiết yếu không bị mất.",
+      "bloom_rationale_vi": "Nguồn mô tả trực tiếp cơ chế summarize context, mục tiêu giảm token count và điều kiện giữ thông tin.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi semantic caching vì compression luôn tạo input mới cho model còn caching có thể loại bỏ LLM call; tiêu chí thành công và lỗi của hai kỹ thuật khác nhau.",
+      "role_reason_vi": "Prompt compression là một cost optimization strategy cốt lõi, được nêu trong mục tiêu và key takeaways.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p016:l132-135",
+        "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150",
+        "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p016:l132-135",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: Cost Optimization Strategies\nPage 16: Cost Optimization Strategies Text Extract Khi cost bắt đầu đáng kể, 4 strategies sau giúp giảm 30 70% chi phí mà không ảnh hưởng chất lượng",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: 4Strategies Chính\nPage 17: 4Strategies Chính Text Extract Cheap model (Haiku) cho simple tasks. Expensive model (Opus) chỉ cho complex. Tiết kiệm: 40 60% token cost. Cache LLM responses cho similar queries. Dùng embedding similarity để match. Tiết kiệm: 20 40% nếu queries lặp. Tóm tắt context trước khi gửi LLM. Giảm token count mà giữ thông tin. Tiết kiệm: 15 30% input tokens. vLLM, Ollama cho high volume. Break even: khoảng 1M+ tokens/ngày. Tiết kiệm: 50 80% so với API khi scale lớn.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Tổng kết - Key Takeaways\nPage 32: Tổng kết Key Takeaways Text Extract Những ý chính cần nhớ trước khi sang bài tiếp theo 1. Enterprise deploy khác startup: security, compliance, on premise, hybrid. Hiểu context trước khi chọn architecture. 2. Cost optimization: model routing, semantic caching, prompt compression. API tokens chiếm 40 60% cost optimize đúng chỗ. 3. 3 pillars, 3 tracks: CP1 (Business) → Track 1, CP2 (Infra) → Track 2, CP3 (Application) → Track 3. Chọn theo mục tiêu. 4. You are no longer beginners you are builders. 15 ngày, 15 labs, 1 deployed product. Phase 2 đi sâu hơn.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "prompt_compression",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "prompt_compression",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence mô tả tóm tắt context để giảm token. Disposition core_kc đúng. Scope tách biệt với caching. Có thể đánh giá qua áp dụng nén. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "self_hosting_cost_break_even",
+      "name_vi": "Đánh giá điểm hòa vốn của self-hosted LLM",
+      "description_vi": "So sánh cloud API với self-hosted theo volume token và tổng chi phí, trong đó self-hosted chỉ có lợi khi lưu lượng đủ cao để bù GPU, operations và maintenance; nguồn dùng khoảng 1M tokens/ngày làm mốc định hướng.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá khi nào self-hosted có lợi hơn cloud API về tổng chi phí",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Ra quyết định dùng cloud API hay self-hosted sau khi cân nhắc token volume, GPU, operations và maintenance.",
+      "bloom_rationale_vi": "Nguồn nêu rõ self-hosted tiết kiệm ở volume cao, cloud API có thể rẻ hơn dưới ngưỡng khi tính đủ GPU và vận hành, đồng thời đưa mốc break-even định hướng.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi self-hosted inference vì triển khai được công cụ không đồng nghĩa chọn đúng mô hình kinh tế; hai năng lực có task đánh giá riêng là setup và cost comparison.",
+      "role_reason_vi": "Đây là tiêu chí trực tiếp để áp dụng chiến lược self-hosting trong cost optimization và enterprise deployment.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p011:l88-99",
+        "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p011:l88-99",
+          "source_type": "slide",
+          "page_no": 11,
+          "content": "## Page 11: Self-Hosted LLM: vLLM & Ollama\nPage 11: Self Hosted LLM: vLLM & Ollama Text Extract Production grade inference. PagedAttention, continuous batching. Dùng khi: cần throughput cao, có GPU server. Run models locally, dễ setup. Download model, chạy 1 lệnh. Dùng khi: dev, demo, edge deployment Lưu ý: Self hosted tiết kiệm khi volume cao ( 1M tokens/ngày). Dưới mức đó, cloud API rẻ hơn khi tính cả chi phí GPU, ops, và maintenance.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: 4Strategies Chính\nPage 17: 4Strategies Chính Text Extract Cheap model (Haiku) cho simple tasks. Expensive model (Opus) chỉ cho complex. Tiết kiệm: 40 60% token cost. Cache LLM responses cho similar queries. Dùng embedding similarity để match. Tiết kiệm: 20 40% nếu queries lặp. Tóm tắt context trước khi gửi LLM. Giảm token count mà giữ thông tin. Tiết kiệm: 15 30% input tokens. vLLM, Ollama cho high volume. Break even: khoảng 1M+ tokens/ngày. Tiết kiệm: 50 80% so với API khi scale lớn.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "self_hosting_cost_break_even",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "self_hosting_cost_break_even",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence nêu break-even point 1M tokens/ngày. Disposition core_kc hợp lý. Scope tách biệt với self-hosted inference. Có thể đánh giá qua quyết định chọn cloud hay self-hosted. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "request_queue_for_load_spikes",
+      "name_vi": "Request queue để hấp thụ tải cao",
+      "description_vi": "Đưa request vào queue khi tải cao để làm phẳng các đợt tăng đột biến, cho phép agent xử lý bất đồng bộ và trả trạng thái đang xử lý thay vì để request timeout; các công cụ được nêu gồm Redis Queue, Celery và Bull.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế luồng queue cho workload có tải cao hoặc biến động",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Áp dụng request queue để xử lý load spike và thay đổi trải nghiệm từ timeout sang trạng thái xử lý bất đồng bộ.",
+      "bloom_rationale_vi": "Nguồn mô tả trực tiếp trigger high load, vai trò smooth out spikes, trải nghiệm người dùng và các công cụ triển khai.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi circuit breaker vì queue giải quyết biến động tải còn circuit breaker xử lý upstream failure; hai pattern có mục tiêu và failure signal khác nhau.",
+      "role_reason_vi": "Queue là một trong các pattern production cần có khi agent phục vụ enterprise.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p019:l160-163",
+        "day15-trien-khai-thuc-te-dinh-huong:p020:l164-179"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p019:l160-163",
+          "source_type": "slide",
+          "page_no": 19,
+          "content": "## Page 19: Scaling & Reliability Production\nPage 19: Scaling & Reliability Production Text Extract Khi agent phục vụ enterprise, cần thêm queue, circuit breaker, và SLA commitment",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p020:l164-179",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Production Patterns\nPage 20: Production Patterns Text Extract High load → request queue → smooth out spikes. User nhận 'đang xử lý' thay vì timeout. Tool: Redis Queue, Celery, Bull Khi LLM API down, degrade gracefully. Trả cached response hoặc fallback message. Pattern: closed → open → half open Stateless agent → N instances. Day 12: đã design cho stateless. Scale: thêm instances khi load tăng Enterprise cần uptime commitment. 99.9% = max 8.7h downtime/năm. Cần: redundancy, failover, monitoring",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "request_queue_for_load_spikes",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "request_queue_for_load_spikes",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence mô tả queue và tools. Disposition core_kc phù hợp. Scope tách biệt với circuit breaker. Có thể đánh giá qua thiết kế queue. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "circuit_breaker_for_llm_failures",
+      "name_vi": "Circuit breaker khi LLM API lỗi",
+      "description_vi": "Dùng circuit breaker để tránh tiếp tục gọi một LLM API đang lỗi và degrade gracefully bằng cached response hoặc fallback message; trạng thái vận hành gồm closed, open và half-open.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế cơ chế ngắt và phục hồi cuộc gọi tới upstream LLM không ổn định",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Áp dụng circuit breaker với fallback phù hợp khi LLM API down và mô tả chuyển đổi giữa các trạng thái closed, open và half-open.",
+      "bloom_rationale_vi": "Nguồn nêu trigger API down, hành vi degrade gracefully, các fallback và ba trạng thái của pattern.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi queue vì circuit breaker quản lý lỗi upstream chứ không điều tiết tải; tách khỏi SLA vì SLA là criterion về mức dịch vụ, không phải cơ chế thực thi.",
+      "role_reason_vi": "Circuit breaker được dạy như một pattern reliability production bắt buộc cho enterprise agent.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p019:l160-163",
+        "day15-trien-khai-thuc-te-dinh-huong:p020:l164-179"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p019:l160-163",
+          "source_type": "slide",
+          "page_no": 19,
+          "content": "## Page 19: Scaling & Reliability Production\nPage 19: Scaling & Reliability Production Text Extract Khi agent phục vụ enterprise, cần thêm queue, circuit breaker, và SLA commitment",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p020:l164-179",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Production Patterns\nPage 20: Production Patterns Text Extract High load → request queue → smooth out spikes. User nhận 'đang xử lý' thay vì timeout. Tool: Redis Queue, Celery, Bull Khi LLM API down, degrade gracefully. Trả cached response hoặc fallback message. Pattern: closed → open → half open Stateless agent → N instances. Day 12: đã design cho stateless. Scale: thêm instances khi load tăng Enterprise cần uptime commitment. 99.9% = max 8.7h downtime/năm. Cần: redundancy, failover, monitoring",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "circuit_breaker_for_llm_failures",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "circuit_breaker_for_llm_failures",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence mô tả states closed/open/half-open và fallback. Disposition core_kc đúng. Scope tách biệt với queue. Có thể đánh giá qua áp dụng circuit breaker. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "stateless_horizontal_agent_scaling",
+      "name_vi": "Scale ngang agent stateless",
+      "description_vi": "Giữ agent stateless để có thể chạy nhiều instance giống nhau và tăng số instance khi load tăng; cách scale này dựa trên việc state không bị gắn cứng vào một instance.",
+      "item_form": "principle",
+      "primary_capability_vi": "Mở rộng agent theo chiều ngang bằng nhiều instance stateless",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Chọn hoặc thiết kế deployment stateless để có thể thêm instance khi tải tăng mà không phụ thuộc vào một instance cụ thể.",
+      "bloom_rationale_vi": "Nguồn nêu trực tiếp mô hình stateless agent, N instances và quy tắc thêm instances khi load tăng.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi request queue vì queue điều phối request còn stateless scaling quyết định khả năng nhân bản compute; hai giải pháp có thể dùng độc lập hoặc cùng nhau.",
+      "role_reason_vi": "Horizontal scaling là một phần trực tiếp của scaling production cho enterprise agent.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p020:l164-179"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p020:l164-179",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Production Patterns\nPage 20: Production Patterns Text Extract High load → request queue → smooth out spikes. User nhận 'đang xử lý' thay vì timeout. Tool: Redis Queue, Celery, Bull Khi LLM API down, degrade gracefully. Trả cached response hoặc fallback message. Pattern: closed → open → half open Stateless agent → N instances. Day 12: đã design cho stateless. Scale: thêm instances khi load tăng Enterprise cần uptime commitment. 99.9% = max 8.7h downtime/năm. Cần: redundancy, failover, monitoring",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "stateless_horizontal_agent_scaling",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "stateless_horizontal_agent_scaling",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence đề cập stateless agent và scale ngang. Disposition core_kc hợp lý. Scope tách biệt với queue. Có thể đánh giá qua thiết kế deployment. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "sla_reliability_requirements",
+      "name_vi": "SLA và các yêu cầu đảm bảo uptime",
+      "description_vi": "Hiểu SLA commitment của enterprise, ý nghĩa của mức uptime 99.9% và nhu cầu redundancy, failover तथा monitoring để đáp ứng cam kết độ sẵn sàng.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Xác định các thành phần reliability cần có để đáp ứng một SLA uptime",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Giải thích được SLA 99.9% đặt ra yêu cầu gì đối với redundancy, failover và monitoring.",
+      "bloom_rationale_vi": "Nguồn nêu mức 99.9%, thời gian downtime tương ứng và trực tiếp liệt kê redundancy, failover, monitoring là các yêu cầu cần thiết.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi circuit breaker và scaling vì SLA là chuẩn/tiêu chí đánh giá reliability, còn hai item kia là các cơ chế kỹ thuật cụ thể.",
+      "role_reason_vi": "Enterprise cần uptime commitment; hiểu SLA là phần cốt lõi của scaling và reliability production.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p019:l160-163",
+        "day15-trien-khai-thuc-te-dinh-huong:p020:l164-179"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p019:l160-163",
+          "source_type": "slide",
+          "page_no": 19,
+          "content": "## Page 19: Scaling & Reliability Production\nPage 19: Scaling & Reliability Production Text Extract Khi agent phục vụ enterprise, cần thêm queue, circuit breaker, và SLA commitment",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p020:l164-179",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Production Patterns\nPage 20: Production Patterns Text Extract High load → request queue → smooth out spikes. User nhận 'đang xử lý' thay vì timeout. Tool: Redis Queue, Celery, Bull Khi LLM API down, degrade gracefully. Trả cached response hoặc fallback message. Pattern: closed → open → half open Stateless agent → N instances. Day 12: đã design cho stateless. Scale: thêm instances khi load tăng Enterprise cần uptime commitment. 99.9% = max 8.7h downtime/năm. Cần: redundancy, failover, monitoring",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "sla_reliability_requirements",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "sla_reliability_requirements",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence mô tả SLA 99.9% và các yêu cầu redundancy, failover. Disposition core_kc phù hợp. Scope tách biệt với circuit breaker. Có thể đánh giá qua giải thích ý nghĩa SLA. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "ai_skills_map_three_pillars",
+      "name_vi": "Skills map theo ba pillars",
+      "description_vi": "Phân loại năng lực đã học thành CP1 Business gồm problem statement, AI readiness, PRD, risk assessment, ROI, UX và cost analysis; CP2 Infrastructure gồm vector store, data pipeline, Docker, cloud deploy, monitoring, logging và tracing; CP3 AI Engineering gồm LLM API, agent, prompt, tool calling, embedding/RAG, multi-agent, guardrails và evaluation.",
+      "item_form": "concept",
+      "primary_capability_vi": "Phân loại năng lực AI product theo ba pillars Business, Infrastructure và AI Engineering",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Giải thích được phạm vi của từng pillar và xếp một kỹ năng hoặc hoạt động vào pillar phù hợp.",
+      "bloom_rationale_vi": "Nguồn liệt kê rõ ba pillars, các nhóm kỹ năng tương ứng và kết quả năng lực sau 15 ngày.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp các kỹ năng con vào từng pillar vì chúng là thành phần của một skills map recap, không có mastery state độc lập trong content unit này.",
+      "role_reason_vi": "Skills map là mục tiêu tổng kết chính và là cơ sở để định hướng sang Phase 2.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p022:l180-212",
+        "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p022:l180-212",
+          "source_type": "slide",
+          "page_no": 22,
+          "content": "## Page 22: Skills Map - 3 Pillars\nPage 22: Skills Map 3 Pillars Text Extract CP3: AI Engineering LLM API ReAct Agent Prompt Engineering Tool Calling Embedding RAG Pipeline Multi Agent Guardrails Evaluation Sau 15 ngày: bạn đã có deployed, monitored, evaluated AI product + skills across 3 pillars. CP2: Infrastructure Vector Store Data Pipeline Docker Cloud Deploy Monitoring Structured Logging Tracing CP1: Business Problem Statement AI Readiness PRD Risk Assessment ROI Analysis UX Design Cost Analysis",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Tổng kết - Key Takeaways\nPage 32: Tổng kết Key Takeaways Text Extract Những ý chính cần nhớ trước khi sang bài tiếp theo 1. Enterprise deploy khác startup: security, compliance, on premise, hybrid. Hiểu context trước khi chọn architecture. 2. Cost optimization: model routing, semantic caching, prompt compression. API tokens chiếm 40 60% cost optimize đúng chỗ. 3. 3 pillars, 3 tracks: CP1 (Business) → Track 1, CP2 (Infra) → Track 2, CP3 (Application) → Track 3. Chọn theo mục tiêu. 4. You are no longer beginners you are builders. 15 ngày, 15 labs, 1 deployed product. Phase 2 đi sâu hơn.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "ai_skills_map_three_pillars",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "ai_skills_map_three_pillars",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence liệt kê ba pillars với các kỹ năng tương ứng. Disposition core_kc hợp lý. Scope không overlap với career paths. Có thể đánh giá qua phân loại kỹ năng. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "phase_two_track_selection",
+      "name_vi": "Chọn track Phase 2 theo mục tiêu nghề nghiệp",
+      "description_vi": "Chọn Track 1 Business khi thiên về business, chọn Track 2 Infrastructure khi thiên về technical và infra, hoặc Track 3 Application khi thiên về technical và app; quyết định dựa trên mục tiêu nghề nghiệp và hứng thú cá nhân, không có track đúng hoặc sai và có thể đổi sau tuần đầu.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Ra quyết định chọn hướng chuyên sâu Phase 2 phù hợp với mục tiêu và sở thích nghề nghiệp",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Áp dụng cây quyết định business/technical rồi infra/app để chọn track và giải thích được lý do lựa chọn.",
+      "bloom_rationale_vi": "Nguồn cung cấp flowchart quyết định, mô tả phạm vi và vai trò của ba track, đồng thời nêu tiêu chí mục tiêu nghề nghiệp và hứng thú cá nhân.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi skills map vì biết pillar hiện tại chưa đủ để ra quyết định chuyên môn; track selection có task quyết định và tiêu chí remediation riêng.",
+      "role_reason_vi": "Chọn track là một mục tiêu rõ ràng của Ngày 15 và là kết quả chuyển tiếp trực tiếp sang Phase 2.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p022:l180-212",
+        "day15-trien-khai-thuc-te-dinh-huong:p023:l213-216",
+        "day15-trien-khai-thuc-te-dinh-huong:p024:l217-229",
+        "day15-trien-khai-thuc-te-dinh-huong:p025:l230-242",
+        "day15-trien-khai-thuc-te-dinh-huong:p026:l243-255",
+        "day15-trien-khai-thuc-te-dinh-huong:p027:l256-266",
+        "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p022:l180-212",
+          "source_type": "slide",
+          "page_no": 22,
+          "content": "## Page 22: Skills Map - 3 Pillars\nPage 22: Skills Map 3 Pillars Text Extract CP3: AI Engineering LLM API ReAct Agent Prompt Engineering Tool Calling Embedding RAG Pipeline Multi Agent Guardrails Evaluation Sau 15 ngày: bạn đã có deployed, monitored, evaluated AI product + skills across 3 pillars. CP2: Infrastructure Vector Store Data Pipeline Docker Cloud Deploy Monitoring Structured Logging Tracing CP1: Business Problem Statement AI Readiness PRD Risk Assessment ROI Analysis UX Design Cost Analysis",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p023:l213-216",
+          "source_type": "slide",
+          "page_no": 23,
+          "content": "## Page 23: 3 Track Giai Đoạn 2\nPage 23: 3 Track Giai Đoạn 2 Text Extract Phase 1 cho nền tảng chung. Phase 2 đi sâu theo hướng bạn chọn mỗi track 3 tuần chuyên sâu",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p024:l217-229",
+          "source_type": "slide",
+          "page_no": 24,
+          "content": "## Page 24: Track 1 - AI Business & Product\nPage 24: Track 1 AI Business & Product Text Extract Nội dung chính Product Strategy cho AI products Financial Modeling & ROI AI Governance & Compliance AI Act & regulatory landscape Go to market cho AI products Người muốn làm: AI Product Manager, AI Business Analyst, AI Strategist Business plan cho AI product + financial model + compliance checklist + go to market strategy.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p025:l230-242",
+          "source_type": "slide",
+          "page_no": 25,
+          "content": "## Page 25: Track 2 - AI Infrastructure & Data\nPage 25: Track 2 AI Infrastructure & Data Text Extract Nội dung chính Lakehouse & Feature Store vLLM deployment & optimization CI/CD cho AI (LLMOps) GPU FinOps & cost management Production data pipeline Người muốn làm: AI Data Engineer, Platform Engineer, MLOps Engineer Production grade data pipeline + self hosted LLM + CI/CD pipeline + monitoring dashboard.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p026:l243-255",
+          "source_type": "slide",
+          "page_no": 26,
+          "content": "## Page 26: Track 3 - AI Application\nPage 26: Track 3 AI Application Text Extract Nội dung chính Advanced Agent patterns Memory & long term context GraphRAG & knowledge graphs Fine tuning & model customization Production evaluation systems Người muốn làm: AI Engineer, LLM Engineer, AI Agent Developer Advanced agent system + custom fine tuned model + production eval pipeline + technical portfolio.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p027:l256-266",
+          "source_type": "slide",
+          "page_no": 27,
+          "content": "## Page 27: Chọn Track Như Thế Nào?\nPage 27: Chọn Track Như Thế Nào? Image Caption Decision flowchart with two diamond decision nodes and three track endpoints. Top diamond: “Thích business hay technical?” Left arrow labeled “business” to green rounded box: “Track 1 / Business” Right arrow labeled “technical” to second diamond: “Thích infra hay app?” Second diamond branches: Down left arrow labeled “infra” to red rounded box: “Track 2 / Infra” Down right arrow labeled “app” to blue rounded box: “Track 3 / Application” Bottom note: Không có track ‘đúng’ hay ‘sai’. Chọn theo mục tiêu nghề nghiệp và hứng thú cá nhân. Có thể đổi track sau tuần đầu nếu cần.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Tổng kết - Key Takeaways\nPage 32: Tổng kết Key Takeaways Text Extract Những ý chính cần nhớ trước khi sang bài tiếp theo 1. Enterprise deploy khác startup: security, compliance, on premise, hybrid. Hiểu context trước khi chọn architecture. 2. Cost optimization: model routing, semantic caching, prompt compression. API tokens chiếm 40 60% cost optimize đúng chỗ. 3. 3 pillars, 3 tracks: CP1 (Business) → Track 1, CP2 (Infra) → Track 2, CP3 (Application) → Track 3. Chọn theo mục tiêu. 4. You are no longer beginners you are builders. 15 ngày, 15 labs, 1 deployed product. Phase 2 đi sâu hơn.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "phase_two_track_selection",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "phase_two_track_selection",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence từ decision flowchart và mô tả các track. Disposition core_kc phù hợp. Scope tách biệt với track descriptions. Có thể đánh giá qua quyết định chọn track. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 3.667,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "ai_business_product_track",
+      "name_vi": "Định hướng Track AI Business & Product",
+      "description_vi": "Track 1 tập trung vào product strategy, financial modeling và ROI, governance/compliance, regulatory landscape và go-to-market; hướng tới các vai trò AI Product Manager, AI Business Analyst và AI Strategist.",
+      "item_form": "reference_topic",
+      "primary_capability_vi": "",
+      "target_bloom_level": null,
+      "bloom_learning_objective_vi": "",
+      "bloom_rationale_vi": "",
+      "knowledge_role": "reference_concept",
+      "granularity_reason_vi": "Giữ thành một reference topic vì đây là một hướng chuyên môn có phạm vi và vai trò riêng; không tách từng môn học do slide chỉ giới thiệu chương trình, chưa dạy mastery độc lập.",
+      "role_reason_vi": "Nội dung chủ yếu dùng để định hướng nghề nghiệp và so sánh track, không yêu cầu mastery để hoàn thành trọng tâm kỹ thuật của bài.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p024:l217-229"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p024:l217-229",
+          "source_type": "slide",
+          "page_no": 24,
+          "content": "## Page 24: Track 1 - AI Business & Product\nPage 24: Track 1 AI Business & Product Text Extract Nội dung chính Product Strategy cho AI products Financial Modeling & ROI AI Governance & Compliance AI Act & regulatory landscape Go to market cho AI products Người muốn làm: AI Product Manager, AI Business Analyst, AI Strategist Business plan cho AI product + financial model + compliance checklist + go to market strategy.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "ai_business_product_track",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "ai_business_product_track",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": null,
+          "assessability": null,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence hỗ trợ nội dung Track 1. Disposition supporting_info phù hợp vì đây là thông tin tham khảo, không phải mastery leaf. Scope không có vấn đề. Mô tả rõ ràng.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "ai_infrastructure_data_track",
+      "name_vi": "Định hướng Track AI Infrastructure & Data",
+      "description_vi": "Track 2 tập trung vào lakehouse và feature store, vLLM deployment/optimization, CI/CD cho AI hoặc LLMOps, GPU FinOps/cost management và production data pipeline; hướng tới AI Data Engineer, Platform Engineer và MLOps Engineer.",
+      "item_form": "reference_topic",
+      "primary_capability_vi": "",
+      "target_bloom_level": null,
+      "bloom_learning_objective_vi": "",
+      "bloom_rationale_vi": "",
+      "knowledge_role": "reference_concept",
+      "granularity_reason_vi": "Giữ thành một reference topic vì đây là một hướng chuyên môn có phạm vi và vai trò riêng; không tách các công nghệ thành KC vì slide chỉ nêu nội dung Phase 2.",
+      "role_reason_vi": "Nội dung phục vụ định hướng chuyên sâu và nghề nghiệp, không phải capability bắt buộc phải master trong content unit hiện tại.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p025:l230-242"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p025:l230-242",
+          "source_type": "slide",
+          "page_no": 25,
+          "content": "## Page 25: Track 2 - AI Infrastructure & Data\nPage 25: Track 2 AI Infrastructure & Data Text Extract Nội dung chính Lakehouse & Feature Store vLLM deployment & optimization CI/CD cho AI (LLMOps) GPU FinOps & cost management Production data pipeline Người muốn làm: AI Data Engineer, Platform Engineer, MLOps Engineer Production grade data pipeline + self hosted LLM + CI/CD pipeline + monitoring dashboard.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "ai_infrastructure_data_track",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "ai_infrastructure_data_track",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": null,
+          "assessability": null,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence hỗ trợ nội dung Track 2. Disposition supporting_info hợp lý. Scope không overlap. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "ai_application_track",
+      "name_vi": "Định hướng Track AI Application",
+      "description_vi": "Track 3 tập trung vào advanced agent patterns, memory và long-term context, GraphRAG/knowledge graphs, fine-tuning/model customization và production evaluation systems; hướng tới AI Engineer, LLM Engineer và AI Agent Developer.",
+      "item_form": "reference_topic",
+      "primary_capability_vi": "",
+      "target_bloom_level": null,
+      "bloom_learning_objective_vi": "",
+      "bloom_rationale_vi": "",
+      "knowledge_role": "reference_concept",
+      "granularity_reason_vi": "Giữ thành một reference topic vì đây là một hướng chuyên môn có phạm vi và vai trò riêng; không tách từng chủ đề nâng cao do chúng chỉ được liệt kê như curriculum định hướng.",
+      "role_reason_vi": "Nội dung hữu ích để tra cứu hướng phát triển tiếp theo nhưng chưa cung cấp đủ hướng dẫn để xem từng chủ đề là capability cần mastery.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p026:l243-255"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p026:l243-255",
+          "source_type": "slide",
+          "page_no": 26,
+          "content": "## Page 26: Track 3 - AI Application\nPage 26: Track 3 AI Application Text Extract Nội dung chính Advanced Agent patterns Memory & long term context GraphRAG & knowledge graphs Fine tuning & model customization Production evaluation systems Người muốn làm: AI Engineer, LLM Engineer, AI Agent Developer Advanced agent system + custom fine tuned model + production eval pipeline + technical portfolio.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "ai_application_track",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả và evidence đầy đủ, không có lỗi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "ai_application_track",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": null,
+          "assessability": null,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence hỗ trợ nội dung Track 3. Disposition supporting_info phù hợp. Scope không overlap. Mô tả rõ.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "ai_career_paths_by_pillar",
+      "name_vi": "Các career path theo pillar và track",
+      "description_vi": "Ánh xạ CP1 tới AI PM, AI BA và AI Strategist; CP2 tới AI Data Engineer, Platform Engineer và MLOps; CP3 tới AI Engineer, LLM Engineer và Agent Developer, cùng định hướng nhu cầu nhân lực tương đối của từng nhóm.",
+      "item_form": "reference_topic",
+      "primary_capability_vi": "",
+      "target_bloom_level": null,
+      "bloom_learning_objective_vi": "",
+      "bloom_rationale_vi": "",
+      "knowledge_role": "reference_concept",
+      "granularity_reason_vi": "Giữ mapping nghề nghiệp thành một reference topic vì các role và demand là thông tin định hướng liên quan; không tách từng vai trò đơn lẻ vì không có capability hay mastery state riêng.",
+      "role_reason_vi": "Nội dung hỗ trợ career orientation và RAG về nghề nghiệp, không phải năng lực cần mastery để triển khai hệ thống.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p029:l271-281"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p029:l271-281",
+          "source_type": "slide",
+          "page_no": 29,
+          "content": "## Page 29: Career Paths Sau Khoá Học\nPage 29: Career Paths Sau Khoá Học Tables | Pillar | Roles | Track | Demand | | | | | | | CP1 | AI PM, AI BA, AI Strategist | Track 1 | Cao, khan hiếm | | CP2 | AI Data Engineer, Platform Eng, MLOps | Track 2 | Rất cao | | CP3 | AI Engineer, LLM Engineer, Agent Dev | Track 3 | Cao nhất | Text Extract Từ portfolio khóa học → dự án thực tế tại Vingroup. Portfolio mạnh = cánh cửa mở.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "ai_career_paths_by_pillar",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "major",
+        "rationale_vi": "Code này đã tồn tại trong inventory_index với nội dung và disposition giống hệt, dẫn đến trùng lặp. Việc tạo candidate mới với cùng code là không cần thiết và vi phạm tính duy nhất của code trong inventory."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "ai_career_paths_by_pillar",
+        "scores": {
+          "accuracy": 3,
+          "disposition_fit": 3,
+          "granularity": null,
+          "assessability": null,
+          "grounding": 3,
+          "clarity": 3
+        },
+        "rationale_vi": "Candidate này đã tồn tại trong inventory_index với cùng code, nội dung và disposition, dẫn đến trùng lặp. Mặc dù nội dung chuyên môn đúng và có evidence hỗ trợ, nhưng việc tạo candidate mới không bổ sung giá trị và vi phạm tính duy nhất của code trong inventory. Do đó, cần loại bỏ.",
+        "issues_vi": [
+          "Candidate trùng lặp với candidate đã có trong inventory_index (code giống hệt, nội dung và disposition giống hệt)."
+        ],
+        "recommended_action": "remove",
+        "overall_score": 3.0,
+        "level": "review",
+        "review_priority": 2,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "fine_tuning_vs_rag_prompt",
+      "name_vi": "Định hướng khi nào cần fine-tuning",
+      "description_vi": "Fine-tuning không mặc định cần cho đa số use case được nêu; RAG kết hợp prompt engineering thường đã đủ cho nhiều nhu cầu, còn fine-tuning là hướng tùy biến nâng cao cần cân nhắc riêng.",
+      "item_form": "reference_topic",
+      "primary_capability_vi": "",
+      "target_bloom_level": null,
+      "bloom_learning_objective_vi": "",
+      "bloom_rationale_vi": "",
+      "knowledge_role": "reference_concept",
+      "granularity_reason_vi": "Giữ như một reference topic vì nguồn chỉ đưa ra định hướng AMA ngắn, không cung cấp tiêu chí chẩn đoán hoặc quy trình đánh giá fine-tuning độc lập.",
+      "role_reason_vi": "Thông tin hữu ích khi tra cứu related topics và định hướng Phase 2, nhưng chưa đủ bằng chứng để gắn mastery role.",
+      "evidence_section_ids": [
+        "day15-trien-khai-thuc-te-dinh-huong:p030:l282-290",
+        "day15-trien-khai-thuc-te-dinh-huong:p026:l243-255"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p030:l282-290",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: AMA-AskMeAnything\nPage 30: AMA AskMeAnything Text Extract Mọi câu hỏi về kỹ thuật, career, track selection, hoặc bất kỳ điều gì bạn muốn hỏi. Câu hỏi hay gặp nhất: 'Track nào dễ xin việc hơn?' Cả 3 đều thiếu người. Chọn theo thế mạnh. 'Fine tuning có cần không?' 80% use cases không cần. RAG + prompt đủ. 'AI sẽ thay lập trình viên không?' AI thay code, không thay builder.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day15-trien-khai-thuc-te-dinh-huong:p026:l243-255",
+          "source_type": "slide",
+          "page_no": 26,
+          "content": "## Page 26: Track 3 - AI Application\nPage 26: Track 3 AI Application Text Extract Nội dung chính Advanced Agent patterns Memory & long term context GraphRAG & knowledge graphs Fine tuning & model customization Production evaluation systems Người muốn làm: AI Engineer, LLM Engineer, AI Agent Developer Advanced agent system + custom fine tuned model + production eval pipeline + technical portfolio.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "fine_tuning_vs_rag_prompt",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "major",
+        "rationale_vi": "Code này đã tồn tại trong inventory_index với nội dung và disposition giống hệt, dẫn đến trùng lặp. Candidate này không bổ sung giá trị mới và cần được xem xét loại bỏ để đảm bảo tính duy nhất."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "fine_tuning_vs_rag_prompt",
+        "scores": {
+          "accuracy": 3,
+          "disposition_fit": 3,
+          "granularity": null,
+          "assessability": null,
+          "grounding": 3,
+          "clarity": 3
+        },
+        "rationale_vi": "Candidate này đã tồn tại trong inventory_index với cùng code, nội dung và disposition, dẫn đến trùng lặp. Mặc dù nội dung chuyên môn đúng và có evidence hỗ trợ, nhưng việc tạo candidate mới không bổ sung giá trị và vi phạm tính duy nhất của code trong inventory. Do đó, cần loại bỏ.",
+        "issues_vi": [
+          "Candidate trùng lặp với candidate đã có trong inventory_index (code giống hệt, nội dung và disposition giống hệt)."
+        ],
+        "recommended_action": "remove",
+        "overall_score": 3.0,
+        "level": "review",
+        "review_priority": 2,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    }
+  ],
+  "evidence_sections": [
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p002:l1-5",
+      "page_no": 2,
+      "heading": "slide",
+      "snippet": "## Page 2: HÃYSUYNGHĨ...\nPage 2: HÃYSUYNGHĨ... Text Extract 15 ngày trước bạn chưa biết LLM hoạt động thế nào. Hôm nay bạn đã có agent deployed, monitored, và evaluated. Câu hỏi bây giờ: đi sâu hướng nào? Giữ câu hỏi này trong đầu khi học bài hôm nay",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p003:l6-16",
+      "page_no": 3,
+      "heading": "slide",
+      "snippet": "## Page 3: Nội Dung Bài Học\nPage 3: Nội Dung Bài Học Text Extract 15 ngày nhìn lại Triển khai enterprise Cost anatomy Cost optimization Scaling production Skills map recap 3 Track Phase 2 Career paths & AMA",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p004:l17-24",
+      "page_no": 4,
+      "heading": "slide",
+      "snippet": "## Page 4: MụcTiêu Ngày 15\nPage 4: MụcTiêu Ngày 15 Text Extract Hiểu thách thức triển khai enterprise: security, compliance, legacy systems Phân tích cost anatomy của AI system và biết cách tối ưu chi phí Nắm cost optimization strategies: model routing, semantic caching, prompt compression Nhìn lại skills map đã tích lũy qua 15 ngày Chọn track Phase 2 phù hợp với mục tiêu nghề nghiệp",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p005:l25-28",
+      "page_no": 5,
+      "heading": "slide",
+      "snippet": "## Page 5: 15 Ngày Nhìn Lại\nPage 5: 15 Ngày Nhìn Lại Text Extract Từ 'AI là gì?' đến agent deployed, monitored, evaluated một hành trình 15 ngày xây dựng năng lực thực chiến",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p006:l29-39",
+      "page_no": 6,
+      "heading": "slide",
+      "snippet": "## Page 6: Timeline: Hành Trình 15 Ngày\nPage 6: Timeline: Hành Trình 15 Ngày Image Caption Slide timeline / roadmap with three horizontal rows of rounded boxes connected by right pointing arrows. Row 1 label: “Nền tảng” N1 LLM → N2 Bài toán → N3 Agent → N4 Tool Call → N5 Product Row 2 label: “Xây dựng” N6 PM → N7 Data → N8 RAG → N9 Multi → N10 UX Row 3 label: “Production” N11 Safety → N12 Deploy → N13 Monitor → N14 Eval → N15 Wrap up (green final box) Bottom summary: 3 giai đoạn: Hiểu nền tảng (N1–5) → Xây dựng hệ thống (N6–10) → Đưa lên production (N11–15)",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p007:l40-54",
+      "page_no": 7,
+      "heading": "slide",
+      "snippet": "## Page 7: Milestones Đã Đạt Được\nPage 7: Milestones Đã Đạt Được Text Extract Gọi LLM API, so sánh models Build ReAct agent + tool calling RAG pipeline grounded Multi agent + MCP Guardrails + safety testing Problem statement + PRD UX với trust layer Deployed trên cloud Monitoring + alerting Evaluation + benchmark Bạn không chỉ học lý thuyết. Bạn đã build, deploy, monitor, và evaluate một AI product thật.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p008:l55-58",
+      "page_no": 8,
+      "heading": "slide",
+      "snippet": "## Page 8: Triển Khai Enterprise 02 Lab deploy lên Railway là bước đầu. Enterprise có thêm security policies, c\nPage 8: Triển Khai Enterprise 02 Lab deploy lên Railway là bước đầu. Enterprise có thêm security policies, c Text Extract Triển Khai Enterprise 02 Lab deploy lên Railway là bước đầu. Enterprise có thêm security policies, compliance, legacy systems, và network restrictions",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p009:l59-74",
+      "page_no": 9,
+      "heading": "slide",
+      "snippet": "## Page 9: Enterprise Challenges\nPage 9: Enterprise Challenges Text Extract Security & Compliance Data không được rời khỏi VN PII phải encrypted at rest Audit trail cho mọi AI decision Compliance: PDPA, ngành tài chính Technical Constraints Legacy systems, mainframe Network restrictions, air gapped On premise infrastructure only Limited GPU resources Lưu ý: Enterprise deploy khác startup deploy. Không phải mọi thứ đều 'push lên cloud' được. Đôi khi LLM phải chạy on premise.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p010:l75-87",
+      "page_no": 10,
+      "heading": "slide",
+      "snippet": "## Page 10: On-Premise vs Cloud vs Hybrid\nPage 10: On Premise vs Cloud vs Hybrid Tables | | Cloud API | On Premise | Hybrid | | | | | | | Data control | Thấp | Cao nhất | Tùy chọn | | Setup time | Phút | Tuần tháng | Tuần | | Cost model | Per token | Capex + GPU | Mixed | | Performance | Nhanh | Tùy hardware | Tùy routing | | Best for | MVP, startup | Bank, gov | Enterprise | Text Extract Hybrid đang trở thành default cho enterprise VN: sensitive data on prem, non sensitive qua cloud API.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p011:l88-99",
+      "page_no": 11,
+      "heading": "slide",
+      "snippet": "## Page 11: Self-Hosted LLM: vLLM & Ollama\nPage 11: Self Hosted LLM: vLLM & Ollama Text Extract Production grade inference. PagedAttention, continuous batching. Dùng khi: cần throughput cao, có GPU server. Run models locally, dễ setup. Download model, chạy 1 lệnh. Dùng khi: dev, demo, edge deployment Lưu ý: Self hosted tiết kiệm khi volume cao ( 1M tokens/ngày). Dưới mức đó, cloud API rẻ hơn khi tính cả chi phí GPU, ops, và maintenance.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p012:l100-103",
+      "page_no": 12,
+      "heading": "slide",
+      "snippet": "## Page 12: Cost Anatomy Của AI System\nPage 12: Cost Anatomy Của AI System Text Extract AI agent production không chỉ tốn tiền token. Hiểu đầy đủ cost structure mới optimize đúng chỗ",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p013:l104-113",
+      "page_no": 13,
+      "heading": "slide",
+      "snippet": "## Page 13: Cost Breakdown\nPage 13: Cost Breakdown Image Caption A horizontal cost breakdown graphic with five colored rounded boxes across the slide, each with a percentage below. API Tokens / Input + Output: 40–60% (red box) Compute / CPU/GPU: 15–25% (blue box) Storage / Vector DB: 5–10% (slate blue box) Human / Review: 10–15% (gray box) Ops / Monitor: 5–10% (green box) Bottom note: API tokens chiếm 40–60% cost. Optimize token usage là ROI cao nhất cho hầu hết AI systems.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p014:l114-120",
+      "page_no": 14,
+      "heading": "slide",
+      "snippet": "## Page 14: LLMAPI Cost Calculator\nPage 14: LLMAPI Cost Calculator Image Caption Two panel formula slide. Left panel shows the formula: Monthly cost = (avg input tokens + avg output tokens) × price per token × requests per day × 30 ngày Right panel shows an example calculation: 1000 tokens/request; $3/1M input tokens (Sonnet); 500 requests/ngày; = 1000 × $0.000003 × 500 × 30; = $45/tháng chỉ LLM API Bottom warning note: Hidden costs thường gấp 1.5–2x API cost: retry overhead, guardrails LLM calls, monitoring, eval pipeline. Budget phải tính tổng, không chỉ API.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p015:l121-131",
+      "page_no": 15,
+      "heading": "slide",
+      "snippet": "## Page 15: Budget Planning: 3-Tier Model\nPage 15: Budget Planning: 3 Tier Model Tables | Tier | Traffic | Estimated cost | Stack | | | | | | | MVP | <100 req/ngày | \\$50–200/tháng | Cloud API + Railway | | Growth | 100–5K req/ngày | \\$200–2K/tháng | Cloud API + ECS/Cloud Run | | Scale | 5K req/ngày | \\$2K+/tháng | Hybrid / self hosted | Text Extract Bắt đầu MVP tier. Chỉ upgrade khi traffic thật sự đòi hỏi. Premature optimization is the root of all evil.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p016:l132-135",
+      "page_no": 16,
+      "heading": "slide",
+      "snippet": "## Page 16: Cost Optimization Strategies\nPage 16: Cost Optimization Strategies Text Extract Khi cost bắt đầu đáng kể, 4 strategies sau giúp giảm 30 70% chi phí mà không ảnh hưởng chất lượng",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p017:l136-150",
+      "page_no": 17,
+      "heading": "slide",
+      "snippet": "## Page 17: 4Strategies Chính\nPage 17: 4Strategies Chính Text Extract Cheap model (Haiku) cho simple tasks. Expensive model (Opus) chỉ cho complex. Tiết kiệm: 40 60% token cost. Cache LLM responses cho similar queries. Dùng embedding similarity để match. Tiết kiệm: 20 40% nếu queries lặp. Tóm tắt context trước khi gửi LLM. Giảm token count mà giữ thông tin. Tiết kiệm: 15 30% input tokens. vLLM, Ollama cho high volume. Break even: khoảng 1M+ tokens/ngày. Tiết kiệm: 50 80% so với API khi scale lớn.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p018:l151-159",
+      "page_no": 18,
+      "heading": "slide",
+      "snippet": "## Page 18: Model Routing - Chi Tiết\nPage 18: Model Routing Chi Tiết Image Caption Flow diagram showing request routing by complexity. Left gray box: “User Request” Arrow to red box: “Complexity Classifier” From classifier, a top right arrow labeled “simple” goes to a green box: “Haiku / GPT 4o mini / Fast + Cheap” with “70% traffic” shown on the right. From classifier, a bottom right arrow labeled “complex” goes to a blue box: “Opus / GPT 4o / Strong + Expensive” with “30% traffic” shown on the right. Bottom note: Nếu 70% requests dùng cheap model (10x rẻ hơn), tổng cost giảm khoảng 50% mà quality gần như không đổi trên simple tasks.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p019:l160-163",
+      "page_no": 19,
+      "heading": "slide",
+      "snippet": "## Page 19: Scaling & Reliability Production\nPage 19: Scaling & Reliability Production Text Extract Khi agent phục vụ enterprise, cần thêm queue, circuit breaker, và SLA commitment",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p020:l164-179",
+      "page_no": 20,
+      "heading": "slide",
+      "snippet": "## Page 20: Production Patterns\nPage 20: Production Patterns Text Extract High load → request queue → smooth out spikes. User nhận 'đang xử lý' thay vì timeout. Tool: Redis Queue, Celery, Bull Khi LLM API down, degrade gracefully. Trả cached response hoặc fallback message. Pattern: closed → open → half open Stateless agent → N instances. Day 12: đã design cho stateless. Scale: thêm instances khi load tăng Enterprise cần uptime commitment. 99.9% = max 8.7h downtime/năm. Cần: redundancy, failover, monitoring",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p022:l180-212",
+      "page_no": 22,
+      "heading": "slide",
+      "snippet": "## Page 22: Skills Map - 3 Pillars\nPage 22: Skills Map 3 Pillars Text Extract CP3: AI Engineering LLM API ReAct Agent Prompt Engineering Tool Calling Embedding RAG Pipeline Multi Agent Guardrails Evaluation Sau 15 ngày: bạn đã có deployed, monitored, evaluated AI product + skills across 3 pillars. CP2: Infrastructure Vector Store Data Pipeline Docker Cloud Deploy Monitoring Structured Logging Tracing CP1: Business Problem Statement AI Readiness PRD Risk Assessment ROI Analysis UX Design Cost Analysis",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p023:l213-216",
+      "page_no": 23,
+      "heading": "slide",
+      "snippet": "## Page 23: 3 Track Giai Đoạn 2\nPage 23: 3 Track Giai Đoạn 2 Text Extract Phase 1 cho nền tảng chung. Phase 2 đi sâu theo hướng bạn chọn mỗi track 3 tuần chuyên sâu",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p024:l217-229",
+      "page_no": 24,
+      "heading": "slide",
+      "snippet": "## Page 24: Track 1 - AI Business & Product\nPage 24: Track 1 AI Business & Product Text Extract Nội dung chính Product Strategy cho AI products Financial Modeling & ROI AI Governance & Compliance AI Act & regulatory landscape Go to market cho AI products Người muốn làm: AI Product Manager, AI Business Analyst, AI Strategist Business plan cho AI product + financial model + compliance checklist + go to market strategy.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p025:l230-242",
+      "page_no": 25,
+      "heading": "slide",
+      "snippet": "## Page 25: Track 2 - AI Infrastructure & Data\nPage 25: Track 2 AI Infrastructure & Data Text Extract Nội dung chính Lakehouse & Feature Store vLLM deployment & optimization CI/CD cho AI (LLMOps) GPU FinOps & cost management Production data pipeline Người muốn làm: AI Data Engineer, Platform Engineer, MLOps Engineer Production grade data pipeline + self hosted LLM + CI/CD pipeline + monitoring dashboard.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p026:l243-255",
+      "page_no": 26,
+      "heading": "slide",
+      "snippet": "## Page 26: Track 3 - AI Application\nPage 26: Track 3 AI Application Text Extract Nội dung chính Advanced Agent patterns Memory & long term context GraphRAG & knowledge graphs Fine tuning & model customization Production evaluation systems Người muốn làm: AI Engineer, LLM Engineer, AI Agent Developer Advanced agent system + custom fine tuned model + production eval pipeline + technical portfolio.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p027:l256-266",
+      "page_no": 27,
+      "heading": "slide",
+      "snippet": "## Page 27: Chọn Track Như Thế Nào?\nPage 27: Chọn Track Như Thế Nào? Image Caption Decision flowchart with two diamond decision nodes and three track endpoints. Top diamond: “Thích business hay technical?” Left arrow labeled “business” to green rounded box: “Track 1 / Business” Right arrow labeled “technical” to second diamond: “Thích infra hay app?” Second diamond branches: Down left arrow labeled “infra” to red rounded box: “Track 2 / Infra” Down right arrow labeled “app” to blue rounded box: “Track 3 / Application” Bottom note: Không có track ‘đúng’ hay ‘sai’. Chọn theo mục tiêu nghề nghiệp và hứng thú cá nhân. Có thể đổi track sau tuần đầu nếu cần.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p028:l267-270",
+      "page_no": 28,
+      "heading": "slide",
+      "snippet": "## Page 28: Career Paths & Kết Thúc Phase 1\nPage 28: Career Paths & Kết Thúc Phase 1 Text Extract 15 ngày, 15 labs, 1 deployed product. Bạn không còn là beginner bạn là builder",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p029:l271-281",
+      "page_no": 29,
+      "heading": "slide",
+      "snippet": "## Page 29: Career Paths Sau Khoá Học\nPage 29: Career Paths Sau Khoá Học Tables | Pillar | Roles | Track | Demand | | | | | | | CP1 | AI PM, AI BA, AI Strategist | Track 1 | Cao, khan hiếm | | CP2 | AI Data Engineer, Platform Eng, MLOps | Track 2 | Rất cao | | CP3 | AI Engineer, LLM Engineer, Agent Dev | Track 3 | Cao nhất | Text Extract Từ portfolio khóa học → dự án thực tế tại Vingroup. Portfolio mạnh = cánh cửa mở.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p030:l282-290",
+      "page_no": 30,
+      "heading": "slide",
+      "snippet": "## Page 30: AMA-AskMeAnything\nPage 30: AMA AskMeAnything Text Extract Mọi câu hỏi về kỹ thuật, career, track selection, hoặc bất kỳ điều gì bạn muốn hỏi. Câu hỏi hay gặp nhất: 'Track nào dễ xin việc hơn?' Cả 3 đều thiếu người. Chọn theo thế mạnh. 'Fine tuning có cần không?' 80% use cases không cần. RAG + prompt đủ. 'AI sẽ thay lập trình viên không?' AI thay code, không thay builder.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p031:l291-302",
+      "page_no": 31,
+      "heading": "slide",
+      "snippet": "## Page 31: Final Assignment\nPage 31: Final Assignment Text Extract Hoàn thành track selection form Submit portfolio link (GitHub/demo URL) Cost analysis cho agent (Lab 15) Final presentation (10 phút) Deployed agent URL Monitoring dashboard screenshot Evaluation report + RAGAS scores README giải thích architecture Cost analysis",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p032:l303-310",
+      "page_no": 32,
+      "heading": "slide",
+      "snippet": "## Page 32: Tổng kết - Key Takeaways\nPage 32: Tổng kết Key Takeaways Text Extract Những ý chính cần nhớ trước khi sang bài tiếp theo 1. Enterprise deploy khác startup: security, compliance, on premise, hybrid. Hiểu context trước khi chọn architecture. 2. Cost optimization: model routing, semantic caching, prompt compression. API tokens chiếm 40 60% cost optimize đúng chỗ. 3. 3 pillars, 3 tracks: CP1 (Business) → Track 1, CP2 (Infra) → Track 2, CP3 (Application) → Track 3. Chọn theo mục tiêu. 4. You are no longer beginners you are builders. 15 ngày, 15 labs, 1 deployed product. Phase 2 đi sâu hơn.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p033:l311-316",
+      "page_no": 33,
+      "heading": "slide",
+      "snippet": "## Page 33: Tài Liệu Tham Khảo\nPage 33: Tài Liệu Tham Khảo Text Extract Anthropic & OpenAI Pricing Docs anthropic.com/pricing, platform.openai.com/tokenizer. Cost calculator. vLLM Documentation docs.vllm.ai. Self hosted LLM inference, PagedAttention, quantization. Strubell et al. (2019), Energy and Policy Considerations for Deep Learning in NLP arXiv:1906.02243.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p034:l317-320",
+      "page_no": 34,
+      "heading": "slide",
+      "snippet": "## Page 34: Hỏi & Đáp\nPage 34: Hỏi & Đáp Text Extract 15 ngày từ zero đến deployed AI product. Phase 2 bắt đầu hành trình chuyên sâu của bạn.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day15-trien-khai-thuc-te-dinh-huong:p035:l321-323",
+      "page_no": 35,
+      "heading": "slide",
+      "snippet": "## Page 35: Cảmơn!\nPage 35: Cảmơn! Text Extract Chúc mừng hoàn thành Phase 1!",
+      "source_type": "slide",
+      "transcript_evidence": []
+    }
+  ]
+}

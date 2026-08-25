@@ -1,0 +1,12 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day13-monitoring-logging-observability",
+  "sources": [
+    {
+      "source_id": "slide-day13",
+      "source_type": "slide",
+      "sha256": "1cd985ac2dd81ebb0878c75947bb9b2dd9f31b3ecab1ebd7bae040dbb3364be1",
+      "uri": "source://phase1/day13/slide"
+    }
+  ]
+}

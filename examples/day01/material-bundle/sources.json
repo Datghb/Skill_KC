@@ -1,0 +1,18 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day01-ai-and-llm-foundation-blue",
+  "sources": [
+    {
+      "source_id": "slide-day01-blue",
+      "source_type": "slide",
+      "sha256": "11edfb28dfd44dc19d510cbec400224b83aff35200c5240a35a5feabefd79ecb",
+      "uri": "source://phase1/day01/slide"
+    },
+    {
+      "source_id": "lecture-notes-day01",
+      "source_type": "lecture_note",
+      "sha256": "1ea0617c69201a72633b222bd5e1520b12a4ada6be4c890942a66a3bc09ab8fe",
+      "uri": "artifact://phase1/day01/grounded-lecture-notes"
+    }
+  ]
+}

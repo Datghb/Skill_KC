@@ -1,0 +1,549 @@
+{
+  "schema_version": "vlearn_parent_topics_v1",
+  "source_slug": "day01-ai-and-llm-foundation-blue",
+  "ward_reference_k": 10,
+  "final_k": 15,
+  "ward_reference_reason_vi": "K=10 có silhouette cosine 0.145361, cao hơn các mức K thấp hơn mà vẫn không có singleton, kích thước nhỏ nhất là 2 và trung vị là 3. Baseline này đủ chi tiết để nhận ra các nhánh transformer, context, generation và model selection, nhưng chưa phân mảnh quá mức như các mức K từ 11 trở lên.",
+  "cluster_count_reason_vi": "Partition cuối có 15 nhóm vì một số Ward cluster chứa nhiều parent family cần split để tạo node PG có mục tiêu trung tâm rõ. Hai leaf được move có bằng chứng trực tiếp cho evaluation và model selection. Các nhóm nhỏ vẫn được giữ khi chúng biểu diễn một capability family rõ, nhưng không tách mọi KC độc lập thành singleton.",
+  "overall_change_summary_vi": "Giữ nguyên các cluster Ward đã có coherence tốt; split các cluster 0, 4, 5, 7 và 9 theo taxonomy, agent operation, generation, API, token economics, training, product architecture, context operations, evaluation và model selection. Move ai_product_evaluation_loop từ Ward cluster 5 sang evaluation family và quality_latency_cost_tradeoff từ Ward cluster 7 sang model-selection family. Rename toàn bộ parent sau khi membership ổn định.",
+  "post_selection_audit_vi": "Ward cluster 0 trộn taxonomy AI với agent nên đã split thành hai parent. Cluster 1 về deep learning foundations và cluster 2 về attention/Transformer có coherence cao nên giữ. Cluster 3 gồm hallucination, knowledge cutoff và stepwise drafting được giữ trong family reliability vì cùng phục vụ mục tiêu nhận diện và cải thiện độ tin cậy của đầu ra, với boundary rõ với evaluation. Cluster 4 trộn cơ chế sinh token, token economics và API runtime nên đã split thành ba parent. Cluster 5 trộn training/alignment, product architecture và evaluation; đã split hai parent tại chỗ và move evaluation loop sang cluster 9. Cluster 6 về context window và prompt structure được giữ. Cluster 7 chủ yếu là context-state operations nhưng quality_latency_cost_tradeoff là member ngoại vi nên đã move sang model selection. Cluster 8 về các biến thể năng lực biểu diễn của model được giữ. Cluster 9 trộn evaluation với lựa chọn/triển khai model nên đã split thành hai parent. Không có Ward baseline cluster nào biến mất.",
+  "groups": [
+    {
+      "parent_code": "ai_conceptual_taxonomy",
+      "ward_home_cluster_index": 1,
+      "name_vi": "Phân loại các tầng công nghệ AI",
+      "name_en": "AI Technology Taxonomy",
+      "description_vi": "Giải thích quan hệ phạm vi giữa AI, machine learning, deep learning, generative AI, LLM và phân biệt discriminative, generative với agentic AI theo dạng đầu ra và mức độ tự chủ.",
+      "boundary_notes_vi": "Không bao gồm vòng lặp vận hành agent, pipeline huấn luyện, kiến trúc sản phẩm hay tiêu chí chọn model.",
+      "member_codes": [
+        "ai_ml_dl_generative_ai_llm_hierarchy",
+        "discriminative_generative_agentic_ai_distinction"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Có mục tiêu phân loại và định vị khái niệm rõ, phù hợp làm node nền tảng trước các node về model, product và agent.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "agent_operation_levels",
+      "ward_home_cluster_index": 1,
+      "name_vi": "Vận hành và các mức năng lực của AI agent",
+      "name_en": "AI Agent Operation and Capability Levels",
+      "description_vi": "Mô tả vòng Goal, Reasoning hoặc Plan, Tools, Action, Memory và các mức tiến hóa từ LLM trần đến agent có tools, lập kế hoạch và phối hợp nhiều agent.",
+      "boundary_notes_vi": "Không bao gồm taxonomy AI nói chung, grounding như một lớp sản phẩm hay pipeline huấn luyện LLM.",
+      "member_codes": [
+        "agent_capability_levels",
+        "ai_agent_work_loop"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Có capability procedural và phân loại rõ; node này có thể nối từ LLM core sang tools, planning và product architecture mà không nhập các parent producer-consumer đó.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "deep_learning_foundations",
+      "ward_home_cluster_index": 2,
+      "name_vi": "Nền tảng khả thi và học biểu diễn của deep learning",
+      "name_en": "Deep Learning Feasibility and Representation Foundations",
+      "description_vi": "Giải thích vai trò kết hợp của dữ liệu, kiến trúc, phần cứng và cách mạng neuron sâu tự học đặc trưng từ dữ liệu thô.",
+      "boundary_notes_vi": "Không bao gồm attention hoặc Transformer parallelism, vốn là cơ chế kiến trúc cụ thể hơn.",
+      "member_codes": [
+        "deep_learning_enabling_conditions",
+        "deep_learning_feature_learning"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Đây là node foundation có mục tiêu trung tâm rõ và có thể làm tiền đề cho các parent về Transformer và LLM.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "transformer_attention_mechanisms",
+      "ward_home_cluster_index": 3,
+      "name_vi": "Cơ chế attention và Transformer",
+      "name_en": "Transformer and Attention Mechanisms",
+      "description_vi": "Giải thích giới hạn tuần tự của RNN, khả năng song song hóa của Transformer, attention theo ngữ cảnh và nhiều attention head.",
+      "boundary_notes_vi": "Không bao gồm cơ chế dự đoán token tự hồi quy hoặc API sinh output.",
+      "member_codes": [
+        "attention_contextual_weighting",
+        "multi_head_attention",
+        "rnn_limitations_and_transformer_parallelism"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Các KC tạo thành một chuỗi sư phạm tự nhiên từ vấn đề của RNN đến giải pháp Transformer và attention, phù hợp làm node kỹ thuật nền.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "llm_reliability_limits",
+      "ward_home_cluster_index": 4,
+      "name_vi": "Độ tin cậy và giới hạn của LLM",
+      "name_en": "LLM Reliability and Limitations",
+      "description_vi": "Nhận diện hallucination, giới hạn knowledge cutoff và dùng soạn nháp từng bước để giảm lỗi và tăng độ chính xác của đầu ra.",
+      "boundary_notes_vi": "Không bao gồm evaluation có benchmark/tác vụ thực tế, grounding bằng retrieval hoặc lựa chọn model theo chi phí.",
+      "member_codes": [
+        "knowledge_cutoff",
+        "llm_hallucination",
+        "stepwise_drafting_for_accuracy"
+      ],
+      "coherence": "medium",
+      "pg_readiness_reason_vi": "Node có mục tiêu trung tâm là đáng tin cậy hóa đầu ra; stepwise drafting là biện pháp cải thiện trong cùng family chứ không phải một parent evaluation riêng.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "llm_generation_sampling",
+      "ward_home_cluster_index": 5,
+      "name_vi": "Sinh token tự hồi quy và điều khiển sampling",
+      "name_en": "Autoregressive Generation and Sampling",
+      "description_vi": "Giải thích LLM dự đoán token tiếp theo, lặp predict-append-rerun và điều khiển tính ổn định hoặc đa dạng bằng temperature và top_p.",
+      "boundary_notes_vi": "Không bao gồm cách token được tính phí, cấu trúc API request/response hoặc streaming transport.",
+      "member_codes": [
+        "autoregressive_token_generation",
+        "llm_next_token_prediction",
+        "sampling_temperature_and_top_p"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Có capability core rõ và tạo producer node tự nhiên cho token economics và API runtime.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "tokenization_cost_economics",
+      "ward_home_cluster_index": 5,
+      "name_vi": "Token hóa và kinh tế token",
+      "name_en": "Tokenization and Token Cost Economics",
+      "description_vi": "Giải thích token là đơn vị xử lý, cách tokenizer tách nội dung và cách input/output token quyết định tính toán và chi phí API.",
+      "boundary_notes_vi": "Không bao gồm cách model chọn token hoặc quy trình nhận response từ API.",
+      "member_codes": [
+        "input_output_token_pricing",
+        "tokenization_and_token_economics"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Node có ranh giới capability rõ giữa biểu diễn token và hệ quả kinh tế, hỗ trợ các PG edge sang context và model selection.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "api_runtime_interaction",
+      "ward_home_cluster_index": 5,
+      "name_vi": "Tương tác runtime với API LLM",
+      "name_en": "LLM API Runtime Interaction",
+      "description_vi": "Thực hiện API request, đọc choices và usage, đồng thời nhận output từng phần qua streaming.",
+      "boundary_notes_vi": "Không bao gồm cơ chế nội tại sinh token, token pricing hay thiết kế system prompt.",
+      "member_codes": [
+        "api_request_response_and_usage",
+        "streaming_api_response"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Đây là node apply rõ cho việc biến model thành dịch vụ có thể gọi, với cạnh producer-consumer tự nhiên từ generation sang API.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "llm_training_alignment",
+      "ward_home_cluster_index": 6,
+      "name_vi": "Huấn luyện và căn chỉnh LLM",
+      "name_en": "LLM Training and Alignment",
+      "description_vi": "Trình bày pre-training, SFT, RLHF/DPO và vai trò đánh giá của con người trong việc điều chỉnh hành vi LLM.",
+      "boundary_notes_vi": "Không bao gồm các lớp runtime của sản phẩm như context, tools, memory, evaluation loop hay grounding.",
+      "member_codes": [
+        "human_feedback_alignment",
+        "llm_training_pipeline"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Có mục tiêu trung tâm là hình thành và căn chỉnh model, phù hợp làm parent upstream cho các node sử dụng và đánh giá model.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "ai_product_architecture_grounding",
+      "ward_home_cluster_index": 6,
+      "name_vi": "Kiến trúc sản phẩm AI và grounding",
+      "name_en": "AI Product Architecture and Grounding",
+      "description_vi": "Mô tả các lớp bao quanh LLM gồm context, tools, memory, guardrails, evaluation và cách retrieval hoặc dữ liệu bên ngoài giúp model dùng thông tin cập nhật, riêng tư và hành động được.",
+      "boundary_notes_vi": "Không bao gồm vòng evaluation cụ thể như benchmark regression loop, vốn là một parent riêng; cũng không bao gồm agent planning loop.",
+      "member_codes": [
+        "ai_product_system_layers",
+        "grounding_llm_with_context_tools_retrieval"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Có mục tiêu trung tâm về biến LLM thành sản phẩm có context, tools và lớp kiểm soát; phù hợp làm node kiến trúc trung gian trong PG.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "context_window_prompt_design",
+      "ward_home_cluster_index": 7,
+      "name_vi": "Context window và thiết kế prompt",
+      "name_en": "Context Window and Prompt Design",
+      "description_vi": "Xác định giới hạn context window, rủi ro Lost in the Middle và cấu trúc system instruction, user input, context và output format.",
+      "boundary_notes_vi": "Không bao gồm vận hành lịch sử qua nhiều lượt hoặc tối ưu chi phí hội thoại; các nội dung đó thuộc context operations.",
+      "member_codes": [
+        "context_window_and_lost_in_the_middle",
+        "prompt_message_structure"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Node có mục tiêu apply/analyze rõ về cách đưa thông tin vào một lượt model, là tiền đề cho context management và generation.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "conversation_context_operations",
+      "ward_home_cluster_index": 8,
+      "name_vi": "Vận hành context và trạng thái hội thoại",
+      "name_en": "Conversation Context and State Operations",
+      "description_vi": "Quản lý context, lịch sử hội thoại, trạng thái stateless và chiến lược tóm tắt để kiểm soát token, độ trễ và chi phí qua nhiều lượt gọi.",
+      "boundary_notes_vi": "Không bao gồm trade-off chọn model; quality_latency_cost_tradeoff đã được chuyển sang model-selection family.",
+      "member_codes": [
+        "context_management",
+        "conversation_context_cost_optimization",
+        "stateless_model_and_history_resubmission"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Các KC cùng mô tả cách ứng dụng duy trì và tối ưu context giữa các lượt, tạo node vận hành rõ và nối tự nhiên với prompt design.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "model_architecture_capacity",
+      "ward_home_cluster_index": 9,
+      "name_vi": "Kiến trúc và năng lực biểu diễn của model",
+      "name_en": "Model Architecture and Representation Capacity",
+      "description_vi": "Giải thích parameter, năng lực biểu diễn và MoE với kích hoạt thưa, đồng thời đặt chúng trong bức tranh các cách model xử lý nhiều dạng dữ liệu.",
+      "boundary_notes_vi": "Không bao gồm chọn model theo task/tier, quyền kiểm soát triển khai hoặc đánh giá benchmark.",
+      "member_codes": [
+        "mixture_of_experts_sparse_activation",
+        "model_parameters_and_capacity",
+        "multimodal_tokenization"
+      ],
+      "coherence": "medium",
+      "pg_readiness_reason_vi": "Node cung cấp nền tảng về cấu tạo và capacity của model; nó hỗ trợ hiểu vì sao các model khác nhau có trade-off khác nhau mà không nhập với parent selection.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "ai_product_evaluation",
+      "ward_home_cluster_index": 10,
+      "name_vi": "Đánh giá sản phẩm AI theo tác vụ",
+      "name_en": "Task-Specific AI Product Evaluation",
+      "description_vi": "Thiết kế vòng evaluation lặp lại bằng benchmark hoặc dữ liệu phản ánh tác vụ thực tế, đo thay đổi chất lượng và phát hiện regression sau mỗi thay đổi.",
+      "boundary_notes_vi": "Không bao gồm chọn model theo tier, chi phí hay quyền tự triển khai; evaluation cung cấp bằng chứng cho quyết định đó nhưng không phải cùng một parent.",
+      "member_codes": [
+        "ai_product_evaluation_loop",
+        "benchmark_vs_task_specific_evaluation"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Có target trung tâm rõ là đo chất lượng trên công việc thật, Bloom evaluate/apply và có thể làm node kiểm chứng cho product architecture và model selection.",
+      "singleton_justification_vi": ""
+    },
+    {
+      "parent_code": "model_selection_deployment_strategy",
+      "ward_home_cluster_index": 10,
+      "name_vi": "Chiến lược chọn và triển khai model",
+      "name_en": "Model Selection and Deployment Strategy",
+      "description_vi": "Ánh xạ độ khó và yêu cầu công việc vào model phù hợp, cân bằng chất lượng, độ trễ, chi phí và mức kiểm soát giữa model đóng, mở hoặc self-host.",
+      "boundary_notes_vi": "Không thực hiện benchmark/evaluation loop cụ thể; cũng không bao gồm token pricing ở cấp API hay quản lý context.",
+      "member_codes": [
+        "model_selection_by_task_and_tier",
+        "open_closed_model_landscape",
+        "quality_latency_cost_tradeoff"
+      ],
+      "coherence": "high",
+      "pg_readiness_reason_vi": "Đây là node evaluate trực tiếp cho quyết định model, giữ riêng với evaluation để PG biểu diễn cạnh bằng chứng-đến-quyết định thay vì nhập hai capability theo cùng workflow.",
+      "singleton_justification_vi": ""
+    }
+  ],
+  "modifications": [
+    {
+      "action": "split",
+      "affected_member_codes": [
+        "ai_ml_dl_generative_ai_llm_hierarchy",
+        "ai_agent_work_loop",
+        "discriminative_generative_agentic_ai_distinction",
+        "agent_capability_levels"
+      ],
+      "rationale_vi": "Cluster này chứa hai family sư phạm khác nhau: phân loại các tầng công nghệ AI và vận hành/năng lực của agent. Split giúp taxonomy và agent operation trở thành hai node PG có mục tiêu trung tâm riêng.",
+      "source_ward_cluster_index": 1,
+      "target_parent_code": ""
+    },
+    {
+      "action": "keep",
+      "affected_member_codes": [
+        "deep_learning_feature_learning",
+        "deep_learning_enabling_conditions"
+      ],
+      "rationale_vi": "Hai KC cùng tập trung vào điều kiện khả thi của deep learning và cơ chế mạng sâu tự học đặc trưng, tạo thành một foundation family rõ.",
+      "source_ward_cluster_index": 2,
+      "target_parent_code": ""
+    },
+    {
+      "action": "keep",
+      "affected_member_codes": [
+        "attention_contextual_weighting",
+        "rnn_limitations_and_transformer_parallelism",
+        "multi_head_attention"
+      ],
+      "rationale_vi": "Ba KC cùng giải thích bước chuyển từ RNN sang Transformer, attention và multi-head attention; giữ chung giúp PG biểu diễn quan hệ kỹ thuật nền tảng.",
+      "source_ward_cluster_index": 3,
+      "target_parent_code": ""
+    },
+    {
+      "action": "keep",
+      "affected_member_codes": [
+        "llm_hallucination",
+        "knowledge_cutoff",
+        "stepwise_drafting_for_accuracy"
+      ],
+      "rationale_vi": "Các KC đều liên quan đến độ tin cậy của đầu ra LLM: nhận diện giới hạn, nguy cơ sai và cách dùng quy trình nháp để cải thiện accuracy. Chúng được giữ chung nhưng không bao gồm benchmark evaluation hay grounding.",
+      "source_ward_cluster_index": 4,
+      "target_parent_code": ""
+    },
+    {
+      "action": "split",
+      "affected_member_codes": [
+        "llm_next_token_prediction",
+        "autoregressive_token_generation",
+        "tokenization_and_token_economics",
+        "sampling_temperature_and_top_p",
+        "input_output_token_pricing",
+        "api_request_response_and_usage",
+        "streaming_api_response"
+      ],
+      "rationale_vi": "Ward cluster này trộn ba capability family: cơ chế sinh và sampling, token economics, và tích hợp API runtime. Split làm rõ các cạnh producer-consumer giữa generation và API thay vì dùng một parent quá rộng.",
+      "source_ward_cluster_index": 5,
+      "target_parent_code": ""
+    },
+    {
+      "action": "split",
+      "affected_member_codes": [
+        "llm_training_pipeline",
+        "grounding_llm_with_context_tools_retrieval",
+        "human_feedback_alignment",
+        "ai_product_evaluation_loop",
+        "ai_product_system_layers"
+      ],
+      "rationale_vi": "Cluster chứa training/alignment, product architecture và evaluation, là các family có mục tiêu và Bloom khác nhau. Training/alignment và product architecture được giữ theo home cluster; evaluation loop được chuyển sang evaluation family.",
+      "source_ward_cluster_index": 6,
+      "target_parent_code": ""
+    },
+    {
+      "action": "keep",
+      "affected_member_codes": [
+        "context_window_and_lost_in_the_middle",
+        "prompt_message_structure"
+      ],
+      "rationale_vi": "Hai KC cùng mô tả bàn làm việc của model và cách cấu trúc thông tin đưa vào prompt, phù hợp làm một node về context window và prompt design.",
+      "source_ward_cluster_index": 7,
+      "target_parent_code": ""
+    },
+    {
+      "action": "split",
+      "affected_member_codes": [
+        "context_management",
+        "conversation_context_cost_optimization",
+        "quality_latency_cost_tradeoff",
+        "stateless_model_and_history_resubmission"
+      ],
+      "rationale_vi": "Ba KC về quản lý trạng thái, lịch sử và chi phí context tạo thành context operations family; quality_latency_cost_tradeoff là tiêu chí đánh giá lựa chọn model, không phải mục tiêu trung tâm của context operations.",
+      "source_ward_cluster_index": 8,
+      "target_parent_code": ""
+    },
+    {
+      "action": "keep",
+      "affected_member_codes": [
+        "mixture_of_experts_sparse_activation",
+        "model_parameters_and_capacity",
+        "multimodal_tokenization"
+      ],
+      "rationale_vi": "Các KC đều mô tả cách model được cấu tạo và biểu diễn năng lực, gồm capacity, sparse activation và biểu diễn đa phương thức. Giữ chung tránh tạo singleton không cần thiết.",
+      "source_ward_cluster_index": 9,
+      "target_parent_code": ""
+    },
+    {
+      "action": "split",
+      "affected_member_codes": [
+        "benchmark_vs_task_specific_evaluation",
+        "open_closed_model_landscape",
+        "model_selection_by_task_and_tier"
+      ],
+      "rationale_vi": "Benchmark/task evaluation và lựa chọn hoặc triển khai model là hai parent family khác nhau. Split giúp evaluation node không bị nhập vào model selection chỉ vì cùng xuất hiện trong workflow chọn model.",
+      "source_ward_cluster_index": 10,
+      "target_parent_code": ""
+    },
+    {
+      "action": "move",
+      "affected_member_codes": [
+        "ai_product_evaluation_loop"
+      ],
+      "rationale_vi": "KC này không thuộc mục tiêu trung tâm của training/alignment hay product architecture; primary capability là thiết lập evaluation lặp lại, Bloom apply và evidence trực tiếp nói về benchmark/dữ liệu tác vụ, phát hiện lỗi và cải tiến. Parent evaluation vẫn giữ mục tiêu trung tâm rõ nhờ benchmark_vs_task_specific_evaluation, và move làm PG rõ cạnh giữa product architecture với evaluation.",
+      "source_ward_cluster_index": 6,
+      "target_parent_code": "ai_product_evaluation"
+    },
+    {
+      "action": "move",
+      "affected_member_codes": [
+        "quality_latency_cost_tradeoff"
+      ],
+      "rationale_vi": "KC không thuộc mục tiêu trung tâm của context-state operations; nó là criterion Bloom evaluate để cân bằng chất lượng, độ trễ và chi phí khi chọn model hoặc cấu hình. Evidence liên kết trực tiếp với model_selection_by_task_and_tier, target vẫn có mục tiêu model selection rõ, và move tránh parent edge chỉ đúng với member ngoại vi của context cluster.",
+      "source_ward_cluster_index": 8,
+      "target_parent_code": "model_selection_deployment_strategy"
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "ai_ml_dl_generative_ai_llm_hierarchy",
+        "discriminative_generative_agentic_ai_distinction"
+      ],
+      "rationale_vi": "Đặt tên sau khi tách membership để phản ánh family phân loại và phạm vi công nghệ AI.",
+      "source_ward_cluster_index": 1,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "ai_agent_work_loop",
+        "agent_capability_levels"
+      ],
+      "rationale_vi": "Đặt tên theo mục tiêu trung tâm là mô tả vòng lặp và các mức năng lực của agent.",
+      "source_ward_cluster_index": 1,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "deep_learning_feature_learning",
+        "deep_learning_enabling_conditions"
+      ],
+      "rationale_vi": "Đặt tên theo family nền tảng giúp deep learning khả thi và học biểu diễn.",
+      "source_ward_cluster_index": 2,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "attention_contextual_weighting",
+        "rnn_limitations_and_transformer_parallelism",
+        "multi_head_attention"
+      ],
+      "rationale_vi": "Đặt tên theo capability kỹ thuật về attention và cơ chế Transformer.",
+      "source_ward_cluster_index": 3,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "llm_hallucination",
+        "knowledge_cutoff",
+        "stepwise_drafting_for_accuracy"
+      ],
+      "rationale_vi": "Đặt tên theo mục tiêu nhận diện giới hạn và nâng độ tin cậy của câu trả lời LLM.",
+      "source_ward_cluster_index": 4,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "llm_next_token_prediction",
+        "autoregressive_token_generation",
+        "sampling_temperature_and_top_p"
+      ],
+      "rationale_vi": "Đặt tên theo cơ chế sinh token và điều khiển sampling.",
+      "source_ward_cluster_index": 5,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "tokenization_and_token_economics",
+        "input_output_token_pricing"
+      ],
+      "rationale_vi": "Đặt tên theo tokenization và quan hệ giữa token, tính toán và chi phí.",
+      "source_ward_cluster_index": 5,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "api_request_response_and_usage",
+        "streaming_api_response"
+      ],
+      "rationale_vi": "Đặt tên theo capability gọi API, đọc usage và nhận response theo stream.",
+      "source_ward_cluster_index": 5,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "llm_training_pipeline",
+        "human_feedback_alignment"
+      ],
+      "rationale_vi": "Đặt tên theo các giai đoạn huấn luyện và căn chỉnh hành vi LLM.",
+      "source_ward_cluster_index": 6,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "grounding_llm_with_context_tools_retrieval",
+        "ai_product_system_layers"
+      ],
+      "rationale_vi": "Đặt tên theo kiến trúc sản phẩm bao quanh LLM và các lớp grounding, tools, context.",
+      "source_ward_cluster_index": 6,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "context_window_and_lost_in_the_middle",
+        "prompt_message_structure"
+      ],
+      "rationale_vi": "Đặt tên theo việc thiết kế prompt trong giới hạn context window.",
+      "source_ward_cluster_index": 7,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "context_management",
+        "conversation_context_cost_optimization",
+        "stateless_model_and_history_resubmission"
+      ],
+      "rationale_vi": "Đặt tên theo vận hành context, trạng thái hội thoại và tối ưu lịch sử gửi lại.",
+      "source_ward_cluster_index": 8,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "mixture_of_experts_sparse_activation",
+        "model_parameters_and_capacity",
+        "multimodal_tokenization"
+      ],
+      "rationale_vi": "Đặt tên theo kiến trúc, capacity và cách model biểu diễn dữ liệu.",
+      "source_ward_cluster_index": 9,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "benchmark_vs_task_specific_evaluation",
+        "ai_product_evaluation_loop"
+      ],
+      "rationale_vi": "Đặt tên theo capability đánh giá model bằng benchmark và tác vụ thực tế trong vòng lặp sản phẩm.",
+      "source_ward_cluster_index": 10,
+      "target_parent_code": ""
+    },
+    {
+      "action": "rename",
+      "affected_member_codes": [
+        "model_selection_by_task_and_tier",
+        "open_closed_model_landscape",
+        "quality_latency_cost_tradeoff"
+      ],
+      "rationale_vi": "Đặt tên theo quyết định chọn và triển khai model dưới các ràng buộc chất lượng, độ trễ, chi phí và quyền kiểm soát.",
+      "source_ward_cluster_index": 10,
+      "target_parent_code": ""
+    }
+  ],
+  "move_lineage": [
+    {
+      "leaf_code": "ai_product_evaluation_loop",
+      "source_ward_cluster_index": 6,
+      "target_parent_code": "ai_product_evaluation"
+    },
+    {
+      "leaf_code": "quality_latency_cost_tradeoff",
+      "source_ward_cluster_index": 8,
+      "target_parent_code": "model_selection_deployment_strategy"
+    }
+  ],
+  "home_index_normalization": "none",
+  "unresolved_issues_vi": []
+}

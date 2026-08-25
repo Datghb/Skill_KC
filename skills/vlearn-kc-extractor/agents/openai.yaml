@@ -1,0 +1,4 @@
+interface:
+  display_name: "VLearn KC Extractor"
+  short_description: "Extract review-ready KCs from course bundles"
+  default_prompt: "Use $vlearn-kc-extractor to validate my prepared course bundle and create a review-ready KC draft."

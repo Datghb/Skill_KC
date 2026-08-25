@@ -1,0 +1,29 @@
+{
+  "schema_version": "vlearn_kc_run_manifest_v1",
+  "source_slug": "day01-ai-and-llm-foundation-blue",
+  "material_bundle_sha256": "225221ed9f34512d4d78bd17f95a3fb6a98fb3ba9957bc5ce5f7e768ff3e98fd",
+  "prompt_sha256": {
+    "kc_extraction": "062ec5df7171eabe0bbaa56d0f41f90d9adfb358a96fa8714c815e11d0d4b651",
+    "parent_refinement": "80e1356fa734f737263c096cfb08701d69a1e3b04de34381263fa538ab55a5b0"
+  },
+  "artifact_sha256": {
+    "kc_candidates": "afe78ca4ef5393557d551f480450448322e219defad110b9aa99f81439b61b12",
+    "embeddings": "07f30871b006eda8724849ded28b9c8c60733ecb4415c676ec16aa2cf6cf0111",
+    "ward_candidates": "8a42b5c92651e2915deb06f545ee5140b6e711d31d22d2d01e8301c3c0c48dc2",
+    "parent_topics": "d6a54fbb3e7e599b88e1963d04b0a0d70389b818a4d11c353b0e808764eb1d24"
+  },
+  "counts": {
+    "content_units": 261,
+    "knowledge_items": 43,
+    "trackable_kcs": 36,
+    "parent_topics": 15,
+    "leaf_moves": 2
+  },
+  "telemetry": {
+    "source": "recorded legacy experiment normalized into standalone contract"
+  },
+  "release": {
+    "auto_publish": false,
+    "production_write": false
+  }
+}

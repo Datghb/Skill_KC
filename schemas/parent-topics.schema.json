@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vlearn.local/schemas/parent-topics.schema.json",
+  "title": "VLearn Parent Topics",
+  "type": "object",
+  "required": [
+    "schema_version", "source_slug", "ward_reference_k", "final_k",
+    "groups", "modifications", "move_lineage"
+  ],
+  "properties": {
+    "schema_version": {"const": "vlearn_parent_topics_v1"},
+    "source_slug": {"type": "string"},
+    "ward_reference_k": {"type": "integer", "minimum": 2},
+    "final_k": {"type": "integer", "minimum": 2},
+    "groups": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "parent_code", "ward_home_cluster_index", "name_vi", "name_en",
+          "description_vi", "boundary_notes_vi", "member_codes", "coherence",
+          "pg_readiness_reason_vi", "singleton_justification_vi"
+        ]
+      }
+    },
+    "modifications": {"type": "array"},
+    "move_lineage": {"type": "array"}
+  }
+}
+

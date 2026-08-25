@@ -1,0 +1,182 @@
+{
+  "schema_version": "vlearn_phase1_leaf_review_snapshot_v1",
+  "source_snapshot": "phase1_mixed_source_deepseek_2026-08-19",
+  "days": [
+    {
+      "day": 1,
+      "source_mode": "slide_transcript",
+      "kc_count": 43,
+      "judge_levels": {
+        "high": 41,
+        "low": 2
+      },
+      "kc_candidates_sha256": "bc3b26aefbe7b655d9896a5899d20b38f779447d3cbcd8ff461c85854299f810",
+      "judged_kc_candidates_sha256": "c195a616e4ef0bf261009230b134041b8a523152ee8f18698b505bc4808e8c2a"
+    },
+    {
+      "day": 2,
+      "source_mode": "slide_transcript",
+      "kc_count": 26,
+      "judge_levels": {
+        "high": 23,
+        "low": 3
+      },
+      "kc_candidates_sha256": "77e9d5d666e05fce57e25b479da38c9e4437f6ca7ecd65335aabb0872e50dddb",
+      "judged_kc_candidates_sha256": "482fdbd4d818a88b4859b1b3b60ab6e4cac339c96c6b92044e085eb364f6b74e"
+    },
+    {
+      "day": 3,
+      "source_mode": "slide_only",
+      "kc_count": 31,
+      "judge_levels": {
+        "high": 19,
+        "low": 1,
+        "review": 11
+      },
+      "kc_candidates_sha256": "97521212e9f807db6ff1fd9d4dd658774a5443b4dc051841ea978b683f53930e",
+      "judged_kc_candidates_sha256": "2a241aea232c2ab69acd7c6dc12411111e9e1bced31b8d519401e515b7b30747"
+    },
+    {
+      "day": 4,
+      "source_mode": "slide_transcript",
+      "kc_count": 42,
+      "judge_levels": {
+        "review": 11,
+        "low": 9,
+        "high": 22
+      },
+      "kc_candidates_sha256": "8bdc138daac32830273811e8dabf27058224d427f597623fa49fa1d192fd59ee",
+      "judged_kc_candidates_sha256": "0be707c48cf5174b56935261a88fc2e275a9dc840fa3686bb6b39beb085ca4a4"
+    },
+    {
+      "day": 5,
+      "source_mode": "slide_transcript",
+      "kc_count": 38,
+      "judge_levels": {
+        "low": 4,
+        "high": 34
+      },
+      "kc_candidates_sha256": "c728ae73c44dfb940713d3442ac0df806a562a49c7f18bc86c84a0654c3abe4a",
+      "judged_kc_candidates_sha256": "0cb84f99a83f1b687f3d40dd28216c3a0a1c2d721ce703d8f61e560700ce593f"
+    },
+    {
+      "day": 6,
+      "source_mode": "slide_only",
+      "kc_count": 17,
+      "judge_levels": {
+        "high": 16,
+        "low": 1
+      },
+      "kc_candidates_sha256": "5c237b5268fd306f07da39d54f064675e588ff7cf55bde34ca905b0df7f88fb3",
+      "judged_kc_candidates_sha256": "6b281a25baecae0f46a9ee986dd774b5234d424af44d3fd1aa3aa7b4bd9bff4f"
+    },
+    {
+      "day": 7,
+      "source_mode": "slide_only",
+      "kc_count": 33,
+      "judge_levels": {
+        "high": 33
+      },
+      "kc_candidates_sha256": "a828ab86f56b449331368f12a7c05f5c7829775dd7d5e94d0f07cc91699de9f0",
+      "judged_kc_candidates_sha256": "5fdf28573bf46feb843eb0fb7cd4e93bef522e9ac9f49d0f52c40215fa6535ee"
+    },
+    {
+      "day": 8,
+      "source_mode": "slide_transcript",
+      "kc_count": 63,
+      "judge_levels": {
+        "high": 43,
+        "low": 20
+      },
+      "kc_candidates_sha256": "6882a146ecef95d1e540e79dcca67444db5aca75a2f575d9c54bc5e5652d01aa",
+      "judged_kc_candidates_sha256": "b02897b571ce49fe33bc22524e15dbec799ad1449ff38dd9d2ab13c3d18724f3"
+    },
+    {
+      "day": 9,
+      "source_mode": "slide_only",
+      "kc_count": 31,
+      "judge_levels": {
+        "high": 31
+      },
+      "kc_candidates_sha256": "3299239d22527be0d8d3f16a580f365fe19758d9df6debe78ebcce5309e5eca8",
+      "judged_kc_candidates_sha256": "bece928e4c5da7d990d060636e65f625edae9c3a197cdcb0b4a819f27ba26e5c"
+    },
+    {
+      "day": 10,
+      "source_mode": "slide_only",
+      "kc_count": 29,
+      "judge_levels": {
+        "high": 25,
+        "low": 4
+      },
+      "kc_candidates_sha256": "cc39a4a50869b76b012d51a567abd9d77a03027f7fb3aef495c544e0d4c24f46",
+      "judged_kc_candidates_sha256": "e340ab3853052c0b566c9e9f7e9dd9358791df1a88755404c7168284fd85d426"
+    },
+    {
+      "day": 11,
+      "source_mode": "slide_only",
+      "kc_count": 29,
+      "judge_levels": {
+        "high": 29
+      },
+      "kc_candidates_sha256": "45cf6099648976f3d67485fbfef82e0af8b7f05cf3296809c403b1600d2fc077",
+      "judged_kc_candidates_sha256": "e11399c0fb25830a01ccbb7a22c98a2a337daedad5bb35cce4670a47c2c66eaa"
+    },
+    {
+      "day": 12,
+      "source_mode": "slide_only",
+      "kc_count": 23,
+      "judge_levels": {
+        "low": 5,
+        "high": 18
+      },
+      "kc_candidates_sha256": "70880222734e758e3bdbb9febc1a3da5c0759faf40f1a613be95f1afa7ecf43c",
+      "judged_kc_candidates_sha256": "3b56a088a97444688f0fb8345e99fdf8795efa1cb4c049dbd3b4f810a2cdf900"
+    },
+    {
+      "day": 13,
+      "source_mode": "slide_only",
+      "kc_count": 43,
+      "judge_levels": {
+        "high": 23,
+        "review": 18,
+        "low": 2
+      },
+      "kc_candidates_sha256": "155a8dd11b6e827e9e1714227e69c9f77e680be81b85dbd50b760882e326195b",
+      "judged_kc_candidates_sha256": "00fdab465d0cc6c9e83e7295c727bde00c1602ecd6c88316f134b75f4c10b31d"
+    },
+    {
+      "day": 14,
+      "source_mode": "slide_only",
+      "kc_count": 56,
+      "judge_levels": {
+        "review": 20,
+        "high": 35,
+        "low": 1
+      },
+      "kc_candidates_sha256": "1210298180447d1071a90a0c3222f8d48ce54dee8c9060b23b316e73019c2f71",
+      "judged_kc_candidates_sha256": "2c8399742601bab1dce4382862c372004b19dfda429262c9cbc526f45ca8e0a0"
+    },
+    {
+      "day": 15,
+      "source_mode": "slide_only",
+      "kc_count": 22,
+      "judge_levels": {
+        "high": 20,
+        "review": 2
+      },
+      "kc_candidates_sha256": "5d373adcb78138728ab9431f15d5285e957413e72a10b5a17d80dce2818c8b7f",
+      "judged_kc_candidates_sha256": "b283cf06daad7ff76753078953b05236cc8b2f2acc724ef8f9e52e47296f3ae3"
+    }
+  ],
+  "totals": {
+    "days": 15,
+    "knowledge_items": 526
+  },
+  "exclusions": [
+    "raw media",
+    "provider logs",
+    "legacy Ward candidates",
+    "legacy parent clusters"
+  ]
+}

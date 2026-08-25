@@ -1,0 +1,12 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day14-ai-evaluation-benchmarking",
+  "sources": [
+    {
+      "source_id": "slide-day14",
+      "source_type": "slide",
+      "sha256": "4ff5a001a9ef9bc45e2270690d40730c83464b09d3935f4af016ae9f87ffbf52",
+      "uri": "source://phase1/day14/slide"
+    }
+  ]
+}

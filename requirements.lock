@@ -1,0 +1,8 @@
+httpx==0.28.1
+json-repair==0.59.10
+jsonschema==4.26.0
+numpy==2.4.6
+openai==2.38.0
+scikit-learn==1.8.0
+scipy==1.17.1
+pytest==9.0.3

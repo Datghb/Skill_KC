@@ -1,0 +1,114 @@
+{
+  "schema_version": "vlearn_phase1_material_bundles_v1",
+  "days": [
+    {
+      "day": 1,
+      "source_mode": "slide_transcript",
+      "source_slug": "day01-ai-and-llm-foundation-blue",
+      "content_units": 261,
+      "bundle_sha256": "3417b93beb21712d27a274aee22350cd8b46c593514ab7d4e0f4df926e4ddb57"
+    },
+    {
+      "day": 2,
+      "source_mode": "slide_transcript",
+      "source_slug": "day02-define-the-problem-for-ai-selected",
+      "content_units": 132,
+      "bundle_sha256": "5c22cf1cd86cd0d490a7ae5b0afca6de1250f65195107a18fe8bc30e260ccdbb"
+    },
+    {
+      "day": 3,
+      "source_mode": "slide_only",
+      "source_slug": "day03-tu-chatbot-den-agentic-agent-react",
+      "content_units": 75,
+      "bundle_sha256": "46a487f9fe59c1c107a045d0271aec66505118c472123241fb4ba2d5d2157b32"
+    },
+    {
+      "day": 4,
+      "source_mode": "slide_transcript",
+      "source_slug": "day04-prompt-engineering-tool-calling-selected",
+      "content_units": 110,
+      "bundle_sha256": "076e7b46aee678ece9b73474897079fcf50ce642afda4cff3e343a194b8fd330"
+    },
+    {
+      "day": 5,
+      "source_mode": "slide_transcript",
+      "source_slug": "day05-ai-product-thinking-and-requirement-selected",
+      "content_units": 100,
+      "bundle_sha256": "d43c5177f730c9e473aca014598a4004d7a4af0d0dec2d1c703e9c62ff2635cd"
+    },
+    {
+      "day": 6,
+      "source_mode": "slide_only",
+      "source_slug": "day06-ai-product-prototype-and-demo",
+      "content_units": 14,
+      "bundle_sha256": "39d71a93f9ac2915f35246ec1f4f9d5b3705c5f6d2c12264127473827eac2995"
+    },
+    {
+      "day": 7,
+      "source_mode": "slide_only",
+      "source_slug": "day07-data-foundations-embedding-vector-store",
+      "content_units": 68,
+      "bundle_sha256": "dc38a9ad36caf42b482b82ad9656ab498a1978caf360b50c481b95233ab0f030"
+    },
+    {
+      "day": 8,
+      "source_mode": "slide_transcript",
+      "source_slug": "day08-rag-pipeline-selected",
+      "content_units": 250,
+      "bundle_sha256": "6a6a97749691b0312f8a8bf2de738dc80ecbab06f885b89dc7b6d4488ab6e49d"
+    },
+    {
+      "day": 9,
+      "source_mode": "slide_only",
+      "source_slug": "day09-multi-agent-mcp-a2a",
+      "content_units": 77,
+      "bundle_sha256": "263a06a59482e051137eb58474cd8a5d83268d50b026056525b34447b8eff0d3"
+    },
+    {
+      "day": 10,
+      "source_mode": "slide_only",
+      "source_slug": "day10-data-pipeline-and-data-observability",
+      "content_units": 45,
+      "bundle_sha256": "063de1b1949a043511a71401c48f595fd23fe8d1d0c3db083298e0edcdc1f17d"
+    },
+    {
+      "day": 11,
+      "source_mode": "slide_only",
+      "source_slug": "day11-guardrails-ai-safety",
+      "content_units": 56,
+      "bundle_sha256": "ab62df3a36b5cd00a7f43bbe626bef3bce0d6f6aaf5f01048d55f49151d2353a"
+    },
+    {
+      "day": 12,
+      "source_mode": "slide_only",
+      "source_slug": "day12-cloud-services-and-deployment",
+      "content_units": 30,
+      "bundle_sha256": "d951d2f9caed9aeeb0ed04054dad56d0573a3b843874cf0feade35764b722c24"
+    },
+    {
+      "day": 13,
+      "source_mode": "slide_only",
+      "source_slug": "day13-monitoring-logging-observability",
+      "content_units": 77,
+      "bundle_sha256": "8eb910837d2bb2f7cb82bdb44ea1accac9c536d6bc39cccaabeb0483bb79b16f"
+    },
+    {
+      "day": 14,
+      "source_mode": "slide_only",
+      "source_slug": "day14-ai-evaluation-benchmarking",
+      "content_units": 78,
+      "bundle_sha256": "2b72a6947e4ba1822631a86d74bab22a94d184d9c87d79ab34788936594b0332"
+    },
+    {
+      "day": 15,
+      "source_mode": "slide_only",
+      "source_slug": "day15-trien-khai-thuc-te-dinh-huong",
+      "content_units": 33,
+      "bundle_sha256": "5527a9e88ed2cd52ebfa3f9d0301c16d0b909afc1385f0a7f416257469929f52"
+    }
+  ],
+  "totals": {
+    "days": 15,
+    "content_units": 1406
+  }
+}

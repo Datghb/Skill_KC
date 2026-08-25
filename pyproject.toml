@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vlearn-kc-pipeline"
+version = "0.1.0"
+description = "Standalone VLearn Knowledge Component extraction and clustering pipeline"
+requires-python = ">=3.12"
+dependencies = [
+  "httpx==0.28.1",
+  "json-repair==0.59.10",
+  "numpy==2.4.6",
+  "openai==2.38.0",
+  "scikit-learn==1.8.0",
+  "scipy==1.17.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2,<2",
+  "jsonschema>=4.20,<5",
+  "pytest>=8,<10",
+  "pytest-cov>=6,<8",
+  "pyyaml>=6,<7",
+]
+
+[project.scripts]
+vlearn-kc = "vlearn_kc.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+vlearn_kc = ["prompts/*.md"]
+
+[tool.coverage.run]
+branch = true
+source = ["vlearn_kc"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

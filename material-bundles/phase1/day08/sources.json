@@ -1,0 +1,18 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day08-rag-pipeline-selected",
+  "sources": [
+    {
+      "source_id": "slide-day08",
+      "source_type": "slide",
+      "sha256": "4cd13a547566e2b0305bcd8b3240581cb309d1ef6e615ea738079a1653c323c4",
+      "uri": "source://phase1/day08/slide"
+    },
+    {
+      "source_id": "lecture-notes-day08",
+      "source_type": "lecture_note",
+      "sha256": "62d64c94640957f6d88db4f086adc8554eb01e33bd5aa8bf2fe2caa8b9885386",
+      "uri": "artifact://phase1/day08/grounded-lecture-notes"
+    }
+  ]
+}

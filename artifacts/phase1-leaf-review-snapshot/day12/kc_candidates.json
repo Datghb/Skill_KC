@@ -1,0 +1,962 @@
+{
+  "schema_version": "mixed_source_knowledge_inventory_v1",
+  "source_slug": "day12-cloud-services-and-deployment",
+  "knowledge_items": [
+    {
+      "code": "localhost_to_production_gap",
+      "name_vi": "Khoảng cách từ localhost đến production",
+      "description_vi": "Phân biệt môi trường agent chạy cục bộ với môi trường production theo các khía cạnh dependencies, config và secrets, networking, số người dùng, xử lý lỗi và logging.",
+      "item_form": "concept",
+      "primary_capability_vi": "Phân tích các rủi ro khi chuyển một agent đang chạy trên localhost lên production.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Người học có thể đối chiếu một cấu hình local với yêu cầu production và xác định các khoảng thiếu cần xử lý.",
+      "bloom_rationale_vi": "Nguồn cung cấp bảng so sánh Dev và Production cùng các failure mode của việc chỉ chạy trên localhost.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ riêng vì đây là năng lực chẩn đoán tổng quát; các biện pháp cụ thể như env vars, health check và stateless được dạy và đánh giá riêng.",
+      "role_reason_vi": "Nhận diện gap dev–production là trọng tâm để đạt mục tiêu đưa agent từ máy cá nhân lên cloud.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p006:l37-40",
+        "day12-cloud-services-and-deployment:p007:l41-58",
+        "day12-cloud-services-and-deployment:p008:l59-72"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p006:l37-40",
+          "source_type": "slide",
+          "page_no": 6,
+          "content": "## Page 6: 01 TỪ LOCALHOST ĐẾN PRODUCTION\nPage 6: 01 TỪ LOCALHOST ĐẾN PRODUCTION Text Extract Agent chạy trên máy mình ≠ Agent chạy cho 100 người",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p007:l41-58",
+          "source_type": "slide",
+          "page_no": 7,
+          "content": "## Page 7: Recap: \"It Works On My Machine\"\nPage 7: Recap: \"It Works On My Machine\" Text Extract 11 Ngày Đã Build LLM API + prompt engineering RAG pipeline grounded Multi agent + MCP UX + trust layer Guardrails + safety Nhưng Đang Chạy Trên... localhost:8000 API keys trong .env file Chỉ 1 user (chính mình) Không health check Tắt laptop = agent chết \"It works on my machine\" câu nói nổi tiếng nhất lịch sử software engineering. Day 12 giải quyết đúng vấn đề này.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p008:l59-72",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Dev Environment ≠ Production\nPage 8: Dev Environment ≠ Production Text Extract Environment parity: dev/staging/prod càng giống nhau → càng ít bug khi deploy. Tables | Khía cạnh | Dev | Production | | | | | | Dependencies | pip install thủ công | Đóng gói cùng container | | Config / Secrets | .env file trên máy | Env vars + secrets manager | | Networking | localhost:8000 | HTTPS, domain, load balancer | | Users | 1 (chính mình) | N users đồng thời | | Failure handling | Restart thủ công | Auto restart + health check | | Logging | print() statements | Structured JSON logs |",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "dev_prod_environment_parity",
+      "name_vi": "Tính tương đồng giữa môi trường dev và production",
+      "description_vi": "Duy trì dev, staging và production càng giống nhau càng tốt để giảm lỗi phát sinh khi deploy, bao gồm dependencies, config, networking và cách xử lý tiến trình.",
+      "item_form": "principle",
+      "primary_capability_vi": "Áp dụng nguyên tắc environment parity khi chuẩn bị triển khai agent.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể chỉ ra và giảm các khác biệt không cần thiết giữa dev, staging và production.",
+      "bloom_rationale_vi": "Nguồn nêu trực tiếp nguyên tắc parity và liên hệ nó với việc giảm bug khi deploy.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi việc nhận diện gap vì parity là nguyên tắc remediation có task áp dụng riêng.",
+      "role_reason_vi": "Đây là nguyên tắc cốt lõi để chuyển agent sang production ổn định.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p008:l59-72",
+        "day12-cloud-services-and-deployment:p009:l73-89"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p008:l59-72",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Dev Environment ≠ Production\nPage 8: Dev Environment ≠ Production Text Extract Environment parity: dev/staging/prod càng giống nhau → càng ít bug khi deploy. Tables | Khía cạnh | Dev | Production | | | | | | Dependencies | pip install thủ công | Đóng gói cùng container | | Config / Secrets | .env file trên máy | Env vars + secrets manager | | Networking | localhost:8000 | HTTPS, domain, load balancer | | Users | 1 (chính mình) | N users đồng thời | | Failure handling | Restart thủ công | Auto restart + health check | | Logging | print() statements | Structured JSON logs |",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p009:l73-89",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: 12-Factor App - Áp Dụng Cho AI Agent\nPage 9: 12 Factor App Áp Dụng Cho AI Agent Text Extract 1 Config in env Không hardcode API keys. Dùng os.getenv() cho mọi config. 2 Stateless processes Agent không giữ session trên instance memory. Production Checklist (MVP) Secrets trong env vars (không trong code) Health check endpoint: GET /health Structured logging (JSON format) Graceful shutdown (handle SIGTERM) 3 Port binding Đọc PORT từ env var. Railway/Render inject tự động. 4 Dev/prod parity Giữ gap nhỏ nhất giữa dev, staging, production. Đừng cố học hết 12 factors ngay. 4 cái trên đủ cho MVP deployment.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "externalized_config_and_secrets",
+      "name_vi": "Externalize config và secrets bằng environment variables",
+      "description_vi": "Không hardcode API keys hoặc cấu hình trong code; lấy cấu hình từ environment variables và dùng secrets manager khi cần.",
+      "item_form": "principle",
+      "primary_capability_vi": "Cấu hình agent an toàn bằng environment variables thay vì lưu secrets trong source code hoặc file local được commit.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể chuyển các cấu hình và API keys của agent sang env vars, đồng thời kiểm tra rằng secrets không bị hardcode.",
+      "bloom_rationale_vi": "Nguồn yêu cầu dùng os.getenv cho mọi config, đặt secrets trong env vars và thiết lập env vars trên platform.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi environment parity vì quản lý secret có failure và remediation riêng, đặc biệt là nguy cơ lộ API key.",
+      "role_reason_vi": "Quản lý config và secrets là mục tiêu trực tiếp của bài và là điều kiện để deploy an toàn.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p008:l59-72",
+        "day12-cloud-services-and-deployment:p009:l73-89",
+        "day12-cloud-services-and-deployment:p017:l224-251",
+        "day12-cloud-services-and-deployment:p030:l433-450",
+        "day12-cloud-services-and-deployment:p031:l451-467"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p008:l59-72",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Dev Environment ≠ Production\nPage 8: Dev Environment ≠ Production Text Extract Environment parity: dev/staging/prod càng giống nhau → càng ít bug khi deploy. Tables | Khía cạnh | Dev | Production | | | | | | Dependencies | pip install thủ công | Đóng gói cùng container | | Config / Secrets | .env file trên máy | Env vars + secrets manager | | Networking | localhost:8000 | HTTPS, domain, load balancer | | Users | 1 (chính mình) | N users đồng thời | | Failure handling | Restart thủ công | Auto restart + health check | | Logging | print() statements | Structured JSON logs |",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p009:l73-89",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: 12-Factor App - Áp Dụng Cho AI Agent\nPage 9: 12 Factor App Áp Dụng Cho AI Agent Text Extract 1 Config in env Không hardcode API keys. Dùng os.getenv() cho mọi config. 2 Stateless processes Agent không giữ session trên instance memory. Production Checklist (MVP) Secrets trong env vars (không trong code) Health check endpoint: GET /health Structured logging (JSON format) Graceful shutdown (handle SIGTERM) 3 Port binding Đọc PORT từ env var. Railway/Render inject tự động. 4 Dev/prod parity Giữ gap nhỏ nhất giữa dev, staging, production. Đừng cố học hết 12 factors ngay. 4 cái trên đủ cho MVP deployment.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p017:l224-251",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: Railway - Deploy Trong 5 Phút\nPage 17: Railway Deploy Trong 5 Phút Text Extract 1 Kết nối GitHub repo railway login && railway init 2 Railway tự detect Dockerfile / Nixpacks 3 Set environment variables railway variables set OPENAI API KEY=sk ... 4 Click Deploy (hoặc railway up) railway up 5 Nhận public URL railway domain → your app.up.railway.app toml [build] builder = \"NIXPACKS\" [deploy] startCommand = \"uvicorn app:app host 0.0.0.0 port $PORT\" healthcheckPath = \"/health\" restartPolicyType = \"ON FAILURE\" Đặt PORT=8000 trong env vars. Railway inject PORT tự động — agent PHẢI đọc os.getenv('PORT').",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p030:l433-450",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Blueprint Cần Nộp\nPage 30: Blueprint Cần Nộp Text Extract Không cần enterprise grade. Cần chứng minh: biết đưa agent từ localhost lên cloud và nó hoạt động. Tables | Container | Deployment | | | | | Dockerfile | Multi stage build, < 500 MB, non root user | | docker compose.yml | Agent + dependencies | | .dockerignore | Loại bỏ .env, pycache , venv/ | | GET /health | Trả về status + uptime + version | | GET /ready | Readiness check | | Public URL | https://your app.up.railway.app | | Env vars | Secrets trong env, không hardcode | | API Key auth | X API Key header, 401 nếu thiếu | | Demo | Request → Response qua public URL | | check production ready.py | 20/20 c",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p031:l451-467",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Key Takeaways\nPage 31: Key Takeaways Text Extract 1 Container = \"ship anywhere\" Docker giải quyết \"it works on my machine\". Multi stage + slim image → agent < 500 MB. 2 Start simple, migrate later Railway/Render cho MVP (< 10 phút). Migrate AWS/GCP khi business thật sự cần scale. 3 Security from day 1 Secrets management + HTTPS + rate limiting + spending caps. Setup trước khi có user thật. 4 Health check + rolling deploy = always available Stateless design + Redis cho phép scale bằng cách thêm instances bất kỳ lúc nào.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "env_based_port_binding",
+      "name_vi": "Port binding theo biến PORT",
+      "description_vi": "Agent phải bind trên địa chỉ có thể truy cập từ container hoặc platform và đọc port từ biến PORT do môi trường triển khai inject.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Cấu hình server của agent bind đúng host và port theo môi trường triển khai.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể cấu hình agent đọc PORT từ environment và lắng nghe trên 0.0.0.0 để platform route request vào container.",
+      "bloom_rationale_vi": "Nguồn minh họa start command với 0.0.0.0 và $PORT, đồng thời nhấn mạnh Railway inject PORT tự động.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ riêng vì lỗi port binding khiến deployment không nhận traffic và có failure signal khác với lỗi secrets hoặc dependencies.",
+      "role_reason_vi": "Đây là điều kiện kỹ thuật bắt buộc để agent hoạt động trên Railway hoặc Render.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p009:l73-89",
+        "day12-cloud-services-and-deployment:p012:l116-145",
+        "day12-cloud-services-and-deployment:p017:l224-251"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p009:l73-89",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: 12-Factor App - Áp Dụng Cho AI Agent\nPage 9: 12 Factor App Áp Dụng Cho AI Agent Text Extract 1 Config in env Không hardcode API keys. Dùng os.getenv() cho mọi config. 2 Stateless processes Agent không giữ session trên instance memory. Production Checklist (MVP) Secrets trong env vars (không trong code) Health check endpoint: GET /health Structured logging (JSON format) Graceful shutdown (handle SIGTERM) 3 Port binding Đọc PORT từ env var. Railway/Render inject tự động. 4 Dev/prod parity Giữ gap nhỏ nhất giữa dev, staging, production. Đừng cố học hết 12 factors ngay. 4 cái trên đủ cho MVP deployment.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p012:l116-145",
+          "source_type": "slide",
+          "page_no": 12,
+          "content": "## Page 12: Dockerfile Cho AI Agent\nPage 12: Dockerfile Cho AI Agent Text Extract BASIC Single Stage FROM python:3.11 ← 1.0 GB base image WORKDIR /app COPY requirements.txt . RUN pip install r requirements.txt COPY . . CMD [\"uvicorn\", \"main:app\", \" host\", \"0.0.0.0\"] Image Size: python:3.11 → ~1.0 GB python:3.11 slim + multi stage → ~160 MB ADVANCED Multi Stage Stage 1: Builder (có build tools) FROM python:3.11 slim AS builder WORKDIR /app COPY requirements.txt . RUN pip install no cache dir user r requirements.txt Stage 2: Runtime (chỉ app + packages) FROM python:3.11 slim AS runtime RUN useradd r appuser non root COPY from=builder /root/.local /home/appuser/.local COPY . . HEA",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p017:l224-251",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: Railway - Deploy Trong 5 Phút\nPage 17: Railway Deploy Trong 5 Phút Text Extract 1 Kết nối GitHub repo railway login && railway init 2 Railway tự detect Dockerfile / Nixpacks 3 Set environment variables railway variables set OPENAI API KEY=sk ... 4 Click Deploy (hoặc railway up) railway up 5 Nhận public URL railway domain → your app.up.railway.app toml [build] builder = \"NIXPACKS\" [deploy] startCommand = \"uvicorn app:app host 0.0.0.0 port $PORT\" healthcheckPath = \"/health\" restartPolicyType = \"ON FAILURE\" Đặt PORT=8000 trong env vars. Railway inject PORT tự động — agent PHẢI đọc os.getenv('PORT').",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "stateless_agent_process",
+      "name_vi": "Thiết kế agent stateless",
+      "description_vi": "Mỗi process hoặc instance không giữ session cần thiết trong memory riêng; request có thể được xử lý bởi bất kỳ instance nào.",
+      "item_form": "principle",
+      "primary_capability_vi": "Thiết kế process agent không phụ thuộc vào state cục bộ của một instance.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể nhận diện và loại bỏ việc lưu session hoặc state quan trọng chỉ trong memory của instance.",
+      "bloom_rationale_vi": "Nguồn nêu stateless processes là một nguyên tắc MVP và minh họa lỗi khi request sau đi tới instance khác.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi shared Redis scaling vì stateless là nguyên tắc thiết kế, còn lưu state dùng Redis là một kiến trúc triển khai cụ thể.",
+      "role_reason_vi": "Stateless process là nền tảng để agent có thể chạy ổn định trên nhiều instance.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p009:l73-89",
+        "day12-cloud-services-and-deployment:p024:l345-366"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p009:l73-89",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: 12-Factor App - Áp Dụng Cho AI Agent\nPage 9: 12 Factor App Áp Dụng Cho AI Agent Text Extract 1 Config in env Không hardcode API keys. Dùng os.getenv() cho mọi config. 2 Stateless processes Agent không giữ session trên instance memory. Production Checklist (MVP) Secrets trong env vars (không trong code) Health check endpoint: GET /health Structured logging (JSON format) Graceful shutdown (handle SIGTERM) 3 Port binding Đọc PORT từ env var. Railway/Render inject tự động. 4 Dev/prod parity Giữ gap nhỏ nhất giữa dev, staging, production. Đừng cố học hết 12 factors ngay. 4 cái trên đủ cho MVP deployment.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p024:l345-366",
+          "source_type": "slide",
+          "page_no": 24,
+          "content": "## Page 24: Stateless Design - Scale Bằng Cách Thêm Instances\nPage 24: Stateless Design Scale Bằng Cách Thêm Instances Text Extract Stateful (Không Scale Được) Session lưu trong memory của instance sessions = {} dict trong RAM Instance 1 xử lý request 1 → lưu session Instance 2 xử lý request 2 → KHÔNG CÓ SESSION! → Bug! User mất context Stateless + Redis (Scale Được) Session lưu trong Redis (shared) redis client = redis.from url(REDIS URL) def save session(session id, data): redis client.setex(f'session:{session id}', 3600, json.dumps(data)) Bất kỳ instance nào cũng đọc được session! Users → Load Balancer → Instance 1, 2, 3 → Redis (Shared State) Nguyên tắc: Bất kỳ instance nào cũng phải serve được bất",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "structured_json_logging",
+      "name_vi": "Structured logging dạng JSON",
+      "description_vi": "Thay thế print statements bằng log có cấu trúc JSON để phù hợp với việc vận hành và quan sát agent trên production.",
+      "item_form": "principle",
+      "primary_capability_vi": "Mô tả và nhận diện cách logging phù hợp cho production.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Người học có thể giải thích vì sao production nên dùng structured JSON logs thay cho print statements.",
+      "bloom_rationale_vi": "Nguồn trực tiếp đối chiếu logging ở dev và production và đưa structured logging vào MVP checklist.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Giữ riêng vì logging có mục tiêu vận hành và failure/remediation khác với graceful shutdown hoặc health check.",
+      "role_reason_vi": "Đây là capability tái sử dụng cho production nhưng không phải điều kiện cốt lõi duy nhất của deliverable deploy.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p008:l59-72",
+        "day12-cloud-services-and-deployment:p009:l73-89"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p008:l59-72",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Dev Environment ≠ Production\nPage 8: Dev Environment ≠ Production Text Extract Environment parity: dev/staging/prod càng giống nhau → càng ít bug khi deploy. Tables | Khía cạnh | Dev | Production | | | | | | Dependencies | pip install thủ công | Đóng gói cùng container | | Config / Secrets | .env file trên máy | Env vars + secrets manager | | Networking | localhost:8000 | HTTPS, domain, load balancer | | Users | 1 (chính mình) | N users đồng thời | | Failure handling | Restart thủ công | Auto restart + health check | | Logging | print() statements | Structured JSON logs |",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p009:l73-89",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: 12-Factor App - Áp Dụng Cho AI Agent\nPage 9: 12 Factor App Áp Dụng Cho AI Agent Text Extract 1 Config in env Không hardcode API keys. Dùng os.getenv() cho mọi config. 2 Stateless processes Agent không giữ session trên instance memory. Production Checklist (MVP) Secrets trong env vars (không trong code) Health check endpoint: GET /health Structured logging (JSON format) Graceful shutdown (handle SIGTERM) 3 Port binding Đọc PORT từ env var. Railway/Render inject tự động. 4 Dev/prod parity Giữ gap nhỏ nhất giữa dev, staging, production. Đừng cố học hết 12 factors ngay. 4 cái trên đủ cho MVP deployment.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "graceful_shutdown",
+      "name_vi": "Graceful shutdown của agent",
+      "description_vi": "Agent xử lý tín hiệu dừng như SIGTERM để kết thúc tiến trình có kiểm soát thay vì bị dừng đột ngột.",
+      "item_form": "principle",
+      "primary_capability_vi": "Giải thích vai trò của graceful shutdown trong deployment và restart container.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Người học có thể mô tả vì sao agent cần handle SIGTERM khi chạy trên platform quản lý container.",
+      "bloom_rationale_vi": "Nguồn đưa graceful shutdown và handle SIGTERM vào production checklist nhưng không cung cấp quy trình triển khai chi tiết.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách vì đây là hành vi vòng đời process riêng, không thể nắm đầy đủ chỉ từ health check hoặc stateless design.",
+      "role_reason_vi": "Có tính tái sử dụng trong vận hành container nhưng không phải yêu cầu triển khai tối thiểu duy nhất của bài.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p009:l73-89"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p009:l73-89",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: 12-Factor App - Áp Dụng Cho AI Agent\nPage 9: 12 Factor App Áp Dụng Cho AI Agent Text Extract 1 Config in env Không hardcode API keys. Dùng os.getenv() cho mọi config. 2 Stateless processes Agent không giữ session trên instance memory. Production Checklist (MVP) Secrets trong env vars (không trong code) Health check endpoint: GET /health Structured logging (JSON format) Graceful shutdown (handle SIGTERM) 3 Port binding Đọc PORT từ env var. Railway/Render inject tự động. 4 Dev/prod parity Giữ gap nhỏ nhất giữa dev, staging, production. Đừng cố học hết 12 factors ngay. 4 cái trên đủ cho MVP deployment.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "containerization_for_portability",
+      "name_vi": "Container hóa agent",
+      "description_vi": "Đóng gói application code, dependencies, runtime config và môi trường OS tối thiểu thành một unit có thể chạy nhất quán ở nhiều nơi.",
+      "item_form": "concept",
+      "primary_capability_vi": "Giải thích cách container hóa giải quyết vấn đề it works on my machine.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Người học có thể phân biệt container với VM và giải thích vì sao container giúp đóng gói agent cùng dependencies để chạy portable.",
+      "bloom_rationale_vi": "Nguồn định nghĩa container là app + dependencies + runtime, đồng thời so sánh kích thước, thời gian khởi động và mức portable với VM.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "VM được giữ như phần đối chiếu trong cùng concept; không tách vì không có mastery state độc lập trong bài.",
+      "role_reason_vi": "Containerization là trọng tâm chính của mục tiêu và deliverable Day 12.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p010:l90-93",
+        "day12-cloud-services-and-deployment:p011:l94-115"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p010:l90-93",
+          "source_type": "slide",
+          "page_no": 10,
+          "content": "## Page 10: 02 DOCKER ĐÓNG GÓI AGENT THÀNH CONTAINER\nPage 10: 02 DOCKER ĐÓNG GÓI AGENT THÀNH CONTAINER Text Extract Build once run anywhere",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p011:l94-115",
+          "source_type": "slide",
+          "page_no": 11,
+          "content": "## Page 11: Container Là Gì?\nPage 11: Container Là Gì? Text Extract CONTAINER Application Code Dependencies (Python, libs) Runtime Config Minimal OS (slim / alpine) VM vs Container VM OS đầy đủ (~GB) Khởi động chậm (phút) Isolation mạnh hơn Container Dùng chung OS kernel Khởi động nhanh (giây) Nhẹ hơn, portable hơn Đóng gói 1 lần, chạy ở mọi nơi Container = app + deps + runtime đóng gói thành 1 unit. Giải quyết \"it works on my machine\" triệt để.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "multi_stage_dockerfile_build",
+      "name_vi": "Viết Dockerfile multi-stage tối ưu",
+      "description_vi": "Dùng builder stage có build tools và runtime stage chỉ chứa app cùng packages cần thiết; dùng slim base image, cài package không cache, chạy non-root và hướng tới image dưới 500 MB.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tạo Dockerfile multi-stage an toàn và nhỏ cho AI agent.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể viết và build Dockerfile multi-stage với runtime image slim, non-root user và kích thước đạt mục tiêu dưới 500 MB.",
+      "bloom_rationale_vi": "Nguồn cung cấp cấu trúc builder/runtime, so sánh kích thước single-stage với slim multi-stage và yêu cầu lab về non-root, HEALTHCHECK, dưới 500 MB.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Các lựa chọn slim, multi-stage, non-root và no-cache cùng phục vụ một mục tiêu tối ưu image và có chung failure signal nên được gộp.",
+      "role_reason_vi": "Đây là capability trực tiếp được yêu cầu trong mục tiêu và blueprint nộp bài.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p004:l18-25",
+        "day12-cloud-services-and-deployment:p012:l116-145",
+        "day12-cloud-services-and-deployment:p029:l410-432",
+        "day12-cloud-services-and-deployment:p030:l433-450",
+        "day12-cloud-services-and-deployment:p031:l451-467"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p004:l18-25",
+          "source_type": "slide",
+          "page_no": 4,
+          "content": "## Page 4: Mục Tiêu Ngày 12\nPage 4: Mục Tiêu Ngày 12 Text Extract 1 Hiểu gap dev → production: dependencies, config, secrets, networking 2 Viết Dockerfile đúng cách: đóng gói agent thành container < 500 MB 3 So sánh cloud options: Railway, Render, AWS ECS, Serverless 4 Thiết kế API gateway: authentication, rate limiting, cost protection 5 Deploy lên cloud: agent có public URL hoạt động được",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p012:l116-145",
+          "source_type": "slide",
+          "page_no": 12,
+          "content": "## Page 12: Dockerfile Cho AI Agent\nPage 12: Dockerfile Cho AI Agent Text Extract BASIC Single Stage FROM python:3.11 ← 1.0 GB base image WORKDIR /app COPY requirements.txt . RUN pip install r requirements.txt COPY . . CMD [\"uvicorn\", \"main:app\", \" host\", \"0.0.0.0\"] Image Size: python:3.11 → ~1.0 GB python:3.11 slim + multi stage → ~160 MB ADVANCED Multi Stage Stage 1: Builder (có build tools) FROM python:3.11 slim AS builder WORKDIR /app COPY requirements.txt . RUN pip install no cache dir user r requirements.txt Stage 2: Runtime (chỉ app + packages) FROM python:3.11 slim AS runtime RUN useradd r appuser non root COPY from=builder /root/.local /home/appuser/.local COPY . . HEA",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p029:l410-432",
+          "source_type": "slide",
+          "page_no": 29,
+          "content": "## Page 29: Lab 12 - Các Bước Thực Hiện\nPage 29: Lab 12 Các Bước Thực Hiện Text Extract 1 Viết Dockerfile Multi stage build, non root user, HEALTHCHECK Target < 500 MB 2 Build & Test Local docker build t my agent . docker run p 8000:8000 my agent 3 Deploy Railway / Render Connect GitHub → Set env vars → Deploy → Nhận public URL 4 Health Check Endpoint GET /health trả về: status, uptime, version, dependencies 5 Basic Authentication API Key header: X API Key Reject 401 nếu thiếu hoặc sai key 6 Demo Request → Response curl H 'X API Key: ...' X POST https://your url/ask d '{\"question\":\"...\"}'",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p030:l433-450",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Blueprint Cần Nộp\nPage 30: Blueprint Cần Nộp Text Extract Không cần enterprise grade. Cần chứng minh: biết đưa agent từ localhost lên cloud và nó hoạt động. Tables | Container | Deployment | | | | | Dockerfile | Multi stage build, < 500 MB, non root user | | docker compose.yml | Agent + dependencies | | .dockerignore | Loại bỏ .env, pycache , venv/ | | GET /health | Trả về status + uptime + version | | GET /ready | Readiness check | | Public URL | https://your app.up.railway.app | | Env vars | Secrets trong env, không hardcode | | API Key auth | X API Key header, 401 nếu thiếu | | Demo | Request → Response qua public URL | | check production ready.py | 20/20 c",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p031:l451-467",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Key Takeaways\nPage 31: Key Takeaways Text Extract 1 Container = \"ship anywhere\" Docker giải quyết \"it works on my machine\". Multi stage + slim image → agent < 500 MB. 2 Start simple, migrate later Railway/Render cho MVP (< 10 phút). Migrate AWS/GCP khi business thật sự cần scale. 3 Security from day 1 Secrets management + HTTPS + rate limiting + spending caps. Setup trước khi có user thật. 4 Health check + rolling deploy = always available Stateless design + Redis cho phép scale bằng cách thêm instances bất kỳ lúc nào.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "docker_compose_multi_service_stack",
+      "name_vi": "Điều phối stack nhiều service bằng Docker Compose",
+      "description_vi": "Mô tả và cấu hình stack gồm agent cùng các dependency như vector store, Redis và Nginx; khai báo dependencies, env file và healthcheck để khởi động bằng một lệnh.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tạo docker-compose stack cho agent và các service phụ thuộc.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể cấu hình agent cùng vector store bằng Compose và biết khi nào cần thêm Redis hoặc Nginx.",
+      "bloom_rationale_vi": "Nguồn đưa cấu trúc services, depends_on, env_file, healthcheck và chiến lược bắt đầu với agent + vector store rồi mở rộng khi scale.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ riêng khỏi Dockerfile vì Compose điều phối nhiều service và network dependency, có task và lỗi cấu hình khác với build một image.",
+      "role_reason_vi": "docker compose.yml là thành phần bắt buộc trong deliverable và giúp tái lập deployment stack.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p013:l146-180",
+        "day12-cloud-services-and-deployment:p027:l394-405",
+        "day12-cloud-services-and-deployment:p030:l433-450"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p013:l146-180",
+          "source_type": "slide",
+          "page_no": 13,
+          "content": "## Page 13: Docker Compose - Multi-Service Stack\nPage 13: Docker Compose Multi Service Stack Text Extract 1 lệnh docker compose up → khởi động toàn bộ stack Tables | Service | Vai trò | | | | | Agent Service | FastAPI + LLM logic; Port 8000 | | Vector Store | Qdrant / ChromaDB; RAG database | | Redis | Session cache; Rate limit store | | Nginx | Reverse proxy; Load balancer | yaml services: agent: build: . depends on: [redis, qdrant] env file: [.env.local] healthcheck: test: [\"CMD\", \"curl\", \" f\", \"http://localhost:8000/health\"] redis: image: redis:7 alpine qdrant: image: qdrant/qdrant:v1.9.0 Text Extract Bắt đầu với 2 services: agent + vector store. Thêm Redis và Nginx khi cần scale. Lợi íc",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p027:l394-405",
+          "source_type": "slide",
+          "page_no": 27,
+          "content": "## Page 27: Key Files - Cơ Bản vs Chuyên Sâu\nPage 27: Key Files Cơ Bản vs Chuyên Sâu Text Extract Section 4: API Gateway basic/app.py → API Key auth (30 lines) advanced/auth.py + rate limiter.py + cost guard.py → JWT + Sliding Window + Budget cap Section 5: Scaling basic/app.py → /health + /ready + graceful shutdown advanced/app.py + docker compose.yml → Redis sessions + 3 replicas + Nginx LB utils/mock llm.py → Dùng chung cho tất cả sections (không cần API key thật)",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p030:l433-450",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Blueprint Cần Nộp\nPage 30: Blueprint Cần Nộp Text Extract Không cần enterprise grade. Cần chứng minh: biết đưa agent từ localhost lên cloud và nó hoạt động. Tables | Container | Deployment | | | | | Dockerfile | Multi stage build, < 500 MB, non root user | | docker compose.yml | Agent + dependencies | | .dockerignore | Loại bỏ .env, pycache , venv/ | | GET /health | Trả về status + uptime + version | | GET /ready | Readiness check | | Public URL | https://your app.up.railway.app | | Env vars | Secrets trong env, không hardcode | | API Key auth | X API Key header, 401 nếu thiếu | | Demo | Request → Response qua public URL | | check production ready.py | 20/20 c",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "cloud_platform_selection",
+      "name_vi": "Lựa chọn cloud platform theo nhu cầu",
+      "description_vi": "Chọn tier và platform dựa trên traffic, cost, mức control, compliance, độ phức tạp và nhu cầu scaling; Railway/Render phù hợp MVP, AWS ECS hoặc Cloud Run khi cần production scale, Kubernetes khi cần full control và quy mô lớn.",
+      "item_form": "criterion",
+      "primary_capability_vi": "So sánh và lựa chọn platform triển khai phù hợp với bối cảnh agent.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Người học có thể phân tích traffic, chi phí, độ phức tạp và yêu cầu vận hành để chọn giữa Railway, Render, Cloud Run, ECS, serverless hoặc Kubernetes.",
+      "bloom_rationale_vi": "Nguồn cung cấp tier deployment, bảng so sánh platform và trade-off cold start của serverless với container-based deployment.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Các platform và tier được gộp vì chúng là các phương án trong cùng task lựa chọn; không tạo item riêng cho tên platform đơn lẻ.",
+      "role_reason_vi": "So sánh cloud options là mục tiêu trực tiếp của bài học.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p014:l181-184",
+        "day12-cloud-services-and-deployment:p015:l185-210",
+        "day12-cloud-services-and-deployment:p016:l211-223",
+        "day12-cloud-services-and-deployment:p031:l451-467"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p014:l181-184",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: 03 CLOUD DEPLOYMENT OPTIONS\nPage 14: 03 CLOUD DEPLOYMENT OPTIONS Text Extract Chọn platform dựa trên traffic, cost, control, compliance",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p015:l185-210",
+          "source_type": "slide",
+          "page_no": 15,
+          "content": "## Page 15: 3 Tier Deployment\nPage 15: 3 Tier Deployment Text Extract Tier 1 Railway / Render / Fly.io < 10 phút deploy Free tier có sẵn Zero config MVP / Demo / Học BẮT ĐẦU ĐÂY Tier 2 AWS ECS / GCP Cloud Run Enterprise grade Auto scaling CI/CD pipeline Production ready KHI CẦN SCALE Tier 3 Kubernetes (Self managed) Full control Complex ops Large scale Multi cloud KHI LỚN HƠN",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p016:l211-223",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: So Sánh Platform\nPage 16: So Sánh Platform Text Extract Serverless cold start 5 15s. Với AI agent cần response nhanh, container based (Railway/Render) thường tốt hơn Lambda. Tables | | Railway | Render | Cloud Run | Lambda | | | | | | | | Deploy time | < 5 phút | < 10 phút | 10 15 phút | 15 20 phút | | Pricing | Usage based | Free tier | Per request | Per invoke | | Scaling | Auto | Auto | Auto | Auto | | Complexity | Thấp | Thấp | Trung bình | Trung bình | | Best for | MVP, demo | Side project | Production | Low traffic |",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p031:l451-467",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Key Takeaways\nPage 31: Key Takeaways Text Extract 1 Container = \"ship anywhere\" Docker giải quyết \"it works on my machine\". Multi stage + slim image → agent < 500 MB. 2 Start simple, migrate later Railway/Render cho MVP (< 10 phút). Migrate AWS/GCP khi business thật sự cần scale. 3 Security from day 1 Secrets management + HTTPS + rate limiting + spending caps. Setup trước khi có user thật. 4 Health check + rolling deploy = always available Stateless design + Redis cho phép scale bằng cách thêm instances bất kỳ lúc nào.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "managed_cloud_container_deployment",
+      "name_vi": "Deploy container lên managed cloud",
+      "description_vi": "Triển khai agent từ repository lên managed cloud bằng cách kết nối GitHub, để platform nhận diện Dockerfile hoặc build configuration, thiết lập env vars, chạy deployment, health check và nhận public URL.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Đưa một containerized agent lên managed cloud và làm cho endpoint public hoạt động.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể kết nối repository, cấu hình environment variables, deploy agent lên Railway hoặc Render và kiểm tra public URL.",
+      "bloom_rationale_vi": "Nguồn mô tả trực tiếp chuỗi triển khai Railway, cách set variables, start command, healthcheck path và public URL; lab cũng yêu cầu quy trình tương tự.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi bài lab end-to-end vì đây là quy trình cloud deployment; lab còn tích hợp build local, auth và demo request–response.",
+      "role_reason_vi": "Deploy lên cloud và có public URL hoạt động là mục tiêu và deliverable cốt lõi.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p017:l224-251",
+        "day12-cloud-services-and-deployment:p028:l406-409",
+        "day12-cloud-services-and-deployment:p029:l410-432",
+        "day12-cloud-services-and-deployment:p030:l433-450"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p017:l224-251",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: Railway - Deploy Trong 5 Phút\nPage 17: Railway Deploy Trong 5 Phút Text Extract 1 Kết nối GitHub repo railway login && railway init 2 Railway tự detect Dockerfile / Nixpacks 3 Set environment variables railway variables set OPENAI API KEY=sk ... 4 Click Deploy (hoặc railway up) railway up 5 Nhận public URL railway domain → your app.up.railway.app toml [build] builder = \"NIXPACKS\" [deploy] startCommand = \"uvicorn app:app host 0.0.0.0 port $PORT\" healthcheckPath = \"/health\" restartPolicyType = \"ON FAILURE\" Đặt PORT=8000 trong env vars. Railway inject PORT tự động — agent PHẢI đọc os.getenv('PORT').",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p028:l406-409",
+          "source_type": "slide",
+          "page_no": 28,
+          "content": "## Page 28: LAB LAB 12 CONTAINERIZE & DEPLOY\nPage 28: LAB LAB 12 CONTAINERIZE & DEPLOY Text Extract Mục tiêu: agent có public URL ai cũng truy cập được",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p029:l410-432",
+          "source_type": "slide",
+          "page_no": 29,
+          "content": "## Page 29: Lab 12 - Các Bước Thực Hiện\nPage 29: Lab 12 Các Bước Thực Hiện Text Extract 1 Viết Dockerfile Multi stage build, non root user, HEALTHCHECK Target < 500 MB 2 Build & Test Local docker build t my agent . docker run p 8000:8000 my agent 3 Deploy Railway / Render Connect GitHub → Set env vars → Deploy → Nhận public URL 4 Health Check Endpoint GET /health trả về: status, uptime, version, dependencies 5 Basic Authentication API Key header: X API Key Reject 401 nếu thiếu hoặc sai key 6 Demo Request → Response curl H 'X API Key: ...' X POST https://your url/ask d '{\"question\":\"...\"}'",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p030:l433-450",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Blueprint Cần Nộp\nPage 30: Blueprint Cần Nộp Text Extract Không cần enterprise grade. Cần chứng minh: biết đưa agent từ localhost lên cloud và nó hoạt động. Tables | Container | Deployment | | | | | Dockerfile | Multi stage build, < 500 MB, non root user | | docker compose.yml | Agent + dependencies | | .dockerignore | Loại bỏ .env, pycache , venv/ | | GET /health | Trả về status + uptime + version | | GET /ready | Readiness check | | Public URL | https://your app.up.railway.app | | Env vars | Secrets trong env, không hardcode | | API Key auth | X API Key header, 401 nếu thiếu | | Demo | Request → Response qua public URL | | check production ready.py | 20/20 c",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "api_gateway_request_pipeline",
+      "name_vi": "Pipeline xử lý request của API gateway",
+      "description_vi": "Mỗi request đi qua theo thứ tự Auth Check, Rate Limiter, Input Validate và Cost Check trước khi được phép gọi agent hoặc LLM; request không hợp lệ phải bị reject sớm.",
+      "item_form": "principle",
+      "primary_capability_vi": "Thiết kế hoặc áp dụng thứ tự kiểm soát request trước agent logic.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể triển khai flow kiểm tra auth, rate limit, input và budget trước khi request gọi LLM, với mã lỗi phù hợp.",
+      "bloom_rationale_vi": "Nguồn đưa architecture pipeline cụ thể, các mã 401, 429, 422, 402 và lý do reject sớm để tiết kiệm token.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ pipeline như một capability tổng hợp; các cơ chế auth và cost protection có implementation concern riêng nên được tách.",
+      "role_reason_vi": "API gateway và security là một mục tiêu trực tiếp của bài học.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p018:l252-256",
+        "day12-cloud-services-and-deployment:p019:l257-267"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p018:l252-256",
+          "source_type": "slide",
+          "page_no": 18,
+          "content": "## Page 18: API GATEWAY & SECURITY\nPage 18: API GATEWAY & SECURITY Text Extract 04 Bảo vệ agent trước khi request đến được logic",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p019:l257-267",
+          "source_type": "slide",
+          "page_no": 19,
+          "content": "## Page 19: API Gateway Architecture\nPage 19: API Gateway Architecture Text Extract Mỗi request PHẢI đi qua đủ các bước trước khi agent xử lý: Client Request → Auth Check → Rate Limiter → Input Validate → Cost Check → Agent Process 401 Unauthorized 429 Too Many 422 Invalid 402 Budget Reject sớm = tiết kiệm tokens. Mỗi request vượt qua Auth + Rate Limit + Validate mới được phép gọi LLM.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "authentication_pattern_selection",
+      "name_vi": "Lựa chọn pattern authentication",
+      "description_vi": "Phân biệt API key header, JWT và OAuth2 theo trạng thái, thông tin user, expiry, khả năng revoke và bối cảnh sử dụng như MVP, internal API, SaaS hoặc social login.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn pattern authentication phù hợp với loại người dùng và mức độ phức tạp của sản phẩm.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Người học có thể so sánh API key, JWT và OAuth2 rồi chọn phương án phù hợp cho một use case cụ thể.",
+      "bloom_rationale_vi": "Nguồn mô tả đặc tính, ưu nhược điểm và bối cảnh dùng của cả ba pattern, đồng thời khuyến nghị API key cho MVP.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi API key implementation vì việc chọn pattern bao quát nhiều phương án và có tiêu chí đánh giá riêng.",
+      "role_reason_vi": "Đây là capability độc lập, tái sử dụng cho nhiều hệ thống nhưng bài hiện tại chỉ bắt buộc basic API key.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p020:l268-295"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p020:l268-295",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Authentication Patterns\nPage 20: Authentication Patterns Text Extract API Key Header: X API Key: sk xxx Đơn giản nhất Stateless Dễ rotate Phù hợp B2B / internal Dùng khi: MVP, demo, internal API JWT Token Bearer eyJhbGciOiJIUzI1... Stateless auth Chứa user info Có expiry time Không cần DB check Dùng khi: User facing app, SaaS OAuth2 Third party login (Google...) Delegated auth User không nhớ password Revoke dễ dàng Social login Dùng khi: Platform, marketplace Cho MVP: API key là đủ. Đừng over engineer auth trước khi có user thật.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "api_key_header_authentication",
+      "name_vi": "Basic authentication bằng API key header",
+      "description_vi": "Bảo vệ API bằng header X-API-Key; request thiếu hoặc sai key bị từ chối với 401 Unauthorized.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Cài đặt và kiểm thử basic API key authentication cho agent endpoint.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể yêu cầu X-API-Key hợp lệ trước khi xử lý request và trả 401 khi key thiếu hoặc không đúng.",
+      "bloom_rationale_vi": "Nguồn nêu API key header là lựa chọn MVP và lab/blueprint quy định rõ header cùng hành vi reject 401.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ riêng khỏi việc chọn auth pattern vì đây là task triển khai cụ thể với failure signal 401.",
+      "role_reason_vi": "Basic authentication bằng API key là yêu cầu bắt buộc của deliverable cuối ngày.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p005:l26-36",
+        "day12-cloud-services-and-deployment:p020:l268-295",
+        "day12-cloud-services-and-deployment:p029:l410-432",
+        "day12-cloud-services-and-deployment:p030:l433-450"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p005:l26-36",
+          "source_type": "slide",
+          "page_no": 5,
+          "content": "## Page 5: Deliverable Cuối Ngày\nPage 5: Deliverable Cuối Ngày Text Extract Agent đã được containerize và deploy lên cloud, có health check endpoint, basic authentication, và accessible qua public URL Tables | Container | Deployment | Demo | | | | | | Dockerfile (multi stage, < 500 MB) | Deployed instance: Railway / Render | Public URL ai cũng truy cập được | | docker compose.yml + .dockerignore | Env vars đúng cách (không hardcode) | Request → Response hoạt động | | Health check endpoint /health | Basic auth (API key header) | Production readiness check ✅ |",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p020:l268-295",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Authentication Patterns\nPage 20: Authentication Patterns Text Extract API Key Header: X API Key: sk xxx Đơn giản nhất Stateless Dễ rotate Phù hợp B2B / internal Dùng khi: MVP, demo, internal API JWT Token Bearer eyJhbGciOiJIUzI1... Stateless auth Chứa user info Có expiry time Không cần DB check Dùng khi: User facing app, SaaS OAuth2 Third party login (Google...) Delegated auth User không nhớ password Revoke dễ dàng Social login Dùng khi: Platform, marketplace Cho MVP: API key là đủ. Đừng over engineer auth trước khi có user thật.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p029:l410-432",
+          "source_type": "slide",
+          "page_no": 29,
+          "content": "## Page 29: Lab 12 - Các Bước Thực Hiện\nPage 29: Lab 12 Các Bước Thực Hiện Text Extract 1 Viết Dockerfile Multi stage build, non root user, HEALTHCHECK Target < 500 MB 2 Build & Test Local docker build t my agent . docker run p 8000:8000 my agent 3 Deploy Railway / Render Connect GitHub → Set env vars → Deploy → Nhận public URL 4 Health Check Endpoint GET /health trả về: status, uptime, version, dependencies 5 Basic Authentication API Key header: X API Key Reject 401 nếu thiếu hoặc sai key 6 Demo Request → Response curl H 'X API Key: ...' X POST https://your url/ask d '{\"question\":\"...\"}'",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p030:l433-450",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Blueprint Cần Nộp\nPage 30: Blueprint Cần Nộp Text Extract Không cần enterprise grade. Cần chứng minh: biết đưa agent từ localhost lên cloud và nó hoạt động. Tables | Container | Deployment | | | | | Dockerfile | Multi stage build, < 500 MB, non root user | | docker compose.yml | Agent + dependencies | | .dockerignore | Loại bỏ .env, pycache , venv/ | | GET /health | Trả về status + uptime + version | | GET /ready | Readiness check | | Public URL | https://your app.up.railway.app | | Env vars | Secrets trong env, không hardcode | | API Key auth | X API Key header, 401 nếu thiếu | | Demo | Request → Response qua public URL | | check production ready.py | 20/20 c",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "agent_cost_protection",
+      "name_vi": "Bảo vệ chi phí khi gọi LLM",
+      "description_vi": "Kiểm soát request và mức tiêu thụ LLM bằng rate limiting, spending limits, usage alerts và circuit breaker để giảm spam, token explosion, loop vô hạn hoặc lạm dụng API key.",
+      "item_form": "principle",
+      "primary_capability_vi": "Thiết kế các guard để giới hạn chi phí và ngăn hành vi gọi LLM bất thường.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể áp dụng giới hạn request, budget cap, cảnh báo usage và circuit breaker cho API của agent.",
+      "bloom_rationale_vi": "Nguồn liệt kê các rủi ro chi phí và bốn biện pháp bảo vệ cụ thể, đồng thời đặt rate limiting và spending caps vào security checklist.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi pipeline vì cost protection có nhiều cơ chế và failure mode về tài chính riêng, dù được gọi tại một bước trong pipeline.",
+      "role_reason_vi": "Bảo vệ chi phí là yêu cầu security from day 1 và là một phần của API gateway production readiness.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p019:l257-267",
+        "day12-cloud-services-and-deployment:p021:l296-309",
+        "day12-cloud-services-and-deployment:p027:l394-405",
+        "day12-cloud-services-and-deployment:p031:l451-467"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p019:l257-267",
+          "source_type": "slide",
+          "page_no": 19,
+          "content": "## Page 19: API Gateway Architecture\nPage 19: API Gateway Architecture Text Extract Mỗi request PHẢI đi qua đủ các bước trước khi agent xử lý: Client Request → Auth Check → Rate Limiter → Input Validate → Cost Check → Agent Process 401 Unauthorized 429 Too Many 422 Invalid 402 Budget Reject sớm = tiết kiệm tokens. Mỗi request vượt qua Auth + Rate Limit + Validate mới được phép gọi LLM.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p021:l296-309",
+          "source_type": "slide",
+          "page_no": 21,
+          "content": "## Page 21: Cost Protection - Đừng Để Agent Đốt Hết Tiền\nPage 21: Cost Protection Đừng Để Agent Đốt Hết Tiền Text Extract Rủi Ro 1 user spam 10.000 requests → bill khổng lồ Prompt injection trigger loop → token explosion Bug trong code gọi LLM lặp vô hạn API key bị lộ → hacker dùng thoải mái Biện Pháp Bảo Vệ Rate limiting: max requests/user/phút Spending limits: daily/monthly budget cap Usage alerts: notify khi cost threshold Circuit breaker: tắt khi anomaly detected",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p027:l394-405",
+          "source_type": "slide",
+          "page_no": 27,
+          "content": "## Page 27: Key Files - Cơ Bản vs Chuyên Sâu\nPage 27: Key Files Cơ Bản vs Chuyên Sâu Text Extract Section 4: API Gateway basic/app.py → API Key auth (30 lines) advanced/auth.py + rate limiter.py + cost guard.py → JWT + Sliding Window + Budget cap Section 5: Scaling basic/app.py → /health + /ready + graceful shutdown advanced/app.py + docker compose.yml → Redis sessions + 3 replicas + Nginx LB utils/mock llm.py → Dùng chung cho tất cả sections (không cần API key thật)",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p031:l451-467",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Key Takeaways\nPage 31: Key Takeaways Text Extract 1 Container = \"ship anywhere\" Docker giải quyết \"it works on my machine\". Multi stage + slim image → agent < 500 MB. 2 Start simple, migrate later Railway/Render cho MVP (< 10 phút). Migrate AWS/GCP khi business thật sự cần scale. 3 Security from day 1 Secrets management + HTTPS + rate limiting + spending caps. Setup trước khi có user thật. 4 Health check + rolling deploy = always available Stateless design + Redis cho phép scale bằng cách thêm instances bất kỳ lúc nào.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "liveness_probe_health_check",
+      "name_vi": "Liveness probe và endpoint /health",
+      "description_vi": "Liveness probe xác định container hoặc agent còn sống hay không; GET /health trả trạng thái vận hành và có thể cung cấp uptime, version cùng trạng thái dependencies để platform tự restart khi fail.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Thiết lập và kiểm tra liveness health check cho agent.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể tạo GET /health với response phù hợp và cấu hình platform restart container khi liveness check thất bại.",
+      "bloom_rationale_vi": "Nguồn mô tả ý nghĩa liveness, endpoint /health, hành vi restart, chu kỳ check và mẫu response; lab yêu cầu endpoint này.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi readiness vì liveness quyết định process có cần restart, trong khi readiness quyết định có route traffic hay không.",
+      "role_reason_vi": "Health check /health là yêu cầu bắt buộc trong deliverable và production readiness.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p005:l26-36",
+        "day12-cloud-services-and-deployment:p023:l314-344",
+        "day12-cloud-services-and-deployment:p029:l410-432",
+        "day12-cloud-services-and-deployment:p030:l433-450"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p005:l26-36",
+          "source_type": "slide",
+          "page_no": 5,
+          "content": "## Page 5: Deliverable Cuối Ngày\nPage 5: Deliverable Cuối Ngày Text Extract Agent đã được containerize và deploy lên cloud, có health check endpoint, basic authentication, và accessible qua public URL Tables | Container | Deployment | Demo | | | | | | Dockerfile (multi stage, < 500 MB) | Deployed instance: Railway / Render | Public URL ai cũng truy cập được | | docker compose.yml + .dockerignore | Env vars đúng cách (không hardcode) | Request → Response hoạt động | | Health check endpoint /health | Basic auth (API key header) | Production readiness check ✅ |",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p023:l314-344",
+          "source_type": "slide",
+          "page_no": 23,
+          "content": "## Page 23: Health Checks - Tự Động Phát Hiện & Khôi Phục\nPage 23: Health Checks Tự Động Phát Hiện & Khôi Phục Text Extract Liveness Probe \"Agent có còn sống không?\" Endpoint: GET /health Fail → platform restart container Check mỗi 30 giây Readiness Probe \"Agent có sẵn sàng nhận request?\" Endpoint: GET /ready Fail → load balancer ngưng route Check khi startup GET /health → Response: { \"status\": \"ok\", \"uptime seconds\": 3600, \"version\": \"1.0.0\", \"dependencies\": { \"redis\": \"ok\", \"db\": \"ok\" } } Rolling Deployment = Zero Downtime: 1. Start new instance v2 2. Health check passes 3. Route traffic to v2 4. Stop old instance v1",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p029:l410-432",
+          "source_type": "slide",
+          "page_no": 29,
+          "content": "## Page 29: Lab 12 - Các Bước Thực Hiện\nPage 29: Lab 12 Các Bước Thực Hiện Text Extract 1 Viết Dockerfile Multi stage build, non root user, HEALTHCHECK Target < 500 MB 2 Build & Test Local docker build t my agent . docker run p 8000:8000 my agent 3 Deploy Railway / Render Connect GitHub → Set env vars → Deploy → Nhận public URL 4 Health Check Endpoint GET /health trả về: status, uptime, version, dependencies 5 Basic Authentication API Key header: X API Key Reject 401 nếu thiếu hoặc sai key 6 Demo Request → Response curl H 'X API Key: ...' X POST https://your url/ask d '{\"question\":\"...\"}'",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p030:l433-450",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Blueprint Cần Nộp\nPage 30: Blueprint Cần Nộp Text Extract Không cần enterprise grade. Cần chứng minh: biết đưa agent từ localhost lên cloud và nó hoạt động. Tables | Container | Deployment | | | | | Dockerfile | Multi stage build, < 500 MB, non root user | | docker compose.yml | Agent + dependencies | | .dockerignore | Loại bỏ .env, pycache , venv/ | | GET /health | Trả về status + uptime + version | | GET /ready | Readiness check | | Public URL | https://your app.up.railway.app | | Env vars | Secrets trong env, không hardcode | | API Key auth | X API Key header, 401 nếu thiếu | | Demo | Request → Response qua public URL | | check production ready.py | 20/20 c",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "readiness_probe",
+      "name_vi": "Readiness probe và endpoint /ready",
+      "description_vi": "Readiness probe xác định instance đã sẵn sàng nhận request hay chưa; khi fail, load balancer ngừng route traffic tới instance thay vì nhất thiết restart nó.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Thiết lập readiness check để chỉ route traffic tới instance sẵn sàng.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể cung cấp GET /ready và dùng kết quả của nó để loại instance chưa sẵn sàng khỏi traffic.",
+      "bloom_rationale_vi": "Nguồn phân biệt rõ readiness với liveness và nêu hành vi load balancer ngừng route khi readiness fail.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Được tách vì readiness có semantics, thời điểm kiểm tra và remediation khác với liveness.",
+      "role_reason_vi": "GET /ready nằm trong blueprint production readiness của deliverable.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p023:l314-344",
+        "day12-cloud-services-and-deployment:p030:l433-450"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p023:l314-344",
+          "source_type": "slide",
+          "page_no": 23,
+          "content": "## Page 23: Health Checks - Tự Động Phát Hiện & Khôi Phục\nPage 23: Health Checks Tự Động Phát Hiện & Khôi Phục Text Extract Liveness Probe \"Agent có còn sống không?\" Endpoint: GET /health Fail → platform restart container Check mỗi 30 giây Readiness Probe \"Agent có sẵn sàng nhận request?\" Endpoint: GET /ready Fail → load balancer ngưng route Check khi startup GET /health → Response: { \"status\": \"ok\", \"uptime seconds\": 3600, \"version\": \"1.0.0\", \"dependencies\": { \"redis\": \"ok\", \"db\": \"ok\" } } Rolling Deployment = Zero Downtime: 1. Start new instance v2 2. Health check passes 3. Route traffic to v2 4. Stop old instance v1",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p030:l433-450",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Blueprint Cần Nộp\nPage 30: Blueprint Cần Nộp Text Extract Không cần enterprise grade. Cần chứng minh: biết đưa agent từ localhost lên cloud và nó hoạt động. Tables | Container | Deployment | | | | | Dockerfile | Multi stage build, < 500 MB, non root user | | docker compose.yml | Agent + dependencies | | .dockerignore | Loại bỏ .env, pycache , venv/ | | GET /health | Trả về status + uptime + version | | GET /ready | Readiness check | | Public URL | https://your app.up.railway.app | | Env vars | Secrets trong env, không hardcode | | API Key auth | X API Key header, 401 nếu thiếu | | Demo | Request → Response qua public URL | | check production ready.py | 20/20 c",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "rolling_deployment_zero_downtime",
+      "name_vi": "Rolling deployment không downtime",
+      "description_vi": "Triển khai phiên bản mới bằng cách khởi động instance v2, chờ health check pass, chuyển traffic sang v2 rồi mới dừng v1.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Mô tả hoặc áp dụng trình tự rolling deployment để duy trì availability.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể sắp xếp các bước rolling deployment sao cho instance mới chỉ nhận traffic sau khi đạt health check.",
+      "bloom_rationale_vi": "Nguồn cung cấp trình tự bốn bước rõ ràng và liên hệ health check với zero downtime.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi health check vì rolling deployment là quy trình release có mục tiêu zero downtime, không chỉ là phát hiện trạng thái instance.",
+      "role_reason_vi": "Có tính tái sử dụng cho production reliability nhưng không phải yêu cầu tối thiểu của lab.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p023:l314-344",
+        "day12-cloud-services-and-deployment:p031:l451-467"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p023:l314-344",
+          "source_type": "slide",
+          "page_no": 23,
+          "content": "## Page 23: Health Checks - Tự Động Phát Hiện & Khôi Phục\nPage 23: Health Checks Tự Động Phát Hiện & Khôi Phục Text Extract Liveness Probe \"Agent có còn sống không?\" Endpoint: GET /health Fail → platform restart container Check mỗi 30 giây Readiness Probe \"Agent có sẵn sàng nhận request?\" Endpoint: GET /ready Fail → load balancer ngưng route Check khi startup GET /health → Response: { \"status\": \"ok\", \"uptime seconds\": 3600, \"version\": \"1.0.0\", \"dependencies\": { \"redis\": \"ok\", \"db\": \"ok\" } } Rolling Deployment = Zero Downtime: 1. Start new instance v2 2. Health check passes 3. Route traffic to v2 4. Stop old instance v1",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p031:l451-467",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Key Takeaways\nPage 31: Key Takeaways Text Extract 1 Container = \"ship anywhere\" Docker giải quyết \"it works on my machine\". Multi stage + slim image → agent < 500 MB. 2 Start simple, migrate later Railway/Render cho MVP (< 10 phút). Migrate AWS/GCP khi business thật sự cần scale. 3 Security from day 1 Secrets management + HTTPS + rate limiting + spending caps. Setup trước khi có user thật. 4 Health check + rolling deploy = always available Stateless design + Redis cho phép scale bằng cách thêm instances bất kỳ lúc nào.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "shared_session_state_with_redis",
+      "name_vi": "Scale stateless với session state dùng chung bằng Redis",
+      "description_vi": "Không lưu session trong RAM của một instance; lưu session trong Redis dùng chung để mọi instance phía sau load balancer đều đọc được context.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế lưu session dùng chung để agent có thể scale ngang bằng cách thêm instances.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể chuyển session từ instance memory sang Redis shared state và để nhiều instance cùng phục vụ user.",
+      "bloom_rationale_vi": "Nguồn minh họa lỗi stateful qua hai instance, đưa mẫu lưu session bằng Redis và sơ đồ users–load balancer–instances–Redis.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi stateless principle vì đây là cách triển khai external shared state cụ thể, với task Redis và load balancer riêng.",
+      "role_reason_vi": "Đây là capability scaling nâng cao, được đánh dấu advanced và không bắt buộc trong blueprint MVP.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p013:l146-180",
+        "day12-cloud-services-and-deployment:p024:l345-366",
+        "day12-cloud-services-and-deployment:p027:l394-405",
+        "day12-cloud-services-and-deployment:p031:l451-467"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p013:l146-180",
+          "source_type": "slide",
+          "page_no": 13,
+          "content": "## Page 13: Docker Compose - Multi-Service Stack\nPage 13: Docker Compose Multi Service Stack Text Extract 1 lệnh docker compose up → khởi động toàn bộ stack Tables | Service | Vai trò | | | | | Agent Service | FastAPI + LLM logic; Port 8000 | | Vector Store | Qdrant / ChromaDB; RAG database | | Redis | Session cache; Rate limit store | | Nginx | Reverse proxy; Load balancer | yaml services: agent: build: . depends on: [redis, qdrant] env file: [.env.local] healthcheck: test: [\"CMD\", \"curl\", \" f\", \"http://localhost:8000/health\"] redis: image: redis:7 alpine qdrant: image: qdrant/qdrant:v1.9.0 Text Extract Bắt đầu với 2 services: agent + vector store. Thêm Redis và Nginx khi cần scale. Lợi íc",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p024:l345-366",
+          "source_type": "slide",
+          "page_no": 24,
+          "content": "## Page 24: Stateless Design - Scale Bằng Cách Thêm Instances\nPage 24: Stateless Design Scale Bằng Cách Thêm Instances Text Extract Stateful (Không Scale Được) Session lưu trong memory của instance sessions = {} dict trong RAM Instance 1 xử lý request 1 → lưu session Instance 2 xử lý request 2 → KHÔNG CÓ SESSION! → Bug! User mất context Stateless + Redis (Scale Được) Session lưu trong Redis (shared) redis client = redis.from url(REDIS URL) def save session(session id, data): redis client.setex(f'session:{session id}', 3600, json.dumps(data)) Bất kỳ instance nào cũng đọc được session! Users → Load Balancer → Instance 1, 2, 3 → Redis (Shared State) Nguyên tắc: Bất kỳ instance nào cũng phải serve được bất",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p027:l394-405",
+          "source_type": "slide",
+          "page_no": 27,
+          "content": "## Page 27: Key Files - Cơ Bản vs Chuyên Sâu\nPage 27: Key Files Cơ Bản vs Chuyên Sâu Text Extract Section 4: API Gateway basic/app.py → API Key auth (30 lines) advanced/auth.py + rate limiter.py + cost guard.py → JWT + Sliding Window + Budget cap Section 5: Scaling basic/app.py → /health + /ready + graceful shutdown advanced/app.py + docker compose.yml → Redis sessions + 3 replicas + Nginx LB utils/mock llm.py → Dùng chung cho tất cả sections (không cần API key thật)",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p031:l451-467",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Key Takeaways\nPage 31: Key Takeaways Text Extract 1 Container = \"ship anywhere\" Docker giải quyết \"it works on my machine\". Multi stage + slim image → agent < 500 MB. 2 Start simple, migrate later Railway/Render cho MVP (< 10 phút). Migrate AWS/GCP khi business thật sự cần scale. 3 Security from day 1 Secrets management + HTTPS + rate limiting + spending caps. Setup trước khi có user thật. 4 Health check + rolling deploy = always available Stateless design + Redis cho phép scale bằng cách thêm instances bất kỳ lúc nào.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "end_to_end_containerize_and_deploy_lab",
+      "name_vi": "Quy trình containerize và deploy agent end-to-end",
+      "description_vi": "Quy trình tích hợp gồm viết Dockerfile multi-stage, build và test local, deploy Railway hoặc Render, cấu hình env vars, kiểm tra health endpoint, bật API key auth và demo request–response qua public URL.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thực hiện trọn vẹn việc đưa agent từ localhost lên cloud và chứng minh agent hoạt động.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể hoàn thành chuỗi build local, deploy public, health check, authentication và gửi request thành công qua public URL.",
+      "bloom_rationale_vi": "Lab 12 liệt kê tuần tự các bước và blueprint nêu đầy đủ artefacts cùng kết quả cần nộp.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ lại như một procedure tích hợp vì task cuối là kết hợp nhiều capability thành một deployment chạy được; các thành phần vẫn có item riêng do được đánh giá độc lập.",
+      "role_reason_vi": "Đây là trọng tâm thực hành và deliverable chính của bài học.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p028:l406-409",
+        "day12-cloud-services-and-deployment:p029:l410-432",
+        "day12-cloud-services-and-deployment:p030:l433-450"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p028:l406-409",
+          "source_type": "slide",
+          "page_no": 28,
+          "content": "## Page 28: LAB LAB 12 CONTAINERIZE & DEPLOY\nPage 28: LAB LAB 12 CONTAINERIZE & DEPLOY Text Extract Mục tiêu: agent có public URL ai cũng truy cập được",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p029:l410-432",
+          "source_type": "slide",
+          "page_no": 29,
+          "content": "## Page 29: Lab 12 - Các Bước Thực Hiện\nPage 29: Lab 12 Các Bước Thực Hiện Text Extract 1 Viết Dockerfile Multi stage build, non root user, HEALTHCHECK Target < 500 MB 2 Build & Test Local docker build t my agent . docker run p 8000:8000 my agent 3 Deploy Railway / Render Connect GitHub → Set env vars → Deploy → Nhận public URL 4 Health Check Endpoint GET /health trả về: status, uptime, version, dependencies 5 Basic Authentication API Key header: X API Key Reject 401 nếu thiếu hoặc sai key 6 Demo Request → Response curl H 'X API Key: ...' X POST https://your url/ask d '{\"question\":\"...\"}'",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p030:l433-450",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Blueprint Cần Nộp\nPage 30: Blueprint Cần Nộp Text Extract Không cần enterprise grade. Cần chứng minh: biết đưa agent từ localhost lên cloud và nó hoạt động. Tables | Container | Deployment | | | | | Dockerfile | Multi stage build, < 500 MB, non root user | | docker compose.yml | Agent + dependencies | | .dockerignore | Loại bỏ .env, pycache , venv/ | | GET /health | Trả về status + uptime + version | | GET /ready | Readiness check | | Public URL | https://your app.up.railway.app | | Env vars | Secrets trong env, không hardcode | | API Key auth | X API Key header, 401 nếu thiếu | | Demo | Request → Response qua public URL | | check production ready.py | 20/20 c",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "mvp_production_readiness_evaluation",
+      "name_vi": "Đánh giá production readiness ở mức MVP",
+      "description_vi": "Đánh giá agent đã sẵn sàng ở mức MVP khi có container phù hợp, compose và dockerignore, health/readiness checks, secrets qua env vars, API key auth, public URL và request–response hoạt động.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Kiểm tra agent theo checklist production readiness trước khi bàn giao hoặc demo.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Người học có thể đánh giá một deployment theo checklist và xác định deployment đã đáp ứng các điều kiện MVP hay chưa.",
+      "bloom_rationale_vi": "Nguồn đưa deliverable cuối ngày và blueprint kiểm tra các artefacts, endpoint, secrets, auth, public URL và demo thực tế.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi procedure deploy vì đánh giá readiness là task kiểm định kết quả với tiêu chí pass/fail tổng hợp.",
+      "role_reason_vi": "Production readiness check là đầu ra trực tiếp của bài và dùng để chứng minh agent không chỉ chạy trên máy cá nhân.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p005:l26-36",
+        "day12-cloud-services-and-deployment:p030:l433-450"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p005:l26-36",
+          "source_type": "slide",
+          "page_no": 5,
+          "content": "## Page 5: Deliverable Cuối Ngày\nPage 5: Deliverable Cuối Ngày Text Extract Agent đã được containerize và deploy lên cloud, có health check endpoint, basic authentication, và accessible qua public URL Tables | Container | Deployment | Demo | | | | | | Dockerfile (multi stage, < 500 MB) | Deployed instance: Railway / Render | Public URL ai cũng truy cập được | | docker compose.yml + .dockerignore | Env vars đúng cách (không hardcode) | Request → Response hoạt động | | Health check endpoint /health | Basic auth (API key header) | Production readiness check ✅ |",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p030:l433-450",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Blueprint Cần Nộp\nPage 30: Blueprint Cần Nộp Text Extract Không cần enterprise grade. Cần chứng minh: biết đưa agent từ localhost lên cloud và nó hoạt động. Tables | Container | Deployment | | | | | Dockerfile | Multi stage build, < 500 MB, non root user | | docker compose.yml | Agent + dependencies | | .dockerignore | Loại bỏ .env, pycache , venv/ | | GET /health | Trả về status + uptime + version | | GET /ready | Readiness check | | Public URL | https://your app.up.railway.app | | Env vars | Secrets trong env, không hardcode | | API Key auth | X API Key header, 401 nếu thiếu | | Demo | Request → Response qua public URL | | check production ready.py | 20/20 c",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "monitoring_and_observability_for_deployed_agents",
+      "name_vi": "Monitoring và observability cho agent đã deploy",
+      "description_vi": "Các hoạt động theo dõi latency, throughput, error rate, token usage; structured logs, LLM tracing và alerting để phát hiện anomaly sau deployment.",
+      "item_form": "reference_topic",
+      "primary_capability_vi": "",
+      "target_bloom_level": null,
+      "bloom_learning_objective_vi": "",
+      "bloom_rationale_vi": "",
+      "knowledge_role": "reference_concept",
+      "granularity_reason_vi": "Giữ như một chủ đề tham chiếu vì nội dung chỉ là phần preview cho Day 13, chưa dạy quy trình hay tiêu chí mastery.",
+      "role_reason_vi": "Hữu ích để liên kết sang chủ đề monitoring và observability nhưng không thuộc năng lực cần mastery của bài hiện tại.",
+      "evidence_section_ids": [
+        "day12-cloud-services-and-deployment:p032:l468-483"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day12-cloud-services-and-deployment:p032:l468-483",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Preview - Day 13: Monitoring & Observability\nPage 32: Preview Day 13: Monitoring & Observability Text Extract \"Agent deploy xong, 3 ngày sau: latency tăng gấp đôi, cost tăng 300%. Bạn không biết cho đến khi user phàn nàn.\" Metrics Latency, throughput, error rate, token usage Logging Structured logs → Loki / Datadog / CloudWatch Tracing LangSmith / Langfuse cho LLM traces Alerting PagerDuty / Slack alert khi anomaly detected Chuẩn bị: Đọc LangSmith hoặc Langfuse quickstart (20 phút) trước buổi sau. Từ hôm nay, agent không còn chỉ chạy trên máy bạn.",
+          "transcript_evidence": []
+        }
+      ]
+    }
+  ],
+  "evidence_repairs": [
+    {
+      "code": "dev_prod_environment_parity",
+      "from": "day12-cloud-services-and-deployment:p009:l90-93",
+      "to": "day12-cloud-services-and-deployment:p009:l73-89",
+      "repair_kind": "unique_page_unit",
+      "line_distance": 21
+    },
+    {
+      "code": "externalized_config_and_secrets",
+      "from": "day12-cloud-services-and-deployment:p009:l90-93",
+      "to": "day12-cloud-services-and-deployment:p009:l73-89",
+      "repair_kind": "unique_page_unit",
+      "line_distance": 21
+    },
+    {
+      "code": "env_based_port_binding",
+      "from": "day12-cloud-services-and-deployment:p009:l90-93",
+      "to": "day12-cloud-services-and-deployment:p009:l73-89",
+      "repair_kind": "unique_page_unit",
+      "line_distance": 21
+    },
+    {
+      "code": "stateless_agent_process",
+      "from": "day12-cloud-services-and-deployment:p009:l90-93",
+      "to": "day12-cloud-services-and-deployment:p009:l73-89",
+      "repair_kind": "unique_page_unit",
+      "line_distance": 21
+    },
+    {
+      "code": "structured_json_logging",
+      "from": "day12-cloud-services-and-deployment:p009:l90-93",
+      "to": "day12-cloud-services-and-deployment:p009:l73-89",
+      "repair_kind": "unique_page_unit",
+      "line_distance": 21
+    },
+    {
+      "code": "graceful_shutdown",
+      "from": "day12-cloud-services-and-deployment:p009:l90-93",
+      "to": "day12-cloud-services-and-deployment:p009:l73-89",
+      "repair_kind": "unique_page_unit",
+      "line_distance": 21
+    }
+  ],
+  "source_mode": "slide_only"
+}

@@ -1,0 +1,1355 @@
+{
+  "schema_version": "mixed_source_knowledge_inventory_v1",
+  "source_slug": "day13-monitoring-logging-observability",
+  "knowledge_items": [
+    {
+      "code": "observability_vs_monitoring",
+      "name_vi": "Phân biệt monitoring và observability",
+      "description_vi": "Monitoring đo các chỉ số và trả lời các câu hỏi đã biết trước; observability phát ra đủ dữ liệu để khám phá các câu hỏi mới và điều tra unknown unknowns trong hệ thống, đặc biệt là AI agent.",
+      "item_form": "concept",
+      "primary_capability_vi": "Giải thích và nhận diện khi nào monitoring đơn thuần không đủ, cần observability để điều tra vấn đề chưa biết trước.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Giải thích được sự khác nhau giữa monitoring và observability, đồng thời liên hệ sự khác biệt này với các vấn đề như model drift, prompt mới và hành vi người dùng.",
+      "bloom_rationale_vi": "Nguồn định nghĩa trực tiếp hai khái niệm, đối chiếu known unknowns với unknown unknowns và nêu lý do observability quan trọng hơn với AI agent.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ chung phần đối chiếu monitoring và observability vì đây là một năng lực phân biệt khái niệm; các ví dụ chỉ minh họa cho cùng một ranh giới.",
+      "role_reason_vi": "Đây là nền tảng để hiểu toàn bộ bài học và quyết định dữ liệu cần thu thập khi vận hành agent.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p006:l35-38",
+        "day13-monitoring-logging-observability:p007:l39-53"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p006:l35-38",
+          "source_type": "slide",
+          "page_no": 6,
+          "content": "## Page 6: Foundations of Observability\nPage 6: Foundations of Observability Text Extract Từ lý thuyết xuống thực hành: observability là gì, và vì sao chỉ monitoring không đủ cho AI agent",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p007:l39-53",
+          "source_type": "slide",
+          "page_no": 7,
+          "content": "## Page 7: Monitoring vs Observability - Khác Nhau Thế Nào?\nPage 7: Monitoring vs Observability Khác Nhau Thế Nào? Text Extract Monitoring (biết trước) Đo các metrics biết trước sẽ cần Trả lời câu hỏi đã định sẵn Phù hợp với known unknowns Ví dụ: CPU 80%? uptime? Observability (khám phá) Hệ thống phát ra đủ data để hỏi câu hỏi mới Phù hợp với unknown unknowns Ví dụ: vì sao user X với feature Y, model Z, tháng W latency cao? AI agent có rất nhiều unknown unknowns (prompt mới, model drift, user creativity) → observability quan trọng hơn monitoring đơn thuần.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "observability_pillars",
+      "name_vi": "Ba trụ cột của observability",
+      "description_vi": "Metrics là số liệu aggregate để phát hiện và cảnh báo; logs là các event chi tiết để debug; traces là hành trình end-to-end của request để localize nguyên nhân. Profiles phân tích CPU/memory nhưng ít quan trọng hơn trong AI vì bottleneck thường ở LLM API.",
+      "item_form": "concept",
+      "primary_capability_vi": "Phân loại được dữ liệu observability thành metrics, logs, traces và nhận diện vai trò của từng loại trong phát hiện, định vị và tìm root cause.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Giải thích được metrics trả lời bao nhiêu/bao lâu, logs trả lời chuyện gì xảy ra và traces trả lời vì sao; chọn đúng trụ cột cho một tình huống điều tra.",
+      "bloom_rationale_vi": "Nguồn không chỉ liệt kê ba pillars mà còn mô tả mục đích, chi phí và vai trò của từng loại qua một incident hoàn chỉnh.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp metrics, logs, traces và profiles vì nguồn dạy chúng như một mô hình phân vai trong cùng hệ observability; profiles không có mastery state độc lập trong bài.",
+      "role_reason_vi": "Đây là cấu trúc khái niệm trung tâm để thiết kế logging, tracing, dashboard và alerting cho agent.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p010:l77-91",
+        "day13-monitoring-logging-observability:p012:l113-124",
+        "day13-monitoring-logging-observability:p075:l1090-1096"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p010:l77-91",
+          "source_type": "slide",
+          "page_no": 10,
+          "content": "## Page 10: 3 Pillars of Observability + Profiles\nPage 10: 3 Pillars of Observability + Profiles Text Extract Metrics: Đo lường Logs: Ghi chép Traces: Theo dõi Profiles: Phân tích CPU Metrics: Bao nhiêu? Bao lâu? Latency, rate, cost Logs: Gì xảy ra? Input/output, event Traces: Tại sao? End to end flow Profiles: Tốn ở dòng code nào? Rare in AI Metrics = số liệu aggregate (rẻ, alert). Logs = event chi tiết (đắt, debug). Traces = hành trình request (vừa phải, root cause). Pillar thứ 4 Profiles (CPU/memory) ít dùng cho AI vì bottleneck thường ở LLM API, không code local.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p012:l113-124",
+          "source_type": "slide",
+          "page_no": 12,
+          "content": "## Page 12: 3 Pillars Cùng Nhau - Một Ví Dụ Thực Tế\nPage 12: 3 Pillars Cùng Nhau Một Ví Dụ Thực Tế Text Extract Kịch bản: Alert fire lúc 3h sáng: \"P99 latency 8s suốt 10 phút\". Metrics cho thấy P99 đã tăng từ 2s → 8s trong 10 phút. Error rate vẫn 0%. → Biết có vấn đề, nhưng chưa biết vì sao. Traces cho 10 request chậm nhất: span vector search chiếm 6.5s (bình thường 200ms). Bottleneck tại retrieval, không phải LLM. Logs tại service retrieval: \"Pinecone request timeout after 6000ms\" bắt đầu từ 02:47. Root cause: Pinecone có sự cố, cần chuyển sang fallback vector DB. Metrics → phát hiện. Traces → localize. Logs → root cause. Thiếu 1 trong 3, MTTR sẽ kéo dài từ phút lên giờ.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p075:l1090-1096",
+          "source_type": "slide",
+          "page_no": 75,
+          "content": "## Page 75: Tổng kết - Key Takeaways\nPage 75: Tổng kết Key Takeaways Text Extract Những ý chính cần nhớ trước khi sang bài tiếp theo 1. 3 pillars + 2 extras. Metrics, Logs, Traces + Cost và Quality riêng cho AI. 2. SLO driven, symptom based alerting. Alert khi user bị ảnh hưởng, luôn có runbook. 3. OpenTelemetry + FinOps. Instrument 1 lần; 4 cost patterns (cache/routing/semantic/batch) giảm 70%.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "metric_cardinality_design",
+      "name_vi": "Thiết kế cardinality cho metrics",
+      "description_vi": "Cardinality là số tổ hợp unique của các metric label. Metric không nên dùng user ID, request ID hoặc email làm label; các thuộc tính high-cardinality phải chuyển sang logs hoặc traces. Các label phù hợp gồm model, environment, feature và tier.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá và thiết kế metric labels để tránh tạo quá nhiều time series và kiểm soát chi phí lưu trữ observability.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Chọn được label nên và không nên đưa vào metrics, ước tính tác động của cardinality và chuyển dữ liệu high-cardinality sang logs hoặc traces.",
+      "bloom_rationale_vi": "Nguồn cung cấp công thức số series, ví dụ chi phí Prometheus và quy tắc lựa chọn label có thể áp dụng trực tiếp khi instrument hệ thống.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ khái niệm cardinality, rủi ro chi phí và quy tắc label trong một criterion vì chúng cùng phục vụ quyết định metric design; phép tính số series chỉ là tham số minh họa.",
+      "role_reason_vi": "Thiết kế cardinality ảnh hưởng trực tiếp đến khả năng vận hành và chi phí monitoring, đồng thời là một phần quan trọng của monitoring blueprint.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p011:l92-112"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p011:l92-112",
+          "source_type": "slide",
+          "page_no": 11,
+          "content": "## Page 11: Cardinality - Tại Sao Metrics Đắt\nPage 11: Cardinality Tại Sao Metrics Đắt Text Extract Cardinality = số tổ hợp unique của các label. Ví dụ: metric llm latency user id: 100,000 giá trị model: 4 giá trị endpoint: 20 giá trị status: 10 giá trị Tổng series = 100,000 × 4 × 20 × 10 = 8 × 10^7 series! Với Prometheus, mỗi series ≈ 500 bytes/15s → ∼ 40GB/giờ. Không khả thi. Lưu ý: Sai cardinality là cách phổ biến nhất làm sập Prometheus và nhận bill $40k/tháng từ Datadog không báo trước. Quy tắc cardinality KHÔNG dùng user id, request id, email làm metric label CÓ dùng: model, env, feature, tier High cardinality data → vào logs hoặc traces Sampling 1 10% cho AI workloads",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "sli_slo_sla_distinction",
+      "name_vi": "Phân biệt SLI, SLO và SLA",
+      "description_vi": "SLI là metric đo lường được; SLO là mục tiêu nội bộ cho SLI; SLA là cam kết với khách hàng và có thể kèm phạt. SLO thường chặt hơn SLA để tạo buffer vận hành.",
+      "item_form": "concept",
+      "primary_capability_vi": "Phân loại một chỉ số hoặc cam kết reliability thành SLI, SLO hoặc SLA và giải thích quan hệ giữa chúng.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Giải thích được SLI, SLO, SLA khác nhau thế nào và chuyển một yêu cầu reliability của agent thành SLI và SLO phù hợp.",
+      "bloom_rationale_vi": "Nguồn đưa định nghĩa, ví dụ agent và quan hệ SLO chặt hơn SLA một cách trực tiếp.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp ba thuật ngữ vì mastery chính là phân biệt vai trò của chúng trong cùng một reliability model; ví dụ P95 latency và uptime không cần tách thành item riêng.",
+      "role_reason_vi": "SLO là nền tảng cho alert rules và monitoring blueprint của bài.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p014:l134-145"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p014:l134-145",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: SLI / SLO / SLA - Ngôn Ngữ Của Reliability\nPage 14: SLI / SLO / SLA Ngôn Ngữ Của Reliability Tables | Thuật ngữ | Định nghĩa | Ví dụ cho agent | | | | | | SLI | Service Level Indicator 1 metric đo lường được | P95 latency = 2.3s | | SLO | Objective: mục tiêu nội bộ cho SLI | P95 ≤ 3s trong 99.5% thời gian (28 ngày) | | SLA | Agreement: cam kết với khách hàng, có phạt | 99% uptime, nếu không sẽ refund 10% | | Error Budget | Dung sai cho phép SLO sai lệch | 100% 99.5% = 0.5% = 3.6 giờ/tháng | Text Extract SLO chặt hơn SLA (buffer để không bao giờ breach SLA). Khi error budget còn nhiều → được phép deploy risky. Hết budget → freeze, chỉ fix bug.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "error_budget_calculation",
+      "name_vi": "Tính error budget",
+      "description_vi": "Error budget là phần dung sai cho phép SLO sai lệch, được tính bằng phần trăm không đạt SLO và quy đổi ra downtime theo tháng, tuần hoặc ngày.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tính được error budget thời gian từ mức SLO và diễn giải giới hạn downtime tương ứng.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Từ một SLO availability cho trước, tính được downtime được phép trong các khoảng thời gian và kiểm tra tính thực tế của cam kết.",
+      "bloom_rationale_vi": "Nguồn đưa bảng quy đổi cho nhiều mức SLO và nêu quy luật mỗi thêm một nine làm chi phí tăng khoảng mười lần.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi định nghĩa SLI/SLO/SLA vì tính error budget là task định lượng riêng, có lỗi và cách sửa khác với việc phân biệt thuật ngữ.",
+      "role_reason_vi": "Monitoring blueprint phải có SLO và budget thực tế; việc tính budget giúp tránh đặt reliability objective không khả thi.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p014:l134-145",
+        "day13-monitoring-logging-observability:p015:l146-158"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p014:l134-145",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: SLI / SLO / SLA - Ngôn Ngữ Của Reliability\nPage 14: SLI / SLO / SLA Ngôn Ngữ Của Reliability Tables | Thuật ngữ | Định nghĩa | Ví dụ cho agent | | | | | | SLI | Service Level Indicator 1 metric đo lường được | P95 latency = 2.3s | | SLO | Objective: mục tiêu nội bộ cho SLI | P95 ≤ 3s trong 99.5% thời gian (28 ngày) | | SLA | Agreement: cam kết với khách hàng, có phạt | 99% uptime, nếu không sẽ refund 10% | | Error Budget | Dung sai cho phép SLO sai lệch | 100% 99.5% = 0.5% = 3.6 giờ/tháng | Text Extract SLO chặt hơn SLA (buffer để không bao giờ breach SLA). Khi error budget còn nhiều → được phép deploy risky. Hết budget → freeze, chỉ fix bug.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p015:l146-158",
+          "source_type": "slide",
+          "page_no": 15,
+          "content": "## Page 15: Error Budget Math - Bao Nhiêu Downtime Chấp Nhận?\nPage 15: Error Budget Math Bao Nhiêu Downtime Chấp Nhận? Tables | SLO | Downtime/tháng | Downtime/tuần | Downtime/ngày | | | | | | | 99% | 7.2 giờ | 1.68 giờ | 14.4 phút | | 99.5% | 3.6 giờ | 50.4 phút | 7.2 phút | | 99.9% (3 nines) | 43.2 phút | 10.1 phút | 1.44 phút | | 99.99% (4 nines) | 4.32 phút | 1.01 phút | 8.6 giây | | 99.999% (5 nines) | 25.9 giây | 6.05 giây | 0.86 giây | Text Extract Lưu ý: Mỗi thêm 1 'nine' tốn gấp 10 lần tiền. AI agent thực tế → SLO 99% 99.5% là đủ. Đừng hứa 99.99% khi LLM API chỉ 99.9%.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "error_budget_release_policy",
+      "name_vi": "Dùng error budget để quyết định phát hành",
+      "description_vi": "Khi error budget còn nhiều, team có thể chấp nhận deploy risky; khi budget cạn, cần freeze phát hành và ưu tiên sửa lỗi.",
+      "item_form": "principle",
+      "primary_capability_vi": "Ra quyết định release hoặc freeze dựa trên trạng thái error budget.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Đề xuất được hành động release hoặc remediation tương ứng với mức error budget còn lại.",
+      "bloom_rationale_vi": "Nguồn nêu rõ hai chính sách vận hành đối nghịch dựa trên budget còn nhiều hay đã hết.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi phép tính error budget vì tính budget và dùng budget để quản trị release là hai task đánh giá khác nhau.",
+      "role_reason_vi": "Đây là capability tái sử dụng trong reliability engineering nhưng không phải thành phần bắt buộc của mọi monitoring blueprint tối thiểu.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p014:l134-145"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p014:l134-145",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: SLI / SLO / SLA - Ngôn Ngữ Của Reliability\nPage 14: SLI / SLO / SLA Ngôn Ngữ Của Reliability Tables | Thuật ngữ | Định nghĩa | Ví dụ cho agent | | | | | | SLI | Service Level Indicator 1 metric đo lường được | P95 latency = 2.3s | | SLO | Objective: mục tiêu nội bộ cho SLI | P95 ≤ 3s trong 99.5% thời gian (28 ngày) | | SLA | Agreement: cam kết với khách hàng, có phạt | 99% uptime, nếu không sẽ refund 10% | | Error Budget | Dung sai cho phép SLO sai lệch | 100% 99.5% = 0.5% = 3.6 giờ/tháng | Text Extract SLO chặt hơn SLA (buffer để không bao giờ breach SLA). Khi error budget còn nhiều → được phép deploy risky. Hết budget → freeze, chỉ fix bug.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "ai_observability_metric_taxonomy",
+      "name_vi": "Các nhóm metrics riêng cho AI agent",
+      "description_vi": "AI agent cần theo dõi performance, quality, cost, reliability và drift bên cạnh các metrics hạ tầng truyền thống.",
+      "item_form": "concept",
+      "primary_capability_vi": "Nhận diện và phân loại được các nhóm metrics cần có khi quan sát AI agent.",
+      "target_bloom_level": "remember",
+      "bloom_learning_objective_vi": "Liệt kê được các nhóm metrics AI-specific và phân biệt chúng với các metrics monitoring truyền thống.",
+      "bloom_rationale_vi": "Nguồn nêu trực tiếp taxonomy gồm performance, quality, cost, reliability và drift, đồng thời nhấn mạnh đây là những thứ monitoring truyền thống bỏ qua.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ taxonomy ở mức nhóm, tách các metric chi tiết như TTFT và quality pyramid sang item riêng vì chúng có năng lực quan sát và lỗi riêng.",
+      "role_reason_vi": "Đây là phạm vi đo lường cốt lõi để nhận biết agent đang hoạt động, tốn tiền hay trả lời kém.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p016:l159-172",
+        "day13-monitoring-logging-observability:p018:l189-192"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p016:l159-172",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: 4 Golden Signals + 2 Cho AI Agent\nPage 16: 4 Golden Signals + 2 Cho AI Agent Text Extract Google SRE 4 Golden Signals Latency: thời gian phản hồi Traffic: request rate (QPS) Errors: error rate Saturation: tài nguyên còn bao nhiêu? Agent có thể \"up\" (traffic OK, latency OK, error OK) nhưng trả lời sai và đốt tiền. Đây là 2 failure mode riêng của AI mà monitoring truyền thống bỏ qua. AI Agent cần thêm 2 Cost: $/request, $/user, token usage Quality: hallucination rate, user CSAT, groundedness score",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p018:l189-192",
+          "source_type": "slide",
+          "page_no": 18,
+          "content": "## Page 18: AI Metrics Deep Dive\nPage 18: AI Metrics Deep Dive Text Extract AI agent cần metrics riêng: performance, quality, cost, reliability, và drift những thứ monitoring truyền thống không có",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "ai_performance_latency_metrics",
+      "name_vi": "Metrics hiệu năng đặc thù của AI",
+      "description_vi": "Ngoài latency end-to-end, throughput, queue depth và uptime, AI agent cần TTFT, TPOT, tokens/sec và context fill. Với streaming UI, TTFT phản ánh cảm nhận nhanh/chậm ban đầu tốt hơn total latency.",
+      "item_form": "concept",
+      "primary_capability_vi": "Chọn và diễn giải các performance metrics phù hợp với trải nghiệm streaming và pipeline LLM.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Giải thích được ý nghĩa của TTFT, TPOT, tokens/sec, context fill và chọn TTFT làm chỉ số ưu tiên khi tối ưu trải nghiệm streaming.",
+      "bloom_rationale_vi": "Nguồn định nghĩa từng metric và đưa đối chiếu trực tiếp giữa TTFT với total latency trong giao diện streaming.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi taxonomy vì taxonomy chỉ phân nhóm metric, còn item này yêu cầu hiểu ý nghĩa và cách ưu tiên các performance metric cụ thể.",
+      "role_reason_vi": "Performance là một phần của golden signals và dashboard bắt buộc của bài.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p019:l193-208"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p019:l193-208",
+          "source_type": "slide",
+          "page_no": 19,
+          "content": "## Page 19: Performance Metrics - Deep Dive\nPage 19: Performance Metrics Deep Dive Text Extract Metrics truyền thống Latency thời gian end to end Throughput requests/giây Queue depth backlog Uptime availability AI specific (mới) TTFT Time To First Token TPOT Time Per Output Token Tokens/sec tốc độ generate Context fill % dùng bao nhiêu window Với streaming UI, user cảm nhận TTFT, không phải total latency. TTFT 500ms → nhanh kể cả tổng 8s. TTFT 3s → lag kể cả tổng 4s. Optimize TTFT trước total.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "tail_latency_percentiles",
+      "name_vi": "Phân tích percentile và tail latency",
+      "description_vi": "P50, P95 và P99 mô tả các phân vị khác nhau của latency; average có thể che giấu long tail. Khi user thực hiện nhiều lượt hoặc workflow có nhiều bước, xác suất gặp tail latency tăng theo số lượt và số bước.",
+      "item_form": "principle",
+      "primary_capability_vi": "Phân tích percentile latency để đánh giá trải nghiệm tail và ưu tiên tối ưu P99/P99.9 thay vì chỉ nhìn average.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Đọc được P50/P95/P99, giải thích tác động của tail latency lên người dùng và xác định khi nào cần tối ưu percentile cao.",
+      "bloom_rationale_vi": "Nguồn đưa định nghĩa các percentile, công thức xác suất gặp tail, hiện tượng tail latency compounds và lý do P99 quan trọng hơn average.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp định nghĩa percentile, long-tail và hiệu ứng nhiều lượt/nhiều bước vì chúng cùng phục vụ một năng lực phân tích latency; ví dụ Amazon chỉ là minh họa.",
+      "role_reason_vi": "P95/P99 là SLI và panel quan trọng trong mục tiêu bài cũng như monitoring dashboard.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p020:l209-222",
+        "day13-monitoring-logging-observability:p021:l223-230"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p020:l209-222",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Percentile Math - Vì Sao P99 Quan Trọng\nPage 20: Percentile Math Vì Sao P99 Quan Trọng Text Extract Bài toán: Agent có P99 = 5s, user chat 10 lượt. Xác suất user gặp 1 lần 5s: 1/10 user sẽ gặp lag rất tệ Với 1,000 user/ngày → 96 user bức xúc Họ sẽ là người tweet negative, churn, complain Service có P99 = X ms, user dùng N lượt → khả năng gặp tail = 1 0.99^N. Tail latency compounds nhanh trong agentic workflow nhiều bước 5 bước × P99 = P95 của toàn bộ! Amazon Rule \"Every 100ms of latency cost them 1% of sales.\" Optimize tail, không chỉ average. P99, P99.9 là KPI chính thức tại Amazon, Google, Meta.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p021:l223-230",
+          "source_type": "slide",
+          "page_no": 21,
+          "content": "## Page 21: Percentile Latency - P50 vs P95 vs P99\nPage 21: Percentile Latency P50 vs P95 vs P99 Text Extract P50 = 800ms (nửa số request nhanh hơn) P95 = 2.1s (95% request nhanh hơn) P99 = 5.3s Lưu ý: Trung bình (average) ẩn giấu long tail. Nếu P50 là 800ms nhưng P99 là 5s, nghĩa là 1 trên 100 user phải chờ rất lâu và họ là người dễ churn nhất.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "ai_quality_metric_pyramid",
+      "name_vi": "Kim tự tháp quality metrics cho AI",
+      "description_vi": "Quality được đo ở bốn tầng: heuristic tự động về format/length/toxicity/PII, LLM-as-judge về relevance/faithfulness, user signals như CSAT và outcome như task success/revenue/retention. Tầng thấp rẻ và nhanh; tầng cao sát ground truth hơn nhưng chậm hoặc tốn hơn.",
+      "item_form": "concept",
+      "primary_capability_vi": "Thiết kế bộ đo quality nhiều tầng và hiểu vai trò của từng tầng trong alerting và xác nhận xu hướng.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Giải thích được trade-off giữa bốn tầng quality metrics và phân công L1/L2 cho alert, L3/L4 cho xác nhận trend.",
+      "bloom_rationale_vi": "Nguồn mô tả đủ bốn tầng, đặc tính chi phí/độ trễ và cách dùng chúng trong production.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp các metric trong kim tự tháp vì chúng là các tầng của cùng một framework chất lượng; từng ví dụ format hoặc CSAT không có mastery state riêng.",
+      "role_reason_vi": "Quality là failure mode riêng của AI và được yêu cầu trong dashboard, alerting và blueprint.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p016:l159-172",
+        "day13-monitoring-logging-observability:p022:l231-243"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p016:l159-172",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: 4 Golden Signals + 2 Cho AI Agent\nPage 16: 4 Golden Signals + 2 Cho AI Agent Text Extract Google SRE 4 Golden Signals Latency: thời gian phản hồi Traffic: request rate (QPS) Errors: error rate Saturation: tài nguyên còn bao nhiêu? Agent có thể \"up\" (traffic OK, latency OK, error OK) nhưng trả lời sai và đốt tiền. Đây là 2 failure mode riêng của AI mà monitoring truyền thống bỏ qua. AI Agent cần thêm 2 Cost: $/request, $/user, token usage Quality: hallucination rate, user CSAT, groundedness score",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p022:l231-243",
+          "source_type": "slide",
+          "page_no": 22,
+          "content": "## Page 22: Quality Metrics - Kim Tự Tháp 4 Tầng\nPage 22: Quality Metrics Kim Tự Tháp 4 Tầng Text Extract L4: Outcome Task success, revenue, retention L3: User Signal Thumbs up/down, CSAT, follow up L2: LLM as Judge Relevance, faithfulness (RAGAS) L1: Automated Heuristic Format, length, toxicity, PII leak L1 rẻ, realtime nhưng không nói được quality thực. L4 là ground truth nhưng lag hàng tuần. Production cần cả 4 L1/L2 để alert, L3/L4 để confirm trends.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "hallucination_detection",
+      "name_vi": "Phát hiện hallucination bằng nhiều tín hiệu",
+      "description_vi": "Hallucination là câu trả lời tự tin nhưng sai. Không dùng một metric duy nhất; kết hợp groundedness/faithfulness với retrieved context, self-consistency, entity verification qua DB/API và user feedback như regenerate.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Xây dựng quy trình phát hiện hoặc ước lượng hallucination bằng nhiều pattern phù hợp với use case.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Chọn và áp dụng các kiểm tra groundedness, self-consistency, entity verification hoặc feedback loop, đồng thời cân nhắc chi phí sampling.",
+      "bloom_rationale_vi": "Nguồn trình bày bốn pattern phát hiện cụ thể, công cụ tương ứng và trade-off chi phí của self-consistency.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ bốn pattern trong một procedure vì chúng là các bước/nguồn tín hiệu bổ sung cho cùng mục tiêu phát hiện hallucination.",
+      "role_reason_vi": "Quality và hallucination là failure mode AI bắt buộc phải quan sát, không thể suy ra từ metrics hệ thống.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p022:l231-243",
+        "day13-monitoring-logging-observability:p023:l244-268"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p022:l231-243",
+          "source_type": "slide",
+          "page_no": 22,
+          "content": "## Page 22: Quality Metrics - Kim Tự Tháp 4 Tầng\nPage 22: Quality Metrics Kim Tự Tháp 4 Tầng Text Extract L4: Outcome Task success, revenue, retention L3: User Signal Thumbs up/down, CSAT, follow up L2: LLM as Judge Relevance, faithfulness (RAGAS) L1: Automated Heuristic Format, length, toxicity, PII leak L1 rẻ, realtime nhưng không nói được quality thực. L4 là ground truth nhưng lag hàng tuần. Production cần cả 4 L1/L2 để alert, L3/L4 để confirm trends.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p023:l244-268",
+          "source_type": "slide",
+          "page_no": 23,
+          "content": "## Page 23: Hallucination - Phát Hiện Thế Nào?\nPage 23: Hallucination Phát Hiện Thế Nào? Text Extract Hallucination = agent trả lời \"rất tự tin\" nhưng sai sự thật. Không có 1 metric duy nhất → cần combo 4 patterns: Pattern 1: Groundedness (RAG) Mỗi claim trong output, check có trong retrieved context không Tool: RAGAS faithfulness, TruLens Pattern 2: Self consistency Gọi LLM 3 lần với temp = 0.7 Nếu 3 câu trả lời mâu thuẫn → nghi ngờ Cost 3× → dùng cho sample 1% Pattern 3: Entity verification Extract entities (tên, số, dates) Cross check với DB/API đáng tin Cho finance, medical use cases Pattern 4: User feedback loop \"Was this helpful?\" button Regenerate click = tín hiệu hallucination Sig",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "ai_cost_per_request_calculation",
+      "name_vi": "Tính cost trên mỗi request AI",
+      "description_vi": "Cost request phải tính riêng input tokens, output tokens và các cơ chế cache theo đơn giá tương ứng, sau đó nhân với traffic để suy ra chi phí ngày/tháng.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tính được cost/request và quy đổi thành cost vận hành theo lưu lượng.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Từ token usage, đơn giá input/output/cache và số request, tính được chi phí mỗi request và ngân sách theo ngày hoặc tháng.",
+      "bloom_rationale_vi": "Nguồn đưa công thức, số liệu token cụ thể, kết quả cost/request và phép nhân theo 100.000 requests/ngày.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi cost attribution vì tính số tiền của một request và xác định tiền thuộc về ai/feature nào là hai task khác nhau.",
+      "role_reason_vi": "Cost là một trong các metrics AI bắt buộc và được đưa vào dashboard, alert rules và blueprint.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p024:l269-287"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p024:l269-287",
+          "source_type": "slide",
+          "page_no": 24,
+          "content": "## Page 24: Cost Engineering - Công Thức Cốt Lõi\nPage 24: Cost Engineering Công Thức Cốt Lõi Text Extract Cost per request không phải 1 con số đơn giản: Ví dụ: Claude Sonnet 4.5 (2026) Input: $3 / M tokens Output: $15 / M tokens Cache write: $3.75 / M Cache read: $0.30 / M (10x rẻ hơn input) Request điển hình: RAG agent System + docs: 8,000 tokens in User query: 200 tokens in Response: 500 tokens out Cost = 8200 · 3 / 10^6 + 500 · 15 / 10^6 = $0.0246 + $0.0075 = $0.032/req Với 100k requests/ngày, cost = $3,200/ngày = $96k/tháng. Nếu prompt cache hit 80% cho system: giảm còn $1,100/ngày = tiết kiệm $63k/tháng.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "ai_cost_attribution",
+      "name_vi": "Attribution chi phí LLM",
+      "description_vi": "Chi phí cần được gắn với các dimension như user, feature, model, tenant, environment và cohort. Tối thiểu mỗi LLM call cần user ID, feature và model để trả lời chi phí đi đâu.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Thiết kế tags và phân rã chi phí LLM theo các dimension phục vụ vận hành, pricing và phân tích margin.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Chọn được các cost attribution tags phù hợp cho một use case và kiểm tra trace có đủ user, feature, model hay chưa.",
+      "bloom_rationale_vi": "Nguồn liệt kê các dimension, mục đích sử dụng và yêu cầu tối thiểu ba tags trên mọi LLM call.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ các dimension trong một criterion vì chúng là các lựa chọn phân rã cùng một mục tiêu; không tách từng tag thành item riêng.",
+      "role_reason_vi": "Deliverable yêu cầu trace có cost tags và bài nhấn mạnh khả năng trả lời câu hỏi của CFO.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p025:l288-302"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p025:l288-302",
+          "source_type": "slide",
+          "page_no": 25,
+          "content": "## Page 25: Cost Attribution - Tiền Đi Đâu?\nPage 25: Cost Attribution Tiền Đi Đâu? Tables | Dimension | Tag gắn vào trace | Dùng để... | | | | | | Per user | user id | Biết power user, tính pricing | | Per feature | feature=\"summary\" | Prioritize optimization | | Per model | model=\"claude sonnet 4 5\" | So sánh cost/value các model | | Per tenant | tenant id | Multi tenant billing | | Per env | env=\"prod\" | Tách dev/staging noise | | Per cohort | plan=\"enterprise\" | Margin analysis | Text Extract Câu hỏi CFO luôn hỏi: \"$50k tháng này, ai tốn?\" bạn phải attribute được. Mọi LLM call phải có 3 tags tối thiểu: user id, feature, model. Thiếu 1 trong 3 → khi CFO hỏi, bạn không trả lời được, v",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "ai_cost_optimization_patterns",
+      "name_vi": "Các pattern tối ưu chi phí AI",
+      "description_vi": "Bốn pattern chính là prompt caching, model routing/cascade, semantic cache và Batch API cho workload không realtime.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Chọn và áp dụng pattern tối ưu chi phí phù hợp với đặc điểm request và yêu cầu realtime.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Đề xuất được caching, routing, semantic cache hoặc batch processing cho một workload AI và giải thích trade-off về cost, latency và chất lượng.",
+      "bloom_rationale_vi": "Nguồn mô tả cách áp dụng cả bốn pattern, điều kiện sử dụng và mức tiết kiệm dự kiến.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp bốn pattern vì chúng cùng phục vụ FinOps cho AI; từng tỷ lệ tiết kiệm là tham số minh họa, không phải KC độc lập.",
+      "role_reason_vi": "Đây là capability tái sử dụng để tối ưu production nhưng được đặt ở phần bonus và không bắt buộc cho blueprint tối thiểu.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p026:l303-318"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p026:l303-318",
+          "source_type": "slide",
+          "page_no": 26,
+          "content": "## Page 26: 4 Cost Optimization Patterns\nPage 26: 4 Cost Optimization Patterns Text Extract 1. Prompt Caching Cache system prompt + docs tĩnh. Anthropic: 10x rẻ hơn cache read. → giảm 70% cost 2. Model Routing (Cascade) Dễ → Haiku. Khó → Sonnet. Classifier nhẹ quyết định. → 40 60% giảm cost 3. Semantic Cache Query tương tự → trả lời cached (embedding similarity 0.95). → Hit rate 20 40% 4. Batch API Non realtime (summary đêm) → batch giá 50%. → 50% offline work Apply cả 4 patterns: $96k/tháng → $22k/tháng (77% tiết kiệm). Đây là FinOps for AI kỹ năng hot 2026.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "ai_reliability_error_taxonomy",
+      "name_vi": "Phân loại và xử lý lỗi của AI agent",
+      "description_vi": "Các lỗi gồm LLM API 5xx, timeout, tool call failed, tool schema invalid, guardrail block, empty response và context overflow; mỗi loại cần cách xử lý như retry, fallback, circuit breaker, re-prompt, graceful degradation hoặc truncate/summarize.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Phân loại lỗi runtime của agent và chọn remediation tương ứng.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Từ một lỗi trong agent pipeline, xác định error class và áp dụng chiến lược xử lý phù hợp mà không che giấu failure.",
+      "bloom_rationale_vi": "Nguồn cung cấp bảng nguyên nhân và cách handle cho từng error class.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp taxonomy và remediation vì người học phải nối từng loại lỗi với cách xử lý; tách từng loại lỗi sẽ tạo item vụn có cùng task.",
+      "role_reason_vi": "Reliability error rate và tool failures là thành phần bắt buộc của golden signals, dashboard và alert rules.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p027:l319-334"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p027:l319-334",
+          "source_type": "slide",
+          "page_no": 27,
+          "content": "## Page 27: Reliability Metrics - Error Taxonomy\nPage 27: Reliability Metrics Error Taxonomy Tables | Loại lỗi | Nguyên nhân | Cách handle | | | | | | LLM API 5xx | Provider down/rate limit | Retry exponential backoff, fallback model | | LLM timeout | Slow provider, network | Circuit breaker, client timeout < server | | Tool call failed | External API lỗi | Retry, graceful degradation | | Tool schema invalid | LLM sinh JSON lỗi | Re prompt với error feedback | | Guardrail block | Content policy vi phạm | Log + user friendly message | | Empty response | LLM refuse/filter | Alternate prompt, escalate to human | | Context overflow | Input limit | Truncate, summarize history | Text Extract \"Err",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "user_centric_ai_metrics",
+      "name_vi": "Metrics hướng người dùng",
+      "description_vi": "Bên cạnh engineering metrics, cần đo explicit signals như thumbs up/down, CSAT, NPS, escalation và implicit signals như regenerate, follow-up, conversion, session length và return rate. Regenerate rate có thể dự báo churn tốt hơn thumbs down.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn metrics phản ánh trực tiếp trải nghiệm và hành vi người dùng thay vì chỉ dựa vào sức khỏe kỹ thuật.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Phân tích một use case để chọn explicit và implicit user signals, đồng thời nhận diện nguy cơ kết luận sai khi chỉ dùng feedback trực tiếp.",
+      "bloom_rationale_vi": "Nguồn đối chiếu explicit với implicit signals và nêu mối liên hệ của regenerate rate với churn.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp explicit và implicit signals vì chúng là hai nguồn trong cùng năng lực đo user experience; từng signal không có mastery state độc lập.",
+      "role_reason_vi": "Đây là capability độc lập, hữu ích cho product analytics và quality trend nhưng không phải thành phần tối thiểu của instrumentation pipeline.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p028:l335-354"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p028:l335-354",
+          "source_type": "slide",
+          "page_no": 28,
+          "content": "## Page 28: User-centric Metrics - Ngoài Kỹ Thuật\nPage 28: User centric Metrics Ngoài Kỹ Thuật Text Extract Engineering metrics xanh không có nghĩa là user happy. Cần đo trực tiếp: Explicit signals Thumbs up/down gắn vào mỗi response CSAT survey weekly sample NPS quarterly Escalation to human rate → Signal rõ, response rate thấp (< 5%) Implicit signals (quan trọng hơn) Regenerate rate user bấm \"thử lại\" Session length dùng lâu = hài lòng? Follow up rate câu hỏi tiếp Conversion action sau chat Return rate quay lại trong 7 ngày Họ thấy Regenerate rate là predictor tốt nhất cho churn hơn cả thumbs down. User không bấm thumbs down, họ chỉ... rời đi.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "ai_drift_monitoring",
+      "name_vi": "Theo dõi drift của dữ liệu và model",
+      "description_vi": "Data drift là thay đổi phân phối input; concept drift là thay đổi ánh xạ input-output; model drift là thay đổi hành vi do provider/model update. Có thể phát hiện bằng PSI, embedding drift/cosine similarity và KL divergence.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Phân loại drift và chọn phép đo để phát hiện thay đổi âm thầm trong AI system.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Xác định loại drift từ dấu hiệu quan sát được, chọn detector phù hợp và diễn giải ngưỡng PSI stable, mild hoặc significant.",
+      "bloom_rationale_vi": "Nguồn định nghĩa ba loại drift, liệt kê detector và cung cấp ngưỡng diễn giải PSI.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp loại drift, detector và diễn giải PSI vì đây là một quy trình monitor drift; các threshold chỉ là tham số của quy trình.",
+      "role_reason_vi": "Drift là metric AI-specific quan trọng để phát hiện model hoặc dữ liệu thay đổi mà monitoring hạ tầng không thấy.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p029:l355-374"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p029:l355-374",
+          "source_type": "slide",
+          "page_no": 29,
+          "content": "## Page 29: Drift - Khi Data/Model Thay Đổi Âm Thầm\nPage 29: Drift Khi Data/Model Thay Đổi Âm Thầm Text Extract 3 loại drift cần monitor: Data drift input distribution thay đổi (user hỏi kiểu mới) Concept drift mapping input → output thay đổi (luật mới) Model drift provider update model, behavior đổi Phát hiện bằng: Population Stability Index (PSI) Embedding drift (cosine similarity) KL divergence giữa distributions PSI formula Interpret: < 0.1 stable 0.1 0.25 mild drift 0.25 significant, cần retrain Lưu ý: Case 2024: OpenAI silently update GPT 4 → format output đổi → nhiều pipelines breaks in silence. Không drift monitoring = không biết.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "structured_log_schema",
+      "name_vi": "Thiết kế schema log có cấu trúc",
+      "description_vi": "Structured log dùng JSON có schema thống nhất, gồm Tier 1 bắt buộc: timestamp ISO 8601, level, correlation ID, service name và event type; Tier 2 là context như hashed user ID, session, feature, model, environment; Tier 3 là payload metrics theo event.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá và thiết kế schema log JSON nhất quán, queryable và đủ context cho debug.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Thiết kế được schema ba tầng, chọn field bắt buộc và event-specific, sau đó xác thực schema trước khi emit log.",
+      "bloom_rationale_vi": "Nguồn đưa cấu trúc ba tier, field cụ thể và yêu cầu dùng Pydantic model hoặc JSON Schema để validate.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách schema design khỏi việc triển khai pipeline vì thiết kế field và viết code emit/propagate có task và failure signal khác nhau.",
+      "role_reason_vi": "Structured JSON logging là một deliverable bắt buộc và nền tảng để query, aggregate và debug agent ở scale.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p031:l388-391",
+        "day13-monitoring-logging-observability:p032:l392-412",
+        "day13-monitoring-logging-observability:p033:l413-440"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p031:l388-391",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Structured Logging\nPage 31: Structured Logging Text Extract Biến log thành data có thể query được nền tảng cho debug AI agent ở scale",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p032:l392-412",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Unstructured vs Structured Log\nPage 32: Unstructured vs Structured Log Text Extract Unstructured: kho search, kho filter 2026 03 18 10:23:45 INFO Agent responded to query 2026 03 18 10:23:46 ERROR Tool call failed Structured JSON: de query, de aggregate log entry = { \"ts\": \"2026 03 18T10:23:45Z\", \"level\": \"INFO\", \"correlation id\": \"req abc123\", \"user id\": \"u 7842\", \"event\": \"agent response\", \"latency ms\": 1250, \"tokens in\": 850, \"tokens out\": 120, \"cost usd\": 0.0043, \"model\": \"claude sonnet 4 5\", \"feature\": \"summary\" }",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p033:l413-440",
+          "source_type": "slide",
+          "page_no": 33,
+          "content": "## Page 33: Log Schema - 3 Tier Design\nPage 33: Log Schema 3 Tier Design Text Extract Tier 1: Required Mỗi log entry phải có: ts (ISO 8601) level (INFO/WARN/ERROR) correlation id service name event type Tier 2: Context Nên có khi liên quan: user id (hashed) session id feature model env Tier 3: Payload Event specific metrics: latency ms tokens in/out cost usd error type tool name Viết thành Pydantic model hoặc JSON Schema, validate trước khi emit. Nếu mỗi service log khác nhau → dashboard không build được.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "structured_logging_pipeline",
+      "name_vi": "Triển khai structured logging pipeline",
+      "description_vi": "Pipeline log agent phải emit JSON events theo schema thống nhất, có timestamp, level, event, latency, token usage, cost và model/feature context; có thể dùng structlog với JSON renderer.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Triển khai logging pipeline JSON có thể query và aggregate cho agent đang deploy.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Cấu hình được logger structured, emit các milestone và event lỗi với field chuẩn, đồng thời kiểm tra output JSON.",
+      "bloom_rationale_vi": "Nguồn mô tả mục tiêu structured logging, ví dụ JSON event và setup structlog có processors, timestamp và JSON renderer.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ cấu hình logger và cách emit event trong một procedure; schema field chuẩn đã được tách thành criterion thiết kế.",
+      "role_reason_vi": "Đây là phần bắt buộc của structured logging pipeline trong deliverable và lab.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p031:l388-391",
+        "day13-monitoring-logging-observability:p032:l392-412",
+        "day13-monitoring-logging-observability:p034:l441-463"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p031:l388-391",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Structured Logging\nPage 31: Structured Logging Text Extract Biến log thành data có thể query được nền tảng cho debug AI agent ở scale",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p032:l392-412",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Unstructured vs Structured Log\nPage 32: Unstructured vs Structured Log Text Extract Unstructured: kho search, kho filter 2026 03 18 10:23:45 INFO Agent responded to query 2026 03 18 10:23:46 ERROR Tool call failed Structured JSON: de query, de aggregate log entry = { \"ts\": \"2026 03 18T10:23:45Z\", \"level\": \"INFO\", \"correlation id\": \"req abc123\", \"user id\": \"u 7842\", \"event\": \"agent response\", \"latency ms\": 1250, \"tokens in\": 850, \"tokens out\": 120, \"cost usd\": 0.0043, \"model\": \"claude sonnet 4 5\", \"feature\": \"summary\" }",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p034:l441-463",
+          "source_type": "slide",
+          "page_no": 34,
+          "content": "## Page 34: Python structlog - Setup Chuẩn\nPage 34: Python structlog Setup Chuẩn Text Extract python import structlog, logging structlog.configure( processors=[ structlog.contextvars.merge contextvars, structlog.processors.add log level, structlog.processors.TimeStamper(fmt=\"iso\", utc=True), structlog.processors.StackInfoRenderer(), structlog.processors.format exc info, structlog.processors.JSONRenderer(), ], wrapper class=structlog.make filtering bound logger(logging.INFO), cache logger on first use=True, ) log = structlog.get logger() log.info(\"agent started\", service=\"rag agent\", version=\"1.2.0\") {\"event\":\"agent started\",\"level\":\"info\",\"timestamp\":\"...\"}",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "async_correlation_context",
+      "name_vi": "Quản lý correlation context trong async",
+      "description_vi": "Dùng contextvars để bind correlation ID, user ID và feature ở đầu mỗi request; clear context trước request mới. Context riêng cho mỗi asyncio request giúp tránh lẫn dữ liệu giữa các request concurrent.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Gắn context logging tự động và an toàn cho từng request async.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Triển khai được clear/bind contextvars ở request boundary và kiểm tra mọi log trong request có đúng correlation fields.",
+      "bloom_rationale_vi": "Nguồn cung cấp procedure và giải thích tính an toàn của contextvars với concurrent asyncio requests.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi propagation xuyên service vì context local trong async và truyền ID qua network boundaries có implementation và failure mode khác nhau.",
+      "role_reason_vi": "Correlation ID là tiêu chí chấm điểm trực tiếp của logging và tracing deliverable.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p035:l464-485",
+        "day13-monitoring-logging-observability:p073:l1051-1064"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p035:l464-485",
+          "source_type": "slide",
+          "page_no": 35,
+          "content": "## Page 35: contextvars - Correlation ID Tự Động\nPage 35: contextvars Correlation ID Tự Động Text Extract python from structlog.contextvars import bind contextvars, clear contextvars import uuid async def handle request(request): clear contextvars() bind contextvars( correlation id=str(uuid.uuid4())[:8], user id=request.user id, feature=request.feature, ) Từ đây trở đi, mọi log. tự động có 3 fields này log.info(\"request received\", query len=len(request.query)) result = await agent.run(request.query) log.info(\"response sent\", latency ms=result.latency) return result contextvars an toàn với asyncio mỗi request có context riêng, không bị lẫn giữa concurrent requests.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p073:l1051-1064",
+          "source_type": "slide",
+          "page_no": 73,
+          "content": "## Page 73: Lab 13 Troubleshooting - Lỗi Thường Gặp\nPage 73: Lab 13 Troubleshooting Lỗi Thường Gặp Text Extract Bật DEBUG cho Langfuse và OpenTelemetry logger → thấy trace export request/response, tìm ra vấn đề trong 5 phút. Tables | Triệu chứng | Cách xử lý | | | | | Trace không xuất hiện ở Langfuse | Check API key env var, network, bật LANGFUSE DEBUG=true | | Cost không được track | Model name sai (phải khớp Langfuse pricing DB) hoặc thiếu usage details | | Correlation ID không propagate qua async | Dùng contextvars; kiểm tra clear contextvars ở đầu mỗi request | | PII leak vào log dù đã scrub | Check order processors: scrubber phải chạy trước JSONRenderer | | Alert fire nhưng không Slack |",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "distributed_correlation_propagation",
+      "name_vi": "Propagation correlation ID qua các service",
+      "description_vi": "Correlation ID phải đi xuyên từ client qua API gateway, agent, RAG service đến LLM provider; có thể truyền bằng request ID hoặc W3C traceparent trong HTTP headers và các boundary khác.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Propagate và truy vết một request xuyên nhiều service bằng correlation ID hoặc trace context chuẩn.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Thiết lập được propagation header giữa các service và truy xuất toàn bộ journey bằng một ID duy nhất.",
+      "bloom_rationale_vi": "Nguồn mô tả chuỗi service, cơ chế propagate và chuẩn W3C Trace Context.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Đây là phần cross-service của correlation; không gộp với contextvars vì lỗi ở network propagation khác lỗi context bị lẫn trong async.",
+      "role_reason_vi": "Không có propagation thì logs/traces không nối được thành journey end-to-end, làm mất khả năng debug agent pipeline.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p036:l486-493"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p036:l486-493",
+          "source_type": "slide",
+          "page_no": 36,
+          "content": "## Page 36: Correlation ID - Xuyên Suốt Services\nPage 36: Correlation ID Xuyên Suốt Services Text Extract Client → API Gateway → Agent → RAG Service → LLM Provider X Request ID → propagate → propagate → header correlation id = \"req abc123\" Mọi log entry đều có field này → grep 1 ID ra full journey HTTP header traceparent (W3C Trace Context) = correlation ID chuẩn quốc tế. Mọi framework hiện đại (FastAPI, Express) đều support.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "pii_log_sanitization",
+      "name_vi": "Sanitize PII và secrets trước khi log",
+      "description_vi": "Chỉ log input đã sanitize, metadata tool, output summary, latency/token/cost, correlation ID và hashed user ID; không log tên, số điện thoại, CCCD, email, credentials, secrets, full sensitive prompt, tài khoản ngân hàng hoặc raw user input.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế và thực hiện quy trình loại bỏ PII, secrets và dữ liệu nhạy cảm trước khi ghi log.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Xác định trường dữ liệu được phép log, scrub dữ liệu nhạy cảm trước khi emit và kiểm tra pipeline không làm lộ PII.",
+      "bloom_rationale_vi": "Nguồn phân biệt rõ nên/không nên log, yêu cầu sanitize trước audit và nêu hậu quả compliance.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp policy về dữ liệu được log với thao tác scrub vì chúng cùng tạo thành capability bảo vệ PII; regex và Presidio là hai phương án triển khai.",
+      "role_reason_vi": "PII sanitization là tiêu chí bắt buộc trong rubric và là yêu cầu an toàn trực tiếp khi triển khai logging cho agent.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p037:l494-513",
+        "day13-monitoring-logging-observability:p038:l514-540",
+        "day13-monitoring-logging-observability:p074:l1065-1089"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p037:l494-513",
+          "source_type": "slide",
+          "page_no": 37,
+          "content": "## Page 37: PII Sanitization - Nên Log Gì Và Không\nPage 37: PII Sanitization Nên Log Gì Và Không Text Extract Nên log Input đã sanitize (độ dài, topic) Tool calls + results (metadata) Output summary (không full text) Latency, tokens, cost Correlation ID, hashed user ID Errors + stack traces KHÔNG log PII (tên, SĐT, CCCD, email) API keys, tokens, secrets Full prompt chứa sensitive data Credit card, bank account DEBUG verbose ở production Full raw user input Lưu ý: Log PII = vi phạm GDPR, PDPA, CCPA. Phạt có thể 4% revenue toàn cầu (GDPR). Sanitize trước khi log, không phải sau khi bị audit.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p038:l514-540",
+          "source_type": "slide",
+          "page_no": 38,
+          "content": "## Page 38: PII Scrubbing - Regex + Presidio\nPage 38: PII Scrubbing Regex + Presidio Text Extract python Cách 1: regex nhanh cho common patterns import re PII PATTERNS = { \"email\": r\"[\\w\\. ]+@[\\w\\. ]+\\.\\w+\", \"phone vn\": r\"(\\+84|0)\\d{9,10}\", \"cccd\": r\"\\b\\d{12}\\b\", \"credit card\": r\"\\b\\d{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{4}\\b\", } def scrub(text): for n, p in PII PATTERNS.items(): text = re.sub(p, f\"[REDACTED {n.upper()}]\", text) return text Cách 2: Microsoft Presidio (NER based, robust) from presidio analyzer import AnalyzerEngine from presidio anonymizer import AnonymizerEngine analyzer, anonymizer = AnalyzerEngine(), AnonymizerEngine() results = analyzer.analyze(text=user input, language=\"en\")",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p074:l1065-1089",
+          "source_type": "slide",
+          "page_no": 74,
+          "content": "## Page 74: Blueprint Rubric - Chấm Điểm Deliverable\nPage 74: Blueprint Rubric Chấm Điểm Deliverable Text Extract Logging & Tracing (40%) Structured JSON logs (10) PII sanitized (10) Correlation ID propagate (10) 10+ Langfuse traces (10) Dashboard & Alerts (40%) 6+ panels Layer 2 (15) 3 alert rules với runbook (15) SLO defined (5) Screenshot có data (5) Blueprint document (20%) SLO table (5) Alert playbook (5) Architecture diagram (5) Cost & scaling plan (5) Điểm bonus (+10) Cost optimization (prompt cache) OTel auto instrument HTTP Quality metric (heuristic based)",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "production_log_levels",
+      "name_vi": "Chọn log level trong production",
+      "description_vi": "DEBUG dành cho dev hoặc sample khi cần điều tra; INFO cho normal flow và milestone; WARN cho degraded nhưng vẫn hoạt động; ERROR cho failure cần attention; CRITICAL cho system-level failure cần page.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn log level phù hợp với mức độ và hành động cần thiết của một event.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Gán đúng DEBUG/INFO/WARN/ERROR/CRITICAL cho các event của agent và cấu hình production không bật DEBUG thường trực.",
+      "bloom_rationale_vi": "Nguồn cung cấp bảng level, tình huống sử dụng, ví dụ và quy tắc production chạy INFO.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ các level trong một criterion vì task là chọn mức log; không tách từng level do chúng có cùng failure signal là sai severity hoặc volume.",
+      "role_reason_vi": "Deliverable yêu cầu pipeline có nhiều log levels và việc chọn level ảnh hưởng trực tiếp đến alerting, chi phí và khả năng debug.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p039:l541-553"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p039:l541-553",
+          "source_type": "slide",
+          "page_no": 39,
+          "content": "## Page 39: Log Levels - Khi Nào Dùng\nPage 39: Log Levels Khi Nào Dùng Tables | Level | Khi nào dùng | Ví dụ | Prod? | | | | | | | DEBUG | Dev only, rất chi tiết | Full prompt, intermediate state | Không (sample 1%) | | INFO | Normal flow, milestone events | Request received, response sent | Có | | WARN | Degraded nhưng vẫn hoạt động | Retry succeeded, fallback used | Có | | ERROR | Failed, cần attention | Tool call timeout, LLM error | Có, alert | | CRITICAL | System level failure | DB unreachable, all models down | Có, page | Text Extract Production chạy INFO. Debug cụ thể: tạm bật DEBUG cho request ID đó, xong tắt. Không để DEBUG luôn on → log volume 100x, bill lên trời.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "log_and_trace_sampling",
+      "name_vi": "Thiết kế sampling cho log và trace",
+      "description_vi": "Head sampling quyết định sớm và rẻ nhưng có thể bỏ lỡ lỗi; tail sampling quyết định sau khi trace xong và giữ được lỗi; reservoir sampling giữ mẫu uniform. Strategy điển hình là giữ 100% ERROR/WARN, giảm INFO/DEBUG và giữ request chậm hoặc outlier.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn sampling strategy và tỷ lệ giữ dữ liệu để cân bằng chi phí với visibility.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Thiết kế được sampling policy ưu tiên error, warning, latency outlier và một mẫu request bình thường.",
+      "bloom_rationale_vi": "Nguồn phân biệt ba strategy, ưu nhược điểm và đưa policy tỷ lệ cụ thể cho AI workload.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp sampling logs và traces vì chúng dùng cùng trade-off cost/visibility; các tỷ lệ 100%, 10%, 1% chỉ là cấu hình theo workload.",
+      "role_reason_vi": "Sampling là capability tối ưu quy mô và chi phí, hữu ích khi production volume lớn nhưng không phải yêu cầu cốt lõi của blueprint tối thiểu.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p011:l92-112",
+        "day13-monitoring-logging-observability:p040:l554-571"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p011:l92-112",
+          "source_type": "slide",
+          "page_no": 11,
+          "content": "## Page 11: Cardinality - Tại Sao Metrics Đắt\nPage 11: Cardinality Tại Sao Metrics Đắt Text Extract Cardinality = số tổ hợp unique của các label. Ví dụ: metric llm latency user id: 100,000 giá trị model: 4 giá trị endpoint: 20 giá trị status: 10 giá trị Tổng series = 100,000 × 4 × 20 × 10 = 8 × 10^7 series! Với Prometheus, mỗi series ≈ 500 bytes/15s → ∼ 40GB/giờ. Không khả thi. Lưu ý: Sai cardinality là cách phổ biến nhất làm sập Prometheus và nhận bill $40k/tháng từ Datadog không báo trước. Quy tắc cardinality KHÔNG dùng user id, request id, email làm metric label CÓ dùng: model, env, feature, tier High cardinality data → vào logs hoặc traces Sampling 1 10% cho AI workloads",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p040:l554-571",
+          "source_type": "slide",
+          "page_no": 40,
+          "content": "## Page 40: Log Sampling - Khi Volume Quá Cao\nPage 40: Log Sampling Khi Volume Quá Cao Text Extract Vấn đề: 100k requests/ngày × 10 log entries/request = 1M entries/ngày. Elastic/Datadog tính $0.10/1k entries → $100/ngày chỉ riêng log. Không scalable. Strategies Head sampling quyết định sample ngay khi trace bắt đầu (rẻ, có thể miss errors) Tail sampling quyết định sau khi trace xong (đắt, giữ được 100% errors) Reservoir sampling giữ N mẫu uniform Strategy điển hình cho AI agent 100% ERROR và WARN 10% INFO (cho normal requests) 1% DEBUG (cho deep debug) 100% requests 10s (tail sampling on latency) 100% cost $1/request (outliers) Sampling giảm cost 10 100x, nhưng mất visibility vào normal",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "audit_log_separation",
+      "name_vi": "Tách audit log khỏi app log",
+      "description_vi": "App log phục vụ debug và performance, có thể sample/sửa/xóa và retention ngắn; audit log phục vụ compliance, legal và forensics, phải giữ 100%, append-only, truy cập hạn chế và retention dài hơn.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Phân loại và thiết kế lưu trữ audit log độc lập với application log.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Quyết định được event nào cần audit log, áp dụng retention và access policy phù hợp, đồng thời tránh trộn hai loại log.",
+      "bloom_rationale_vi": "Nguồn đưa bảng so sánh mục đích, retention, sampling, khả năng chỉnh sửa và quyền truy cập của hai loại log.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp các khác biệt policy trong một criterion vì chúng cùng phục vụ quyết định phân tách audit/app log.",
+      "role_reason_vi": "Đây là capability compliance và forensics có tính tái sử dụng, nhưng không nằm trong trọng tâm instrumentation tối thiểu của lab.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p042:l585-604"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p042:l585-604",
+          "source_type": "slide",
+          "page_no": 42,
+          "content": "## Page 42: Audit Log - Tách Biệt Với App Log\nPage 42: Audit Log Tách Biệt Với App Log Text Extract Audit log = record who did what when cho compliance, legal, security. App log Mục đích: debug, performance Retention: 30 90 ngày Có thể sample Có thể sửa/xóa Truy cập: dev team Audit log Mục đích: compliance, forensics Retention: 2 7 năm (tùy ngành) Không sample 100% Append only không sửa được Truy cập: restricted (compliance officer) Lưu ý: Sai lầm phổ biến: trộn audit log vào app log → khi cần investigate bị thiếu data. Tách riêng từ ngày đầu: S3 bucket với Object Lock, hoặc dedicated audit service.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "log_aggregation_stack_selection",
+      "name_vi": "Chọn log aggregation stack",
+      "description_vi": "Có thể dùng stdout JSON cho dev, Langfuse cho LLM calls, ELK cho full-text search, Loki cho label-based logging, Datadog cho SaaS setup nhanh, CloudWatch cho AWS và BigQuery cho SQL analytics/retention dài.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn log storage và aggregation stack theo nhu cầu query, hạ tầng, scale và chi phí.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "So sánh được các log stack và biện minh lựa chọn dựa trên khả năng tìm kiếm, chi phí, hạ tầng sẵn có và yêu cầu retention.",
+      "bloom_rationale_vi": "Nguồn nêu thành phần, trường hợp sử dụng và cost/tier của nhiều stack khác nhau.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp các stack trong một criterion lựa chọn công cụ; tên sản phẩm và giá riêng lẻ không có mastery state độc lập.",
+      "role_reason_vi": "Capability này tái sử dụng khi scale logging nhưng không bắt buộc để hoàn thành lab với stdout JSON hoặc Langfuse.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p041:l572-584"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p041:l572-584",
+          "source_type": "slide",
+          "page_no": 41,
+          "content": "## Page 41: Log Aggregation Stacks\nPage 41: Log Aggregation Stacks Text Extract Langfuse tự là log store cho LLM calls + SaaS free tier. Dev local → stdout JSON + jq là đủ. Scale up mới cần ELK/Loki. Tables | Stack | Components | Khi nào dùng | Cost/tier | | | | | | | ELK | Elasticsearch, Logstash, Kibana | Full text search mạnh, complex queries | Tự host, OSS | | Loki | Loki, Promtail, Grafana | Label based (giống Prometheus), rẻ | Tự host, OSS | | Datadog Logs | SaaS | Setup nhanh, alert tốt, đắt ở scale | \\$0.10/GB | | CloudWatch | AWS native | Đã ở AWS, tích hợp IAM | \\$0.50/GB ingest | | BigQuery | GCP DW | Analytics SQL, long retention | \\$0.02/GB scan |",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "red_use_diagnostic_framework",
+      "name_vi": "Dùng RED và USE để chẩn đoán",
+      "description_vi": "RED nhìn từ request: Rate, Duration và Errors; USE nhìn từ resource: Utilization, Errors và Saturation. RED phát hiện triệu chứng phía request, còn USE giúp tìm nguyên nhân do resource như rate limit hoặc queue saturation.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn góc nhìn RED hoặc USE để điều tra một vấn đề latency/error của agent.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Từ một triệu chứng request, phân tích metric RED để xác định vấn đề và dùng USE để kiểm tra resource bottleneck.",
+      "bloom_rationale_vi": "Nguồn định nghĩa hai framework và đưa chuỗi chẩn đoán duration tăng do LLM API utilization cao dẫn tới throttling.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp RED và USE vì giá trị của chúng nằm ở việc dùng phối hợp hai góc nhìn; không tách từng chữ cái thành item.",
+      "role_reason_vi": "Đây là framework chẩn đoán tái sử dụng, nhưng là phương pháp bổ trợ cho pillars và trace analysis chứ không phải deliverable độc lập.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p017:l173-188"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p017:l173-188",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: RED vs USE - Hai Phương Pháp Observability\nPage 17: RED vs USE Hai Phương Pháp Observability Text Extract RED (request centric) Rate requests/giây Duration latency P50/P95/P99 Errors error rate Perspective: user tôi gửi request, được gì? USE (resource centric) Utilization tài nguyên dùng % Errors lỗi của resource Saturation có queue/chờ không? Perspective: resource LLM API, queue đang làm gì? Agent chậm (RED: Duration P95 tăng) → debug bằng USE (LLM rate limit utilization 95%) → bị throttle → upgrade tier hoặc fallback.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "trace_span_context_model",
+      "name_vi": "Mô hình trace, span và context",
+      "description_vi": "Trace là toàn bộ request end-to-end với trace ID; span là một operation có span ID, parent, timing, attributes, status, events và links; context propagation truyền trace ID qua HTTP headers hoặc queue boundaries. Trace có dạng cây với root span và child spans.",
+      "item_form": "concept",
+      "primary_capability_vi": "Đọc và mô hình hóa quan hệ trace-span-context trong distributed system.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Giải thích được trace, span, parent-child relationship và context propagation, đồng thời xác định root span và các child operation.",
+      "bloom_rationale_vi": "Nguồn cung cấp thuật ngữ, các trường của span và cấu trúc cây của trace.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp ba thuật ngữ vì chúng tạo thành một mô hình truy vết duy nhất; từng span attribute chỉ là thuộc tính của span.",
+      "role_reason_vi": "Hiểu mô hình này là điều kiện để đọc waterfall và triển khai distributed tracing cho agent.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p043:l605-608",
+        "day13-monitoring-logging-observability:p044:l609-625"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p043:l605-608",
+          "source_type": "slide",
+          "page_no": 43,
+          "content": "## Page 43: Distributed Tracing\nPage 43: Distributed Tracing Text Extract Trace cho biết toàn bộ hành trình của 1 request qua nhiều bước công cụ số một để debug AI agent pipeline",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p044:l609-625",
+          "source_type": "slide",
+          "page_no": 44,
+          "content": "## Page 44: Trace, Span, Context - Terminology\nPage 44: Trace, Span, Context Terminology Text Extract Khái niệm cốt lõi Trace toàn bộ request end to end, có trace id duy nhất Span 1 đơn vị công việc trong trace, có span id, parent span id Context propagation cơ chế truyền trace id qua boundaries (HTTP headers, queue messages) Span có gì? name tên operation (e.g. llm.generate) start time, duration attributes key value (model, tokens) status OK/ERROR events logs gắn vào span links related spans (e.g. retry) Trace = cây. Root span là entry point (HTTP request). Child spans là các bước con (RAG retrieve, LLM call, tool call). Nhìn cây biết bottleneck.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "trace_waterfall_bottleneck_analysis",
+      "name_vi": "Phân tích trace waterfall để tìm bottleneck",
+      "description_vi": "Waterfall biểu diễn các span theo timeline của một request. Phân tích span dài nhất, các span lặp, waiting time và retry để xác định bottleneck và hướng remediation.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Đọc trace waterfall và localize bottleneck trong pipeline nhiều bước.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Từ một waterfall, xác định bước chiếm latency, phân biệt sequential dependency, N+1 queries, waiting và retry storm, rồi đề xuất parallelize, batch, cache, timeout hoặc circuit breaker.",
+      "bloom_rationale_vi": "Nguồn đưa waterfall mẫu, bốn bottleneck patterns, heuristic đọc span và case debug truy ra query quá dài.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp waterfall reading, pattern recognition và remediation vì chúng tạo thành một procedure debug end-to-end; từng pattern không cần mastery state riêng.",
+      "role_reason_vi": "Mục tiêu bài yêu cầu đọc trace waterfall và xác định bottleneck trong agent pipeline nhiều bước.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p045:l626-642",
+        "day13-monitoring-logging-observability:p050:l727-733",
+        "day13-monitoring-logging-observability:p051:l734-756",
+        "day13-monitoring-logging-observability:p054:l795-805"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p045:l626-642",
+          "source_type": "slide",
+          "page_no": 45,
+          "content": "## Page 45: Trace Là Gì - Waterfall View\nPage 45: Trace Là Gì Waterfall View Text Extract text 0ms 2500ms Total Request: 2500ms Parse: 50ms Retrieval: 600ms LLM Call: 1400ms Embed: 200ms Search: 350ms Generate: 1200ms Post: 100ms Mỗi hàng ngang là 1 span. Tất cả spans của 1 request tạo thành 1 trace. Nhìn trace biết ngay bottleneck ở đâu.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p050:l727-733",
+          "source_type": "slide",
+          "page_no": 50,
+          "content": "## Page 50: Trace Cho Agent Pipeline\nPage 50: Trace Cho Agent Pipeline Text Extract User Request → Input Guards → Agent Router → RAG Retrieve → LLM Generate → Response 20ms → 50ms → 600ms → 1400ms → 30ms LLM Generate chiếm 67% latency. Muốn tối ưu → bắt đầu từ LLM call: model nhỏ hơn, prompt ngắn hơn, streaming hoặc parallelize RAG với LLM warmup.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p051:l734-756",
+          "source_type": "slide",
+          "page_no": 51,
+          "content": "## Page 51: 4 Bottleneck Patterns Trong Trace\nPage 51: 4 Bottleneck Patterns Trong Trace Text Extract Pattern 1: Sequential dependency A → B → C, tổng = sum Fix: parallelize A, B nếu không phụ thuộc Pattern 2: N+1 queries Loop gọi API/DB nhiều lần Trace: nhiều span ngắn cùng tên Fix: batch API, hoặc pre fetch Pattern 3: Waiting (không phải CPU) Span dài nhưng CPU idle LLM API, DB, network Fix: parallelize, cache, timeout Pattern 4: Retry storm Nhiều span retry trong 1 trace Backoff quá ngắn, không jitter Fix: exponential backoff, circuit breaker Nhìn span dài nhất → hỏi \"có parallelize được không?\". Nhìn nhiều span ngắn lặp → hỏi \"có batch được không?\". Đó là 80% tối ưu hóa.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p054:l795-805",
+          "source_type": "slide",
+          "page_no": 54,
+          "content": "## Page 54: Case Debug Thực Tế - Dùng Trace Để Tìm Bottleneck\nPage 54: Case Debug Thực Tế Dùng Trace Để Tìm Bottleneck Text Extract Vấn đề: User phàn nàn agent chậm \"đôi khi\". Metrics nói P95 = 2.3s, OK. P99 = 12s không OK. Filter trace theo duration 10s trong 24h qua → được 47 traces Nhóm theo feature tag → 42/47 thuộc feature \"legal qa\" Mở waterfall 1 trace: LLM span = 800ms (OK), RAG span = 10.2s (!) Drill vào RAG span: sub span vector search = 9.8s với query length 4,200 tokens Root cause: user dán full document vào query → embedding gọi với input lớn → chậm Fix: truncate query to 500 tokens before embedding, thêm warning cho user Không có trace → chỉ biết \"đôi khi chậm\", không biết bước nào, không",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "opentelemetry_architecture",
+      "name_vi": "Kiến trúc OpenTelemetry",
+      "description_vi": "OpenTelemetry là chuẩn vendor-neutral gồm API để instrument, SDK cho từng ngôn ngữ và Collector để receive, process, export dữ liệu tới backend. Instrument một lần giúp chuyển backend và giảm vendor lock-in.",
+      "item_form": "concept",
+      "primary_capability_vi": "Giải thích vai trò của API, SDK và Collector trong một kiến trúc OpenTelemetry.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Mô tả được luồng dữ liệu OTel từ instrumentation qua SDK và Collector đến backend, đồng thời giải thích lợi ích vendor neutrality.",
+      "bloom_rationale_vi": "Nguồn định nghĩa ba thành phần, auto-instrumentation và lợi ích switch backend.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp API, SDK, Collector và vendor neutrality vì chúng là các thành phần và hệ quả của cùng một kiến trúc OTel.",
+      "role_reason_vi": "OTel là nền tảng tiêu chuẩn hóa tracing được nhấn mạnh trong bài và liên quan trực tiếp đến các backend LLM observability.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p046:l643-658"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p046:l643-658",
+          "source_type": "slide",
+          "page_no": 46,
+          "content": "## Page 46: OpenTelemetry - Tiêu Chuẩn Mở\nPage 46: OpenTelemetry Tiêu Chuẩn Mở Text Extract OpenTelemetry (OTel) = CNCF graduated project (2024), vendor neutral tiêu chuẩn cho observability. OTel gồm 3 phần API interface để instrument code (ngôn ngữ agnostic) SDK implementation cho ngôn ngữ cụ thể (Python, Go, Java...) Collector receive, process, export data đến backend (Jaeger, Tempo, Datadog...) Vì sao quan trọng Instrument 1 lần switch backend tự do (khỏi vendor lock in) Auto instrumentation cho FastAPI, requests, SQLAlchemy... 2024: OTel phát hành GenAI Semantic Conventions cho LLM tracing Học OTel một lần → dùng được Langfuse, Datadog, Jaeger, New Relic đều được. Tất cả đều acce",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "otel_genai_semantic_conventions",
+      "name_vi": "Dùng OTel GenAI semantic conventions",
+      "description_vi": "LLM spans nên dùng namespace gen_ai với các thuộc tính chuẩn như provider, model, temperature, max tokens, input/output tokens, finish reason và operation name thay vì custom attribute names.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá và chuẩn hóa thuộc tính LLM trace theo OTel GenAI semantic conventions.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Chọn được tên attribute chuẩn cho một LLM span để dashboard query có thể tái sử dụng giữa các backend.",
+      "bloom_rationale_vi": "Nguồn liệt kê namespace, các attribute và lý do tránh custom names để bảo đảm interoperability.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp namespace và các attribute cụ thể vì đây là một quy tắc chuẩn hóa schema; từng attribute chỉ là thuộc tính/alias.",
+      "role_reason_vi": "Đây là capability mở rộng giúp tracing portable và interoperable, nhưng lab có thể hoàn thành mà không tự định nghĩa toàn bộ semantic conventions.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p048:l682-697"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p048:l682-697",
+          "source_type": "slide",
+          "page_no": 48,
+          "content": "## Page 48: OTel GenAI Semantic Conventions\nPage 48: OTel GenAI Semantic Conventions Text Extract Dùng namespace gen ai. → dashboard queries reusable. Tránh custom names như my model không interoperable. Tables | Attribute | Ý nghĩa | | | | | gen ai.system | Provider: \"anthropic\", \"openai\", \"google\" | | gen ai.request.model | Model name: \"claude sonnet 4 5\" | | gen ai.request.temperature | Sampling temp | | gen ai.request.max tokens | Max tokens cap | | gen ai.usage.input tokens | Input tokens | | gen ai.usage.output tokens | Output tokens | | gen ai.response.finish reasons | \"stop\", \"length\", \"tool use\" | | gen ai.operation.name | \"chat\", \"completion\", \"embeddings\" |",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "otel_agent_instrumentation",
+      "name_vi": "Instrument agent bằng OpenTelemetry",
+      "description_vi": "Có thể manual instrumentation bằng tracer/span hoặc dùng auto-instrumentation cho FastAPI, HTTP client và Anthropic; setup provider, span processor và OTLP exporter ở startup hoặc chạy instrumentation command.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thêm distributed tracing vào agent bằng manual hoặc auto-instrumentation.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Instrument được các operation chính của agent, export span qua OTLP và xác minh trace xuất hiện ở backend.",
+      "bloom_rationale_vi": "Nguồn đưa cả setup manual span và quy trình cài/chạy auto-instrumentation.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp manual và auto instrumentation vì chúng là hai cách triển khai cho cùng mục tiêu instrument agent; boilerplate code cụ thể không phải item riêng.",
+      "role_reason_vi": "Tracing là phần bắt buộc của monitoring blueprint và OTel là chuẩn được bài dạy để triển khai tracing.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p047:l659-681",
+        "day13-monitoring-logging-observability:p049:l698-726"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p047:l659-681",
+          "source_type": "slide",
+          "page_no": 47,
+          "content": "## Page 47: OpenTelemetry Python - Manual Instrumentation\nPage 47: OpenTelemetry Python Manual Instrumentation Text Extract python from opentelemetry import trace from opentelemetry.sdk.trace import TracerProvider from opentelemetry.sdk.trace.export import BatchSpanProcessor from opentelemetry.exporter.otlp.proto.http.trace exporter import OTLPSpanExporter Setup 1 lần ở startup provider = TracerProvider() provider.add span processor(BatchSpanProcessor(OTLPSpanExporter())) trace.set tracer provider(provider) tracer = trace.get tracer(\"agent service\") Instrument function def rag retrieve(query): with tracer.start as current span(\"rag.retrieve\") as span: span.set attribute(\"rag.query len\", len(query))",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p049:l698-726",
+          "source_type": "slide",
+          "page_no": 49,
+          "content": "## Page 49: Auto-instrumentation - Ít Code Hơn\nPage 49: Auto instrumentation Ít Code Hơn Text Extract bash Install pip install opentelemetry distro opentelemetry exporter otlp \\ opentelemetry instrumentation fastapi opentelemetry instrumentation anthropic Run (khong can sua code) opentelemetry instrument traces exporter otlp uvicorn app:main app.py: code thong thuong, khong co OTel boilerplate from fastapi import FastAPI from anthropic import Anthropic app = FastAPI() client = Anthropic() @app.post(\"/chat\") async def chat(msg: str): r = client.messages.create( model=\"claude sonnet 4 5\", max tokens=1024, messages=[{\"role\":\"user\",\"content\":msg}], ) return {\"reply\": r.content[0].text} Mọi HT",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "langfuse_agent_integration",
+      "name_vi": "Tích hợp Langfuse với agent",
+      "description_vi": "Dùng decorator observe để tạo trace/observation cho agent, cập nhật user ID và tags, đồng thời ghi metadata, input/output token usage và các thuộc tính cost/latency cần thiết.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tích hợp LLM observability backend vào agent và tạo các trace có tags, cost và latency metadata.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Instrument được các function chính của agent, tạo ít nhất một tập trace có user/feature/model tags và kiểm tra usage details được ghi nhận.",
+      "bloom_rationale_vi": "Nguồn đưa integration mẫu bằng decorator, trace tags, metadata và token usage; lab yêu cầu tích hợp cho ba functions chính.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp decorator, tags và usage metadata vì chúng là các bước của cùng một integration task; số lượng trace là điều kiện deliverable, không phải KC riêng.",
+      "role_reason_vi": "Langfuse integration là một deliverable trực tiếp và là cách thực hành tracing/cost tracking trong lab.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p052:l757-768",
+        "day13-monitoring-logging-observability:p053:l769-794",
+        "day13-monitoring-logging-observability:p072:l1031-1050"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p052:l757-768",
+          "source_type": "slide",
+          "page_no": 52,
+          "content": "## Page 52: Tool Comparison - 4 Lựa Chọn Hàng Đầu\nPage 52: Tool Comparison 4 Lựa Chọn Hàng Đầu Text Extract Chọn Langfuse open source, free cloud tier, framework agnostic, đã support OTel GenAI conventions. UI tốt nhất cho LLM specific features. Tables | Tool | Strength | Best for | Pricing | OSS? | | | | | | | | Langfuse | Full stack: tracing, eval, prompts, cost | Self host, framework agnostic | Free tier, cloud paid | Yes (MIT) | | LangSmith | Tight LangChain, playground, datasets | LangChain users | Free tier, seat based | No (SaaS) | | Helicone | Proxy approach, 0 code change | Rapid integration | Free tier, usage based | Yes (Apache) | | Arize Phoenix | OpenTelemetry native, OSS | Rese",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p053:l769-794",
+          "source_type": "slide",
+          "page_no": 53,
+          "content": "## Page 53: Langfuse Integration - 5 Dòng Code\nPage 53: Langfuse Integration 5 Dòng Code Text Extract python from langfuse.decorators import observe, langfuse context from anthropic import Anthropic client = Anthropic() @observe() def rag agent(query: str, user id: str): langfuse context.update current trace(user id=user id, tags=[\"prod\",\"rag\"]) docs = retrieve(query) response = client.messages.create( model=\"claude sonnet 4 5\", max tokens=1024, messages=[{\"role\":\"user\",\"content\":f\"Docs: {docs}\\n\\nQ: {query}\"}], ) langfuse context.update current observation( metadata={\"doc count\": len(docs)}, usage details={\"input\": response.usage.input tokens, \"output\": response.usage.output tokens}, ) r",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p072:l1031-1050",
+          "source_type": "slide",
+          "page_no": 72,
+          "content": "## Page 72: Lab 13: Monitoring Blueprint Cho Agent\nPage 72: Lab 13: Monitoring Blueprint Cho Agent Text Extract Gắn monitoring stack đầy đủ vào deployed agent từ Day 12: structured logging + tracing + dashboard + SLO based alerts, với blueprint document bàn giao được. Phase A: Instrumentation (30 phút) Setup Langfuse project (free cloud tier), lấy API keys Add structlog cho structured JSON logging + correlation ID với contextvars Integrate Langfuse @observe() decorator cho 3 functions chính Add tags: user id, feature, model, env Phase B: Dashboard + Alerts (30 phút) Define SLO: P95 latency, error rate, daily cost budget Build dashboard Layer 2 (6 panels tối thiểu) Configure 3 alert rules với",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "observability_tool_selection",
+      "name_vi": "Chọn công cụ observability theo use case",
+      "description_vi": "Tool choice phụ thuộc team size, compliance, existing stack, budget, skill set và nhu cầu evaluation. Langfuse phù hợp full-stack/framework-agnostic, LangSmith với LangChain, Helicone cho proxy/ít thay đổi code, Phoenix cho OTel/evaluation, còn Datadog/Grafana phù hợp các stack hạ tầng tương ứng.",
+      "item_form": "criterion",
+      "primary_capability_vi": "So sánh và lựa chọn công cụ observability phù hợp với team, use case, compliance và ngân sách.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Biện minh được lựa chọn giữa Langfuse, LangSmith, Helicone, Phoenix và các stack liên quan cho một use case cụ thể.",
+      "bloom_rationale_vi": "Nguồn cung cấp bảng strengths/best-for/pricing và decision framework sáu câu hỏi.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp comparison table và decision framework vì đều phục vụ cùng task đánh giá/chọn tool; tên và giá từng sản phẩm là thuộc tính của lựa chọn.",
+      "role_reason_vi": "Mục tiêu ngày yêu cầu so sánh các tool cho use case cụ thể và bài có phần tool landscape/decision framework rõ ràng.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p052:l757-768",
+        "day13-monitoring-logging-observability:p063:l913-924",
+        "day13-monitoring-logging-observability:p066:l939-951",
+        "day13-monitoring-logging-observability:p067:l952-985"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p052:l757-768",
+          "source_type": "slide",
+          "page_no": 52,
+          "content": "## Page 52: Tool Comparison - 4 Lựa Chọn Hàng Đầu\nPage 52: Tool Comparison 4 Lựa Chọn Hàng Đầu Text Extract Chọn Langfuse open source, free cloud tier, framework agnostic, đã support OTel GenAI conventions. UI tốt nhất cho LLM specific features. Tables | Tool | Strength | Best for | Pricing | OSS? | | | | | | | | Langfuse | Full stack: tracing, eval, prompts, cost | Self host, framework agnostic | Free tier, cloud paid | Yes (MIT) | | LangSmith | Tight LangChain, playground, datasets | LangChain users | Free tier, seat based | No (SaaS) | | Helicone | Proxy approach, 0 code change | Rapid integration | Free tier, usage based | Yes (Apache) | | Arize Phoenix | OpenTelemetry native, OSS | Rese",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p063:l913-924",
+          "source_type": "slide",
+          "page_no": 63,
+          "content": "## Page 63: Dashboard Tools Landscape 2026\nPage 63: Dashboard Tools Landscape 2026 Text Extract Open source, powerful. Kết nối mọi data source (Prom, Loki, CloudWatch). Khi nào: team có infra ops, muốn kiểm soát All in one SaaS. Setup nhanh, alerting tốt, đắt ở scale. Khi nào: cần nhanh, có budget, muốn 1 tool LLM native hoặc Python custom. Full control, dễ customize. Khi nào: AI agent MVP, demo, PoC Lưu ý: Cho lab: Langfuse dashboard đã đủ cho MVP. Đừng dành thời gian build Grafana custom trước khi có đủ data YAGNI principle.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p066:l939-951",
+          "source_type": "slide",
+          "page_no": 66,
+          "content": "## Page 66: LLM Observability Landscape 2026\nPage 66: LLM Observability Landscape 2026 Text Extract Converge: APM truyền thống (Datadog) add LLM features. LLM native (Langfuse) add infra tracing. Trong 12 tháng tới, OpenTelemetry GenAI semconv thành chuẩn chung. Tables | Category | Leader 2026 | Strength | Watch | | | | | | | LLM native | Langfuse, LangSmith | Prompt, eval, cost | Helicone, Phoenix | | APM truyền thống | Datadog, New Relic | Infra + app + AI | Honeycomb, Lightstep | | OSS self host | Jaeger, Tempo, Loki | Zero vendor lock | SigNoz | | Cost focused | Helicone, OpenMeter | Token accounting | Vellum | | Eval focused | Arize Phoenix, Patronus | Quality & drift | Galileo |",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p067:l952-985",
+          "source_type": "slide",
+          "page_no": 67,
+          "content": "## Page 67: Decision Framework - Chọn Tool Thế Nào?\nPage 67: Decision Framework Chọn Tool Thế Nào? Text Extract Q1: Team size? 1 5: SaaS, free tier 5 50: SaaS paid 50+: Hybrid / self host Q2: Compliance? HIPAA/PCI: self host GDPR: EU region SaaS None: bất kỳ Q3: Existing stack? Datadog: stay, add AI addon LangChain: LangSmith Agnostic: Langfuse Q4: Budget/month? $0: Langfuse cloud free $100 500: LangSmith/Helicone $500+: Datadog full stack Q5: Skill set? Python heavy: Langfuse Infra ops: Grafana Non dev: Datadog Q6: Evaluation? Quality cần: Phoenix, LangSmith Cost only: Helicone Full stack: Langfuse Không có 'best tool'. Có best tool cho team + use case + budget của bạn. Đừng copy stack của FA",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "symptom_based_alerting",
+      "name_vi": "Alert theo symptom thay vì cause",
+      "description_vi": "Alert chính nên dựa trên tác động tới user như P95 latency vượt SLO, error rate, cost budget hoặc hallucination spike; các cause như CPU, RAM hay retry count chỉ là thông tin bổ trợ để debug.",
+      "item_form": "principle",
+      "primary_capability_vi": "Đánh giá alert rule theo user impact và loại bỏ các alert cause-based dễ gây false positive.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Phân loại được một alert là symptom-based hay cause-based và thiết kế lại alert để chỉ page khi user thực sự bị ảnh hưởng.",
+      "bloom_rationale_vi": "Nguồn đối chiếu trực tiếp hai cách alert, nêu false positive của cause-based và nguyên tắc page on symptoms, not causes.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp distinction và quy tắc thiết kế vì chúng cùng tạo thành một principle; từng metric cause hoặc symptom chỉ là ví dụ.",
+      "role_reason_vi": "SLO-driven, symptom-based alerting là key takeaway và là phần bắt buộc của monitoring blueprint.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p055:l806-809",
+        "day13-monitoring-logging-observability:p056:l810-829",
+        "day13-monitoring-logging-observability:p075:l1090-1096"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p055:l806-809",
+          "source_type": "slide",
+          "page_no": 55,
+          "content": "## Page 55: SLO-based Alerting & Dashboard\nPage 55: SLO based Alerting & Dashboard Text Extract Metrics và traces chỉ có giá trị nếu có người nhìn học design alert chất lượng dựa trên SLO",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p056:l810-829",
+          "source_type": "slide",
+          "page_no": 56,
+          "content": "## Page 56: Symptom vs Cause - Alert Về Cái Gì?\nPage 56: Symptom vs Cause Alert Về Cái Gì? Text Extract Cause based (sai) Alert về nguyên nhân kỹ thuật: CPU 80% RAM 90% Disk 85% LLM API retry count 5 Cause cao nhưng user không bị ảnh hưởng → false positive. Ignore dần. Symptom based (đúng) Alert về impact tới user: P95 latency SLO Error rate 1% Cost/hour budget Hallucination rate spike Chỉ alert khi user thực sự bị ảnh hưởng. Ít false positive. 'Page on symptoms, not causes.' Cause alerts chỉ là supplementary info để debug sau khi symptom alert fire.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p075:l1090-1096",
+          "source_type": "slide",
+          "page_no": 75,
+          "content": "## Page 75: Tổng kết - Key Takeaways\nPage 75: Tổng kết Key Takeaways Text Extract Những ý chính cần nhớ trước khi sang bài tiếp theo 1. 3 pillars + 2 extras. Metrics, Logs, Traces + Cost và Quality riêng cho AI. 2. SLO driven, symptom based alerting. Alert khi user bị ảnh hưởng, luôn có runbook. 3. OpenTelemetry + FinOps. Instrument 1 lần; 4 cost patterns (cache/routing/semantic/batch) giảm 70%.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "multi_window_burn_rate_alerting",
+      "name_vi": "Alert multi-window multi-burn-rate",
+      "description_vi": "Kết hợp một short window và một long window với burn rate để phản ứng nhanh với spike nhưng lọc noise ngắn hạn; alert chỉ fire khi cả hai cửa sổ vượt threshold.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế alert SLO dùng nhiều cửa sổ thời gian và burn rate.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Cấu hình được short/long windows và điều kiện burn-rate phù hợp cho mức severity của một SLO.",
+      "bloom_rationale_vi": "Nguồn giải thích hạn chế của alert một cửa sổ, nguyên lý hai cửa sổ và ví dụ burn rate 14.4x.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Giữ window, burn rate và điều kiện kết hợp trong một procedure vì chúng là các bước không thể tách khi xây rule multi-window.",
+      "role_reason_vi": "Đây là kỹ thuật alerting nâng cao, hữu ích để giảm noise nhưng không cần thiết để hiểu nguyên tắc symptom-based alerting cơ bản.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p057:l830-841"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p057:l830-841",
+          "source_type": "slide",
+          "page_no": 57,
+          "content": "## Page 57: Multi-Window Multi-Burn-Rate Alerting\nPage 57: Multi Window Multi Burn Rate Alerting Text Extract Vấn đề: Alert đơn giản 'error rate 1% trong 5 phút' → fire quá nhanh (noise) hoặc quá chậm (miss incident). Giải pháp của Google: kết hợp 2 windows với 2 burn rates: '14.4x burn rate': nếu error giữ mức này, tháng sẽ burn hết error budget trong 2 ngày thay vì 30. Alert fire khi cả 2 window cùng vượt threshold. Short window → react nhanh với spike thực. Long window → filter noise ngắn. Google SRE Workbook Chapter 5. Tables | Severity | Short window | Long window | Burn rate (vs SLO) | Ý nghĩa | | | | | | | | Page (critical) | 5 phút | 1 giờ | 14.4x | | | Ticket (warn) | 30 phút | 6 gi",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "alert_anatomy_and_runbook",
+      "name_vi": "Cấu trúc alert có thể hành động",
+      "description_vi": "Alert tốt phải có title rõ, severity, impact statement, current value, dashboard link, trace link, runbook link và on-call owner. Runbook là một phần của việc tạo alert.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá và tạo alert đủ context để người trực có thể xử lý ngay.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Tạo được alert rule có severity, impact, giá trị hiện tại, liên kết dashboard/trace, runbook và owner.",
+      "bloom_rationale_vi": "Nguồn đưa template đầy đủ và nhấn mạnh alert không có runbook không thể xử lý hiệu quả lúc sự cố xảy ra.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp các trường của alert và runbook vì chúng cùng tạo thành một tiêu chí quality của alert; từng field không có mastery state độc lập.",
+      "role_reason_vi": "Deliverable yêu cầu alert rules có runbook link và blueprint document có alert playbook.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p058:l842-855",
+        "day13-monitoring-logging-observability:p059:l856-870"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p058:l842-855",
+          "source_type": "slide",
+          "page_no": 58,
+          "content": "## Page 58: Alert Anatomy - Alert Tốt Có Gì?\nPage 58: Alert Anatomy Alert Tốt Có Gì? Text Extract Template cho mỗi alert: Title rõ ràng: '[P1] Agent P95 latency 5s cho feature=summary' Severity: P1 (page ngay) / P2 (trong giờ hành chính) / P3 (ticket) Impact statement: '5% user đang bị chậm 5s' Current value: 'P95 = 6.3s, bình thường 1.8s, threshold 5s' Dashboard link: pre filtered với feature tag, last 1h Trace link: top 10 traces chậm nhất trong window Runbook link: playbook fix step by step On call owner: team/người chịu trách nhiệm Lưu ý: Alert không có runbook = alert không thể xử lý lúc 3h sáng. Viết runbook là một phần của work 'tạo alert', không phải nice to have.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p059:l856-870",
+          "source_type": "slide",
+          "page_no": 59,
+          "content": "## Page 59: Alert Rules Cho AI Agent - Bộ Tối Thiểu\nPage 59: Alert Rules Cho AI Agent Bộ Tối Thiểu Tables | Metric | Threshold | Severity | Channel + Action | | | | | | | Latency P95 | 5s, 30 phút | P2 Warning | Slack, investigate trace | | Error rate | 5%, 5 phút | P1 Critical | Slack + PagerDuty, rollback | | Hourly cost | \\$50 (budget × 2) | P2 Warning | Email, check users/features | | Daily cost | daily budget | P1 Critical | Email + SMS, kill switch | | Tool call failure | 10%, 15 phút | P2 Warning | Slack, check tool provider | | Hallucination rate | baseline +2σ | P2 Warning | Slack, review outputs | | Uptime | < 99%, 1 giờ | P1 Critical | PagerDuty, incident response | Text Extract Ale",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "alert_fatigue_prevention",
+      "name_vi": "Phòng tránh alert fatigue",
+      "description_vi": "Alert fatigue xảy ra khi quá nhiều alert ít quan trọng khiến team ignore cả alert thật. Cách tránh là chỉ alert khi cần hành động, phân severity, route đúng người/channel, review và tune định kỳ, auto-resolve và deduplicate.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá chất lượng alerting và điều chỉnh hệ thống để giảm noise, false positive và tình trạng bỏ qua alert.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Phân tích một bộ alert để tìm nguồn alert fatigue và đề xuất severity, routing, deduplication hoặc tuning phù hợp.",
+      "bloom_rationale_vi": "Nguồn mô tả nguyên nhân, hậu quả và danh sách biện pháp phòng tránh cụ thể.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp nguyên nhân và biện pháp vì cùng phục vụ việc đánh giá/tuning alert system; các biện pháp riêng lẻ là thuộc tính của remediation.",
+      "role_reason_vi": "Đây là capability vận hành nâng cao, tái sử dụng cho mọi hệ alert nhưng không phải task instrumentation tối thiểu.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p060:l871-889"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p060:l871-889",
+          "source_type": "slide",
+          "page_no": 60,
+          "content": "## Page 60: Alert Fatigue - Kẻ Giết Hệ Thống Alert\nPage 60: Alert Fatigue Kẻ Giết Hệ Thống Alert Text Extract Alert fatigue xảy ra khi quá nhiều alerts không quan trọng nhận alert 24/7, ngay cả đêm mọi người bắt đầu ignore alert thật bị lẫn trong noise team mất tin tưởng vào hệ thống Cách tránh chỉ alert khi cần hành động ngay phân severity rõ ràng (P1/P2/P3) route đúng người, đúng channel review và tuning alerts hàng tuần auto resolve khi metric recovery dedup trong window Lưu ý: Nếu team ignore alerts thường xuyên, hệ thống alerting đang tệ hơn không có alert alert thật sẽ bị miss. Ít alert chất lượng tốt hơn nhiều alert vô nghĩa.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "three_layer_dashboard_design",
+      "name_vi": "Thiết kế dashboard ba lớp",
+      "description_vi": "Layer 1 là overview cho leadership với health, uptime và key alerts; Layer 2 là detail cho engineering với golden signals, cost và quality; Layer 3 là drill-down cho debugging với traces, log search và root cause.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế dashboard phân tầng theo stakeholder và mức độ điều tra.",
+      "target_bloom_level": "create",
+      "bloom_learning_objective_vi": "Tạo được dashboard ba lớp với Layer 2 giới hạn khoảng sáu panel, có latency percentiles, traffic, errors, cost, token usage, quality và đường SLO/threshold.",
+      "bloom_rationale_vi": "Nguồn mô tả ba layer, stakeholder tương ứng, bố cục Layer 2 và anti-pattern cần tránh như wall of metrics, thiếu baseline hoặc thiếu đơn vị.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp layer structure, panel layout và anti-patterns vì chúng cùng định nghĩa năng lực dashboard design; từng panel hoặc quy tắc hiển thị không cần tách.",
+      "role_reason_vi": "Dashboard là deliverable bắt buộc, với yêu cầu tối thiểu sáu panel và ba lớp trong blueprint.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p061:l890-901",
+        "day13-monitoring-logging-observability:p062:l902-912",
+        "day13-monitoring-logging-observability:p064:l925-934"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p061:l890-901",
+          "source_type": "slide",
+          "page_no": 61,
+          "content": "## Page 61: Dashboard Design - 3 Layers\nPage 61: Dashboard Design 3 Layers Text Extract Layer 1: Overview Health status, uptime, key alerts Layer 2: Detail 4 golden signals + Cost + Quality Layer 3: Drill down Individual traces, log search, root cause Cho leadership Cho engineering Cho debugging Mỗi stakeholder chỉ cần nhìn 1 layer. Leadership cần overview, không cần trace. Engineer cần drill down, không cần revenue chart. Cùng 1 dashboard cho tất cả → không ai nhìn.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p062:l902-912",
+          "source_type": "slide",
+          "page_no": 62,
+          "content": "## Page 62: Dashboard Layer 2 - Bố Cục Chuẩn\nPage 62: Dashboard Layer 2 Bố Cục Chuẩn Text Extract Latency P50/P95/P99 time series Traffic (QPS) time series Error rate % time series + breakdown Cost $/hour cumulative + forecast Tokens in/out stacked Hallucination % sampled, weekly Nhiều panel hơn → không ai đọc. Giới hạn 6 panels ở layer 2 → nhìn 5 giây biết health status. Muốn chi tiết hơn → click vào layer 3.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p064:l925-934",
+          "source_type": "slide",
+          "page_no": 64,
+          "content": "## Page 64: Dashboard Anti-patterns - 5 Điều Nên Tránh\nPage 64: Dashboard Anti patterns 5 Điều Nên Tránh Text Extract 'Wall of metrics' 30 panels, không ai nhìn hết. Giới hạn 6 8 panels/layer. Time range mặc định quá dài default 1 giờ cho ops dashboard, không phải 1 tháng (che mất spike) Không có baseline/threshold line nhìn số P95 = 2.1s không biết tốt hay xấu. Luôn vẽ đường SLO lên chart. Metric không có đơn vị/context 'Cost: 1250' là gì? USD? ngày? Luôn label đầy đủ. Không auto refresh dashboard cần realtime (15 30s refresh) cho ops. Cho monthly report thì khác. Đưa dashboard cho người không trong team xem 30 giây → họ có nói được 'hệ thống đang OK' hay 'đang có vấn đề ở X' không? Nếu không, r",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "stakeholder_metric_mapping",
+      "name_vi": "Ánh xạ metrics theo stakeholder",
+      "description_vi": "Engineering quan tâm latency, errors và saturation; Product quan tâm CSAT, task completion, hallucination và regenerate; Finance/Ops quan tâm cost và attribution; Leadership quan tâm adoption, ROI, uptime; Security/Legal quan tâm PII leak, audit log và retention.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn và diễn đạt metrics theo câu hỏi kinh doanh của từng stakeholder.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Ánh xạ được stakeholder vào dashboard metrics phù hợp và chuyển một giá trị kỹ thuật thành thông điệp business dễ hiểu.",
+      "bloom_rationale_vi": "Nguồn cung cấp bảng stakeholder-to-metrics và ví dụ diễn giải P95 latency thành tỷ lệ người dùng nhận phản hồi trong thời gian nhất định.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp các stakeholder và metric mapping vì đây là một năng lực chọn ngôn ngữ/dashboard theo audience; từng stakeholder không cần item riêng.",
+      "role_reason_vi": "Capability này giúp dashboard được sử dụng hiệu quả nhưng là phần mở rộng so với việc xây dashboard kỹ thuật cốt lõi.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p030:l375-387"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p030:l375-387",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Metric Nào Cho Ai?\nPage 30: Metric Nào Cho Ai? Tables | Stakeholder | Quan tâm | Metrics | | | | | | Engineering | System health, debug | Latency P95/P99, error rate, tool call failure, saturation | | Product | User experience | CSAT, task completion, hallucination rate, regenerate rate | | Finance / Ops | Cost control | Cost/day, tokens/request, cost by model, attribution | | Leadership | ROI overview | Adoption rate, cost vs value, uptime, user growth | | Security / Legal | Compliance | PII leak rate, audit log completeness, data retention | Text Extract Dashboard cho stakeholders phải nói bằng ngôn ngữ business. 'P95 = 2.1s' → '95% user nhận trả lời trong 2s",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "agent_monitoring_blueprint",
+      "name_vi": "Thiết kế monitoring blueprint cho agent",
+      "description_vi": "Blueprint hoàn chỉnh kết hợp structured JSON logging có PII sanitization và correlation ID, distributed tracing, dashboard phân tầng, SLO, symptom-based alert rules và blueprint document gồm architecture, alert playbook và kế hoạch cost/scaling.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế và bàn giao một monitoring blueprint hoàn chỉnh cho deployed AI agent.",
+      "target_bloom_level": "create",
+      "bloom_learning_objective_vi": "Tạo được blueprint có logging, tracing, dashboard, SLO, alert rules có runbook, architecture diagram và kế hoạch cost/scaling.",
+      "bloom_rationale_vi": "Nguồn nêu deliverable, lab phases, rubric và các thành phần bắt buộc của blueprint.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ blueprint như capability tổng hợp ở mức create, không gộp các KC thành phần vào một item duy nhất; các item thành phần vẫn có mastery state riêng.",
+      "role_reason_vi": "Đây là deliverable và trọng tâm cuối ngày, trực tiếp tích hợp toàn bộ kiến thức cốt lõi của bài.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p005:l26-34",
+        "day13-monitoring-logging-observability:p071:l1027-1030",
+        "day13-monitoring-logging-observability:p072:l1031-1050",
+        "day13-monitoring-logging-observability:p074:l1065-1089"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p005:l26-34",
+          "source_type": "slide",
+          "page_no": 5,
+          "content": "## Page 5: Deliverable Cuối Ngày\nPage 5: Deliverable Cuối Ngày Text Extract Monitoring blueprint hoàn chỉnh cho deployed agent: structured logging + tracing + dashboard + alert rules dựa trên SLO. 1 structured logging pipeline: JSON, correlation ID, PII sanitized, 3 log levels 1 Langfuse/LangSmith integration: ≥ 10 traces với cost + latency + quality tags 1 monitoring dashboard: 4 golden signals + cost + quality (6 panels tối thiểu) 1 SLO definition + alert rules: symptom based, có runbook link 1 trang blueprint document: mô tả SLO, architecture diagram, alert playbook",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p071:l1027-1030",
+          "source_type": "slide",
+          "page_no": 71,
+          "content": "## Page 71: Lab 13 & Closing\nPage 71: Lab 13 & Closing Text Extract Monitoring đầy đủ cho agent: biết nó chạy thế nào mà không cần hỏi user, và có blueprint bàn giao được",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p072:l1031-1050",
+          "source_type": "slide",
+          "page_no": 72,
+          "content": "## Page 72: Lab 13: Monitoring Blueprint Cho Agent\nPage 72: Lab 13: Monitoring Blueprint Cho Agent Text Extract Gắn monitoring stack đầy đủ vào deployed agent từ Day 12: structured logging + tracing + dashboard + SLO based alerts, với blueprint document bàn giao được. Phase A: Instrumentation (30 phút) Setup Langfuse project (free cloud tier), lấy API keys Add structlog cho structured JSON logging + correlation ID với contextvars Integrate Langfuse @observe() decorator cho 3 functions chính Add tags: user id, feature, model, env Phase B: Dashboard + Alerts (30 phút) Define SLO: P95 latency, error rate, daily cost budget Build dashboard Layer 2 (6 panels tối thiểu) Configure 3 alert rules với",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p074:l1065-1089",
+          "source_type": "slide",
+          "page_no": 74,
+          "content": "## Page 74: Blueprint Rubric - Chấm Điểm Deliverable\nPage 74: Blueprint Rubric Chấm Điểm Deliverable Text Extract Logging & Tracing (40%) Structured JSON logs (10) PII sanitized (10) Correlation ID propagate (10) 10+ Langfuse traces (10) Dashboard & Alerts (40%) 6+ panels Layer 2 (15) 3 alert rules với runbook (15) SLO defined (5) Screenshot có data (5) Blueprint document (20%) SLO table (5) Alert playbook (5) Architecture diagram (5) Cost & scaling plan (5) Điểm bonus (+10) Cost optimization (prompt cache) OTel auto instrument HTTP Quality metric (heuristic based)",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "observability_stack_troubleshooting",
+      "name_vi": "Troubleshooting logging và tracing stack",
+      "description_vi": "Các lỗi thường gặp gồm trace không xuất hiện, cost không track, correlation ID không propagate qua async và PII vẫn lọt vào log. Cách xử lý là kiểm tra API key/network, model name/usage details, contextvars và thứ tự scrubber trước JSON renderer.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Chẩn đoán lỗi cấu hình và dữ liệu trong observability stack.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Từ một triệu chứng của lab, lần lượt kiểm tra cấu hình, propagation, usage metadata và processor order để khắc phục.",
+      "bloom_rationale_vi": "Nguồn cung cấp bảng triệu chứng-cách xử lý và khuyến nghị bật DEBUG để xem trace export request/response.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp các lỗi troubleshooting trong một procedure vận hành; từng triệu chứng là case của cùng năng lực chẩn đoán, không phải capability độc lập.",
+      "role_reason_vi": "Đây là kỹ năng remediation tái sử dụng sau khi instrument, nhưng không phải mục tiêu khái niệm chính của bài.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p073:l1051-1064"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p073:l1051-1064",
+          "source_type": "slide",
+          "page_no": 73,
+          "content": "## Page 73: Lab 13 Troubleshooting - Lỗi Thường Gặp\nPage 73: Lab 13 Troubleshooting Lỗi Thường Gặp Text Extract Bật DEBUG cho Langfuse và OpenTelemetry logger → thấy trace export request/response, tìm ra vấn đề trong 5 phút. Tables | Triệu chứng | Cách xử lý | | | | | Trace không xuất hiện ở Langfuse | Check API key env var, network, bật LANGFUSE DEBUG=true | | Cost không được track | Model name sai (phải khớp Langfuse pricing DB) hoặc thiếu usage details | | Correlation ID không propagate qua async | Dùng contextvars; kiểm tra clear contextvars ở đầu mỗi request | | PII leak vào log dù đã scrub | Check order processors: scrubber phải chạy trước JSONRenderer | | Alert fire nhưng không Slack |",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "mttd_mttr",
+      "name_vi": "MTTD và MTTR",
+      "description_vi": "MTTD là thời gian từ khi incident xảy ra đến khi phát hiện; MTTR là thời gian từ khi phát hiện đến khi khôi phục. Observability tốt giúp giảm MTTD và cung cấp dữ liệu để rút ngắn MTTR.",
+      "item_form": "reference_topic",
+      "primary_capability_vi": "",
+      "target_bloom_level": null,
+      "bloom_learning_objective_vi": "",
+      "bloom_rationale_vi": "",
+      "knowledge_role": "reference_concept",
+      "granularity_reason_vi": "Giữ MTTD và MTTR thành một reference topic vì nguồn chỉ giới thiệu thuật ngữ và tác động tổng quát, không dạy một quy trình đo hoặc tối ưu độc lập.",
+      "role_reason_vi": "Hữu ích để liên kết observability với reliability engineering và các chủ đề incident management liên quan, nhưng không phải năng lực cần mastery trong deliverable.",
+      "evidence_section_ids": [
+        "day13-monitoring-logging-observability:p008:l54-59"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day13-monitoring-logging-observability:p008:l54-59",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Control Theory - Vì Sao Quan Trọng\nPage 8: Control Theory Vì Sao Quan Trọng Text Extract MTTD (Mean Time To Detect): từ khi sự cố xảy ra đến khi phát hiện MTTR (Mean Time To Recover): từ khi phát hiện đến khi fix xong Monitoring tốt = giảm MTTD xuống phút, không phải ngày. Không có observability, MTTD = thời gian user phản ánh.",
+          "transcript_evidence": []
+        }
+      ]
+    }
+  ],
+  "evidence_repairs": [],
+  "source_mode": "slide_only"
+}

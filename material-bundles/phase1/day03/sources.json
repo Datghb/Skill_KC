@@ -1,0 +1,12 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day03-tu-chatbot-den-agentic-agent-react",
+  "sources": [
+    {
+      "source_id": "slide-day03",
+      "source_type": "slide",
+      "sha256": "82eb3bc40aa583f6b73d19fed78a86074aac4c2884b8e4b419a30e4aaffcda01",
+      "uri": "source://phase1/day03/slide"
+    }
+  ]
+}

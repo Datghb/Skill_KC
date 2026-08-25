@@ -1,0 +1,18 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day02-define-the-problem-for-ai-selected",
+  "sources": [
+    {
+      "source_id": "slide-day02",
+      "source_type": "slide",
+      "sha256": "4197029b71d337ee196ff768c61db09b5360a673ae12a5f2906b88763786ac36",
+      "uri": "source://phase1/day02/slide"
+    },
+    {
+      "source_id": "lecture-notes-day02",
+      "source_type": "lecture_note",
+      "sha256": "30dc5582daa2ab2c8d8532d2c518bf695a3279b1e05afe28c4e46fa9cf96c215",
+      "uri": "artifact://phase1/day02/grounded-lecture-notes"
+    }
+  ]
+}

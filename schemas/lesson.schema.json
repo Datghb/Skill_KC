@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vlearn.local/schemas/lesson.schema.json",
+  "title": "VLearn Lesson",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "lesson_id", "source_slug", "day", "title"],
+  "properties": {
+    "schema_version": {"const": "vlearn_lesson_v1"},
+    "lesson_id": {"type": "string", "minLength": 1},
+    "source_slug": {"type": "string", "minLength": 1},
+    "day": {"type": "integer", "minimum": 1},
+    "title": {"type": "string", "minLength": 1}
+  }
+}
+

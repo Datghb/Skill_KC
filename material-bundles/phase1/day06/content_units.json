@@ -1,0 +1,160 @@
+{
+  "schema_version": "vlearn_content_units_v1",
+  "source_slug": "day06-ai-product-prototype-and-demo",
+  "content_units": [
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p003:l11-23",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 3,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 3: Agenda hôm nay\nPage 3: Agenda hôm nay Text Extract SÁNG HACKATHON: BUILD PROTOTYPE 9:00 9:15: SPEC review nhanh 9:15 13:00: Build Prototype (prompt based / mock flow / code) Focus 1 core flow, test với real input Key milestones M4 Demo prep: 15:30 | M5 Gallery walk + demo: 16:00 17:00 | M6 Top teams + closing: 17:00 18:00 CHIỀU DEMO DAY: DEMO ROUND + TOP TEAMS 14:00 16:00: Polish Prototype + chuẩn bị demo 16:00 17:00: Demo round (feedback trong zone) 17:00 18:00: Top teams present + trao giải + closing",
+      "content_sha256": "70dfc480b8988c02893f4682db20844456d080fc82340cf727f177002d899eda"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p004:l24-34",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 4,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 4: Thread đỏ 3 ngày\nPage 4: Thread đỏ 3 ngày Text Extract Day 2 ✓ Ðã hoàn thành Xác định vấn đề + user + AI opportunity Day 5 ✓ Ðã hoàn thành Framework + Canvas + SPEC Day 6 HÔM NAY Chứng minh bằng SPEC + Prototype + Demo",
+      "content_sha256": "2d47de5037983a04703ce1e27386af6f85cf45bf32392a8a75b43cc8014b9b39"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p005:l35-41",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 5,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 5: 💬 Mỗi nhóm show Canvas - 2 phút. Nhóm nào chưa nộp SPEC?\nPage 5: 💬 Mỗi nhóm show Canvas 2 phút. Nhóm nào chưa nộp SPEC? Image Caption Slide nền đen, chữ trắng căn giữa, dạng thông báo/nhắc việc. Dòng 1 có emoji bong bóng thoại và nội dung: 💬 Mỗi nhóm show Canvas — 2 phút. Dòng 2: Nhóm nào chưa nộp SPEC? Bên dưới, chữ xám nhỏ: 15 phút",
+      "content_sha256": "f3e6bb5cd492a4641674e5c8af12ff9c72e3f71b550c250db634035be46d8441"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p006:l42-50",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 6,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 6: SPEC checklist\nPage 6: SPEC checklist Text Extract Canvas (Value / Trust / Feasibility + learning signal) User Stories 4 paths Eval metrics + threshold Top 3 failure modes ROI 3 kịch bản Mini AI spec",
+      "content_sha256": "92b69a7d17f4b5200b8c4d0cb0f782987d764b961755c96c0fcd721fe291b835"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p007:l51-66",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 7,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 7: Prototype options\nPage 7: Prototype options Text Extract A Prompt based demo Agent / chatbot 1 flow Dùng API (OpenAI, Gemini, ...) Show kết quả thật Nhóm chọn A hoặc B. Bonus nếu C. B Mock flow Figma / slides 1 prompt test thật Minh họa UX flow C Working code (bonus) End to end Deployed hoặc local demo Bonus điểm",
+      "content_sha256": "08633e731b60389c951784fc50b3e33777611ba80cd4ab9a2d00b496f29120b2"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p008:l67-76",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 8,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 8: Working time sáng\nPage 8: Working time sáng Image Caption Slide lịch làm việc trên nền trắng, tiêu đề lớn ở góc trên trái: Working time sáng. Ở giữa bên trái là 3 khối thời gian theo chiều dọc: 9:15 – 11:00 Build (khối xanh) 11:00 – 11:15 Break (khối xám) 11:15 – 13:00 Build (khối xanh) Phía dưới là khung Tips nền hồng nhạt, có vạch đỏ ở mép trái: Tips: Focus vào 1 core flow, không làm full app. Test với real input. Chuẩn bị demo narrative.",
+      "content_sha256": "f50fc3e227b2ec8e0d8e179aaac3594a187b824f4485dbf03099c332e7bc7df4"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p009:l77-80",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 9,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 9: Nhóm không hiểu rõ code / vibe-coding hoàn toàn → 0 điểm demo.\nPage 9: Nhóm không hiểu rõ code / vibe coding hoàn toàn → 0 điểm demo. Text Extract Mỗi thành viên phải giải thích được phần mình.",
+      "content_sha256": "6e669efb389e849279358f4cb383a5b98abaf095476edb899b16905c5448aca3"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p011:l81-91",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 11,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 11: Chiều: polish + chuẩn bị demo\nPage 11: Chiều: polish + chuẩn bị demo Text Extract 14:00 15:30 15:30 16:00 Polish Prototype + chuẩn bị demo Dry run + setup stations Prototype chạy được Demo script 2 phút Poster / slides tóm tắt Mỗi người biết phần mình",
+      "content_sha256": "026dfd4a79d60b72d71a4aa275a7777ab94adc6605477bc8267e914a07548a1a"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p012:l92-96",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 12,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 12: Demo Day: Demo Round + Top Teams\nPage 12: Demo Day: Demo Round + Top Teams Text Extract Chứng minh product xứng đáng ship DEMO",
+      "content_sha256": "121f18cd6b9441fbf87de68286f1531283a560dc6dc8d03e894799e6b974cd99"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p013:l97-104",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 13,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 13: Demo round - luật chơi\nPage 13: Demo round luật chơi Text Extract 16:00 17:00 (60 phút) Mỗi nhóm demo tại bàn mình 2 3 người ở lại trình bày + 2 3 người đi xem Feedback đủ các team trong zone (~5 team) Nộp đủ feedback forms chấm cả chất lượng review",
+      "content_sha256": "8d9022a349ea08033ad1bcf1e041238ebe7267ff155090ca67df0d37a84f12f8"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p014:l105-111",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 14,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 14: Tiêu chí feedback\nPage 14: Tiêu chí feedback Text Extract 1 Problem solution fit bài toán rõ, giải pháp logic 2 AI product thinking auto/aug rõ, failure modes, eval metrics 3 Demo quality chạy được, narrative rõ Mỗi tiêu chí chấm 1 5. Thêm: 1 điều tốt + 1 gợi ý cải thiện.",
+      "content_sha256": "6734305c714396f537626b1e0032c2e249ce1522908b0664560bb3f0f3c8e539"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p016:l112-123",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 16,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 16: Top teams present\nPage 16: Top teams present Text Extract Format: mỗi nhóm ~5 phút present + 2 3 phút Q&A Điểm: bonus cho top teams Tiêu chí challenge: Assumption nào chưa validate? Precision hay recall justify? Data flywheel hoạt động thế nào? Failure mode nào nguy hiểm nhất?",
+      "content_sha256": "959f61371f7e183a5c7d4390e43fb44722c592ccacdf87d8be8b61ed44096805"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p017:l124-135",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 17,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 17: Scoring tổng\nPage 17: Scoring tổng Tables | Hạng mục | Điểm | Loại | | | | | | SPEC | 20 | Nhóm | | Prototype | 15 | Nhóm | | Demo Day (peer feedback + top bonus) | 15 | Nhóm | | Expert contribution | 10 | Cá nhân | | Checkpoint | 15 | Cá nhân | | Reflection | 15 | Cá nhân | | Tổng | 60 + 40 = 100 | Nhóm + Cá nhân |",
+      "content_sha256": "403fe146ae1138654dda61b8993db50dcf784507382b6febd1c2504c9eec6842"
+    },
+    {
+      "content_unit_id": "day06-ai-product-prototype-and-demo:p019:l136-144",
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "page_no": 19,
+      "start_seconds": null,
+      "end_seconds": null,
+      "locator": null,
+      "content": "## Page 19: Recap 3 ngày\nPage 19: Recap 3 ngày Text Extract Day 2 Problem validated Day 5 Framework + SPEC Day 6 Prototype + Demo proved it Tuần tới Day 7 10: build system kỹ thuật để giải đúng vấn đề đã định nghĩa",
+      "content_sha256": "5b572162d6a6b2d1eadca85c8fd48f6308357c8b25436a1f8dbc1aa96dce8f5d"
+    }
+  ]
+}

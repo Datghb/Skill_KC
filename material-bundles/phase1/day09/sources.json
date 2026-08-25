@@ -1,0 +1,12 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day09-multi-agent-mcp-a2a",
+  "sources": [
+    {
+      "source_id": "slide-day09",
+      "source_type": "slide",
+      "sha256": "21c7ef21223d5e809a263e87ea73afc1dc3ae51045461a3133a4096603edf4df",
+      "uri": "source://phase1/day09/slide"
+    }
+  ]
+}

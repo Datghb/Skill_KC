@@ -1,0 +1,12 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day15-trien-khai-thuc-te-dinh-huong",
+  "sources": [
+    {
+      "source_id": "slide-day15",
+      "source_type": "slide",
+      "sha256": "e0220e676d661cf95a574208dd4b0dffa56ead6a4db833002f798334a29d8a5f",
+      "uri": "source://phase1/day15/slide"
+    }
+  ]
+}

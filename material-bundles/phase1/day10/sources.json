@@ -1,0 +1,12 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day10-data-pipeline-and-data-observability",
+  "sources": [
+    {
+      "source_id": "slide-day10",
+      "source_type": "slide",
+      "sha256": "e33b7654a83a5774c5b03e32c4e07a4a583a3011705447192e5328d44f948a1f",
+      "uri": "source://phase1/day10/slide"
+    }
+  ]
+}

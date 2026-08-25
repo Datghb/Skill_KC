@@ -1,0 +1,2400 @@
+{
+  "schema_version": "mixed_source_deepseek_kc_judge_v1",
+  "source_slug": "day10-data-pipeline-and-data-observability",
+  "source_mode": "slide_only",
+  "summary": {
+    "candidate_count": 29,
+    "levels": {
+      "high": 25,
+      "low": 4
+    },
+    "actions": {
+      "keep": 23,
+      "revise": 6
+    },
+    "mean_score": 3.914
+  },
+  "metadata": {
+    "provider": "openrouter",
+    "model": "deepseek/deepseek-v4-flash",
+    "reasoning_effort": "low",
+    "provider_order": [
+      "gmicloud/fp8",
+      "streamlake/fp8",
+      "digitalocean"
+    ],
+    "allow_fallbacks": true,
+    "api_calls": 4,
+    "latency_seconds": 285.245,
+    "usage": {
+      "input_tokens": 58459,
+      "output_tokens": 31912,
+      "reasoning_tokens": 23259,
+      "total_tokens": 90371,
+      "cost_usd": 0.0100328
+    },
+    "upstream_providers": {
+      "GMICloud": 4
+    }
+  },
+  "candidates": [
+    {
+      "code": "ai_data_pipeline_architecture",
+      "name_vi": "Kiến trúc data pipeline trong AI stack",
+      "description_vi": "Mô hình hóa luồng Sources → ingestion/transform → raw và cleaned storage → vector store/cache/API serving → agent; không bao gồm logic prompt hay triển khai model.",
+      "item_form": "concept",
+      "primary_capability_vi": "Giải thích và vẽ được các tầng dữ liệu từ nguồn đến bề mặt agent.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Người học có thể mô tả vai trò và quan hệ của source, pipeline, storage/serving và agent trong một hệ AI.",
+      "bloom_rationale_vi": "Nguồn trình bày trực tiếp sơ đồ Sources → Pipeline → Storage/Serving → Agent và các lớp raw, cleaned, vector store, cache/API.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ riêng vì đây là mô hình hệ thống tổng quát; ETL/ELT, ingestion và observability là các năng lực triển khai chi tiết có task riêng.",
+      "role_reason_vi": "Đây là khung nền để hiểu toàn bộ bài học và xác định lỗi nằm ở tầng nào trước khi sửa agent.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p001:l1-24",
+        "day10-data-pipeline-and-data-observability:p012:l169-190"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p001:l1-24",
+          "source_type": "slide",
+          "page_no": 1,
+          "content": "## Page 1: Data Pipeline & Data Observability\nPage 1: Data Pipeline & Data Observability Text Extract Từ data thô đến agent đáng tin Nối trực tiếp với RAG / multi agent ETL + Data Quality + Observability Company data Pipeline ingest · clean · validate version · monitor Freshness Vector store Agent Quality Observe Page 2: Text Extract [Tên] [Chức danh / vai trò] Audience: học viên đã có RAG / multi agent artifact Focus: data pipeline, data quality, observability Case study: trợ lý nội bộ CS + IT Helpdesk Goal: detect issue trước khi user thấy câu trả lời sai Topic: Data Pipeline & Data Observability",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p012:l169-190",
+          "source_type": "slide",
+          "page_no": 12,
+          "content": "## Page 12: Data pipeline là gì trong AI stack?\nPage 12: Data pipeline là gì trong AI stack? Text Extract Sources → Pipeline → Storage → Serving → Agent Sources DB API Files Streams Pipeline ingest transform ETL ELT Storage / Serving raw + cleaned vector store cache / API Agent surface RAG tools / workers agent quality",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "ai_data_pipeline_architecture",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Mô tả kiến trúc tổng quan được hỗ trợ đầy đủ bởi evidence (p001, p012). Không có claim không có evidence, disposition phù hợp, không overlap với code khác, scope vừa phải và capability có thể đánh giá được."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "ai_data_pipeline_architecture",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Mô tả kiến trúc tổng quan, evidence p001 và p012 hỗ trợ trực tiếp. Disposition core_kc phù hợp. Scope vừa phải, không overlap. Capability có thể đánh giá bằng task vẽ hoặc giải thích.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "etl_vs_elt_selection",
+      "name_vi": "Phân biệt và lựa chọn ETL với ELT",
+      "description_vi": "ETL biến đổi dữ liệu trước khi load; ELT load dữ liệu trước rồi biến đổi. Ranh giới item là lựa chọn mô hình theo yêu cầu bảo mật, governance, latency và chi phí, không bao gồm lựa chọn batch hay streaming.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Phân loại một tình huống thành ETL hoặc ELT và biện minh bằng trade-off.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể chọn ETL hoặc ELT cho một use case cụ thể và nêu lý do kỹ thuật.",
+      "bloom_rationale_vi": "Hoạt động yêu cầu phân loại bốn tình huống và giải thích theo latency, governance, cost; đáp án cũng nêu các lựa chọn thay thế hợp lệ nếu biện minh được.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi batch/streaming vì ETL/ELT nói về thời điểm transform so với load, còn batch/streaming nói về chế độ và độ trễ xử lý; hai lựa chọn có thể kết hợp độc lập.",
+      "role_reason_vi": "Lựa chọn ETL/ELT là quyết định trực tiếp khi thiết kế pipeline và được thực hành trong hoạt động phân loại.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p010:l130-155",
+        "day10-data-pipeline-and-data-observability:p011:l156-168",
+        "day10-data-pipeline-and-data-observability:p012:l169-190"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p010:l130-155",
+          "source_type": "slide",
+          "page_no": 10,
+          "content": "## Page 10: Hoạt động 1 - ETL hay ELT? Batch hay Streaming?\nPage 10: Hoạt động 1 ETL hay ELT? Batch hay Streaming? Text Extract Phân loại 4 tình huống thực tế trước khi đi vào chi tiết ETL transform trước load ELT load rồi mới transform Batch theo lô Streaming theo sự kiện 1 Mask PII log trước khi vào warehouse 2 Nightly sync policy/refund v4.pdf 3 P1 ticket webhook cập nhật dashboard tức thời 4 Monthly CSV tickets/2026 02 incidents.csv latency governance cost debability Streaming ↑ | Batch ↓ ETL + streaming ELT + streaming ETL + batch ELT + batch Output: 1 bảng phân loại + lý do ngắn",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p011:l156-168",
+          "source_type": "slide",
+          "page_no": 11,
+          "content": "## Page 11: Ðáp án mẫu\nPage 11: Ðáp án mẫu Text Extract Hoạt động 1 Gợi ý phân loại + lý do ngắn Đáp án không nhất thiết duy nhất; cần biện minh latency / governance / cost Nếu nhóm chọn khác: hợp lệ nếu nêu rõ trade off (ví dụ streaming ELT nhưng thêm bước mask sớm). Tables | | Gợi ý ô | Lý do (1 dòng) | | | | | | 1 Mask PII log | ETL +streaming | phải che PII trước khi vào lake/warehouse →transform trước load; log tới liên tục | | 2 Nightly PDF | ETL +batch | khối lượng ổn định theo lịch; extract/chuẩn hoá text & metadata trước khi nạp staging | | 3 P1 webhook | ELT +streaming | ghi event/raw nhanh; aggregate/dashboard transform sau trong warehouse | | 4 Monthly",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p012:l169-190",
+          "source_type": "slide",
+          "page_no": 12,
+          "content": "## Page 12: Data pipeline là gì trong AI stack?\nPage 12: Data pipeline là gì trong AI stack? Text Extract Sources → Pipeline → Storage → Serving → Agent Sources DB API Files Streams Pipeline ingest transform ETL ELT Storage / Serving raw + cleaned vector store cache / API Agent surface RAG tools / workers agent quality",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "etl_vs_elt_selection",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p010, p011, p012. Phân biệt rõ ràng với batch/streaming, không overlap, capability khả thi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "etl_vs_elt_selection",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p010, p011, p012 đầy đủ, mô tả rõ ràng, tách biệt với batch/streaming. Capability phân loại và biện minh trade-off khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "batch_vs_streaming_selection",
+      "name_vi": "Phân biệt và lựa chọn batch với streaming",
+      "description_vi": "Batch xử lý dữ liệu theo lô hoặc lịch; streaming xử lý theo sự kiện với độ trễ thấp hơn. Item tập trung vào lựa chọn chế độ theo latency, governance và cost.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn batch hoặc streaming cho nguồn dữ liệu và yêu cầu latency cụ thể.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể phân loại một luồng dữ liệu là batch hoặc streaming và giải thích ảnh hưởng của lựa chọn đó.",
+      "bloom_rationale_vi": "Nguồn yêu cầu phân loại nightly sync, webhook P1 và monthly CSV, đồng thời nêu trade-off latency, governance và cost.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi ETL/ELT vì một pipeline có thể là ETL + streaming, ELT + streaming, ETL + batch hoặc ELT + batch.",
+      "role_reason_vi": "Đây là quyết định thiết kế cốt lõi để đáp ứng freshness và latency của dữ liệu phục vụ agent.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p010:l130-155",
+        "day10-data-pipeline-and-data-observability:p011:l156-168",
+        "day10-data-pipeline-and-data-observability:p013:l191-217"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p010:l130-155",
+          "source_type": "slide",
+          "page_no": 10,
+          "content": "## Page 10: Hoạt động 1 - ETL hay ELT? Batch hay Streaming?\nPage 10: Hoạt động 1 ETL hay ELT? Batch hay Streaming? Text Extract Phân loại 4 tình huống thực tế trước khi đi vào chi tiết ETL transform trước load ELT load rồi mới transform Batch theo lô Streaming theo sự kiện 1 Mask PII log trước khi vào warehouse 2 Nightly sync policy/refund v4.pdf 3 P1 ticket webhook cập nhật dashboard tức thời 4 Monthly CSV tickets/2026 02 incidents.csv latency governance cost debability Streaming ↑ | Batch ↓ ETL + streaming ELT + streaming ETL + batch ELT + batch Output: 1 bảng phân loại + lý do ngắn",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p011:l156-168",
+          "source_type": "slide",
+          "page_no": 11,
+          "content": "## Page 11: Ðáp án mẫu\nPage 11: Ðáp án mẫu Text Extract Hoạt động 1 Gợi ý phân loại + lý do ngắn Đáp án không nhất thiết duy nhất; cần biện minh latency / governance / cost Nếu nhóm chọn khác: hợp lệ nếu nêu rõ trade off (ví dụ streaming ELT nhưng thêm bước mask sớm). Tables | | Gợi ý ô | Lý do (1 dòng) | | | | | | 1 Mask PII log | ETL +streaming | phải che PII trước khi vào lake/warehouse →transform trước load; log tới liên tục | | 2 Nightly PDF | ETL +batch | khối lượng ổn định theo lịch; extract/chuẩn hoá text & metadata trước khi nạp staging | | 3 P1 webhook | ELT +streaming | ghi event/raw nhanh; aggregate/dashboard transform sau trong warehouse | | 4 Monthly",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p013:l191-217",
+          "source_type": "slide",
+          "page_no": 13,
+          "content": "## Page 13: Ingestion từ nhiều nguồn: DB, API, files, streams\nPage 13: Ingestion từ nhiều nguồn: DB, API, files, streams Text Extract Không chỉ kéo data về; phải xử lý CDC, rate limit, backpressure, retry PostgreSQL CDC / snapshot External API poll / pagination / rate limit PDF / HTML parse / OCR / metadata Webhooks queue / consumer / backpressure Ingestion layer retry + backoff buffer / queue DLQ raw cleaned monitor DB schema drift · timeout · CDC lag API auth · pagination · rate limit Files OCR error · encoding · missing metadata Streams backpressure · retry · dedupe",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "batch_vs_streaming_selection",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p010, p011, p013. Không overlap với ETL/ELT, scope phù hợp."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "batch_vs_streaming_selection",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p010, p011, p013 hỗ trợ tốt. Không overlap với ETL/ELT, scope phù hợp. Capability chọn chế độ xử lý theo latency/cost có thể đánh giá.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "multi_source_ingestion_risk_mapping",
+      "name_vi": "Thiết kế ingestion plan và mapping rủi ro nguồn",
+      "description_vi": "Thiết kế từ source đến method, check và owner; xác định cách lấy dữ liệu, failure có thể xảy ra và metric phát hiện sớm cho DB, API, file và stream.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tạo source map có phương thức ingestion, rủi ro, kiểm tra, owner và lineage đến agent.",
+      "target_bloom_level": "create",
+      "bloom_learning_objective_vi": "Người học có thể thiết kế ingestion plan cho use case CS/IT Helpdesk và chỉ ra cách bảo vệ từng nguồn.",
+      "bloom_rationale_vi": "Hoạt động yêu cầu ba bước Identify, Foresee, Protect và output dạng source → method → check → owner; đáp án minh họa pipeline từ nguồn đến vector publish.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ ở mức quy trình thiết kế tổng hợp; các kỹ thuật CDC, API retry, OCR và queue được tách vì có cơ chế và failure/remediation riêng.",
+      "role_reason_vi": "Đây là năng lực trực tiếp để xây pipeline cho các nguồn DB, Jira API và PDF SOP trong case study.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p013:l191-217",
+        "day10-data-pipeline-and-data-observability:p014:l218-228",
+        "day10-data-pipeline-and-data-observability:p019:l278-306",
+        "day10-data-pipeline-and-data-observability:p020:l307-324"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p013:l191-217",
+          "source_type": "slide",
+          "page_no": 13,
+          "content": "## Page 13: Ingestion từ nhiều nguồn: DB, API, files, streams\nPage 13: Ingestion từ nhiều nguồn: DB, API, files, streams Text Extract Không chỉ kéo data về; phải xử lý CDC, rate limit, backpressure, retry PostgreSQL CDC / snapshot External API poll / pagination / rate limit PDF / HTML parse / OCR / metadata Webhooks queue / consumer / backpressure Ingestion layer retry + backoff buffer / queue DLQ raw cleaned monitor DB schema drift · timeout · CDC lag API auth · pagination · rate limit Files OCR error · encoding · missing metadata Streams backpressure · retry · dedupe",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p014:l218-228",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: Nhắc nhanh trước khi vẽ source map\nPage 14: Nhắc nhanh trước khi vẽ source map Text Extract Nguồn nào · Hỏng kiểu gì · Đo cái gì Source PostgreSQL External API PDF / HTML Failure timeout rate limit OCR / schema drift Output template: source → method → check → owner Monitor freshness volume schema / lineage",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p019:l278-306",
+          "source_type": "slide",
+          "page_no": 19,
+          "content": "## Page 19: Hoạt động 2 - Mapping Ingestion Risks\nPage 19: Hoạt động 2 Mapping Ingestion Risks Text Extract Thiết kế ingestion plan cho use case CS & IT Helpdesk Case Study: CS & IT Support PostgreSQL: Thông tin khách hàng & lịch sử ticket. Jira API: Trạng thái xử lý lỗi thời gian thực. PDF Docs: Quy trình (SOP) & Policy bảo mật. Nhiệm vụ (3 Bước) Identify: Xác định logic kéo data cho từng nguồn. Foresee: Đánh dấu các “điểm đứt” (failures). Protect: Đề xuất cách monitor để phát hiện sớm. schema drift OCR error timeout rate limit Pipeline Funnel: Từ Nguồn đến Agent DB (SQL) API (Jira) PDF (SOP) Pipeline Layer Clean · Validate · Embed AI Agent Tables | Source | Risk (What breaks?) | Monitor (H",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p020:l307-324",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Ðáp án mẫu\nPage 20: Ðáp án mẫu Text Extract Hoạt động 2 Source map & bảng ingestion (ví dụ) Use case: CS/IT Helpdesk PostgreSQL + CRM API + PDF SOP 2 rủi ro chính API CRM rate limit 429 làm mất nhịp sync. PDF scan OCR confidence thấp → text rác vào RAG. 1 monitor ưu tiên freshness sla trên bảng kb documents (end to end tới vector publish). Sơ đồ một dòng: 3 nguồn → queue → ingest worker → raw → clean → validate → embed → publish Tables | Source | Method | Check | Owner | | | | | | | PostgreSQL tickets | CDC / watermark updated at | freshness + replication lag | Data Eng | | CRMAPI | poll + cursor checkpoint | 429 rate + checkpoint stall | AI Eng | | PDF",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "multi_source_ingestion_risk_mapping",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ (p013, p014, p019, p020). Đã tách biệt với các kỹ thuật chi tiết, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "multi_source_ingestion_risk_mapping",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p013, p014, p019, p020 hỗ trợ đầy đủ. Đã tách biệt với các kỹ thuật chi tiết. Capability thiết kế source map khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "cdc_vs_snapshot_selection",
+      "name_vi": "Lựa chọn CDC hay snapshot cho database",
+      "description_vi": "Snapshot đọc toàn bộ hoặc incremental theo watermark; CDC đọc log thay đổi với độ trễ thấp hơn. Item bao gồm tiêu chí lựa chọn và metric vận hành tương ứng.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn CDC hoặc snapshot cho nguồn database dựa trên latency, độ phức tạp và nguy cơ bỏ sót thay đổi.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể quyết định phương thức đồng bộ database và chọn metric monitor phù hợp.",
+      "bloom_rationale_vi": "Nguồn nêu rõ trade-off CDC phức tạp nhưng ít miss update, snapshot đơn giản nhưng có thể đọc quá nhiều; đồng thời chỉ ra watermark stall và replication lag cần theo dõi.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi ingestion plan tổng quát vì đây là quyết định riêng cho database, có failure signal và remediation khác với API, file hoặc stream.",
+      "role_reason_vi": "Năng lực tái sử dụng trong data engineering nhưng không bắt buộc cho mọi pipeline của bài học.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p015:l229-245"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p015:l229-245",
+          "source_type": "slide",
+          "page_no": 15,
+          "content": "## Page 15: PHẦN B ·\nPage 15: PHẦN B · Text Extract CDC vs snapshot: khi nào dùng gì? Database là nguồn hay thay đổi nhất cho policy nội bộ Snapshot / batch query full hoặc incremental theo watermark updated at đơn giản, dễ hiểu CDC (log based) độ trễ thấp, ít miss update nếu có slot WAL Trade off CDC phức tạp hơn vận hành; snapshot dễ “đọc quá nhiều” Monitor snapshot watermark stall · duration query · rows/sec Monitor CDC replication lag · consumer offset · poison message Agent note CDC trễ vài phút vẫn có thể làm policy “cũ” với ticket P1",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "cdc_vs_snapshot_selection",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p015. Không overlap với code khác, scope hẹp và đúng."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "cdc_vs_snapshot_selection",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p015 duy nhất nhưng đủ chi tiết để hỗ trợ mô tả. Disposition performance_kc phù hợp. Scope hẹp, không overlap. Capability ra quyết định có thể đánh giá.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "resilient_api_ingestion",
+      "name_vi": "Ingestion API có pagination, quota và replay an toàn",
+      "description_vi": "Xử lý rate limit bằng tôn trọng Retry-After, exponential backoff và jitter; dùng cursor ổn định, checkpoint, idempotent rerun và DLQ cho page lỗi.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế và vận hành API ingestion không bị dừng hoặc fetch trùng khi gặp 429 và lỗi từng trang.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể cấu hình pagination, checkpoint, retry và DLQ để replay có chủ đích một API ingestion.",
+      "bloom_rationale_vi": "Slide cung cấp trực tiếp các cơ chế token bucket, Retry-After, backoff, cursor, checkpoint và partial page failure vào DLQ.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi ingestion plan vì có thuật toán và failure mode riêng của API; không gộp với idempotency warehouse/vector vì remediation ở tầng lưu trữ khác.",
+      "role_reason_vi": "Đây là capability độc lập, tái sử dụng cho các API như Jira/CRM nhưng không phải mọi nguồn trong pipeline đều cần.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p016:l246-254",
+        "day10-data-pipeline-and-data-observability:p020:l307-324"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p016:l246-254",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: PHẦN B ·\nPage 16: PHẦN B · Text Extract API ingestion pagination, cursor, quota Thiết kế để không bị 429 làm “đứng hình” pipeline Token bucket / rate limit header respect Retry After , exponential backoff + jitter Pagination cursor ổn định hơn offset khi data đang thay đổi Checkpoint lưu last synced id idempotent; rerun không double fetch toàn bộ Partial page failure ghi page đã fail vào DLQ để replay có chủ đích",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p020:l307-324",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Ðáp án mẫu\nPage 20: Ðáp án mẫu Text Extract Hoạt động 2 Source map & bảng ingestion (ví dụ) Use case: CS/IT Helpdesk PostgreSQL + CRM API + PDF SOP 2 rủi ro chính API CRM rate limit 429 làm mất nhịp sync. PDF scan OCR confidence thấp → text rác vào RAG. 1 monitor ưu tiên freshness sla trên bảng kb documents (end to end tới vector publish). Sơ đồ một dòng: 3 nguồn → queue → ingest worker → raw → clean → validate → embed → publish Tables | Source | Method | Check | Owner | | | | | | | PostgreSQL tickets | CDC / watermark updated at | freshness + replication lag | Data Eng | | CRMAPI | poll + cursor checkpoint | 429 rate + checkpoint stall | AI Eng | | PDF",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "resilient_api_ingestion",
+        "overlap_codes": [
+          "queue_backpressure_and_dlq"
+        ],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "minor",
+        "rationale_vi": "Mô tả có đề cập đến DLQ, trùng với một phần nội dung của code 'queue_backpressure_and_dlq'. Mặc dù mục đích khác nhau, nhưng có overlap về khái niệm DLQ. Các evidence hỗ trợ đầy đủ, không có vấn đề khác."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "resilient_api_ingestion",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p016, p020 hỗ trợ tốt. Có overlap nhẹ với queue_backpressure_and_dlq về khái niệm DLQ, nhưng mục đích khác nhau. Granularity bị ảnh hưởng nhẹ. Các mặt khác đều tốt.",
+        "issues_vi": [
+          "Mô tả có đề cập DLQ, trùng với một phần của candidate queue_backpressure_and_dlq."
+        ],
+        "recommended_action": "revise",
+        "overall_score": 3.833,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "document_ingestion_and_ocr_gate",
+      "name_vi": "Parse tài liệu và kiểm soát chất lượng OCR",
+      "description_vi": "Xử lý PDF/HTML bằng parse hoặc OCR, kiểm tra encoding và metadata, dùng OCR confidence để flag tài liệu chất lượng thấp cho human review trước khi publish.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Đưa tài liệu vào pipeline mà không phát tán text OCR lỗi vào RAG.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể đặt kiểm tra OCR confidence và quyết định publish hay chuyển tài liệu sang human review.",
+      "bloom_rationale_vi": "Nguồn nêu OCR error, encoding, missing metadata và quy tắc confidence thấp phải flag human review trước publish; hoạt động cũng dùng PDF scan OCR thấp làm rủi ro chính.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi versioning và chunking vì OCR có failure signal riêng và remediation là review/quarantine, không phải re-embed hay chỉnh chunk.",
+      "role_reason_vi": "Case study phụ thuộc vào PDF SOP/policy; OCR sai có thể làm agent trả lời sai ngay cả khi pipeline vẫn chạy.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p013:l191-217",
+        "day10-data-pipeline-and-data-observability:p017:l255-263",
+        "day10-data-pipeline-and-data-observability:p020:l307-324"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p013:l191-217",
+          "source_type": "slide",
+          "page_no": 13,
+          "content": "## Page 13: Ingestion từ nhiều nguồn: DB, API, files, streams\nPage 13: Ingestion từ nhiều nguồn: DB, API, files, streams Text Extract Không chỉ kéo data về; phải xử lý CDC, rate limit, backpressure, retry PostgreSQL CDC / snapshot External API poll / pagination / rate limit PDF / HTML parse / OCR / metadata Webhooks queue / consumer / backpressure Ingestion layer retry + backoff buffer / queue DLQ raw cleaned monitor DB schema drift · timeout · CDC lag API auth · pagination · rate limit Files OCR error · encoding · missing metadata Streams backpressure · retry · dedupe",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p017:l255-263",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: PHẦN B ·\nPage 17: PHẦN B · Text Extract Files (PDF/HTML) parse, hash, version Tránh embed nhầm bản policy cũ chỉ vì tên file giống Content hash sha256 của bytes; đổi nhẹ metadata không làm re embed oan Logical version policy v4 gắn metadata cho vector filter OCR path confidence score; thấp → flag human review trước publish Chunk boundary heading aware chunk giảm câu trả lời “cắt nửa điều khoản”",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p020:l307-324",
+          "source_type": "slide",
+          "page_no": 20,
+          "content": "## Page 20: Ðáp án mẫu\nPage 20: Ðáp án mẫu Text Extract Hoạt động 2 Source map & bảng ingestion (ví dụ) Use case: CS/IT Helpdesk PostgreSQL + CRM API + PDF SOP 2 rủi ro chính API CRM rate limit 429 làm mất nhịp sync. PDF scan OCR confidence thấp → text rác vào RAG. 1 monitor ưu tiên freshness sla trên bảng kb documents (end to end tới vector publish). Sơ đồ một dòng: 3 nguồn → queue → ingest worker → raw → clean → validate → embed → publish Tables | Source | Method | Check | Owner | | | | | | | PostgreSQL tickets | CDC / watermark updated at | freshness + replication lag | Data Eng | | CRMAPI | poll + cursor checkpoint | 429 rate + checkpoint stall | AI Eng | | PDF",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "document_ingestion_and_ocr_gate",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p013, p017, p020. Đã tách biệt với versioning và chunking, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "document_ingestion_and_ocr_gate",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p013, p017, p020 hỗ trợ đầy đủ. Đã tách biệt với versioning và chunking. Capability kiểm soát OCR quality khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "document_identity_versioning",
+      "name_vi": "Nhận diện và version tài liệu trước khi embed",
+      "description_vi": "Dùng content hash của bytes để nhận diện nội dung, logical version và effective date trong metadata để tránh embed bản cũ hoặc re-embed không cần thiết.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Xác định bản tài liệu và gắn metadata đủ để filter, publish và truy vết vector đúng version.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể thiết kế khóa nhận diện và metadata version cho tài liệu policy.",
+      "bloom_rationale_vi": "Nguồn chỉ rõ SHA-256 content hash, logical version, metadata vector filter và effective date; đồng thời nêu lỗi embed nhầm policy cũ.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi parse/OCR vì identity/versioning giải quyết lỗi bản cũ và re-embed, còn parse/OCR giải quyết chất lượng nội dung đọc được.",
+      "role_reason_vi": "Version và effective date là điều kiện trực tiếp để agent phản ánh policy đúng và truy nguyên bản nguồn.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p009:l121-129",
+        "day10-data-pipeline-and-data-observability:p017:l255-263",
+        "day10-data-pipeline-and-data-observability:p021:l325-370"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p009:l121-129",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: PHẦN A ·\nPage 9: PHẦN A · Text Extract Checklist trước khi embed lần đầu Copy vào docs nhóm lab nếu cần Schema canonical + kiểu cột + primary key / natural key thống nhất Encoding UTF 8 · test vài dòng tiếng Việt có dấu Version / effective date / source uri ghi nhận được trong metadata chunk Sample 20 row manual skim + 3 câu hỏi golden đặt trước cho agent",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p017:l255-263",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: PHẦN B ·\nPage 17: PHẦN B · Text Extract Files (PDF/HTML) parse, hash, version Tránh embed nhầm bản policy cũ chỉ vì tên file giống Content hash sha256 của bytes; đổi nhẹ metadata không làm re embed oan Logical version policy v4 gắn metadata cho vector filter OCR path confidence score; thấp → flag human review trước publish Chunk boundary heading aware chunk giảm câu trả lời “cắt nửa điều khoản”",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p021:l325-370",
+          "source_type": "slide",
+          "page_no": 21,
+          "content": "## Page 21: Transform: làm sạch và chuẩn hoá trước khi agent dùng được\nPage 21: Transform: làm sạch và chuẩn hoá trước khi agent dùng được Text Extract Missing, duplicates, wrong format, encoding, schema validation Raw sample doc id title date content 12 Refund policy 7 ngày 12 Refund policy 2026 02 07 7 ngày 44 Access approve NULL quy trình… 58 P1 SLA 2026/02/10 2h – lỗi mã hoá Transform = code + contract, không sửa tay ngay trước khi demo. dedupe date parse unicode schema check Cleaned sample id 12 44 58 version v4 v2 v1 effective date 2026 02 07 missing → flag 2026 02 10 status active review active",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "document_identity_versioning",
+        "overlap_codes": [
+          "canonical_data_contract"
+        ],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "minor",
+        "rationale_vi": "Mô tả có đề cập đến version/effective date, trùng với nội dung của code 'canonical_data_contract'. Cả hai đều nói về metadata version, dù mục đích khác nhau. Evidence đầy đủ."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "document_identity_versioning",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 2,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p009, p017, p021 hỗ trợ. Tuy nhiên, có overlap rõ với canonical_data_contract về version/effective date. Cần làm rõ ranh giới giữa hai candidate. Granularity không đạt.",
+        "issues_vi": [
+          "Overlap với canonical_data_contract về metadata version/effective date."
+        ],
+        "recommended_action": "revise",
+        "overall_score": 3.667,
+        "level": "low",
+        "review_priority": 1,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "retrieval_aware_chunk_boundary",
+      "name_vi": "Chọn chunk boundary có nhận biết heading",
+      "description_vi": "Chia tài liệu theo cấu trúc heading và ranh giới điều khoản để giảm chunk bị cắt giữa ý; item không bao gồm toàn bộ chiến lược retrieval hay prompt.",
+      "item_form": "principle",
+      "primary_capability_vi": "Chọn ranh giới chunk phù hợp để giữ trọn điều khoản và cải thiện retrieval.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể nhận diện khi chunk boundary làm lệch retrieval và đề xuất cách chia theo heading.",
+      "bloom_rationale_vi": "Nguồn liên hệ trực tiếp chunk boundary với câu trả lời bị cắt nửa điều khoản và retrieval lệch sau schema/parser change.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi document versioning vì chunk boundary có failure/remediation riêng và mastery của version không đảm bảo mastery về cấu trúc chunk.",
+      "role_reason_vi": "Đây là capability tái sử dụng cho RAG nhưng là tối ưu chất lượng retrieval hơn là lõi của ingestion/quality/observability.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p017:l255-263",
+        "day10-data-pipeline-and-data-observability:p026:l481-497",
+        "day10-data-pipeline-and-data-observability:p040:l709-736"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p017:l255-263",
+          "source_type": "slide",
+          "page_no": 17,
+          "content": "## Page 17: PHẦN B ·\nPage 17: PHẦN B · Text Extract Files (PDF/HTML) parse, hash, version Tránh embed nhầm bản policy cũ chỉ vì tên file giống Content hash sha256 của bytes; đổi nhẹ metadata không làm re embed oan Logical version policy v4 gắn metadata cho vector filter OCR path confidence score; thấp → flag human review trước publish Chunk boundary heading aware chunk giảm câu trả lời “cắt nửa điều khoản”",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p026:l481-497",
+          "source_type": "slide",
+          "page_no": 26,
+          "content": "## Page 26: PHẦN C ·\nPage 26: PHẦN C · Text Extract Schema evolution: additive vs breaking Giữ agent không “gãy” khi nguồn đổi cột Additive (ưu tiên) thêm cột optional · default null · version field Contract ở biên parser ra canonical schema trước khi embed Breaking change đổi kiểu / đổi ý nghĩa cột → cần migration + backfill có run id Quan sát alert khi % null tăng đột biến sau deploy parser Rollback giữ 2 version schema song song trong staging Agent impact chunk boundary đổi → retrieval lệch dù “data vẫn có”",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p040:l709-736",
+          "source_type": "slide",
+          "page_no": 40,
+          "content": "## Page 40: Hướng dẫn thực hành 2 - Sprint 3-4 & evidence\nPage 40: Hướng dẫn thực hành 2 Sprint 3 4 & evidence Text Extract Mục tiêu: inject corruption, đo ảnh hưởng và nộp report có bằng chứng missing duplicate wrong format encoding Before answer stale retrieval lệch chunk lỗi After answer đúng version trace rõ run id freshness pass freshness sla PASS schema contract PASS duplicate key 2 flagged Evidence cần nộp before after eval.csv hoặc ảnh dashboard quality report runbook / monitor screenshot báo cáo cá nhân ngắn gọn Khung báo cáo cá nhân Phần tôi phụ trách Một lỗi hoặc quyết định kỹ thuật chính Bằng chứng trước / sau Một cải tiến tiếp theo",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "retrieval_aware_chunk_boundary",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p017, p026, p040. Không overlap, scope chính xác."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "retrieval_aware_chunk_boundary",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p017, p026, p040 hỗ trợ tốt. Không overlap, scope chính xác. Capability chọn chunk boundary có thể đánh giá.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "queue_backpressure_and_dlq",
+      "name_vi": "Quản lý queue, backpressure và DLQ",
+      "description_vi": "Tách ingest nhanh khỏi transform chậm bằng queue; theo dõi queue depth, áp dụng backpressure, retry có giới hạn và chuyển poison message vào DLQ để replay hoặc xử lý.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế consumer pipeline không mất sự kiện khi downstream chậm hoặc message lỗi không thể retry thành công.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể bố trí queue, metric depth, retry policy và DLQ cho ingestion event-driven.",
+      "bloom_rationale_vi": "Nguồn mô tả đầy đủ producer, queue, ack nhanh, backpressure, depth alert, consumer, retry giới hạn và poison message vào DLQ.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi API retry vì queue xử lý áp lực giữa producer-consumer và poison event; failure signal là queue depth/DLQ thay vì 429/checkpoint.",
+      "role_reason_vi": "Streaming và webhook của case study cần cơ chế này để bảo toàn sự kiện và phát hiện consumer chậm.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p013:l191-217",
+        "day10-data-pipeline-and-data-observability:p018:l264-277"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p013:l191-217",
+          "source_type": "slide",
+          "page_no": 13,
+          "content": "## Page 13: Ingestion từ nhiều nguồn: DB, API, files, streams\nPage 13: Ingestion từ nhiều nguồn: DB, API, files, streams Text Extract Không chỉ kéo data về; phải xử lý CDC, rate limit, backpressure, retry PostgreSQL CDC / snapshot External API poll / pagination / rate limit PDF / HTML parse / OCR / metadata Webhooks queue / consumer / backpressure Ingestion layer retry + backoff buffer / queue DLQ raw cleaned monitor DB schema drift · timeout · CDC lag API auth · pagination · rate limit Files OCR error · encoding · missing metadata Streams backpressure · retry · dedupe",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p018:l264-277",
+          "source_type": "slide",
+          "page_no": 18,
+          "content": "## Page 18: PHẦN B ·\nPage 18: PHẦN B · Text Extract Queue · backpressure · DLQ (một sơ đồ tư duy) Tách ingest nhanh khỏi transform chậm Producer Webhook / poll ghi event vào queue ack nhanh Buffer Queue + depth metric backpressure khi consumer chậm alert depth ngưỡng DLQ không phải “thất bại”; là điểm quan sát để không làm mất sự kiện. Consumer Transform + validate retry có giới hạn poison → DLQ + ticket",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "queue_backpressure_and_dlq",
+        "overlap_codes": [
+          "resilient_api_ingestion"
+        ],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "minor",
+        "rationale_vi": "Mô tả có đề cập đến DLQ, trùng với code 'resilient_api_ingestion'. Evidence đầy đủ từ p013, p018."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "queue_backpressure_and_dlq",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 3,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p013, p018 hỗ trợ tốt. Có overlap nhẹ với resilient_api_ingestion về DLQ. Granularity bị ảnh hưởng nhẹ.",
+        "issues_vi": [
+          "Mô tả có đề cập DLQ, trùng với một phần của candidate resilient_api_ingestion."
+        ],
+        "recommended_action": "revise",
+        "overall_score": 3.833,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "data_cleaning_and_normalization",
+      "name_vi": "Làm sạch và chuẩn hóa dữ liệu",
+      "description_vi": "Biến raw thành cleaned bằng code và rules có thể lặp lại: trim whitespace, parse date đa định dạng, chuẩn hóa Unicode, kiểm tra schema, loại content rỗng, xử lý duplicate và flag dữ liệu thiếu.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Viết và chạy được bước cleaning có log record bị drop hoặc flag trước khi embed.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể áp dụng cleaning rules cho dữ liệu bẩn và tạo output cleaned cùng quarantine/log tương ứng.",
+      "bloom_rationale_vi": "Nguồn cung cấp raw/cleaned sample, các rule cleaning cụ thể và hoạt động yêu cầu đề xuất ít nhất năm rule áp dụng trực tiếp lên CSV lỗi.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp các phép trim, date parse, Unicode, reject và dedupe vì chúng cùng phục vụ mục tiêu tạo cleaned data và có chung failure signal; tách quality assertions vì đó là lớp kiểm thử sau transform.",
+      "role_reason_vi": "Đây là bước trung tâm của ETL và là đầu ra thực hành bắt buộc trước khi dữ liệu đến vector store/agent.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p021:l325-370",
+        "day10-data-pipeline-and-data-observability:p022:l371-411",
+        "day10-data-pipeline-and-data-observability:p023:l412-426",
+        "day10-data-pipeline-and-data-observability:p039:l695-708"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p021:l325-370",
+          "source_type": "slide",
+          "page_no": 21,
+          "content": "## Page 21: Transform: làm sạch và chuẩn hoá trước khi agent dùng được\nPage 21: Transform: làm sạch và chuẩn hoá trước khi agent dùng được Text Extract Missing, duplicates, wrong format, encoding, schema validation Raw sample doc id title date content 12 Refund policy 7 ngày 12 Refund policy 2026 02 07 7 ngày 44 Access approve NULL quy trình… 58 P1 SLA 2026/02/10 2h – lỗi mã hoá Transform = code + contract, không sửa tay ngay trước khi demo. dedupe date parse unicode schema check Cleaned sample id 12 44 58 version v4 v2 v1 effective date 2026 02 07 missing → flag 2026 02 10 status active review active",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p022:l371-411",
+          "source_type": "slide",
+          "page_no": 22,
+          "content": "## Page 22: Hoạt động 3 - Dirty data repair\nPage 22: Hoạt động 3 Dirty data repair Text Extract Từ một CSV lỗi, đề xuất cleaning rules trước khi embed doc id source date content notes 12 refund v4.pdf 2026 02 07 Refund 7 ngày ok 44 access control sop.md NULL Approve by manager missing date 58 sla p1 2026.pdf 2026/02/10 SLA = 2h encoding 67 faq/account recovery.html 2026 02 11 empty content Clean trim whitespace parse date normalize unicode Reject empty content duplicate primary key Flag missing date manual review Tables | doc id | source | date | content | notes | | | | | | | | 12 | refund v4.pdf | 2026 02 07 | Refund 7 ngày | ok | | 44 | access control sop.md | NULL | Approve by manag",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p023:l412-426",
+          "source_type": "slide",
+          "page_no": 23,
+          "content": "## Page 23: Ðáp án mẫu\nPage 23: Ðáp án mẫu Text Extract Hoạt động 3 Bộ cleaning rules (≥5 rule) Áp dụng trực tiếp lên bảng dirty trên slide hoạt động Clean / normalize Trim whitespace cột content và notes. Parse date đa định dạng → YYYY MM DD UTC. Unicode NFC + thay thế ký tự thay thế cho “”. Reject cứng Drop row nếu content rỗng sau trim. Drop duplicate theo khóa (doc id, source, normalized content hash) giữ bản mới nhất theo date parse được. Flag / quarantine Nếu date NULL nhưng content có → flag review missing date, không embed cho đến khi SME điền. Log mọi drop/flag vào quarantine.csv kèm run id.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p039:l695-708",
+          "source_type": "slide",
+          "page_no": 39,
+          "content": "## Page 39: Hướng dẫn thực hành 1 - setup & Sprint 1-2\nPage 39: Hướng dẫn thực hành 1 setup & Sprint 1 2 Text Extract Mục tiêu: có cleaned data, log trước/sau và pipeline end to end Folder tree tối thiểu etl pipeline.py transform/ cleaning rules.py quality/ expectations.py monitoring/ freshness check.py docs/ pipeline architecture.md Run order: ingest → clean → validate → embed 1 Map source và chuẩn hoá schema đầu vào 2 Log số record trước / sau cleaning 3 Đặt run id hoặc timestamp cho pipeline 4 Đến cuối Sprint 2: raw → cleaned → embedded chạy end to end Expected log raw records=128 cleaned records=121 dropped duplicates=5 flagged missing date=2 run id=2026 02 10T14:35",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "data_cleaning_and_normalization",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p021, p022, p023, p039. Không overlap rõ với code khác, scope phù hợp."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "data_cleaning_and_normalization",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p021, p022, p023, p039 hỗ trợ đầy đủ. Đã gộp các thao tác cleaning hợp lý. Không overlap. Capability khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "canonical_data_contract",
+      "name_vi": "Data contract và canonical schema",
+      "description_vi": "Định nghĩa schema canonical ở biên parser, kiểu cột, khóa, version/effective date, metadata và quy tắc hợp lệ để các nguồn khác nhau cung cấp dữ liệu nhất quán cho pipeline và agent.",
+      "item_form": "principle",
+      "primary_capability_vi": "Xác định và áp dụng contract đầu vào trước bước embed.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể mô tả canonical schema, khóa và metadata bắt buộc trong data contract cho corpus agent.",
+      "bloom_rationale_vi": "Nguồn yêu cầu canonical schema, kiểu cột, primary/natural key, version/effective date/source URI và contract ở biên parser trước embed.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi cleaning vì contract quy định dữ liệu phải có gì và hợp lệ thế nào, còn cleaning là thao tác biến đổi dữ liệu thực tế để đạt contract.",
+      "role_reason_vi": "Contract là nền cho validation, schema evolution, ownership và tránh agent đọc nhầm nguồn review.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p007:l99-111",
+        "day10-data-pipeline-and-data-observability:p009:l121-129",
+        "day10-data-pipeline-and-data-observability:p021:l325-370",
+        "day10-data-pipeline-and-data-observability:p026:l481-497",
+        "day10-data-pipeline-and-data-observability:p027:l498-506"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p007:l99-111",
+          "source_type": "slide",
+          "page_no": 7,
+          "content": "## Page 7: PHẦN A ·\nPage 7: PHẦN A · Text Extract Ai làm gì? (bản tối giản RACI) Tránh “AI engineer ôm trọn data platform” không có ranh giới Nhóm nhỏ lab: có thể một người đóng nhiều vai nhưng vẫn ghi rõ owner trên từng nguồn. Tables | Vai trò | Trách nhiệm chính | Artifact | | | | | | AI / Applied | data contract cho corpus agent · eval before/after | data contract.md · golden questions | | Data Eng | ingest robust · modeling · pipeline SLA | pipeline architecture.md · lineage | | SRE / Platform | alert · on call runbook · quota/secret | runbook.md · dashboards | | Product / SME | định nghĩa “đúng” policy · sign off version | source of truth link |",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p009:l121-129",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: PHẦN A ·\nPage 9: PHẦN A · Text Extract Checklist trước khi embed lần đầu Copy vào docs nhóm lab nếu cần Schema canonical + kiểu cột + primary key / natural key thống nhất Encoding UTF 8 · test vài dòng tiếng Việt có dấu Version / effective date / source uri ghi nhận được trong metadata chunk Sample 20 row manual skim + 3 câu hỏi golden đặt trước cho agent",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p021:l325-370",
+          "source_type": "slide",
+          "page_no": 21,
+          "content": "## Page 21: Transform: làm sạch và chuẩn hoá trước khi agent dùng được\nPage 21: Transform: làm sạch và chuẩn hoá trước khi agent dùng được Text Extract Missing, duplicates, wrong format, encoding, schema validation Raw sample doc id title date content 12 Refund policy 7 ngày 12 Refund policy 2026 02 07 7 ngày 44 Access approve NULL quy trình… 58 P1 SLA 2026/02/10 2h – lỗi mã hoá Transform = code + contract, không sửa tay ngay trước khi demo. dedupe date parse unicode schema check Cleaned sample id 12 44 58 version v4 v2 v1 effective date 2026 02 07 missing → flag 2026 02 10 status active review active",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p026:l481-497",
+          "source_type": "slide",
+          "page_no": 26,
+          "content": "## Page 26: PHẦN C ·\nPage 26: PHẦN C · Text Extract Schema evolution: additive vs breaking Giữ agent không “gãy” khi nguồn đổi cột Additive (ưu tiên) thêm cột optional · default null · version field Contract ở biên parser ra canonical schema trước khi embed Breaking change đổi kiểu / đổi ý nghĩa cột → cần migration + backfill có run id Quan sát alert khi % null tăng đột biến sau deploy parser Rollback giữ 2 version schema song song trong staging Agent impact chunk boundary đổi → retrieval lệch dù “data vẫn có”",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p027:l498-506",
+          "source_type": "slide",
+          "page_no": 27,
+          "content": "## Page 27: PHẦN C ·\nPage 27: PHẦN C · Text Extract Mức độ nghiêm trọng expectation: warn · quarantine · halt Không phải mọi lỗi đều dừng pipeline Halt duplicate primary key, encoding không recover, schema contract fail cứng Quarantine row đúng key nhưng content nghi ngờ → bảng quarantine + review Warn + tiếp tục missing optional field, typos trong metadata ít rủi ro Policy ghi rõ trong data contract.md để agent không đọc nhầm nguồn “review”",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "canonical_data_contract",
+        "overlap_codes": [
+          "document_identity_versioning"
+        ],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "minor",
+        "rationale_vi": "Mô tả có đề cập đến version/effective date, trùng với code 'document_identity_versioning'. Evidence đầy đủ từ p007, p009, p021, p026, p027."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "canonical_data_contract",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 2,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p007, p009, p021, p026, p027 hỗ trợ tốt. Tuy nhiên, có overlap rõ với document_identity_versioning về version/effective date. Cần làm rõ ranh giới. Granularity không đạt.",
+        "issues_vi": [
+          "Overlap với document_identity_versioning về metadata version/effective date."
+        ],
+        "recommended_action": "revise",
+        "overall_score": 3.667,
+        "level": "low",
+        "review_priority": 1,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "pre_embedding_data_readiness_check",
+      "name_vi": "Checklist sẵn sàng trước lần embed đầu tiên",
+      "description_vi": "Kiểm tra canonical schema, encoding UTF-8, key, version/effective date/source URI trong metadata, sample manual skim và golden questions trước khi embed.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Đánh giá dữ liệu và metadata đã đủ điều kiện để embed lần đầu hay chưa.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể thực hiện readiness check và phát hiện thiếu sót trước khi đưa corpus vào vector store.",
+      "bloom_rationale_vi": "Slide cung cấp checklist thao tác cụ thể gồm schema, encoding, metadata, sample 20 dòng và ba golden questions.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ riêng vì đây là gate trước embed, có task kiểm tra end-to-end; không gộp vào contract hay cleaning dù có dùng kết quả của chúng.",
+      "role_reason_vi": "Checklist ngăn lỗi chất lượng và lỗi retrieval trước khi chúng trở thành vấn đề của agent.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p009:l121-129"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p009:l121-129",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: PHẦN A ·\nPage 9: PHẦN A · Text Extract Checklist trước khi embed lần đầu Copy vào docs nhóm lab nếu cần Schema canonical + kiểu cột + primary key / natural key thống nhất Encoding UTF 8 · test vài dòng tiếng Việt có dấu Version / effective date / source uri ghi nhận được trong metadata chunk Sample 20 row manual skim + 3 câu hỏi golden đặt trước cho agent",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "pre_embedding_data_readiness_check",
+        "overlap_codes": [
+          "canonical_data_contract",
+          "document_identity_versioning"
+        ],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "minor",
+        "rationale_vi": "Mô tả kiểm tra schema, metadata, version/effective date trùng với nội dung của 'canonical_data_contract' và 'document_identity_versioning'. Evidence chỉ từ p009, nhưng đủ. Overlap nhẹ do cùng đề cập đến các thành phần kiểm tra."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "pre_embedding_data_readiness_check",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 2,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p009 hỗ trợ trực tiếp checklist. Tuy nhiên, nội dung kiểm tra schema, metadata, version/effective date trùng với canonical_data_contract và document_identity_versioning. Cần làm rõ ranh giới. Granularity không đạt.",
+        "issues_vi": [
+          "Overlap với canonical_data_contract và document_identity_versioning về các thành phần kiểm tra."
+        ],
+        "recommended_action": "revise",
+        "overall_score": 3.667,
+        "level": "low",
+        "review_priority": 1,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "data_quality_dimensions",
+      "name_vi": "Các chiều đo data quality",
+      "description_vi": "Sáu chiều chất lượng được dạy là completeness, accuracy, consistency, timeliness, validity và uniqueness; mỗi chiều mô tả một loại điều kiện khác nhau của dữ liệu.",
+      "item_form": "concept",
+      "primary_capability_vi": "Phân biệt và chọn đúng chiều chất lượng cho một lỗi dữ liệu.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Người học có thể giải thích ý nghĩa của sáu chiều chất lượng và liên hệ mỗi chiều với một kiểm tra phù hợp.",
+      "bloom_rationale_vi": "Nguồn liệt kê và định nghĩa trực tiếp cả sáu chiều, kèm ví dụ content not null, policy date, freshness, schema và duplicate record.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp sáu chiều vì chúng tạo thành một taxonomy chung; tách khỏi expectation suite vì hiểu chiều chất lượng chưa đồng nghĩa với viết được assertion chạy trong pipeline.",
+      "role_reason_vi": "Đây là khung khái niệm cốt lõi để thiết kế quality report và diễn giải failure.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p024:l427-451",
+        "day10-data-pipeline-and-data-observability:p025:l452-480"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p024:l427-451",
+          "source_type": "slide",
+          "page_no": 24,
+          "content": "## Page 24: Data quality as code\nPage 24: Data quality as code Text Extract 6 dimensions + Great Expectations / expectation suite Completeness content not null Accuracy policy date đúng Consistency same key, same format Timeliness freshness theo SLA Validity schema + contract hợp lệ Uniqueness không duplicate record Expectation suite batch.expect column values to not be null(\"content\") batch.expect column values to be unique(\"doc id\") batch.expect column values to match regex( \"effective date\", r\"^\\d{{4}} \\d{{2}} \\d{{2}}$\" ) if expectations fail: raise PipelineHalt(\"bad data before agent\") fail pipeline if expectations fail",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p025:l452-480",
+          "source_type": "slide",
+          "page_no": 25,
+          "content": "## Page 25: 5 pillars of data observability\nPage 25: 5 pillars of data observability Text Extract Freshness, distribution, volume, schema, lineage Data observability Freshness 17h Volume 28% Schema 1 drift Distribution stable Freshness timeline 02:00 failure Lineage DB → ingest → clean → embed → agent trace ngược được step fail Freshness Data có cập nhật đúng nhịp không? Distribution Giá trị có lệch bất thường không? Volume Số record có rơi đột ngột không? Schema Cấu trúc có drift không? Lineage Biết lỗi đi từ nguồn nào tới output nào",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "data_quality_dimensions",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p024, p025. Đã tách biệt với expectation suite và five pillars, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "data_quality_dimensions",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p024, p025 hỗ trợ đầy đủ. Đã tách biệt với expectation suite. Capability phân biệt chiều chất lượng khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "expectation_suite_as_code",
+      "name_vi": "Expectation suite chạy như code",
+      "description_vi": "Mã hóa các kỳ vọng về null, uniqueness, regex/schema và freshness; khi expectation fail thì pipeline phải dừng hoặc xử lý theo policy trước khi agent dùng dữ liệu.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Viết và tích hợp quality assertions vào pipeline.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể xây expectation suite, chạy nó trong pipeline và kiểm soát luồng khi assertion thất bại.",
+      "bloom_rationale_vi": "Nguồn đưa ví dụ expectation cụ thể và hành vi PipelineHalt/fail pipeline khi expectations fail; deliverable cũng yêu cầu expectation suite chạy được.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi taxonomy sáu chiều vì task là triển khai assertion và gate, với failure/remediation cụ thể.",
+      "role_reason_vi": "Quality checks phải chạy như code là trọng tâm bài và là điều kiện trực tiếp trước agent.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p024:l427-451",
+        "day10-data-pipeline-and-data-observability:p038:l661-694",
+        "day10-data-pipeline-and-data-observability:p041:l737-746"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p024:l427-451",
+          "source_type": "slide",
+          "page_no": 24,
+          "content": "## Page 24: Data quality as code\nPage 24: Data quality as code Text Extract 6 dimensions + Great Expectations / expectation suite Completeness content not null Accuracy policy date đúng Consistency same key, same format Timeliness freshness theo SLA Validity schema + contract hợp lệ Uniqueness không duplicate record Expectation suite batch.expect column values to not be null(\"content\") batch.expect column values to be unique(\"doc id\") batch.expect column values to match regex( \"effective date\", r\"^\\d{{4}} \\d{{2}} \\d{{2}}$\" ) if expectations fail: raise PipelineHalt(\"bad data before agent\") fail pipeline if expectations fail",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p038:l661-694",
+          "source_type": "slide",
+          "page_no": 38,
+          "content": "## Page 38: Hands-on 10 - ETL + Quality + Monitoring\nPage 38: Hands on 10 ETL + Quality + Monitoring Text Extract 4 giờ thực hành: raw → cleaned → embedded, inject corruption, đo ảnh hưởng lên agent raw → cleaned → embedded Sprint 1 ingest raw → cleaned Sprint 2 cleaned → embedded Sprint 3 inject corruption + compare Sprint 4 expectation suite + monitor + docs Before / after answer quality dirty cleaned Deliverables nhóm etl pipeline.py transform/cleaning rules expectation suite + freshness monitoring quality report + before/after eval pipeline architecture.md · data contract.md · runbook.md ETL pipeline 45% Documentation 25% Quality evidence 20% Individual report 10%",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p041:l737-746",
+          "source_type": "slide",
+          "page_no": 41,
+          "content": "## Page 41: PHẦN E ·\nPage 41: PHẦN E · Text Extract Definition of Done cho pipeline ngày hôm nay Dùng làm checklist trước khi nộp bài Có run id hoặc timestamp gắn mọi artifact (log, cleaned, embed) Có log số record raw → cleaned → embedded (drop/flag có giải thích) Expectation suite chạy được; fail thì pipeline dừng có kiểm soát Có ít nhất 1 bằng chứng before/after ảnh hưởng tới câu trả lời agent Chạy được trên máy",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "expectation_suite_as_code",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p024, p038, p041. Đã tách biệt với quality dimensions và severity policy, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "expectation_suite_as_code",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p024, p038, p041 hỗ trợ tốt. Không overlap. Capability viết và tích hợp assertion khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "quality_failure_severity_policy",
+      "name_vi": "Chính sách warn, quarantine và halt",
+      "description_vi": "Phân loại lỗi theo mức độ: halt cho lỗi nghiêm trọng như duplicate primary key, encoding không recover hoặc contract fail; quarantine cho row nghi ngờ; warn và tiếp tục cho lỗi optional ít rủi ro.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chọn cách xử lý lỗi chất lượng dựa trên mức độ nghiêm trọng và khả năng phục hồi.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể quyết định lỗi nào phải halt, lỗi nào quarantine và lỗi nào chỉ warn, đồng thời ghi rõ policy trong contract.",
+      "bloom_rationale_vi": "Nguồn nêu rõ ba mức xử lý và ví dụ lỗi tương ứng, cũng như yêu cầu record review không được embed.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi expectation suite vì expectation chỉ phát hiện điều kiện; item này quyết định remediation và trạng thái pipeline sau khi phát hiện.",
+      "role_reason_vi": "Nếu thiếu policy, pipeline có thể tiếp tục đưa dữ liệu review hoặc lỗi nghiêm trọng vào agent.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p023:l412-426",
+        "day10-data-pipeline-and-data-observability:p024:l427-451",
+        "day10-data-pipeline-and-data-observability:p027:l498-506"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p023:l412-426",
+          "source_type": "slide",
+          "page_no": 23,
+          "content": "## Page 23: Ðáp án mẫu\nPage 23: Ðáp án mẫu Text Extract Hoạt động 3 Bộ cleaning rules (≥5 rule) Áp dụng trực tiếp lên bảng dirty trên slide hoạt động Clean / normalize Trim whitespace cột content và notes. Parse date đa định dạng → YYYY MM DD UTC. Unicode NFC + thay thế ký tự thay thế cho “”. Reject cứng Drop row nếu content rỗng sau trim. Drop duplicate theo khóa (doc id, source, normalized content hash) giữ bản mới nhất theo date parse được. Flag / quarantine Nếu date NULL nhưng content có → flag review missing date, không embed cho đến khi SME điền. Log mọi drop/flag vào quarantine.csv kèm run id.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p024:l427-451",
+          "source_type": "slide",
+          "page_no": 24,
+          "content": "## Page 24: Data quality as code\nPage 24: Data quality as code Text Extract 6 dimensions + Great Expectations / expectation suite Completeness content not null Accuracy policy date đúng Consistency same key, same format Timeliness freshness theo SLA Validity schema + contract hợp lệ Uniqueness không duplicate record Expectation suite batch.expect column values to not be null(\"content\") batch.expect column values to be unique(\"doc id\") batch.expect column values to match regex( \"effective date\", r\"^\\d{{4}} \\d{{2}} \\d{{2}}$\" ) if expectations fail: raise PipelineHalt(\"bad data before agent\") fail pipeline if expectations fail",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p027:l498-506",
+          "source_type": "slide",
+          "page_no": 27,
+          "content": "## Page 27: PHẦN C ·\nPage 27: PHẦN C · Text Extract Mức độ nghiêm trọng expectation: warn · quarantine · halt Không phải mọi lỗi đều dừng pipeline Halt duplicate primary key, encoding không recover, schema contract fail cứng Quarantine row đúng key nhưng content nghi ngờ → bảng quarantine + review Warn + tiếp tục missing optional field, typos trong metadata ít rủi ro Policy ghi rõ trong data contract.md để agent không đọc nhầm nguồn “review”",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "quality_failure_severity_policy",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p023, p024, p027. Không overlap rõ với code khác, scope phù hợp."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "quality_failure_severity_policy",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p023, p024, p027 hỗ trợ tốt. Không overlap. Capability quyết định mức độ xử lý lỗi khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "business_freshness_sla_monitoring",
+      "name_vi": "Định nghĩa và monitor freshness SLA",
+      "description_vi": "Chuyển yêu cầu nghiệp vụ thành SLA freshness end-to-end, đo từ lúc tài liệu active đến cleaned hoặc vector publish, đặt ngưỡng warning/page và phân biệt static source với stream.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết lập và diễn giải freshness monitor gắn với trải nghiệm agent.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể xác định điểm đo, SLA, ngưỡng cảnh báo và trạng thái freshness cho một policy hoặc nguồn dữ liệu.",
+      "bloom_rationale_vi": "Nguồn đưa ví dụ SLA bốn giờ, điểm đo active-to-publish, warning ở 50%, page ở 100%, cùng các ví dụ freshness 17 giờ và ngưỡng 4 giờ.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi năm trụ cột observability vì freshness là một chiều khái niệm, còn item này là quy trình định nghĩa SLA nghiệp vụ và triển khai alert.",
+      "role_reason_vi": "Freshness là đầu ra monitor bắt buộc của bài và quyết định agent có dùng policy hiện hành hay không.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p008:l112-120",
+        "day10-data-pipeline-and-data-observability:p025:l452-480",
+        "day10-data-pipeline-and-data-observability:p029:l524-533",
+        "day10-data-pipeline-and-data-observability:p032:l561-575",
+        "day10-data-pipeline-and-data-observability:p034:l603-619"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p008:l112-120",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: PHẦN A ·\nPage 8: PHẦN A · Text Extract SLA freshness nói bằng ngôn ngữ nghiệp vụ Ví dụ: policy refund phải reflect trong agent ≤ 4 giờ sau khi PDF ký Đo điểm cuối thời điểm document “active” trên bảng cleaned hoặc vector index Ngưỡng cảnh báo warning ở 50% SLA, page ở 100% SLA Phân loại nguồn static PDF vs ticket stream không dùng chung một SLA Hiển thị cho user “Dữ liệu tri thức cập nhật tới: …” giảm kỳ vọng sai",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p025:l452-480",
+          "source_type": "slide",
+          "page_no": 25,
+          "content": "## Page 25: 5 pillars of data observability\nPage 25: 5 pillars of data observability Text Extract Freshness, distribution, volume, schema, lineage Data observability Freshness 17h Volume 28% Schema 1 drift Distribution stable Freshness timeline 02:00 failure Lineage DB → ingest → clean → embed → agent trace ngược được step fail Freshness Data có cập nhật đúng nhịp không? Distribution Giá trị có lệch bất thường không? Volume Số record có rơi đột ngột không? Schema Cấu trúc có drift không? Lineage Biết lỗi đi từ nguồn nào tới output nào",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p029:l524-533",
+          "source_type": "slide",
+          "page_no": 29,
+          "content": "## Page 29: PHẦN C ·\nPage 29: PHẦN C · Text Extract SLI gợi ý cho tầng RAG / agent Liên kết observability data với trải nghiệm user Citation freshness tuổi của chunk được trích dẫn trung bình / p95 Grounding rate % câu trả lời có trích nguồn hợp lệ (nếu thiết kế yêu cầu) Retrieval hit@k trên tập câu hỏi regression (golden set nhỏ) Latency pipeline ingest→publish p95; tách biệt latency LLM Khi SLI xấu, quay lại 5 pillars trước khi tin vào “model bị lỗi”.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p032:l561-575",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Ðáp án mẫu\nPage 32: Ðáp án mẫu Text Extract Hoạt động 4 Ví dụ triage flow + metric từng bước Học viên có thể đối chiếu hoặc chỉnh theo hệ thực tế 1 · Detect Metric: freshness hours trên bảng kb documents = 17h (ngưỡng 4h) → giả thuyết: sync trễ hoặc fail 2 · Isolate Metric: rows ingested giảm 28% so với 7 ngày trước; embed task success nhưng input nhỏ bất thường 3 · Validate Check: schema contract PDF parser không drift; log: ingest 02:00 retry exhausted 4 · Lineage refund v4.pdf → ingest job → clean → chunk → vector policy v4 điểm đứt: ingest (không phải model) 5 · Fix + verify rerun idempotent ingest + publish; verify: freshness < 4h + agent trả lời “",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p034:l603-619",
+          "source_type": "slide",
+          "page_no": 34,
+          "content": "## Page 34: PHẦN D ·\nPage 34: PHẦN D · Text Extract Triage có timebox tránh “mở hết dashboard” Áp dụng khi user đang chờ (P1 / policy) 0 5 phút Freshness + last success run có trễ SLA không? 5 12 phút Volume + error rate step step nào “im lặng” hoặc spike? 12 20 phút Schema/contract + lineage tới bảng/file nguồn Nếu chưa ra root cause chuyển sang “giảm thiểu”: rollback publish hoặc banner “data đang cập nhật” Ghi incident note metric đã xem + kết luận từng bước (dù fail) Sau khi fix verify bằng cùng run id trên cleaned + embed + 1 query agent",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "business_freshness_sla_monitoring",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p008, p025, p029, p032, p034. Đã tách biệt với five pillars, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "business_freshness_sla_monitoring",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p008, p025, p029, p032, p034 hỗ trợ đầy đủ. Đã tách biệt với five pillars. Capability thiết lập SLA freshness khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "five_pillars_data_observability",
+      "name_vi": "Năm trụ cột data observability",
+      "description_vi": "Data observability gồm freshness, volume, distribution, schema và lineage; các trụ cột cho biết dữ liệu có mới, đủ, phân bố hợp lý, đúng cấu trúc và truy được nguồn hay không.",
+      "item_form": "concept",
+      "primary_capability_vi": "Chọn các góc quan sát phù hợp để mô tả trạng thái dữ liệu và lần theo lỗi.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Người học có thể phân tích một triệu chứng dữ liệu bằng cách đối chiếu freshness, volume, distribution, schema và lineage.",
+      "bloom_rationale_vi": "Nguồn không chỉ định nghĩa năm trụ cột mà còn liên kết chúng với timeline, distribution, record count và trace từ DB đến agent.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ năm trụ cột thành một khung quan sát; freshness SLA, anomaly checks và incident triage được tách vì lần lượt là triển khai chuyên biệt và quy trình chẩn đoán.",
+      "role_reason_vi": "Đây là khung trung tâm của phần observability và là cơ sở để phát hiện lỗi trước khi user phàn nàn.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p025:l452-480",
+        "day10-data-pipeline-and-data-observability:p030:l534-541"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p025:l452-480",
+          "source_type": "slide",
+          "page_no": 25,
+          "content": "## Page 25: 5 pillars of data observability\nPage 25: 5 pillars of data observability Text Extract Freshness, distribution, volume, schema, lineage Data observability Freshness 17h Volume 28% Schema 1 drift Distribution stable Freshness timeline 02:00 failure Lineage DB → ingest → clean → embed → agent trace ngược được step fail Freshness Data có cập nhật đúng nhịp không? Distribution Giá trị có lệch bất thường không? Volume Số record có rơi đột ngột không? Schema Cấu trúc có drift không? Lineage Biết lỗi đi từ nguồn nào tới output nào",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p030:l534-541",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Khi agent trả lời cũ, đừng debug model trước.\nPage 30: Khi agent trả lời cũ, đừng debug model trước. Text Extract Freshness Volume Schema Lineage Root cause",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "five_pillars_data_observability",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p025, p030. Đã tách biệt với freshness SLA, anomaly checks, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "five_pillars_data_observability",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p025, p030 hỗ trợ tốt. Không overlap. Capability chọn góc quan sát phù hợp khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "schema_evolution_management",
+      "name_vi": "Quản lý schema evolution",
+      "description_vi": "Xử lý additive change bằng optional field/default null/version; xử lý breaking change bằng migration và backfill có run id; phát hiện null tăng sau deploy và rollback bằng cách giữ hai schema version trong staging.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Phân loại thay đổi schema và chọn cách tương thích, migration hoặc rollback.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể đánh giá một schema change là additive hay breaking và lập kế hoạch xử lý không làm agent gãy.",
+      "bloom_rationale_vi": "Slide cung cấp trực tiếp hai loại thay đổi, cách xử lý, metric alert và phương án rollback; đồng thời chỉ ra chunk boundary/retrieval có thể bị ảnh hưởng.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi canonical contract vì contract mô tả trạng thái đích, còn schema evolution xử lý thay đổi theo thời gian và migration/backfill.",
+      "role_reason_vi": "Nguồn thay đổi schema là nguyên nhân trực tiếp khiến pipeline và retrieval/agent bị lỗi sau deploy.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p026:l481-497"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p026:l481-497",
+          "source_type": "slide",
+          "page_no": 26,
+          "content": "## Page 26: PHẦN C ·\nPage 26: PHẦN C · Text Extract Schema evolution: additive vs breaking Giữ agent không “gãy” khi nguồn đổi cột Additive (ưu tiên) thêm cột optional · default null · version field Contract ở biên parser ra canonical schema trước khi embed Breaking change đổi kiểu / đổi ý nghĩa cột → cần migration + backfill có run id Quan sát alert khi % null tăng đột biến sau deploy parser Rollback giữ 2 version schema song song trong staging Agent impact chunk boundary đổi → retrieval lệch dù “data vẫn có”",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "schema_evolution_management",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p026. Đã tách biệt với canonical contract, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "schema_evolution_management",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p026 hỗ trợ tốt. Không overlap. Capability phân loại thay đổi schema và chọn cách xử lý khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "distribution_and_anomaly_checks",
+      "name_vi": "Kiểm tra distribution và anomaly",
+      "description_vi": "Phát hiện pipeline chạy nhưng sai bằng null rate, content length, cardinality, entropy/language mix, cross-field constraint và future effective date.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Nhận diện bất thường phân bố hoặc quan hệ trường dù volume tổng thể vẫn có vẻ bình thường.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Người học có thể chọn anomaly metric và phân tích dấu hiệu cho thấy ingest, parser hoặc dedupe đang sai.",
+      "bloom_rationale_vi": "Nguồn liệt kê các chỉ báo distribution và anomaly cụ thể, bao gồm null tăng sau đổi API, unique ID giảm, OCR noise spike và cross-field/time-travel errors.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi volume/freshness vì dữ liệu có thể đủ record và mới nhưng vẫn sai phân bố hoặc sai quan hệ giữa các trường.",
+      "role_reason_vi": "Đây là năng lực observability cần thiết để phát hiện lỗi âm thầm mà chỉ đếm record không thấy được.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p025:l452-480",
+        "day10-data-pipeline-and-data-observability:p028:l507-523"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p025:l452-480",
+          "source_type": "slide",
+          "page_no": 25,
+          "content": "## Page 25: 5 pillars of data observability\nPage 25: 5 pillars of data observability Text Extract Freshness, distribution, volume, schema, lineage Data observability Freshness 17h Volume 28% Schema 1 drift Distribution stable Freshness timeline 02:00 failure Lineage DB → ingest → clean → embed → agent trace ngược được step fail Freshness Data có cập nhật đúng nhịp không? Distribution Giá trị có lệch bất thường không? Volume Số record có rơi đột ngột không? Schema Cấu trúc có drift không? Lineage Biết lỗi đi từ nguồn nào tới output nào",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p028:l507-523",
+          "source_type": "slide",
+          "page_no": 28,
+          "content": "## Page 28: PHẦN C ·\nPage 28: PHẦN C · Text Extract Distribution & anomaly ngoài “đủ record” Phát hiện ingest “chạy nhưng sai” Null rate effective date null % tăng sau đổi API Length content quá ngắn / quá dài bất thường Cardinality số doc id unique giảm mạnh → dedupe lỗi Entropy / language mix ngôn ngữ hoặc OCR noise spike Cross field end < start · version < predecessor Time travel future effective date clock skew ngưỡng",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "distribution_and_anomaly_checks",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ từ p025, p028. Đã tách biệt với five pillars, không overlap."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "distribution_and_anomaly_checks",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p025, p028 hỗ trợ tốt. Không overlap. Capability nhận diện bất thường phân bố khả thi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "rag_agent_data_slis",
+      "name_vi": "SLI dữ liệu gắn với chất lượng agent",
+      "description_vi": "Liên kết data observability với trải nghiệm user bằng citation freshness, grounding rate, retrieval hit@k trên golden set và pipeline ingest-to-publish p95, tách khỏi LLM latency.",
+      "item_form": "concept",
+      "primary_capability_vi": "Chọn và diễn giải SLI cho mối liên hệ giữa dữ liệu, retrieval và câu trả lời agent.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Người học có thể phân tích một SLI xấu để xác định nên quay lại pillar dữ liệu nào trước khi kết luận model lỗi.",
+      "bloom_rationale_vi": "Nguồn nêu các SLI cụ thể và yêu cầu khi SLI xấu phải quay lại năm trụ cột trước khi tin vào giả thuyết model bị lỗi.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi năm trụ cột vì SLI này đo tác động ở bề mặt RAG/agent, không chỉ trạng thái nội tại của data pipeline.",
+      "role_reason_vi": "Bài học kết nối trực tiếp observability với chất lượng câu trả lời agent và yêu cầu before/after evaluation.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p005:l65-81",
+        "day10-data-pipeline-and-data-observability:p029:l524-533"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p005:l65-81",
+          "source_type": "slide",
+          "page_no": 5,
+          "content": "## Page 5: Nhắc lại mạch 3 ngày: cùng một artifact được nâng cấp\nPage 5: Nhắc lại mạch 3 ngày: cùng một artifact được nâng cấp Text Extract Trợ lý nội bộ cho khối CS + IT Helpdesk Day 08 RAG grounded nguồn tri thức đáng tin retrieve đúng đoạn Day 09 Supervisor workers route + trace + MCP các worker phối hợp Day 10 Data + observe freshness + quality detect issue sớm refund policy 7 ngày access approval workflow P1 ticket SLA knowledge base có version và metadata",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p029:l524-533",
+          "source_type": "slide",
+          "page_no": 29,
+          "content": "## Page 29: PHẦN C ·\nPage 29: PHẦN C · Text Extract SLI gợi ý cho tầng RAG / agent Liên kết observability data với trải nghiệm user Citation freshness tuổi của chunk được trích dẫn trung bình / p95 Grounding rate % câu trả lời có trích nguồn hợp lệ (nếu thiết kế yêu cầu) Retrieval hit@k trên tập câu hỏi regression (golden set nhỏ) Latency pipeline ingest→publish p95; tách biệt latency LLM Khi SLI xấu, quay lại 5 pillars trước khi tin vào “model bị lỗi”.",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "rag_agent_data_slis",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [
+          "Claim 'Chọn SLI' không được evidence hỗ trợ trực tiếp; evidence chỉ liệt kê các SLI và diễn giải khi SLI xấu, không có hướng dẫn chọn."
+        ],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "minor",
+        "rationale_vi": "Evidence p029 hỗ trợ diễn giải và liệt kê SLI, nhưng thiếu hướng dẫn chọn SLI; các khía cạnh khác đều phù hợp."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "rag_agent_data_slis",
+        "scores": {
+          "accuracy": 3,
+          "disposition_fit": 3,
+          "granularity": 3,
+          "assessability": 3,
+          "grounding": 2,
+          "clarity": 3
+        },
+        "rationale_vi": "Nội dung SLI đúng chuyên môn, disposition phù hợp, scope không quá rộng. Tuy nhiên, claim 'Chọn SLI' trong primary_capability không được evidence hỗ trợ trực tiếp; evidence chỉ liệt kê SLI và diễn giải khi SLI xấu, thiếu hướng dẫn chọn. Grounding bị trừ điểm do claim này không được support. Các khía cạnh khác đều khả quan.",
+        "issues_vi": [
+          "Claim 'Chọn SLI' không được evidence hỗ trợ trực tiếp; evidence chỉ liệt kê SLI và diễn giải khi SLI xấu, không có hướng dẫn chọn."
+        ],
+        "recommended_action": "revise",
+        "overall_score": 2.833,
+        "level": "low",
+        "review_priority": 1,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "data_first_agent_issue_diagnosis",
+      "name_vi": "Chẩn đoán tầng data trước model",
+      "description_vi": "Đọc triệu chứng agent theo tầng: fact đúng nhưng cũ liên quan freshness/publish/cache/vector; nguồn lẫn lộn liên quan dedupe/version/metadata/chunk; chỉ một loại ticket sai liên quan isolate theo lineage; đột biến sau deploy liên quan schema/parser và distribution.",
+      "item_form": "principle",
+      "primary_capability_vi": "Ánh xạ triệu chứng câu trả lời agent tới giả thuyết lỗi data/pipeline phù hợp.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Người học có thể chọn tầng cần kiểm tra đầu tiên và tránh debug prompt/model khi evidence chỉ ra pipeline lỗi.",
+      "bloom_rationale_vi": "Nguồn đưa bảng triệu chứng–tầng lỗi và nguyên tắc đo freshness, volume trước khi mở notebook fine-tune; case policy cũ có ingest retry exhausted.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi incident triage vì đây là năng lực chẩn đoán triệu chứng và hình thành giả thuyết; triage là thứ tự thao tác dashboard, trace và fix.",
+      "role_reason_vi": "Đây là nguyên tắc vận hành trung tâm của bài: debug data pipeline trước khi đổ lỗi cho agent/model.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p006:l82-98",
+        "day10-data-pipeline-and-data-observability:p003:l25-46",
+        "day10-data-pipeline-and-data-observability:p030:l534-541"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p006:l82-98",
+          "source_type": "slide",
+          "page_no": 6,
+          "content": "## Page 6: PHẦN A ·\nPage 6: PHẦN A · Text Extract Triệu chứng agent ↔ tầng data bị lỗi Đọc “sai” đúng tầng trước khi sửa prompt hay model Trả lời đúng fact nhưng cũ freshness · publish · cache vector Trả lời lẫn lộn nguồn / chunk dedupe · version metadata · chunk boundary Trả lời “tự bịa” có vẻ hợp lý missing grounding + retrieval gap vẫn kiểm data trước Chỉ một loại ticket sai OCR/API cụ thể isolate theo lineage nguồn Đột biến sau deploy pipeline schema/parser change so sánh distribution trước/sau Nguyên tắc đo freshness + volume trước khi mở notebook fine tune",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p003:l25-46",
+          "source_type": "slide",
+          "page_no": 3,
+          "content": "## Page 3: Data từ database công ty đột nhiên sai - agent hallucinate. Bạn có biết không?\nPage 3: Data từ database công ty đột nhiên sai agent hallucinate. Bạn có biết không? Text Extract Nếu chỉ biết sau khi user phàn nàn thì đã quá muộn Mở bài vận hành Agent mạnh vẫn trả lời sai nếu data đầu vào bẩn hoặc stale. Observability = phát hiện vấn đề trước khi người dùng kêu Garbage in → garbage out là bài toán hệ thống Đừng debug model trước khi debug pipeline Source DB refund v4 Pipeline sync 02:00 failed retry exhausted freshness = 17h Vector store last update: yesterday stale data Agent answer Refund 14 ngày user says policy is 7 ngày detect before users complain",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p030:l534-541",
+          "source_type": "slide",
+          "page_no": 30,
+          "content": "## Page 30: Khi agent trả lời cũ, đừng debug model trước.\nPage 30: Khi agent trả lời cũ, đừng debug model trước. Text Extract Freshness Volume Schema Lineage Root cause",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "data_first_agent_issue_diagnosis",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ hỗ trợ description và capability; disposition phù hợp; không overlap; scope vừa phải; task đánh giá khả thi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "data_first_agent_issue_diagnosis",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p006, p003, p030 hỗ trợ trực tiếp description và capability. Nội dung chính xác, disposition core_kc phù hợp, scope không overlap với các candidate khác. Có thể đánh giá bằng task riêng (mapping triệu chứng). Grounding trực tiếp, clarity rõ. Không có lỗi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "data_incident_triage_flow",
+      "name_vi": "Quy trình triage incident dữ liệu",
+      "description_vi": "Triage theo thứ tự Detect freshness, Isolate volume, Validate schema/parse, Trace lineage tới source/step, rồi fix và verify bằng rerun idempotent cùng kiểm tra câu trả lời.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Chẩn đoán root cause của câu trả lời agent cũ bằng flow metric và lineage có thứ tự.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Người học có thể xây triage flow, chọn metric ở từng bước và xác định điểm đứt của pipeline.",
+      "bloom_rationale_vi": "Hoạt động 4 yêu cầu đúng output này; đáp án minh họa freshness 17h, volume giảm, retry exhausted, lineage tới ingest và verify sau rerun.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ các bước thành một procedure vì chúng cùng tạo thành flow incident; không tách từng metric thành KC vì không có mastery state độc lập.",
+      "role_reason_vi": "Năng lực này trực tiếp xử lý tình huống P1 user thấy policy cũ và là kỹ năng vận hành được luyện trong bài.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p031:l542-560",
+        "day10-data-pipeline-and-data-observability:p032:l561-575",
+        "day10-data-pipeline-and-data-observability:p034:l603-619"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p031:l542-560",
+          "source_type": "slide",
+          "page_no": 31,
+          "content": "## Page 31: Hoạt động 4 - Incident triage\nPage 31: Hoạt động 4 Incident triage Text Extract Agent trả lời sai vì dùng data cũ: debug từ dashboard nào trước? P1 · 09:12 User phàn nàn agent trả lời policy cũ Chọn thứ tự check dashboard trước khi mở code. Output 1 triage flow + metric cần xem ở từng bước 1 · Detect freshness có trễ không? 2 · Isolate volume có rơi / spike không? 3 · Validate schema drift hay parse error? 4 · Trace lineage nguồn nào → step nào fail? 5 · Fix + rerun idempotent rerun + verify answer",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p032:l561-575",
+          "source_type": "slide",
+          "page_no": 32,
+          "content": "## Page 32: Ðáp án mẫu\nPage 32: Ðáp án mẫu Text Extract Hoạt động 4 Ví dụ triage flow + metric từng bước Học viên có thể đối chiếu hoặc chỉnh theo hệ thực tế 1 · Detect Metric: freshness hours trên bảng kb documents = 17h (ngưỡng 4h) → giả thuyết: sync trễ hoặc fail 2 · Isolate Metric: rows ingested giảm 28% so với 7 ngày trước; embed task success nhưng input nhỏ bất thường 3 · Validate Check: schema contract PDF parser không drift; log: ingest 02:00 retry exhausted 4 · Lineage refund v4.pdf → ingest job → clean → chunk → vector policy v4 điểm đứt: ingest (không phải model) 5 · Fix + verify rerun idempotent ingest + publish; verify: freshness < 4h + agent trả lời “",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p034:l603-619",
+          "source_type": "slide",
+          "page_no": 34,
+          "content": "## Page 34: PHẦN D ·\nPage 34: PHẦN D · Text Extract Triage có timebox tránh “mở hết dashboard” Áp dụng khi user đang chờ (P1 / policy) 0 5 phút Freshness + last success run có trễ SLA không? 5 12 phút Volume + error rate step step nào “im lặng” hoặc spike? 12 20 phút Schema/contract + lineage tới bảng/file nguồn Nếu chưa ra root cause chuyển sang “giảm thiểu”: rollback publish hoặc banner “data đang cập nhật” Ghi incident note metric đã xem + kết luận từng bước (dù fail) Sau khi fix verify bằng cùng run id trên cleaned + embed + 1 query agent",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "data_incident_triage_flow",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ hỗ trợ; disposition phù hợp; không overlap; scope vừa phải; task đánh giá khả thi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "data_incident_triage_flow",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p031, p032, p034 hỗ trợ đầy đủ flow triage 5 bước, metric và timebox. Nội dung đúng chuyên môn, disposition phù hợp, scope không quá rộng/vụn. Có thể đánh giá bằng task riêng. Grounding trực tiếp, clarity rõ. Không có lỗi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "pipeline_orchestration_and_retry",
+      "name_vi": "Orchestration, scheduling và retry pipeline",
+      "description_vi": "Biểu diễn pipeline thành DAG có dependency rõ; hỗ trợ trigger cron/event/backfill, retry có backoff, retry task lỗi, DLQ, task log, run id, queue depth và SLA alert.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế DAG và policy vận hành để pipeline chạy, retry và backfill có quan sát.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể mô tả dependency graph, trigger, retry policy và các visibility/alert cần có cho pipeline.",
+      "bloom_rationale_vi": "Nguồn đưa DAG ingest → clean → validate → embed → publish, cùng scheduling, retry/backoff/DLQ, sensor, log, lineage và SLA alert.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp scheduling, dependency và retry vì chúng cùng cấu thành orchestration; tách idempotency vì rerun-safe cần các pattern ghi dữ liệu riêng.",
+      "role_reason_vi": "Pipeline chạy được, retry được và có SLA là một phần trực tiếp của deliverable và observability.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p033:l576-602",
+        "day10-data-pipeline-and-data-observability:p036:l629-645"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p033:l576-602",
+          "source_type": "slide",
+          "page_no": 33,
+          "content": "## Page 33: Orchestration, scheduling, retry và idempotency\nPage 33: Orchestration, scheduling, retry và idempotency Text Extract Batch pipeline tốt không chỉ chạy theo cron; nó còn phải re run an toàn DAG tối giản: batch pipeline chạy lại an toàn ingest cron / event clean transform + dedupe validate expectations + contract embed vector update publish serve cho agent alert · SLA breach retry · backoff + DLQ rerun idempotent dependency rõ Schedule cron, event, backfill Retry backoff · DLQ · alert Visibility DAG + dependency + SLA breach Idempotency rerun 2 lần không duplicate vector store",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p036:l629-645",
+          "source_type": "slide",
+          "page_no": 36,
+          "content": "## Page 36: PHẦN D ·\nPage 36: PHẦN D · Text Extract Orchestrator = dependency graph + visibility Airflow / Prefect / Dagster cùng một câu hỏi thiết kế Trigger cron vs event vs upstream success Data awareness sensor đợi file/partition có mặt Retry policy max attempt, backoff, retry only failed task Observability task log + lineage tag run id SLA / alert task duration, queue depth, missed schedule Backfill chạy lại range ngày không phá production alias",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "pipeline_orchestration_and_retry",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ hỗ trợ; disposition phù hợp; không overlap đáng kể; scope vừa phải; task đánh giá khả thi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "pipeline_orchestration_and_retry",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p033, p036 hỗ trợ trực tiếp DAG, trigger, retry policy, visibility. Nội dung chính xác, disposition phù hợp, scope không overlap với idempotent_pipeline_rerun. Có thể đánh giá bằng task thiết kế orchestration. Grounding trực tiếp, clarity rõ. Không có lỗi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "idempotent_pipeline_rerun",
+      "name_vi": "Thiết kế rerun idempotent",
+      "description_vi": "Rerun cùng input/run không tạo duplicate hoặc partial read: upsert theo natural key và version, ghi đè partition cùng run id, transaction delete-then-insert và staging collection → alias swap.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Thiết kế pipeline có thể chạy lại an toàn sau failure hoặc backfill.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể chọn key và chiến lược write để chạy pipeline hai lần mà không duplicate vector hoặc dữ liệu warehouse.",
+      "bloom_rationale_vi": "Nguồn định nghĩa rerun hai lần không duplicate và cung cấp các pattern upsert, partition overwrite, transaction cùng alias swap.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi retry/orchestration vì retry quyết định khi nào chạy lại, còn idempotency quyết định trạng thái dữ liệu sau khi chạy lại.",
+      "role_reason_vi": "Rerun an toàn là yêu cầu kiểm tra trực tiếp trong lab, peer review và incident recovery.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p033:l576-602",
+        "day10-data-pipeline-and-data-observability:p035:l620-628",
+        "day10-data-pipeline-and-data-observability:p042:l747-763"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p033:l576-602",
+          "source_type": "slide",
+          "page_no": 33,
+          "content": "## Page 33: Orchestration, scheduling, retry và idempotency\nPage 33: Orchestration, scheduling, retry và idempotency Text Extract Batch pipeline tốt không chỉ chạy theo cron; nó còn phải re run an toàn DAG tối giản: batch pipeline chạy lại an toàn ingest cron / event clean transform + dedupe validate expectations + contract embed vector update publish serve cho agent alert · SLA breach retry · backoff + DLQ rerun idempotent dependency rõ Schedule cron, event, backfill Retry backoff · DLQ · alert Visibility DAG + dependency + SLA breach Idempotency rerun 2 lần không duplicate vector store",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p035:l620-628",
+          "source_type": "slide",
+          "page_no": 35,
+          "content": "## Page 35: PHẦN D ·\nPage 35: PHẦN D · Text Extract Idempotency pattern thực dụng Rerun an toàn cho embed và warehouse Natural key upsert theo (doc id, version) thay vì random UUID mỗi lần Partition theo ngày ghi đè partition cùng run id thay vì append mù Delete then insert trong transaction cho phạm vi doc id (cẩn thận lock) Vector store policy “replace collection staging → alias swap” giảm partial read",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p042:l747-763",
+          "source_type": "slide",
+          "page_no": 42,
+          "content": "## Page 42: PHẦN E ·\nPage 42: PHẦN E · Text Extract Peer review nhanh giữa các nhóm 10 phút đổi bàn giảm lỗi cấu hình trước khi chấm Người review hỏi “Rerun 2 lần có duplicate vector không?” Người review hỏi “Freshness đo ở bước nào ingest hay publish?” Người review hỏi “Record bị flag đi đâu quarantine hay vẫn embed?” Nhóm trả lời tối thiểu chỉ vào file + dòng log minh chứng Nếu không rõ ghi vào runbook.md là “gap” cần bổ sung Kết quả mỗi nhóm có 3 bullet feedback đã xử lý hoặc đã ghi nhận",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "idempotent_pipeline_rerun",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ hỗ trợ; disposition phù hợp; không overlap; scope vừa phải; task đánh giá khả thi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "idempotent_pipeline_rerun",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p033, p035, p042 hỗ trợ trực tiếp các pattern idempotency (upsert, partition, delete-then-insert, staging->alias swap). Nội dung đúng, disposition phù hợp, scope vừa phải. Có thể đánh giá bằng task thiết kế rerun an toàn. Grounding trực tiếp, clarity rõ. Không có lỗi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "incident_runbook_update",
+      "name_vi": "Cập nhật runbook sau incident",
+      "description_vi": "Ghi lại symptom, detection metric/dashboard, diagnosis root cause và pipeline step, mitigation, prevention, owner và gap quan sát sau sự cố.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Biến một incident thành runbook có thể dùng cho lần xử lý sau.",
+      "target_bloom_level": "create",
+      "bloom_learning_objective_vi": "Người học có thể viết incident note/runbook gồm bằng chứng đã xem, root cause, biện pháp giảm thiểu và prevention.",
+      "bloom_rationale_vi": "Nguồn cung cấp template runbook với các mục symptom, detection, diagnosis, mitigation và prevention; phần triage cũng yêu cầu ghi metric và kết luận từng bước.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi triage vì triage giải quyết incident hiện tại, còn runbook chuyển kiến thức sau incident thành tài sản vận hành lâu dài.",
+      "role_reason_vi": "Runbook là deliverable của bài và giúp duy trì khả năng on-call, alert và remediation.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p034:l603-619",
+        "day10-data-pipeline-and-data-observability:p037:l646-660",
+        "day10-data-pipeline-and-data-observability:p038:l661-694"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p034:l603-619",
+          "source_type": "slide",
+          "page_no": 34,
+          "content": "## Page 34: PHẦN D ·\nPage 34: PHẦN D · Text Extract Triage có timebox tránh “mở hết dashboard” Áp dụng khi user đang chờ (P1 / policy) 0 5 phút Freshness + last success run có trễ SLA không? 5 12 phút Volume + error rate step step nào “im lặng” hoặc spike? 12 20 phút Schema/contract + lineage tới bảng/file nguồn Nếu chưa ra root cause chuyển sang “giảm thiểu”: rollback publish hoặc banner “data đang cập nhật” Ghi incident note metric đã xem + kết luận từng bước (dù fail) Sau khi fix verify bằng cùng run id trên cleaned + embed + 1 query agent",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p037:l646-660",
+          "source_type": "slide",
+          "page_no": 37,
+          "content": "## Page 37: PHẦN D ·\nPage 37: PHẦN D · Text Extract Sau incident: cập nhật runbook (template) Biến sự cố thành tài sản cho lần sau Symptom user thấy gì · agent trả lời sai kiểu gì Detection metric/dashboard nào đã báo (hoặc chưa → gap) Diagnosis root cause · step pipeline · bảng/file Mitigation rollback / rerun / feature flag Prevention expectation mới · alert mới · owner",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p038:l661-694",
+          "source_type": "slide",
+          "page_no": 38,
+          "content": "## Page 38: Hands-on 10 - ETL + Quality + Monitoring\nPage 38: Hands on 10 ETL + Quality + Monitoring Text Extract 4 giờ thực hành: raw → cleaned → embedded, inject corruption, đo ảnh hưởng lên agent raw → cleaned → embedded Sprint 1 ingest raw → cleaned Sprint 2 cleaned → embedded Sprint 3 inject corruption + compare Sprint 4 expectation suite + monitor + docs Before / after answer quality dirty cleaned Deliverables nhóm etl pipeline.py transform/cleaning rules expectation suite + freshness monitoring quality report + before/after eval pipeline architecture.md · data contract.md · runbook.md ETL pipeline 45% Documentation 25% Quality evidence 20% Individual report 10%",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "incident_runbook_update",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ hỗ trợ; disposition phù hợp; không overlap; scope vừa phải; task đánh giá khả thi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "incident_runbook_update",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p034, p037, p038 hỗ trợ trực tiếp template runbook và quy trình ghi lại symptom, detection, diagnosis, mitigation, prevention. Nội dung chính xác, disposition phù hợp, scope không overlap với triage. Có thể đánh giá bằng task viết runbook. Grounding trực tiếp, clarity rõ. Không có lỗi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "before_after_agent_quality_evaluation",
+      "name_vi": "Đánh giá before/after ảnh hưởng của dữ liệu",
+      "description_vi": "So sánh câu trả lời agent trước và sau cleaning, quality checks, embed/publish lại; dùng golden questions/eval evidence, freshness, version và trace run id để chứng minh tác động.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Đánh giá bằng chứng liệu cải thiện data pipeline có làm câu trả lời agent đúng và truy nguyên hơn hay không.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Người học có thể thiết kế và diễn giải một before/after evaluation có câu hỏi, metric và bằng chứng run tương ứng.",
+      "bloom_rationale_vi": "Hands-on yêu cầu inject corruption, compare dirty/cleaned answer quality, golden questions, eval.csv hoặc dashboard screenshot và verify answer sau rerun.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ riêng vì đánh giá tác động lên agent có task và tiêu chí thành công khác với kiểm tra data quality nội tại.",
+      "role_reason_vi": "Đây là bằng chứng đầu ra bắt buộc để chứng minh pipeline và observability thực sự cải thiện hệ AI.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p004:l47-64",
+        "day10-data-pipeline-and-data-observability:p038:l661-694",
+        "day10-data-pipeline-and-data-observability:p040:l709-736",
+        "day10-data-pipeline-and-data-observability:p044:l773-785"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p004:l47-64",
+          "source_type": "slide",
+          "page_no": 4,
+          "content": "## Page 4: Mục tiêu học tập & đầu ra cuối ngày\nPage 4: Mục tiêu học tập & đầu ra cuối ngày Text Extract Học pipeline, quality, observability; build ETL + quality report + before/after comparison Learn · 4h ETL / ELT · batch / stream Ingestion · cleaning · contract Observability · expectation suite Build · 4h ETL pipeline chạy được Freshness monitor + quality checks Before / after ảnh hưởng lên agent Lý thuyết + activity Lab + deliverable etl pipeline.py quality report before after eval runbook",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p038:l661-694",
+          "source_type": "slide",
+          "page_no": 38,
+          "content": "## Page 38: Hands-on 10 - ETL + Quality + Monitoring\nPage 38: Hands on 10 ETL + Quality + Monitoring Text Extract 4 giờ thực hành: raw → cleaned → embedded, inject corruption, đo ảnh hưởng lên agent raw → cleaned → embedded Sprint 1 ingest raw → cleaned Sprint 2 cleaned → embedded Sprint 3 inject corruption + compare Sprint 4 expectation suite + monitor + docs Before / after answer quality dirty cleaned Deliverables nhóm etl pipeline.py transform/cleaning rules expectation suite + freshness monitoring quality report + before/after eval pipeline architecture.md · data contract.md · runbook.md ETL pipeline 45% Documentation 25% Quality evidence 20% Individual report 10%",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p040:l709-736",
+          "source_type": "slide",
+          "page_no": 40,
+          "content": "## Page 40: Hướng dẫn thực hành 2 - Sprint 3-4 & evidence\nPage 40: Hướng dẫn thực hành 2 Sprint 3 4 & evidence Text Extract Mục tiêu: inject corruption, đo ảnh hưởng và nộp report có bằng chứng missing duplicate wrong format encoding Before answer stale retrieval lệch chunk lỗi After answer đúng version trace rõ run id freshness pass freshness sla PASS schema contract PASS duplicate key 2 flagged Evidence cần nộp before after eval.csv hoặc ảnh dashboard quality report runbook / monitor screenshot báo cáo cá nhân ngắn gọn Khung báo cáo cá nhân Phần tôi phụ trách Một lỗi hoặc quyết định kỹ thuật chính Bằng chứng trước / sau Một cải tiến tiếp theo",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p044:l773-785",
+          "source_type": "slide",
+          "page_no": 44,
+          "content": "## Page 44: PHẦN E ·\nPage 44: PHẦN E · Text Extract Kịch bản demo 3 phút trước lớp Cấu trúc cố định: bệnh → đo → sửa → chứng minh 0:00 0:45 Giả thích use case + nguồn (DB/API/file) 0:45 1:30 Inject corruption → chỉ freshness/volume trên dashboard hoặc log 1:30 2:30 Rerun pipeline idempotent → expectation pass 2:30 3:00 So sánh câu agent trước/sau + run id khớp evidence",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "before_after_agent_quality_evaluation",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ hỗ trợ; disposition phù hợp; không overlap; scope vừa phải; task đánh giá khả thi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "before_after_agent_quality_evaluation",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p004, p038, p040, p044 hỗ trợ trực tiếp việc so sánh câu trả lời trước/sau cleaning, dùng golden questions, freshness, version, run id. Nội dung đúng, disposition phù hợp, scope không quá rộng. Có thể đánh giá bằng task thực hiện before/after evaluation. Grounding trực tiếp, clarity rõ. Không có lỗi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "data_pipeline_raci_ownership",
+      "name_vi": "Phân định ownership theo RACI",
+      "description_vi": "Phân định trách nhiệm giữa AI/Applied, Data Eng, SRE/Platform và Product/SME cho data contract, ingest/modeling, alert/on-call/runbook và định nghĩa policy/source of truth.",
+      "item_form": "concept",
+      "primary_capability_vi": "Gán đúng owner cho nguồn dữ liệu, contract, pipeline, alert và quyết định policy.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể lập ownership rõ ràng cho từng nguồn và artifact trong một nhóm nhỏ.",
+      "bloom_rationale_vi": "Nguồn nêu trách nhiệm, artifact và yêu cầu dù một người kiêm nhiều vai vẫn phải ghi rõ owner trên từng nguồn.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Giữ thành một item vì các vai trò cùng giải quyết ranh giới trách nhiệm; không tách từng vai trò vì đó là các thuộc tính trong một mô hình ownership.",
+      "role_reason_vi": "Đây là capability vận hành tái sử dụng, nhưng không phải năng lực kỹ thuật bắt buộc để hoàn thành pipeline cốt lõi.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p007:l99-111"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p007:l99-111",
+          "source_type": "slide",
+          "page_no": 7,
+          "content": "## Page 7: PHẦN A ·\nPage 7: PHẦN A · Text Extract Ai làm gì? (bản tối giản RACI) Tránh “AI engineer ôm trọn data platform” không có ranh giới Nhóm nhỏ lab: có thể một người đóng nhiều vai nhưng vẫn ghi rõ owner trên từng nguồn. Tables | Vai trò | Trách nhiệm chính | Artifact | | | | | | AI / Applied | data contract cho corpus agent · eval before/after | data contract.md · golden questions | | Data Eng | ingest robust · modeling · pipeline SLA | pipeline architecture.md · lineage | | SRE / Platform | alert · on call runbook · quota/secret | runbook.md · dashboards | | Product / SME | định nghĩa “đúng” policy · sign off version | source of truth link |",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "data_pipeline_raci_ownership",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ hỗ trợ; disposition performance_kc phù hợp; không overlap; scope vừa phải; task đánh giá khả thi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "data_pipeline_raci_ownership",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p007 hỗ trợ trực tiếp bảng RACI với các vai trò và trách nhiệm. Nội dung chính xác, disposition performance_kc phù hợp, scope vừa phải. Có thể đánh giá bằng task gán owner cho tình huống. Grounding trực tiếp, clarity rõ. Không có lỗi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    },
+    {
+      "code": "pipeline_artifact_hygiene",
+      "name_vi": "Artifact hygiene và khả năng tái chạy",
+      "description_vi": "Đóng gói pipeline có .env.example không chứa secret, pin version thư viện, sample data nhỏ, cùng pipeline architecture, data contract và runbook trong cùng commit.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Chuẩn bị artifact pipeline có thể chạy lại và được người khác kiểm tra.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Người học có thể tổ chức repository và dependency để pipeline không chỉ chạy trên máy cá nhân.",
+      "bloom_rationale_vi": "Nguồn đưa checklist trực tiếp về secret, dependency version, sample data và các tài liệu phải commit cùng nhau.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp các quy tắc repository vì chúng cùng phục vụ reproducibility và review; không gộp với idempotency vì không quyết định trạng thái dữ liệu khi rerun.",
+      "role_reason_vi": "Đây là thực hành kỹ thuật hữu ích và tái sử dụng, nhưng mang tính hỗ trợ triển khai hơn là trọng tâm data quality/observability.",
+      "evidence_section_ids": [
+        "day10-data-pipeline-and-data-observability:p043:l764-772"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day10-data-pipeline-and-data-observability:p043:l764-772",
+          "source_type": "slide",
+          "page_no": 43,
+          "content": "## Page 43: PHẦN E ·\nPage 43: PHẦN E · Text Extract Git & artifact hygiene cho data pipeline Nhỏ nhưng tránh nộp bài “chỉ chạy trên máy tôi” .env.example liệt kê biến; không commit secret Pin version thư viện (requirements.txt / pyproject) có version cụ thể Sample data trong data/sample/ đủ nhỏ để chấm nhanh docs/ pipeline architecture + data contract + runbook cùng commit cuối",
+          "transcript_evidence": []
+        }
+      ],
+      "independent_critique": {
+        "code": "pipeline_artifact_hygiene",
+        "overlap_codes": [],
+        "unsupported_claims_vi": [],
+        "disposition_issue_vi": "",
+        "granularity_issue_vi": "",
+        "assessability_issue_vi": "",
+        "severity": "none",
+        "rationale_vi": "Evidence đầy đủ hỗ trợ; disposition performance_kc phù hợp; không overlap; scope vừa phải; task đánh giá khả thi."
+      },
+      "source_mode": "slide_only",
+      "independent_judge": {
+        "code": "pipeline_artifact_hygiene",
+        "scores": {
+          "accuracy": 4,
+          "disposition_fit": 4,
+          "granularity": 4,
+          "assessability": 4,
+          "grounding": 4,
+          "clarity": 4
+        },
+        "rationale_vi": "Evidence p043 hỗ trợ trực tiếp các quy tắc: .env.example, pin version, sample data, docs cùng commit. Nội dung đúng, disposition performance_kc phù hợp, scope không overlap với idempotency. Có thể đánh giá bằng task kiểm tra repository. Grounding trực tiếp, clarity rõ. Không có lỗi.",
+        "issues_vi": [],
+        "recommended_action": "keep",
+        "overall_score": 4.0,
+        "level": "high",
+        "review_priority": 3,
+        "score_scale": "1-4",
+        "judge_status": "independent_uncalibrated"
+      }
+    }
+  ],
+  "evidence_sections": [
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p001:l1-24",
+      "page_no": 1,
+      "heading": "slide",
+      "snippet": "## Page 1: Data Pipeline & Data Observability\nPage 1: Data Pipeline & Data Observability Text Extract Từ data thô đến agent đáng tin Nối trực tiếp với RAG / multi agent ETL + Data Quality + Observability Company data Pipeline ingest · clean · validate version · monitor Freshness Vector store Agent Quality Observe Page 2: Text Extract [Tên] [Chức danh / vai trò] Audience: học viên đã có RAG / multi agent artifact Focus: data pipeline, data quality, observability Case study: trợ lý nội bộ CS + IT Helpdesk Goal: detect issue trước khi user thấy câu trả lời sai Topic: Data Pipeline & Data Observability",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p003:l25-46",
+      "page_no": 3,
+      "heading": "slide",
+      "snippet": "## Page 3: Data từ database công ty đột nhiên sai - agent hallucinate. Bạn có biết không?\nPage 3: Data từ database công ty đột nhiên sai agent hallucinate. Bạn có biết không? Text Extract Nếu chỉ biết sau khi user phàn nàn thì đã quá muộn Mở bài vận hành Agent mạnh vẫn trả lời sai nếu data đầu vào bẩn hoặc stale. Observability = phát hiện vấn đề trước khi người dùng kêu Garbage in → garbage out là bài toán hệ thống Đừng debug model trước khi debug pipeline Source DB refund v4 Pipeline sync 02:00 failed retry exhausted freshness = 17h Vector store last update: yesterday stale data Agent answer Refund 14 ngày user says policy is 7 ngày detect before users complain",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p004:l47-64",
+      "page_no": 4,
+      "heading": "slide",
+      "snippet": "## Page 4: Mục tiêu học tập & đầu ra cuối ngày\nPage 4: Mục tiêu học tập & đầu ra cuối ngày Text Extract Học pipeline, quality, observability; build ETL + quality report + before/after comparison Learn · 4h ETL / ELT · batch / stream Ingestion · cleaning · contract Observability · expectation suite Build · 4h ETL pipeline chạy được Freshness monitor + quality checks Before / after ảnh hưởng lên agent Lý thuyết + activity Lab + deliverable etl pipeline.py quality report before after eval runbook",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p005:l65-81",
+      "page_no": 5,
+      "heading": "slide",
+      "snippet": "## Page 5: Nhắc lại mạch 3 ngày: cùng một artifact được nâng cấp\nPage 5: Nhắc lại mạch 3 ngày: cùng một artifact được nâng cấp Text Extract Trợ lý nội bộ cho khối CS + IT Helpdesk Day 08 RAG grounded nguồn tri thức đáng tin retrieve đúng đoạn Day 09 Supervisor workers route + trace + MCP các worker phối hợp Day 10 Data + observe freshness + quality detect issue sớm refund policy 7 ngày access approval workflow P1 ticket SLA knowledge base có version và metadata",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p006:l82-98",
+      "page_no": 6,
+      "heading": "slide",
+      "snippet": "## Page 6: PHẦN A ·\nPage 6: PHẦN A · Text Extract Triệu chứng agent ↔ tầng data bị lỗi Đọc “sai” đúng tầng trước khi sửa prompt hay model Trả lời đúng fact nhưng cũ freshness · publish · cache vector Trả lời lẫn lộn nguồn / chunk dedupe · version metadata · chunk boundary Trả lời “tự bịa” có vẻ hợp lý missing grounding + retrieval gap vẫn kiểm data trước Chỉ một loại ticket sai OCR/API cụ thể isolate theo lineage nguồn Đột biến sau deploy pipeline schema/parser change so sánh distribution trước/sau Nguyên tắc đo freshness + volume trước khi mở notebook fine tune",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p007:l99-111",
+      "page_no": 7,
+      "heading": "slide",
+      "snippet": "## Page 7: PHẦN A ·\nPage 7: PHẦN A · Text Extract Ai làm gì? (bản tối giản RACI) Tránh “AI engineer ôm trọn data platform” không có ranh giới Nhóm nhỏ lab: có thể một người đóng nhiều vai nhưng vẫn ghi rõ owner trên từng nguồn. Tables | Vai trò | Trách nhiệm chính | Artifact | | | | | | AI / Applied | data contract cho corpus agent · eval before/after | data contract.md · golden questions | | Data Eng | ingest robust · modeling · pipeline SLA | pipeline architecture.md · lineage | | SRE / Platform | alert · on call runbook · quota/secret | runbook.md · dashboards | | Product / SME | định nghĩa “đúng” policy · sign off version | source of truth link |",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p008:l112-120",
+      "page_no": 8,
+      "heading": "slide",
+      "snippet": "## Page 8: PHẦN A ·\nPage 8: PHẦN A · Text Extract SLA freshness nói bằng ngôn ngữ nghiệp vụ Ví dụ: policy refund phải reflect trong agent ≤ 4 giờ sau khi PDF ký Đo điểm cuối thời điểm document “active” trên bảng cleaned hoặc vector index Ngưỡng cảnh báo warning ở 50% SLA, page ở 100% SLA Phân loại nguồn static PDF vs ticket stream không dùng chung một SLA Hiển thị cho user “Dữ liệu tri thức cập nhật tới: …” giảm kỳ vọng sai",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p009:l121-129",
+      "page_no": 9,
+      "heading": "slide",
+      "snippet": "## Page 9: PHẦN A ·\nPage 9: PHẦN A · Text Extract Checklist trước khi embed lần đầu Copy vào docs nhóm lab nếu cần Schema canonical + kiểu cột + primary key / natural key thống nhất Encoding UTF 8 · test vài dòng tiếng Việt có dấu Version / effective date / source uri ghi nhận được trong metadata chunk Sample 20 row manual skim + 3 câu hỏi golden đặt trước cho agent",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p010:l130-155",
+      "page_no": 10,
+      "heading": "slide",
+      "snippet": "## Page 10: Hoạt động 1 - ETL hay ELT? Batch hay Streaming?\nPage 10: Hoạt động 1 ETL hay ELT? Batch hay Streaming? Text Extract Phân loại 4 tình huống thực tế trước khi đi vào chi tiết ETL transform trước load ELT load rồi mới transform Batch theo lô Streaming theo sự kiện 1 Mask PII log trước khi vào warehouse 2 Nightly sync policy/refund v4.pdf 3 P1 ticket webhook cập nhật dashboard tức thời 4 Monthly CSV tickets/2026 02 incidents.csv latency governance cost debability Streaming ↑ | Batch ↓ ETL + streaming ELT + streaming ETL + batch ELT + batch Output: 1 bảng phân loại + lý do ngắn",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p011:l156-168",
+      "page_no": 11,
+      "heading": "slide",
+      "snippet": "## Page 11: Ðáp án mẫu\nPage 11: Ðáp án mẫu Text Extract Hoạt động 1 Gợi ý phân loại + lý do ngắn Đáp án không nhất thiết duy nhất; cần biện minh latency / governance / cost Nếu nhóm chọn khác: hợp lệ nếu nêu rõ trade off (ví dụ streaming ELT nhưng thêm bước mask sớm). Tables | | Gợi ý ô | Lý do (1 dòng) | | | | | | 1 Mask PII log | ETL +streaming | phải che PII trước khi vào lake/warehouse →transform trước load; log tới liên tục | | 2 Nightly PDF | ETL +batch | khối lượng ổn định theo lịch; extract/chuẩn hoá text & metadata trước khi nạp staging | | 3 P1 webhook | ELT +streaming | ghi event/raw nhanh; aggregate/dashboard transform sau trong warehouse | | 4 Monthly",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p012:l169-190",
+      "page_no": 12,
+      "heading": "slide",
+      "snippet": "## Page 12: Data pipeline là gì trong AI stack?\nPage 12: Data pipeline là gì trong AI stack? Text Extract Sources → Pipeline → Storage → Serving → Agent Sources DB API Files Streams Pipeline ingest transform ETL ELT Storage / Serving raw + cleaned vector store cache / API Agent surface RAG tools / workers agent quality",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p013:l191-217",
+      "page_no": 13,
+      "heading": "slide",
+      "snippet": "## Page 13: Ingestion từ nhiều nguồn: DB, API, files, streams\nPage 13: Ingestion từ nhiều nguồn: DB, API, files, streams Text Extract Không chỉ kéo data về; phải xử lý CDC, rate limit, backpressure, retry PostgreSQL CDC / snapshot External API poll / pagination / rate limit PDF / HTML parse / OCR / metadata Webhooks queue / consumer / backpressure Ingestion layer retry + backoff buffer / queue DLQ raw cleaned monitor DB schema drift · timeout · CDC lag API auth · pagination · rate limit Files OCR error · encoding · missing metadata Streams backpressure · retry · dedupe",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p014:l218-228",
+      "page_no": 14,
+      "heading": "slide",
+      "snippet": "## Page 14: Nhắc nhanh trước khi vẽ source map\nPage 14: Nhắc nhanh trước khi vẽ source map Text Extract Nguồn nào · Hỏng kiểu gì · Đo cái gì Source PostgreSQL External API PDF / HTML Failure timeout rate limit OCR / schema drift Output template: source → method → check → owner Monitor freshness volume schema / lineage",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p015:l229-245",
+      "page_no": 15,
+      "heading": "slide",
+      "snippet": "## Page 15: PHẦN B ·\nPage 15: PHẦN B · Text Extract CDC vs snapshot: khi nào dùng gì? Database là nguồn hay thay đổi nhất cho policy nội bộ Snapshot / batch query full hoặc incremental theo watermark updated at đơn giản, dễ hiểu CDC (log based) độ trễ thấp, ít miss update nếu có slot WAL Trade off CDC phức tạp hơn vận hành; snapshot dễ “đọc quá nhiều” Monitor snapshot watermark stall · duration query · rows/sec Monitor CDC replication lag · consumer offset · poison message Agent note CDC trễ vài phút vẫn có thể làm policy “cũ” với ticket P1",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p016:l246-254",
+      "page_no": 16,
+      "heading": "slide",
+      "snippet": "## Page 16: PHẦN B ·\nPage 16: PHẦN B · Text Extract API ingestion pagination, cursor, quota Thiết kế để không bị 429 làm “đứng hình” pipeline Token bucket / rate limit header respect Retry After , exponential backoff + jitter Pagination cursor ổn định hơn offset khi data đang thay đổi Checkpoint lưu last synced id idempotent; rerun không double fetch toàn bộ Partial page failure ghi page đã fail vào DLQ để replay có chủ đích",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p017:l255-263",
+      "page_no": 17,
+      "heading": "slide",
+      "snippet": "## Page 17: PHẦN B ·\nPage 17: PHẦN B · Text Extract Files (PDF/HTML) parse, hash, version Tránh embed nhầm bản policy cũ chỉ vì tên file giống Content hash sha256 của bytes; đổi nhẹ metadata không làm re embed oan Logical version policy v4 gắn metadata cho vector filter OCR path confidence score; thấp → flag human review trước publish Chunk boundary heading aware chunk giảm câu trả lời “cắt nửa điều khoản”",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p018:l264-277",
+      "page_no": 18,
+      "heading": "slide",
+      "snippet": "## Page 18: PHẦN B ·\nPage 18: PHẦN B · Text Extract Queue · backpressure · DLQ (một sơ đồ tư duy) Tách ingest nhanh khỏi transform chậm Producer Webhook / poll ghi event vào queue ack nhanh Buffer Queue + depth metric backpressure khi consumer chậm alert depth ngưỡng DLQ không phải “thất bại”; là điểm quan sát để không làm mất sự kiện. Consumer Transform + validate retry có giới hạn poison → DLQ + ticket",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p019:l278-306",
+      "page_no": 19,
+      "heading": "slide",
+      "snippet": "## Page 19: Hoạt động 2 - Mapping Ingestion Risks\nPage 19: Hoạt động 2 Mapping Ingestion Risks Text Extract Thiết kế ingestion plan cho use case CS & IT Helpdesk Case Study: CS & IT Support PostgreSQL: Thông tin khách hàng & lịch sử ticket. Jira API: Trạng thái xử lý lỗi thời gian thực. PDF Docs: Quy trình (SOP) & Policy bảo mật. Nhiệm vụ (3 Bước) Identify: Xác định logic kéo data cho từng nguồn. Foresee: Đánh dấu các “điểm đứt” (failures). Protect: Đề xuất cách monitor để phát hiện sớm. schema drift OCR error timeout rate limit Pipeline Funnel: Từ Nguồn đến Agent DB (SQL) API (Jira) PDF (SOP) Pipeline Layer Clean · Validate · Embed AI Agent Tables | Source | Risk (What breaks?) | Monitor (H",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p020:l307-324",
+      "page_no": 20,
+      "heading": "slide",
+      "snippet": "## Page 20: Ðáp án mẫu\nPage 20: Ðáp án mẫu Text Extract Hoạt động 2 Source map & bảng ingestion (ví dụ) Use case: CS/IT Helpdesk PostgreSQL + CRM API + PDF SOP 2 rủi ro chính API CRM rate limit 429 làm mất nhịp sync. PDF scan OCR confidence thấp → text rác vào RAG. 1 monitor ưu tiên freshness sla trên bảng kb documents (end to end tới vector publish). Sơ đồ một dòng: 3 nguồn → queue → ingest worker → raw → clean → validate → embed → publish Tables | Source | Method | Check | Owner | | | | | | | PostgreSQL tickets | CDC / watermark updated at | freshness + replication lag | Data Eng | | CRMAPI | poll + cursor checkpoint | 429 rate + checkpoint stall | AI Eng | | PDF",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p021:l325-370",
+      "page_no": 21,
+      "heading": "slide",
+      "snippet": "## Page 21: Transform: làm sạch và chuẩn hoá trước khi agent dùng được\nPage 21: Transform: làm sạch và chuẩn hoá trước khi agent dùng được Text Extract Missing, duplicates, wrong format, encoding, schema validation Raw sample doc id title date content 12 Refund policy 7 ngày 12 Refund policy 2026 02 07 7 ngày 44 Access approve NULL quy trình… 58 P1 SLA 2026/02/10 2h – lỗi mã hoá Transform = code + contract, không sửa tay ngay trước khi demo. dedupe date parse unicode schema check Cleaned sample id 12 44 58 version v4 v2 v1 effective date 2026 02 07 missing → flag 2026 02 10 status active review active",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p022:l371-411",
+      "page_no": 22,
+      "heading": "slide",
+      "snippet": "## Page 22: Hoạt động 3 - Dirty data repair\nPage 22: Hoạt động 3 Dirty data repair Text Extract Từ một CSV lỗi, đề xuất cleaning rules trước khi embed doc id source date content notes 12 refund v4.pdf 2026 02 07 Refund 7 ngày ok 44 access control sop.md NULL Approve by manager missing date 58 sla p1 2026.pdf 2026/02/10 SLA = 2h encoding 67 faq/account recovery.html 2026 02 11 empty content Clean trim whitespace parse date normalize unicode Reject empty content duplicate primary key Flag missing date manual review Tables | doc id | source | date | content | notes | | | | | | | | 12 | refund v4.pdf | 2026 02 07 | Refund 7 ngày | ok | | 44 | access control sop.md | NULL | Approve by manag",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p023:l412-426",
+      "page_no": 23,
+      "heading": "slide",
+      "snippet": "## Page 23: Ðáp án mẫu\nPage 23: Ðáp án mẫu Text Extract Hoạt động 3 Bộ cleaning rules (≥5 rule) Áp dụng trực tiếp lên bảng dirty trên slide hoạt động Clean / normalize Trim whitespace cột content và notes. Parse date đa định dạng → YYYY MM DD UTC. Unicode NFC + thay thế ký tự thay thế cho “”. Reject cứng Drop row nếu content rỗng sau trim. Drop duplicate theo khóa (doc id, source, normalized content hash) giữ bản mới nhất theo date parse được. Flag / quarantine Nếu date NULL nhưng content có → flag review missing date, không embed cho đến khi SME điền. Log mọi drop/flag vào quarantine.csv kèm run id.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p024:l427-451",
+      "page_no": 24,
+      "heading": "slide",
+      "snippet": "## Page 24: Data quality as code\nPage 24: Data quality as code Text Extract 6 dimensions + Great Expectations / expectation suite Completeness content not null Accuracy policy date đúng Consistency same key, same format Timeliness freshness theo SLA Validity schema + contract hợp lệ Uniqueness không duplicate record Expectation suite batch.expect column values to not be null(\"content\") batch.expect column values to be unique(\"doc id\") batch.expect column values to match regex( \"effective date\", r\"^\\d{{4}} \\d{{2}} \\d{{2}}$\" ) if expectations fail: raise PipelineHalt(\"bad data before agent\") fail pipeline if expectations fail",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p025:l452-480",
+      "page_no": 25,
+      "heading": "slide",
+      "snippet": "## Page 25: 5 pillars of data observability\nPage 25: 5 pillars of data observability Text Extract Freshness, distribution, volume, schema, lineage Data observability Freshness 17h Volume 28% Schema 1 drift Distribution stable Freshness timeline 02:00 failure Lineage DB → ingest → clean → embed → agent trace ngược được step fail Freshness Data có cập nhật đúng nhịp không? Distribution Giá trị có lệch bất thường không? Volume Số record có rơi đột ngột không? Schema Cấu trúc có drift không? Lineage Biết lỗi đi từ nguồn nào tới output nào",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p026:l481-497",
+      "page_no": 26,
+      "heading": "slide",
+      "snippet": "## Page 26: PHẦN C ·\nPage 26: PHẦN C · Text Extract Schema evolution: additive vs breaking Giữ agent không “gãy” khi nguồn đổi cột Additive (ưu tiên) thêm cột optional · default null · version field Contract ở biên parser ra canonical schema trước khi embed Breaking change đổi kiểu / đổi ý nghĩa cột → cần migration + backfill có run id Quan sát alert khi % null tăng đột biến sau deploy parser Rollback giữ 2 version schema song song trong staging Agent impact chunk boundary đổi → retrieval lệch dù “data vẫn có”",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p027:l498-506",
+      "page_no": 27,
+      "heading": "slide",
+      "snippet": "## Page 27: PHẦN C ·\nPage 27: PHẦN C · Text Extract Mức độ nghiêm trọng expectation: warn · quarantine · halt Không phải mọi lỗi đều dừng pipeline Halt duplicate primary key, encoding không recover, schema contract fail cứng Quarantine row đúng key nhưng content nghi ngờ → bảng quarantine + review Warn + tiếp tục missing optional field, typos trong metadata ít rủi ro Policy ghi rõ trong data contract.md để agent không đọc nhầm nguồn “review”",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p028:l507-523",
+      "page_no": 28,
+      "heading": "slide",
+      "snippet": "## Page 28: PHẦN C ·\nPage 28: PHẦN C · Text Extract Distribution & anomaly ngoài “đủ record” Phát hiện ingest “chạy nhưng sai” Null rate effective date null % tăng sau đổi API Length content quá ngắn / quá dài bất thường Cardinality số doc id unique giảm mạnh → dedupe lỗi Entropy / language mix ngôn ngữ hoặc OCR noise spike Cross field end < start · version < predecessor Time travel future effective date clock skew ngưỡng",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p029:l524-533",
+      "page_no": 29,
+      "heading": "slide",
+      "snippet": "## Page 29: PHẦN C ·\nPage 29: PHẦN C · Text Extract SLI gợi ý cho tầng RAG / agent Liên kết observability data với trải nghiệm user Citation freshness tuổi của chunk được trích dẫn trung bình / p95 Grounding rate % câu trả lời có trích nguồn hợp lệ (nếu thiết kế yêu cầu) Retrieval hit@k trên tập câu hỏi regression (golden set nhỏ) Latency pipeline ingest→publish p95; tách biệt latency LLM Khi SLI xấu, quay lại 5 pillars trước khi tin vào “model bị lỗi”.",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p030:l534-541",
+      "page_no": 30,
+      "heading": "slide",
+      "snippet": "## Page 30: Khi agent trả lời cũ, đừng debug model trước.\nPage 30: Khi agent trả lời cũ, đừng debug model trước. Text Extract Freshness Volume Schema Lineage Root cause",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p031:l542-560",
+      "page_no": 31,
+      "heading": "slide",
+      "snippet": "## Page 31: Hoạt động 4 - Incident triage\nPage 31: Hoạt động 4 Incident triage Text Extract Agent trả lời sai vì dùng data cũ: debug từ dashboard nào trước? P1 · 09:12 User phàn nàn agent trả lời policy cũ Chọn thứ tự check dashboard trước khi mở code. Output 1 triage flow + metric cần xem ở từng bước 1 · Detect freshness có trễ không? 2 · Isolate volume có rơi / spike không? 3 · Validate schema drift hay parse error? 4 · Trace lineage nguồn nào → step nào fail? 5 · Fix + rerun idempotent rerun + verify answer",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p032:l561-575",
+      "page_no": 32,
+      "heading": "slide",
+      "snippet": "## Page 32: Ðáp án mẫu\nPage 32: Ðáp án mẫu Text Extract Hoạt động 4 Ví dụ triage flow + metric từng bước Học viên có thể đối chiếu hoặc chỉnh theo hệ thực tế 1 · Detect Metric: freshness hours trên bảng kb documents = 17h (ngưỡng 4h) → giả thuyết: sync trễ hoặc fail 2 · Isolate Metric: rows ingested giảm 28% so với 7 ngày trước; embed task success nhưng input nhỏ bất thường 3 · Validate Check: schema contract PDF parser không drift; log: ingest 02:00 retry exhausted 4 · Lineage refund v4.pdf → ingest job → clean → chunk → vector policy v4 điểm đứt: ingest (không phải model) 5 · Fix + verify rerun idempotent ingest + publish; verify: freshness < 4h + agent trả lời “",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p033:l576-602",
+      "page_no": 33,
+      "heading": "slide",
+      "snippet": "## Page 33: Orchestration, scheduling, retry và idempotency\nPage 33: Orchestration, scheduling, retry và idempotency Text Extract Batch pipeline tốt không chỉ chạy theo cron; nó còn phải re run an toàn DAG tối giản: batch pipeline chạy lại an toàn ingest cron / event clean transform + dedupe validate expectations + contract embed vector update publish serve cho agent alert · SLA breach retry · backoff + DLQ rerun idempotent dependency rõ Schedule cron, event, backfill Retry backoff · DLQ · alert Visibility DAG + dependency + SLA breach Idempotency rerun 2 lần không duplicate vector store",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p034:l603-619",
+      "page_no": 34,
+      "heading": "slide",
+      "snippet": "## Page 34: PHẦN D ·\nPage 34: PHẦN D · Text Extract Triage có timebox tránh “mở hết dashboard” Áp dụng khi user đang chờ (P1 / policy) 0 5 phút Freshness + last success run có trễ SLA không? 5 12 phút Volume + error rate step step nào “im lặng” hoặc spike? 12 20 phút Schema/contract + lineage tới bảng/file nguồn Nếu chưa ra root cause chuyển sang “giảm thiểu”: rollback publish hoặc banner “data đang cập nhật” Ghi incident note metric đã xem + kết luận từng bước (dù fail) Sau khi fix verify bằng cùng run id trên cleaned + embed + 1 query agent",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p035:l620-628",
+      "page_no": 35,
+      "heading": "slide",
+      "snippet": "## Page 35: PHẦN D ·\nPage 35: PHẦN D · Text Extract Idempotency pattern thực dụng Rerun an toàn cho embed và warehouse Natural key upsert theo (doc id, version) thay vì random UUID mỗi lần Partition theo ngày ghi đè partition cùng run id thay vì append mù Delete then insert trong transaction cho phạm vi doc id (cẩn thận lock) Vector store policy “replace collection staging → alias swap” giảm partial read",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p036:l629-645",
+      "page_no": 36,
+      "heading": "slide",
+      "snippet": "## Page 36: PHẦN D ·\nPage 36: PHẦN D · Text Extract Orchestrator = dependency graph + visibility Airflow / Prefect / Dagster cùng một câu hỏi thiết kế Trigger cron vs event vs upstream success Data awareness sensor đợi file/partition có mặt Retry policy max attempt, backoff, retry only failed task Observability task log + lineage tag run id SLA / alert task duration, queue depth, missed schedule Backfill chạy lại range ngày không phá production alias",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p037:l646-660",
+      "page_no": 37,
+      "heading": "slide",
+      "snippet": "## Page 37: PHẦN D ·\nPage 37: PHẦN D · Text Extract Sau incident: cập nhật runbook (template) Biến sự cố thành tài sản cho lần sau Symptom user thấy gì · agent trả lời sai kiểu gì Detection metric/dashboard nào đã báo (hoặc chưa → gap) Diagnosis root cause · step pipeline · bảng/file Mitigation rollback / rerun / feature flag Prevention expectation mới · alert mới · owner",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p038:l661-694",
+      "page_no": 38,
+      "heading": "slide",
+      "snippet": "## Page 38: Hands-on 10 - ETL + Quality + Monitoring\nPage 38: Hands on 10 ETL + Quality + Monitoring Text Extract 4 giờ thực hành: raw → cleaned → embedded, inject corruption, đo ảnh hưởng lên agent raw → cleaned → embedded Sprint 1 ingest raw → cleaned Sprint 2 cleaned → embedded Sprint 3 inject corruption + compare Sprint 4 expectation suite + monitor + docs Before / after answer quality dirty cleaned Deliverables nhóm etl pipeline.py transform/cleaning rules expectation suite + freshness monitoring quality report + before/after eval pipeline architecture.md · data contract.md · runbook.md ETL pipeline 45% Documentation 25% Quality evidence 20% Individual report 10%",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p039:l695-708",
+      "page_no": 39,
+      "heading": "slide",
+      "snippet": "## Page 39: Hướng dẫn thực hành 1 - setup & Sprint 1-2\nPage 39: Hướng dẫn thực hành 1 setup & Sprint 1 2 Text Extract Mục tiêu: có cleaned data, log trước/sau và pipeline end to end Folder tree tối thiểu etl pipeline.py transform/ cleaning rules.py quality/ expectations.py monitoring/ freshness check.py docs/ pipeline architecture.md Run order: ingest → clean → validate → embed 1 Map source và chuẩn hoá schema đầu vào 2 Log số record trước / sau cleaning 3 Đặt run id hoặc timestamp cho pipeline 4 Đến cuối Sprint 2: raw → cleaned → embedded chạy end to end Expected log raw records=128 cleaned records=121 dropped duplicates=5 flagged missing date=2 run id=2026 02 10T14:35",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p040:l709-736",
+      "page_no": 40,
+      "heading": "slide",
+      "snippet": "## Page 40: Hướng dẫn thực hành 2 - Sprint 3-4 & evidence\nPage 40: Hướng dẫn thực hành 2 Sprint 3 4 & evidence Text Extract Mục tiêu: inject corruption, đo ảnh hưởng và nộp report có bằng chứng missing duplicate wrong format encoding Before answer stale retrieval lệch chunk lỗi After answer đúng version trace rõ run id freshness pass freshness sla PASS schema contract PASS duplicate key 2 flagged Evidence cần nộp before after eval.csv hoặc ảnh dashboard quality report runbook / monitor screenshot báo cáo cá nhân ngắn gọn Khung báo cáo cá nhân Phần tôi phụ trách Một lỗi hoặc quyết định kỹ thuật chính Bằng chứng trước / sau Một cải tiến tiếp theo",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p041:l737-746",
+      "page_no": 41,
+      "heading": "slide",
+      "snippet": "## Page 41: PHẦN E ·\nPage 41: PHẦN E · Text Extract Definition of Done cho pipeline ngày hôm nay Dùng làm checklist trước khi nộp bài Có run id hoặc timestamp gắn mọi artifact (log, cleaned, embed) Có log số record raw → cleaned → embedded (drop/flag có giải thích) Expectation suite chạy được; fail thì pipeline dừng có kiểm soát Có ít nhất 1 bằng chứng before/after ảnh hưởng tới câu trả lời agent Chạy được trên máy",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p042:l747-763",
+      "page_no": 42,
+      "heading": "slide",
+      "snippet": "## Page 42: PHẦN E ·\nPage 42: PHẦN E · Text Extract Peer review nhanh giữa các nhóm 10 phút đổi bàn giảm lỗi cấu hình trước khi chấm Người review hỏi “Rerun 2 lần có duplicate vector không?” Người review hỏi “Freshness đo ở bước nào ingest hay publish?” Người review hỏi “Record bị flag đi đâu quarantine hay vẫn embed?” Nhóm trả lời tối thiểu chỉ vào file + dòng log minh chứng Nếu không rõ ghi vào runbook.md là “gap” cần bổ sung Kết quả mỗi nhóm có 3 bullet feedback đã xử lý hoặc đã ghi nhận",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p043:l764-772",
+      "page_no": 43,
+      "heading": "slide",
+      "snippet": "## Page 43: PHẦN E ·\nPage 43: PHẦN E · Text Extract Git & artifact hygiene cho data pipeline Nhỏ nhưng tránh nộp bài “chỉ chạy trên máy tôi” .env.example liệt kê biến; không commit secret Pin version thư viện (requirements.txt / pyproject) có version cụ thể Sample data trong data/sample/ đủ nhỏ để chấm nhanh docs/ pipeline architecture + data contract + runbook cùng commit cuối",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p044:l773-785",
+      "page_no": 44,
+      "heading": "slide",
+      "snippet": "## Page 44: PHẦN E ·\nPage 44: PHẦN E · Text Extract Kịch bản demo 3 phút trước lớp Cấu trúc cố định: bệnh → đo → sửa → chứng minh 0:00 0:45 Giả thích use case + nguồn (DB/API/file) 0:45 1:30 Inject corruption → chỉ freshness/volume trên dashboard hoặc log 1:30 2:30 Rerun pipeline idempotent → expectation pass 2:30 3:00 So sánh câu agent trước/sau + run id khớp evidence",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p045:l786-805",
+      "page_no": 45,
+      "heading": "slide",
+      "snippet": "## Page 45: Dữ liệu sạch + quan sát tốt = nền cho AI vận hành bền\nPage 45: Dữ liệu sạch + quan sát tốt = nền cho AI vận hành bền Text Extract Tổng kết key takeaways và chuẩn bị cho lớp safety / guardrails tiếp theo 1 60 80% effort thực tế nằm ở data work 2 Quality checks phải chạy như code 3 Observability giúp biết lỗi trước user 4 Bước tiếp theo: safety / guardrails / runbook Day 08 RAG grounded nguồn tri thức đáng tin Day 09 Supervisor workers route + trace + MCP Day 10 Data + observe nuôi và giám sát đúng Day 11 Guardrails / Safety giữ agent an toàn",
+      "source_type": "slide",
+      "transcript_evidence": []
+    },
+    {
+      "section_id": "day10-data-pipeline-and-data-observability:p046:l806-808",
+      "page_no": 46,
+      "heading": "slide",
+      "snippet": "## Page 46: Q&A\nPage 46: Q&A Text Extract Nếu chỉ được giữ 1 dashboard cho hệ AI của mình, bạn giữ dashboard nào agent answer hay data observability?",
+      "source_type": "slide",
+      "transcript_evidence": []
+    }
+  ]
+}

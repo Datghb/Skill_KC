@@ -1,0 +1,12 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day07-data-foundations-embedding-vector-store",
+  "sources": [
+    {
+      "source_id": "slide-day07",
+      "source_type": "slide",
+      "sha256": "5cf834010190d1e98c81c9c41cec2a2dfec6b0edd66aeb0ecdfb142ad71319ca",
+      "uri": "source://phase1/day07/slide"
+    }
+  ]
+}

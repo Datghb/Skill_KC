@@ -1,0 +1,12 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day12-cloud-services-and-deployment",
+  "sources": [
+    {
+      "source_id": "slide-day12",
+      "source_type": "slide",
+      "sha256": "6038d365ddfba6154a33cc6a6b5d13f8417ad95675bb6dbcdfea782bb45a8111",
+      "uri": "source://phase1/day12/slide"
+    }
+  ]
+}

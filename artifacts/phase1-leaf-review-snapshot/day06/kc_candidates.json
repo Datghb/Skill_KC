@@ -1,0 +1,529 @@
+{
+  "schema_version": "mixed_source_knowledge_inventory_v1",
+  "source_slug": "day06-ai-product-prototype-and-demo",
+  "knowledge_items": [
+    {
+      "code": "ai_product_canvas_dimensions",
+      "name_vi": "Bốn chiều của AI product Canvas",
+      "description_vi": "Khung Canvas phải xem xét Value, Trust, Feasibility và learning signal; item không bao gồm toàn bộ quy trình viết SPEC hay triển khai prototype.",
+      "item_form": "concept",
+      "primary_capability_vi": "Giải thích và dùng bốn chiều Value, Trust, Feasibility và learning signal để định hình sản phẩm AI.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Phân loại được các nội dung của một ý tưởng AI theo Value, Trust, Feasibility và learning signal.",
+      "bloom_rationale_vi": "Nguồn liệt kê trực tiếp bốn chiều bắt buộc trong Canvas của SPEC, đủ để người học truy xuất và giải thích cấu trúc khung.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi mini AI spec vì bốn chiều Canvas là một khung tư duy có thể nắm và rà soát riêng; các user story, metric, failure mode và ROI được gộp vào quy trình SPEC vì là các thành phần của cùng một artifact.",
+      "role_reason_vi": "Canvas là một phần bắt buộc của SPEC, mà Day 6 dùng để chứng minh sản phẩm qua prototype và demo.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p006:l42-50"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p006:l42-50",
+          "source_type": "slide",
+          "page_no": 6,
+          "content": "## Page 6: SPEC checklist\nPage 6: SPEC checklist Text Extract Canvas (Value / Trust / Feasibility + learning signal) User Stories 4 paths Eval metrics + threshold Top 3 failure modes ROI 3 kịch bản Mini AI spec",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "mini_ai_spec_checklist",
+      "name_vi": "Lập mini AI SPEC",
+      "description_vi": "Mini AI SPEC bao gồm Canvas, user stories cho 4 paths, eval metrics kèm threshold, top 3 failure modes và ROI qua 3 kịch bản; không bao gồm phần demo hay code triển khai.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Hoàn thiện một mini AI SPEC đủ các thành phần kiểm tra được.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Lập một mini AI SPEC bằng cách điền đủ Canvas, user stories, metrics và threshold, failure modes và các kịch bản ROI.",
+      "bloom_rationale_vi": "Checklist của nguồn quy định trực tiếp các thành phần cần có trong SPEC, chuẩn bị cho việc hoàn thiện một artifact cụ thể.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ các mục user stories, ROI và threshold như thành phần của một quy trình vì nguồn chỉ dạy chúng như checklist, không cung cấp mastery state hay phương pháp riêng cho từng mục.",
+      "role_reason_vi": "SPEC là một trong ba đầu ra trung tâm dùng để chứng minh sản phẩm trong ngày học.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p004:l24-34",
+        "day06-ai-product-prototype-and-demo:p006:l42-50"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p004:l24-34",
+          "source_type": "slide",
+          "page_no": 4,
+          "content": "## Page 4: Thread đỏ 3 ngày\nPage 4: Thread đỏ 3 ngày Text Extract Day 2 ✓ Ðã hoàn thành Xác định vấn đề + user + AI opportunity Day 5 ✓ Ðã hoàn thành Framework + Canvas + SPEC Day 6 HÔM NAY Chứng minh bằng SPEC + Prototype + Demo",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p006:l42-50",
+          "source_type": "slide",
+          "page_no": 6,
+          "content": "## Page 6: SPEC checklist\nPage 6: SPEC checklist Text Extract Canvas (Value / Trust / Feasibility + learning signal) User Stories 4 paths Eval metrics + threshold Top 3 failure modes ROI 3 kịch bản Mini AI spec",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "prototype_format_options",
+      "name_vi": "Các hình thức prototype",
+      "description_vi": "Prototype có thể là prompt-based demo dùng agent/chatbot và API để cho kết quả thật, mock flow bằng Figma/slides có một prompt test thật, hoặc working code end-to-end chạy local/deployed; working code là lựa chọn bonus.",
+      "item_form": "concept",
+      "primary_capability_vi": "Phân biệt và chọn hình thức prototype phù hợp trong số prompt-based demo, mock flow và working code.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Mô tả được đặc điểm và mức độ triển khai của ba hình thức prototype được nêu trong bài.",
+      "bloom_rationale_vi": "Nguồn trình bày trực tiếp ba lựa chọn và các yêu cầu đầu ra tương ứng, nhưng không cung cấp tiêu chí trade-off sâu để suy mức Bloom cao hơn.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp ba hình thức vì chúng là các phương án thay thế cùng phục vụ mục tiêu tạo prototype; API, Figma/slides, local/deployed và bonus chỉ là thuộc tính của từng phương án.",
+      "role_reason_vi": "Chọn một hình thức prototype là điều kiện trực tiếp để nhóm xây dựng và trình diễn core flow.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p007:l51-66"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p007:l51-66",
+          "source_type": "slide",
+          "page_no": 7,
+          "content": "## Page 7: Prototype options\nPage 7: Prototype options Text Extract A Prompt based demo Agent / chatbot 1 flow Dùng API (OpenAI, Gemini, ...) Show kết quả thật Nhóm chọn A hoặc B. Bonus nếu C. B Mock flow Figma / slides 1 prompt test thật Minh họa UX flow C Working code (bonus) End to end Deployed hoặc local demo Bonus điểm",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "single_core_flow_scope",
+      "name_vi": "Giới hạn prototype vào một core flow",
+      "description_vi": "Prototype cần tập trung vào một core flow có giá trị chứng minh, thay vì cố xây dựng full app.",
+      "item_form": "principle",
+      "primary_capability_vi": "Thu hẹp phạm vi xây dựng vào một core flow có thể hoàn thiện và demo được.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Chọn và giới hạn phạm vi prototype vào một flow cốt lõi thay vì mở rộng thành toàn bộ ứng dụng.",
+      "bloom_rationale_vi": "Nguồn nhấn mạnh trực tiếp việc focus vào một core flow và không làm full app trong thời gian build.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi việc test real input vì có thể chọn phạm vi đúng nhưng vẫn không kiểm thử; hai năng lực có task và failure signal khác nhau.",
+      "role_reason_vi": "Kiểm soát scope là nguyên tắc cốt lõi giúp nhóm hoàn thành prototype có thể chạy và demo trong thời lượng giới hạn.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p003:l11-23",
+        "day06-ai-product-prototype-and-demo:p008:l67-76"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p003:l11-23",
+          "source_type": "slide",
+          "page_no": 3,
+          "content": "## Page 3: Agenda hôm nay\nPage 3: Agenda hôm nay Text Extract SÁNG HACKATHON: BUILD PROTOTYPE 9:00 9:15: SPEC review nhanh 9:15 13:00: Build Prototype (prompt based / mock flow / code) Focus 1 core flow, test với real input Key milestones M4 Demo prep: 15:30 | M5 Gallery walk + demo: 16:00 17:00 | M6 Top teams + closing: 17:00 18:00 CHIỀU DEMO DAY: DEMO ROUND + TOP TEAMS 14:00 16:00: Polish Prototype + chuẩn bị demo 16:00 17:00: Demo round (feedback trong zone) 17:00 18:00: Top teams present + trao giải + closing",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p008:l67-76",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Working time sáng\nPage 8: Working time sáng Image Caption Slide lịch làm việc trên nền trắng, tiêu đề lớn ở góc trên trái: Working time sáng. Ở giữa bên trái là 3 khối thời gian theo chiều dọc: 9:15 – 11:00 Build (khối xanh) 11:00 – 11:15 Break (khối xám) 11:15 – 13:00 Build (khối xanh) Phía dưới là khung Tips nền hồng nhạt, có vạch đỏ ở mép trái: Tips: Focus vào 1 core flow, không làm full app. Test với real input. Chuẩn bị demo narrative.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "real_input_prototype_testing",
+      "name_vi": "Kiểm thử prototype bằng input thật",
+      "description_vi": "Prototype phải được thử với real input; với prompt-based hoặc mock flow, cần có kết quả thật hoặc ít nhất một prompt test thật.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Chạy thử core flow với input thật và dùng kết quả để kiểm tra prototype.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Thực hiện một test bằng real input, ghi nhận kết quả và dùng nó làm bằng chứng cho demo.",
+      "bloom_rationale_vi": "Nguồn lặp lại yêu cầu test với real input và nêu rõ prompt-based/mock prototype phải có kết quả hoặc prompt test thật.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi lựa chọn hình thức prototype và scope vì đây là hành động validation riêng, với failure signal là demo chỉ dựa trên flow giả hoặc input giả.",
+      "role_reason_vi": "Kiểm thử bằng input thật là phần trực tiếp biến prototype từ minh họa thành bằng chứng cho khả năng hoạt động.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p003:l11-23",
+        "day06-ai-product-prototype-and-demo:p007:l51-66",
+        "day06-ai-product-prototype-and-demo:p008:l67-76"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p003:l11-23",
+          "source_type": "slide",
+          "page_no": 3,
+          "content": "## Page 3: Agenda hôm nay\nPage 3: Agenda hôm nay Text Extract SÁNG HACKATHON: BUILD PROTOTYPE 9:00 9:15: SPEC review nhanh 9:15 13:00: Build Prototype (prompt based / mock flow / code) Focus 1 core flow, test với real input Key milestones M4 Demo prep: 15:30 | M5 Gallery walk + demo: 16:00 17:00 | M6 Top teams + closing: 17:00 18:00 CHIỀU DEMO DAY: DEMO ROUND + TOP TEAMS 14:00 16:00: Polish Prototype + chuẩn bị demo 16:00 17:00: Demo round (feedback trong zone) 17:00 18:00: Top teams present + trao giải + closing",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p007:l51-66",
+          "source_type": "slide",
+          "page_no": 7,
+          "content": "## Page 7: Prototype options\nPage 7: Prototype options Text Extract A Prompt based demo Agent / chatbot 1 flow Dùng API (OpenAI, Gemini, ...) Show kết quả thật Nhóm chọn A hoặc B. Bonus nếu C. B Mock flow Figma / slides 1 prompt test thật Minh họa UX flow C Working code (bonus) End to end Deployed hoặc local demo Bonus điểm",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p008:l67-76",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Working time sáng\nPage 8: Working time sáng Image Caption Slide lịch làm việc trên nền trắng, tiêu đề lớn ở góc trên trái: Working time sáng. Ở giữa bên trái là 3 khối thời gian theo chiều dọc: 9:15 – 11:00 Build (khối xanh) 11:00 – 11:15 Break (khối xám) 11:15 – 13:00 Build (khối xanh) Phía dưới là khung Tips nền hồng nhạt, có vạch đỏ ở mép trái: Tips: Focus vào 1 core flow, không làm full app. Test với real input. Chuẩn bị demo narrative.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "prototype_implementation_comprehension",
+      "name_vi": "Hiểu và làm chủ phần triển khai",
+      "description_vi": "Mỗi thành viên phải hiểu và giải thích được phần prototype hoặc code mình phụ trách; không chấp nhận việc dùng code theo kiểu vibe-coding mà không hiểu rõ.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Giải thích được phần triển khai mình phụ trách và cách phần đó đóng góp vào prototype.",
+      "target_bloom_level": "understand",
+      "bloom_learning_objective_vi": "Trình bày rõ phần implementation của bản thân khi được hỏi trong quá trình demo.",
+      "bloom_rationale_vi": "Nguồn đặt yêu cầu trực tiếp rằng mỗi thành viên phải giải thích được phần mình và cảnh báo việc không hiểu code sẽ làm mất điểm demo.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi demo preparation vì biết lịch trình hoặc vai trò không đồng nghĩa với hiểu implementation; hai năng lực có thể thất bại độc lập.",
+      "role_reason_vi": "Khả năng làm chủ implementation là điều kiện rõ ràng để prototype được xem là sản phẩm của nhóm thay vì một bản demo không hiểu được.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p009:l77-80",
+        "day06-ai-product-prototype-and-demo:p011:l81-91"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p009:l77-80",
+          "source_type": "slide",
+          "page_no": 9,
+          "content": "## Page 9: Nhóm không hiểu rõ code / vibe-coding hoàn toàn → 0 điểm demo.\nPage 9: Nhóm không hiểu rõ code / vibe coding hoàn toàn → 0 điểm demo. Text Extract Mỗi thành viên phải giải thích được phần mình.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p011:l81-91",
+          "source_type": "slide",
+          "page_no": 11,
+          "content": "## Page 11: Chiều: polish + chuẩn bị demo\nPage 11: Chiều: polish + chuẩn bị demo Text Extract 14:00 15:30 15:30 16:00 Polish Prototype + chuẩn bị demo Dry run + setup stations Prototype chạy được Demo script 2 phút Poster / slides tóm tắt Mỗi người biết phần mình",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "demo_preparation_and_readiness",
+      "name_vi": "Chuẩn bị và kiểm tra độ sẵn sàng của demo",
+      "description_vi": "Quy trình chuẩn bị gồm polish prototype, dry run, setup station, bảo đảm prototype chạy được, viết demo script 2 phút, chuẩn bị poster/slides tóm tắt và phân công để mỗi người biết phần mình.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Biến prototype thành một demo hoàn chỉnh, chạy được và có narrative rõ.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Thực hiện dry run và hoàn thiện các thành phần cần thiết để demo prototype trong khoảng 2 phút.",
+      "bloom_rationale_vi": "Nguồn nêu trực tiếp các bước và deliverable của giai đoạn polish, dry run và setup trước demo.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Gộp polish, dry run, script, poster/slides và phân vai vì chúng là các bước hoặc đầu ra phụ thuộc của cùng một quy trình chuẩn bị demo; hiểu code được tách vì có mastery state riêng.",
+      "role_reason_vi": "Demo readiness là đầu ra trung tâm của buổi chiều và là điều kiện để chứng minh prototype.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p008:l67-76",
+        "day06-ai-product-prototype-and-demo:p011:l81-91"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p008:l67-76",
+          "source_type": "slide",
+          "page_no": 8,
+          "content": "## Page 8: Working time sáng\nPage 8: Working time sáng Image Caption Slide lịch làm việc trên nền trắng, tiêu đề lớn ở góc trên trái: Working time sáng. Ở giữa bên trái là 3 khối thời gian theo chiều dọc: 9:15 – 11:00 Build (khối xanh) 11:00 – 11:15 Break (khối xám) 11:15 – 13:00 Build (khối xanh) Phía dưới là khung Tips nền hồng nhạt, có vạch đỏ ở mép trái: Tips: Focus vào 1 core flow, không làm full app. Test với real input. Chuẩn bị demo narrative.",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p011:l81-91",
+          "source_type": "slide",
+          "page_no": 11,
+          "content": "## Page 11: Chiều: polish + chuẩn bị demo\nPage 11: Chiều: polish + chuẩn bị demo Text Extract 14:00 15:30 15:30 16:00 Polish Prototype + chuẩn bị demo Dry run + setup stations Prototype chạy được Demo script 2 phút Poster / slides tóm tắt Mỗi người biết phần mình",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "demo_round_peer_feedback_protocol",
+      "name_vi": "Thực hiện demo round và peer feedback có cấu trúc",
+      "description_vi": "Trong demo round, một phần thành viên ở lại bàn để trình bày, phần còn lại đi xem các team trong zone, sau đó nộp đủ feedback forms; feedback phải chấm theo rubric và ghi một điểm tốt cùng một gợi ý cải thiện.",
+      "item_form": "procedure",
+      "primary_capability_vi": "Tổ chức và thực hiện một vòng demo đồng cấp với phản hồi đầy đủ, có cấu trúc và có thể sử dụng được.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Phân vai, xem đủ các team trong zone, hoàn thành form phản hồi và cung cấp một nhận xét tích cực cùng một đề xuất cải thiện.",
+      "bloom_rationale_vi": "Nguồn quy định trực tiếp cách phân vai, phạm vi review, việc nộp form và cấu trúc phản hồi.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Gộp luật phân vai, luân chuyển và format phản hồi vì chúng tạo thành một protocol peer review; các tiêu chí đánh giá cụ thể được tách thành những criterion độc lập.",
+      "role_reason_vi": "Đây là năng lực tái sử dụng cho hoạt động review sản phẩm nhưng không bắt buộc để một nhóm tự xây dựng core prototype.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p013:l97-104",
+        "day06-ai-product-prototype-and-demo:p014:l105-111"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p013:l97-104",
+          "source_type": "slide",
+          "page_no": 13,
+          "content": "## Page 13: Demo round - luật chơi\nPage 13: Demo round luật chơi Text Extract 16:00 17:00 (60 phút) Mỗi nhóm demo tại bàn mình 2 3 người ở lại trình bày + 2 3 người đi xem Feedback đủ các team trong zone (~5 team) Nộp đủ feedback forms chấm cả chất lượng review",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p014:l105-111",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: Tiêu chí feedback\nPage 14: Tiêu chí feedback Text Extract 1 Problem solution fit bài toán rõ, giải pháp logic 2 AI product thinking auto/aug rõ, failure modes, eval metrics 3 Demo quality chạy được, narrative rõ Mỗi tiêu chí chấm 1 5. Thêm: 1 điều tốt + 1 gợi ý cải thiện.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "problem_solution_fit_evaluation",
+      "name_vi": "Đánh giá problem-solution fit",
+      "description_vi": "Đánh giá liệu bài toán có được nêu rõ và giải pháp có logic, phù hợp với bài toán hay không.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chấm và giải thích mức độ rõ ràng của problem-solution fit.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Đánh giá một prototype theo hai câu hỏi: problem có rõ không và solution có logic, phù hợp không.",
+      "bloom_rationale_vi": "Nguồn đưa đây là một tiêu chí chấm riêng trong feedback rubric, với thang điểm 1–5.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi AI product thinking và demo quality vì mỗi tiêu chí được chấm riêng và có failure/remediation khác nhau.",
+      "role_reason_vi": "Problem-solution fit là tiêu chí nền tảng để xác định prototype có đang giải đúng vấn đề đã định nghĩa hay không.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p014:l105-111"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p014:l105-111",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: Tiêu chí feedback\nPage 14: Tiêu chí feedback Text Extract 1 Problem solution fit bài toán rõ, giải pháp logic 2 AI product thinking auto/aug rõ, failure modes, eval metrics 3 Demo quality chạy được, narrative rõ Mỗi tiêu chí chấm 1 5. Thêm: 1 điều tốt + 1 gợi ý cải thiện.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "ai_product_thinking_evaluation",
+      "name_vi": "Đánh giá AI product thinking",
+      "description_vi": "Đánh giá mức độ rõ ràng của việc dùng AI theo hướng automation hoặc augmentation, cùng với việc nêu failure modes và eval metrics.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá lựa chọn và cách thiết kế AI trong prototype dựa trên auto/aug, failure modes và eval metrics.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Chấm và nêu lý do cho mức độ rõ ràng của automation/augmentation, failure modes và eval metrics trong một AI product.",
+      "bloom_rationale_vi": "Nguồn gom các thành phần này thành một tiêu chí AI product thinking được chấm riêng, đồng thời checklist SPEC yêu cầu metrics và failure modes.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Giữ auto/aug, failure modes và eval metrics trong cùng criterion vì nguồn đánh giá chúng như một nhóm năng lực AI product thinking; việc tạo danh sách failure modes và đặt threshold được tách khi có task xây dựng riêng.",
+      "role_reason_vi": "Đây là năng lực cốt lõi để chứng minh prototype không chỉ là một demo AI mà có tư duy sản phẩm.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p006:l42-50",
+        "day06-ai-product-prototype-and-demo:p014:l105-111"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p006:l42-50",
+          "source_type": "slide",
+          "page_no": 6,
+          "content": "## Page 6: SPEC checklist\nPage 6: SPEC checklist Text Extract Canvas (Value / Trust / Feasibility + learning signal) User Stories 4 paths Eval metrics + threshold Top 3 failure modes ROI 3 kịch bản Mini AI spec",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p014:l105-111",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: Tiêu chí feedback\nPage 14: Tiêu chí feedback Text Extract 1 Problem solution fit bài toán rõ, giải pháp logic 2 AI product thinking auto/aug rõ, failure modes, eval metrics 3 Demo quality chạy được, narrative rõ Mỗi tiêu chí chấm 1 5. Thêm: 1 điều tốt + 1 gợi ý cải thiện.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "demo_quality_evaluation",
+      "name_vi": "Đánh giá chất lượng demo",
+      "description_vi": "Đánh giá demo dựa trên hai thuộc tính: prototype chạy được và narrative được trình bày rõ.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Đánh giá khả năng vận hành và truyền đạt của một demo prototype.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Chấm một demo theo việc prototype có chạy được hay không và narrative có rõ ràng hay không.",
+      "bloom_rationale_vi": "Nguồn quy định Demo quality là một tiêu chí chấm độc lập trong thang 1–5.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi việc chuẩn bị demo vì một năng lực là tạo demo readiness, còn năng lực này là đánh giá chất lượng đầu ra theo rubric.",
+      "role_reason_vi": "Demo quality là bằng chứng trực tiếp cho việc prototype đã được polish và có thể thuyết phục người xem.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p014:l105-111"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p014:l105-111",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: Tiêu chí feedback\nPage 14: Tiêu chí feedback Text Extract 1 Problem solution fit bài toán rõ, giải pháp logic 2 AI product thinking auto/aug rõ, failure modes, eval metrics 3 Demo quality chạy được, narrative rõ Mỗi tiêu chí chấm 1 5. Thêm: 1 điều tốt + 1 gợi ý cải thiện.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "evaluation_metrics_and_thresholds",
+      "name_vi": "Xác định eval metrics và threshold",
+      "description_vi": "SPEC phải nêu các eval metrics dùng để đánh giá prototype và threshold tương ứng để phân biệt kết quả đạt hay chưa đạt.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Chuyển mục tiêu đánh giá prototype thành metric và ngưỡng đo cụ thể.",
+      "target_bloom_level": "apply",
+      "bloom_learning_objective_vi": "Đề xuất eval metrics cùng threshold phù hợp cho core flow của prototype.",
+      "bloom_rationale_vi": "Checklist SPEC yêu cầu trực tiếp cặp eval metrics + threshold, và rubric AI product thinking kiểm tra sự hiện diện của eval metrics.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi mini AI SPEC vì người học có thể xác định metric/threshold như một task kỹ thuật riêng; không tách metric và threshold vì threshold là thuộc tính cần có của metric trong checklist.",
+      "role_reason_vi": "Đo lường được hiệu quả là điều kiện cốt lõi để prototype chứng minh giá trị thay vì chỉ trình diễn chức năng.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p006:l42-50",
+        "day06-ai-product-prototype-and-demo:p014:l105-111"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p006:l42-50",
+          "source_type": "slide",
+          "page_no": 6,
+          "content": "## Page 6: SPEC checklist\nPage 6: SPEC checklist Text Extract Canvas (Value / Trust / Feasibility + learning signal) User Stories 4 paths Eval metrics + threshold Top 3 failure modes ROI 3 kịch bản Mini AI spec",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p014:l105-111",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: Tiêu chí feedback\nPage 14: Tiêu chí feedback Text Extract 1 Problem solution fit bài toán rõ, giải pháp logic 2 AI product thinking auto/aug rõ, failure modes, eval metrics 3 Demo quality chạy được, narrative rõ Mỗi tiêu chí chấm 1 5. Thêm: 1 điều tốt + 1 gợi ý cải thiện.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "top_failure_modes_identification",
+      "name_vi": "Xác định top 3 failure modes",
+      "description_vi": "SPEC cần liệt kê ba failure modes quan trọng nhất của AI product hoặc core flow; item không bao gồm toàn bộ quy trình xử lý sau khi lỗi xảy ra.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Nhận diện và chọn ra ba failure modes chính của prototype.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Phân tích core flow để chỉ ra top 3 cách prototype có thể thất bại.",
+      "bloom_rationale_vi": "Nguồn yêu cầu trực tiếp top 3 failure modes trong SPEC và dùng failure modes như một phần của tiêu chí AI product thinking.",
+      "knowledge_role": "core_kc",
+      "granularity_reason_vi": "Tách khỏi việc đánh giá AI product thinking vì đây là task tạo danh sách rủi ro cho sản phẩm, còn rubric là task chấm mức độ thể hiện của nhóm khác.",
+      "role_reason_vi": "Nhận diện failure modes là yêu cầu bắt buộc của SPEC và giúp chứng minh prototype đã được suy nghĩ vượt ra ngoài happy path.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p006:l42-50",
+        "day06-ai-product-prototype-and-demo:p014:l105-111"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p006:l42-50",
+          "source_type": "slide",
+          "page_no": 6,
+          "content": "## Page 6: SPEC checklist\nPage 6: SPEC checklist Text Extract Canvas (Value / Trust / Feasibility + learning signal) User Stories 4 paths Eval metrics + threshold Top 3 failure modes ROI 3 kịch bản Mini AI spec",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p014:l105-111",
+          "source_type": "slide",
+          "page_no": 14,
+          "content": "## Page 14: Tiêu chí feedback\nPage 14: Tiêu chí feedback Text Extract 1 Problem solution fit bài toán rõ, giải pháp logic 2 AI product thinking auto/aug rõ, failure modes, eval metrics 3 Demo quality chạy được, narrative rõ Mỗi tiêu chí chấm 1 5. Thêm: 1 điều tốt + 1 gợi ý cải thiện.",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "dangerous_failure_mode_prioritization",
+      "name_vi": "Ưu tiên failure mode nguy hiểm nhất",
+      "description_vi": "Trong phần challenge, nhóm phải xác định failure mode nào nguy hiểm nhất, vượt từ việc liệt kê lỗi sang ưu tiên rủi ro cần được chất vấn trước.",
+      "item_form": "criterion",
+      "primary_capability_vi": "So sánh các failure modes và bảo vệ lựa chọn failure mode nguy hiểm nhất.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Đánh giá mức độ nghiêm trọng của các failure modes và giải thích vì sao một failure mode cần được ưu tiên.",
+      "bloom_rationale_vi": "Top-team challenge hỏi trực tiếp failure mode nào nguy hiểm nhất, yêu cầu người học đưa ra phán đoán có lý do.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi việc xác định top 3 failure modes vì liệt kê rủi ro và xếp hạng mức nguy hiểm là hai task khác nhau với tiêu chí remediation khác nhau.",
+      "role_reason_vi": "Đây là năng lực nâng cao được đặt trong phần challenge dành cho top teams, không phải yêu cầu tối thiểu để hoàn thiện prototype.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p006:l42-50",
+        "day06-ai-product-prototype-and-demo:p016:l112-123"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p006:l42-50",
+          "source_type": "slide",
+          "page_no": 6,
+          "content": "## Page 6: SPEC checklist\nPage 6: SPEC checklist Text Extract Canvas (Value / Trust / Feasibility + learning signal) User Stories 4 paths Eval metrics + threshold Top 3 failure modes ROI 3 kịch bản Mini AI spec",
+          "transcript_evidence": []
+        },
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p016:l112-123",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: Top teams present\nPage 16: Top teams present Text Extract Format: mỗi nhóm ~5 phút present + 2 3 phút Q&A Điểm: bonus cho top teams Tiêu chí challenge: Assumption nào chưa validate? Precision hay recall justify? Data flywheel hoạt động thế nào? Failure mode nào nguy hiểm nhất?",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "precision_recall_choice_justification",
+      "name_vi": "Biện minh lựa chọn precision hay recall",
+      "description_vi": "Nhóm phải bảo vệ việc ưu tiên precision hoặc recall trong cách đánh giá AI product; nguồn không cung cấp công thức hay quy tắc chọn cụ thể.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Biện minh lựa chọn precision hoặc recall theo rủi ro và mục tiêu sản phẩm.",
+      "target_bloom_level": "evaluate",
+      "bloom_learning_objective_vi": "Đánh giá và bảo vệ lựa chọn precision hoặc recall cho prototype trước câu hỏi chất vấn.",
+      "bloom_rationale_vi": "Challenge của top teams yêu cầu trực tiếp justify precision hay recall, nên evidence hỗ trợ hành vi đánh giá và biện minh lựa chọn.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi eval metrics và threshold vì việc chọn metric tổng quát và việc biện minh trade-off precision/recall là hai task đánh giá riêng.",
+      "role_reason_vi": "Đây là yêu cầu chất vấn nâng cao dành cho top teams, hữu ích khi mở rộng năng lực đánh giá nhưng không bắt buộc cho core demo.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p016:l112-123"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p016:l112-123",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: Top teams present\nPage 16: Top teams present Text Extract Format: mỗi nhóm ~5 phút present + 2 3 phút Q&A Điểm: bonus cho top teams Tiêu chí challenge: Assumption nào chưa validate? Precision hay recall justify? Data flywheel hoạt động thế nào? Failure mode nào nguy hiểm nhất?",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "unvalidated_assumption_identification",
+      "name_vi": "Nhận diện assumption chưa được validate",
+      "description_vi": "Phần challenge yêu cầu chỉ ra assumption của product hoặc prototype vẫn chưa được kiểm chứng bằng evidence.",
+      "item_form": "criterion",
+      "primary_capability_vi": "Phát hiện khoảng trống validation trong các assumption của prototype.",
+      "target_bloom_level": "analyze",
+      "bloom_learning_objective_vi": "Phân tích prototype và chỉ ra assumption nào chưa được validate.",
+      "bloom_rationale_vi": "Challenge nêu trực tiếp câu hỏi về assumption chưa validate, chuẩn bị cho việc phân tích khoảng trống bằng chứng.",
+      "knowledge_role": "extension_kc",
+      "granularity_reason_vi": "Tách khỏi real-input testing vì test một input thật không đồng nghĩa với việc rà soát toàn bộ assumption; hai task có phạm vi và failure signal khác nhau.",
+      "role_reason_vi": "Đây là câu hỏi challenge dành cho top teams, hỗ trợ tư duy validation sâu hơn nhưng không phải đầu ra tối thiểu của prototype.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p016:l112-123"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p016:l112-123",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: Top teams present\nPage 16: Top teams present Text Extract Format: mỗi nhóm ~5 phút present + 2 3 phút Q&A Điểm: bonus cho top teams Tiêu chí challenge: Assumption nào chưa validate? Precision hay recall justify? Data flywheel hoạt động thế nào? Failure mode nào nguy hiểm nhất?",
+          "transcript_evidence": []
+        }
+      ]
+    },
+    {
+      "code": "data_flywheel",
+      "name_vi": "Data flywheel",
+      "description_vi": "Data flywheel xuất hiện như một chủ đề để top teams giải thích cách cơ chế dữ liệu của sản phẩm vận hành và tạo vòng lặp cải thiện.",
+      "item_form": "reference_topic",
+      "primary_capability_vi": "",
+      "target_bloom_level": null,
+      "bloom_learning_objective_vi": "",
+      "bloom_rationale_vi": "",
+      "knowledge_role": "reference_concept",
+      "granularity_reason_vi": "Giữ như một chủ đề tham chiếu vì nguồn chỉ nêu câu hỏi challenge, không dạy cấu trúc, điều kiện vận hành hay cách triển khai data flywheel.",
+      "role_reason_vi": "Chủ đề hữu ích để liên kết với các bài về growth loop và dữ liệu sản phẩm, nhưng evidence hiện tại chưa đủ để yêu cầu mastery trong bài này.",
+      "evidence_section_ids": [
+        "day06-ai-product-prototype-and-demo:p016:l112-123"
+      ],
+      "resolved_evidence": [
+        {
+          "content_unit_id": "day06-ai-product-prototype-and-demo:p016:l112-123",
+          "source_type": "slide",
+          "page_no": 16,
+          "content": "## Page 16: Top teams present\nPage 16: Top teams present Text Extract Format: mỗi nhóm ~5 phút present + 2 3 phút Q&A Điểm: bonus cho top teams Tiêu chí challenge: Assumption nào chưa validate? Precision hay recall justify? Data flywheel hoạt động thế nào? Failure mode nào nguy hiểm nhất?",
+          "transcript_evidence": []
+        }
+      ]
+    }
+  ],
+  "evidence_repairs": [
+    {
+      "code": "dangerous_failure_mode_prioritization",
+      "from": "day06-ai-product-and-demo:p006:l42-50",
+      "to": "day06-ai-product-prototype-and-demo:p006:l42-50",
+      "repair_kind": "restored_source_prefix",
+      "line_distance": 0
+    }
+  ],
+  "source_mode": "slide_only"
+}

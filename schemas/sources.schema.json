@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vlearn.local/schemas/sources.schema.json",
+  "title": "VLearn Material Sources",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_slug", "sources"],
+  "properties": {
+    "schema_version": {"const": "vlearn_sources_v1"},
+    "source_slug": {"type": "string", "minLength": 1},
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "source_type", "sha256"],
+        "properties": {
+          "source_id": {"type": "string", "minLength": 1},
+          "source_type": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "uri": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}
+

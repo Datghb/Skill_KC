@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vlearn.local/schemas/kc-inventory.schema.json",
+  "title": "VLearn KC Inventory",
+  "type": "object",
+  "required": ["schema_version", "source_slug", "material_bundle_sha256", "knowledge_items"],
+  "properties": {
+    "schema_version": {"const": "vlearn_kc_inventory_v1"},
+    "source_slug": {"type": "string"},
+    "material_bundle_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "knowledge_items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "code", "name_vi", "description_vi", "primary_capability_vi",
+          "item_form", "knowledge_role", "target_bloom_level",
+          "evidence_section_ids", "resolved_evidence"
+        ]
+      }
+    }
+  }
+}
+

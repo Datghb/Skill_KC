@@ -1,0 +1,12 @@
+{
+  "schema_version": "vlearn_sources_v1",
+  "source_slug": "day06-ai-product-prototype-and-demo",
+  "sources": [
+    {
+      "source_id": "slide-day06",
+      "source_type": "slide",
+      "sha256": "9568a51da84efe44bdb1f4bf6a5502402dfa0a4642a6278be48d9ca397a7d336",
+      "uri": "source://phase1/day06/slide"
+    }
+  ]
+}
