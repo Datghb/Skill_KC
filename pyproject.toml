@@ -10,6 +10,7 @@ requires-python = ">=3.12"
 dependencies = [
   "httpx==0.28.1",
   "json-repair==0.59.10",
+  "mcp==2.1.1",
   "numpy==2.4.6",
   "openai==2.38.0",
   "scikit-learn==1.8.0",
@@ -27,6 +28,7 @@ dev = [
 
 [project.scripts]
 vlearn-kc = "vlearn_kc.cli:main"
+vlearn-kc-mcp = "vlearn_kc_mcp.__main__:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -40,7 +42,7 @@ vlearn_kc = ["prompts/*.md"]
 
 [tool.coverage.run]
 branch = true
-source = ["vlearn_kc"]
+source = ["vlearn_kc", "vlearn_kc_mcp"]
 
 [tool.coverage.report]
 fail_under = 80

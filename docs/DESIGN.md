@@ -71,3 +71,22 @@ snapshot. Raw video, PDF and credentials remain separate upstream assets.
 - Every cross-Ward leaf move is explicit and auditable.
 - No stage publishes to runtime automatically.
 
+## MCP boundary
+
+`vlearn_kc_mcp` is a transport wrapper around this package, not a second KC
+implementation. It writes an inline material bundle into a server-owned job,
+calls `KCPipeline` directly, and exposes only draft inventory, parent topics and
+an allowlisted run manifest. Provider telemetry, embedding vectors and arbitrary
+server paths are not public MCP inputs or draft responses.
+
+The job API is asynchronous because provider runs can take several minutes.
+`request_id` is idempotent: repeating it with the same bundle returns the same
+job, while reusing it with different bundle content is rejected before another
+provider run starts. Replay verification remains a distinct tool and does not
+mutate the job.
+
+Job identity includes a server-configured owner namespace. A caller cannot choose
+that namespace through a tool argument, and job lookup verifies its hashed owner.
+Active-job, stored-job and content-unit caps bound provider cost, queue growth and
+disk use. Streamable HTTP is loopback-only until the LMS integration supplies an
+authenticated gateway and maps authenticated callers to owner namespaces.

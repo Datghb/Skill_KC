@@ -32,6 +32,77 @@ material bundle validation
 
 Nothing is automatically published to runtime.
 
+## MCP server
+
+The `vlearn-kc-mcp` entry point exposes the KC Engine as five MCP tools:
+
+```text
+validate_material_bundle
+start_kc_generation
+get_kc_job_status
+get_kc_draft
+verify_kc_run
+```
+
+MCP accepts the three bundle JSON objects inline; it never accepts client-supplied
+filesystem paths. Generation runs in a background job, is idempotent by
+`request_id` within a server-configured owner namespace, and returns only draft
+artifacts whose run manifest explicitly has `auto_publish=false` and
+`production_write=false`. The public manifest is allowlisted and excludes
+provider telemetry and internal endpoints.
+
+Configure provider credentials on the MCP server process, not in tool inputs:
+
+```bash
+export OPENAI_API_KEY='<openai-api-key>'
+export GEMINI_API_KEYS='<key-1>,<key-2>'
+```
+
+Run locally over stdio:
+
+```bash
+.venv/bin/vlearn-kc-mcp --jobs-root runs/mcp
+```
+
+For separate LMS tenants or callers sharing a job store, run one authenticated
+server instance per owner namespace:
+
+```bash
+.venv/bin/vlearn-kc-mcp \
+  --owner-namespace tenant-a \
+  --max-active-jobs 4 \
+  --max-stored-jobs 200 \
+  --max-content-units 5000
+```
+
+Run Streamable HTTP on loopback:
+
+```bash
+.venv/bin/vlearn-kc-mcp \
+  --transport streamable-http \
+  --host 127.0.0.1 \
+  --port 8000 \
+  --jobs-root runs/mcp
+```
+
+The endpoint is `http://127.0.0.1:8000/mcp`. The server refuses every non-loopback
+bind. Put it behind a trusted same-host authentication proxy before connecting an
+LMS across a network. Authentication and LMS ownership mapping belong to the LMS
+integration in part 4.
+
+Each job is persisted under its server-owned directory:
+
+```text
+runs/mcp/kc-<id>/
+├── input/          # lesson.json, sources.json, content_units.json
+├── output/         # KC artifacts and run manifest
+└── job.json        # sanitized lifecycle state
+```
+
+The LMS remains responsible for saving the returned draft and for teacher review.
+The server enforces active-job, stored-job and content-unit limits; archived jobs
+must be removed through an operator-controlled retention process.
+
 ## Quick verification without API keys
 
 ```bash
@@ -169,6 +240,12 @@ src/vlearn_kc/
 ├── replay.py
 ├── cli.py
 └── prompts/
+
+src/vlearn_kc_mcp/
+├── engine.py
+├── jobs.py
+├── server.py
+└── __main__.py
 ```
 
 No module performs dynamic imports or repository discovery. All filesystem
