@@ -188,6 +188,10 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("input")
     run.add_argument("output")
     run.add_argument(
+        "--embedding-cache",
+        help="Reuse an embedding cache outside the new output directory",
+    )
+    run.add_argument(
         "--acknowledge-external-processing",
         action="store_true",
         help="Confirm course data may be sent to OpenAI and Gemini",
@@ -252,8 +256,11 @@ def main(
     output = Path(args.output)
     _ensure_fresh_output(output)
     secrets = _provider_secrets(active_environ)
+    run_arguments = ["run", str(bundle), str(output)]
+    if args.embedding_cache:
+        run_arguments.extend(["--embedding-cache", args.embedding_cache])
     run_result = run_command(
-        engine_command("run", str(bundle), str(output)),
+        engine_command(*run_arguments),
         runner=runner,
         secrets=secrets,
         environ=active_environ,

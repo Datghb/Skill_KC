@@ -160,6 +160,45 @@ class FakeEmbedder:
         )
 
 
+class RepairingFakeGenerator(FakeGenerator):
+    def __init__(self) -> None:
+        super().__init__()
+        self.refinement_attempts = 0
+
+    def generate(self, *, prompt: str, request: dict, stage: str):
+        response, telemetry = super().generate(
+            prompt=prompt,
+            request=request,
+            stage="parent_refinement" if stage == "parent_refinement_repair" else stage,
+        )
+        if stage.startswith("parent_refinement"):
+            self.calls[-1]["stage"] = stage
+            self.refinement_attempts += 1
+            if self.refinement_attempts == 1:
+                response["groups"][0]["member_codes"] = ["a"]
+                response["groups"][1]["member_codes"] = ["b", "c", "d"]
+        return response, {**telemetry, "stage": stage}
+
+
+class ExtractionRepairFakeGenerator(FakeGenerator):
+    def __init__(self) -> None:
+        super().__init__()
+        self.extraction_attempts = 0
+
+    def generate(self, *, prompt: str, request: dict, stage: str):
+        response, telemetry = super().generate(
+            prompt=prompt,
+            request=request,
+            stage="kc_extraction" if stage == "kc_extraction_repair" else stage,
+        )
+        if stage.startswith("kc_extraction"):
+            self.calls[-1]["stage"] = stage
+            self.extraction_attempts += 1
+            if self.extraction_attempts == 1:
+                response["knowledge_items"][0]["primary_capability_vi"] = ""
+        return response, {**telemetry, "stage": stage}
+
+
 def test_pipeline_runs_without_repo_or_hidden_input_paths(tmp_path: Path) -> None:
     input_dir = _material_bundle(tmp_path / "material")
     output_dir = tmp_path / "run"
@@ -188,6 +227,53 @@ def test_pipeline_runs_without_repo_or_hidden_input_paths(tmp_path: Path) -> Non
     replay = replay_run(input_dir=input_dir, recorded_dir=output_dir)
     assert replay["trackable_kcs"] == 4
     assert replay["parent_topics"] == 2
+
+
+def test_pipeline_repairs_invalid_parent_refinement_once(tmp_path: Path) -> None:
+    input_dir = _material_bundle(tmp_path / "material")
+    output_dir = tmp_path / "run"
+    generator = RepairingFakeGenerator()
+    pipeline = KCPipeline(
+        generator=generator,
+        embedder=FakeEmbedder(),
+        extraction_prompt="extract",
+        refinement_prompt="refine",
+    )
+
+    result = pipeline.run(input_dir=input_dir, output_dir=output_dir)
+
+    assert [call["stage"] for call in generator.calls] == [
+        "kc_extraction",
+        "parent_refinement",
+        "parent_refinement_repair",
+    ]
+    telemetry = result["manifest"]["telemetry"]["parent_refinement"]
+    assert telemetry["attempts"] == 2
+    assert "singleton justification" in telemetry["repair_trigger"]
+    assert replay_run(input_dir=input_dir, recorded_dir=output_dir)["verified"] is True
+
+
+def test_pipeline_repairs_invalid_kc_extraction_once(tmp_path: Path) -> None:
+    input_dir = _material_bundle(tmp_path / "material")
+    output_dir = tmp_path / "run"
+    generator = ExtractionRepairFakeGenerator()
+    pipeline = KCPipeline(
+        generator=generator,
+        embedder=FakeEmbedder(),
+        extraction_prompt="extract",
+        refinement_prompt="refine",
+    )
+
+    result = pipeline.run(input_dir=input_dir, output_dir=output_dir)
+
+    assert [call["stage"] for call in generator.calls] == [
+        "kc_extraction",
+        "kc_extraction_repair",
+        "parent_refinement",
+    ]
+    telemetry = result["manifest"]["telemetry"]["kc_extraction"]
+    assert telemetry["attempts"] == 2
+    assert "primary_capability_vi" in telemetry["repair_trigger"]
 
 
 def test_replay_detects_tampered_parent_membership(tmp_path: Path) -> None:

@@ -55,6 +55,42 @@ def build_refinement_request(
     }
 
 
+def _retry_telemetry(
+    first: dict[str, Any],
+    second: dict[str, Any],
+    error: ValueError,
+    *,
+    stage: str,
+) -> dict[str, Any]:
+    usage_keys = {
+        key
+        for attempt in (first, second)
+        for key in (attempt.get("usage") or {})
+    }
+    usage = {
+        key: sum(
+            int((attempt.get("usage") or {}).get(key) or 0)
+            for attempt in (first, second)
+        )
+        for key in sorted(usage_keys)
+    }
+    return {
+        **second,
+        "stage": stage,
+        "attempts": 2,
+        "api_calls": int(first.get("api_calls") or 0)
+        + int(second.get("api_calls") or 0),
+        "latency_seconds": round(
+            float(first.get("latency_seconds") or 0)
+            + float(second.get("latency_seconds") or 0),
+            3,
+        ),
+        "usage": usage,
+        "repair_trigger": str(error),
+        "attempt_telemetry": [first, second],
+    }
+
+
 class KCPipeline:
     def __init__(
         self,
@@ -80,7 +116,29 @@ class KCPipeline:
             request=extraction_request,
             stage="kc_extraction",
         )
-        inventory = validate_kc_response(raw_inventory, bundle)
+        try:
+            inventory = validate_kc_response(raw_inventory, bundle)
+        except ValueError as error:
+            repair_request = {
+                **extraction_request,
+                "validation_feedback": {
+                    "error": str(error),
+                    "instruction": "Correct the response using only exact content-unit evidence.",
+                },
+                "previous_response": raw_inventory,
+            }
+            repaired_inventory, repair_telemetry = self.generator.generate(
+                prompt=self.extraction_prompt,
+                request=repair_request,
+                stage="kc_extraction_repair",
+            )
+            inventory = validate_kc_response(repaired_inventory, bundle)
+            extraction_telemetry = _retry_telemetry(
+                extraction_telemetry,
+                repair_telemetry,
+                error,
+                stage="kc_extraction",
+            )
         items = trackable_items(list(inventory["knowledge_items"]))
         if len(items) < 3:
             raise ValueError("at least three trackable KCs are required for clustering")
@@ -97,12 +155,39 @@ class KCPipeline:
             request=refinement_request,
             stage="parent_refinement",
         )
-        topics = validate_move_without_merge(
-            raw_topics,
-            source_slug=bundle.source_slug,
-            frozen_codes=set(refinement_request["frozen_leaf_codes"]),
-            candidate_cuts=refinement_request["ward_reference_partitions"],
-        )
+        try:
+            topics = validate_move_without_merge(
+                raw_topics,
+                source_slug=bundle.source_slug,
+                frozen_codes=set(refinement_request["frozen_leaf_codes"]),
+                candidate_cuts=refinement_request["ward_reference_partitions"],
+            )
+        except ValueError as error:
+            repair_request = {
+                **refinement_request,
+                "validation_feedback": {
+                    "error": str(error),
+                    "instruction": "Correct the response without changing frozen leaves or Ward constraints.",
+                },
+                "previous_response": raw_topics,
+            }
+            repaired_topics, repair_telemetry = self.generator.generate(
+                prompt=self.refinement_prompt,
+                request=repair_request,
+                stage="parent_refinement_repair",
+            )
+            topics = validate_move_without_merge(
+                repaired_topics,
+                source_slug=bundle.source_slug,
+                frozen_codes=set(refinement_request["frozen_leaf_codes"]),
+                candidate_cuts=refinement_request["ward_reference_partitions"],
+            )
+            refinement_telemetry = _retry_telemetry(
+                refinement_telemetry,
+                repair_telemetry,
+                error,
+                stage="parent_refinement",
+            )
 
         embeddings = {
             "schema_version": "vlearn_kc_embeddings_v1",
@@ -158,4 +243,3 @@ class KCPipeline:
             "parent_topics": topics,
             "manifest": manifest,
         }
-

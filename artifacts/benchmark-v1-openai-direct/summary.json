@@ -1,0 +1,80 @@
+{
+  "schema_version": "vlearn_kc_benchmark_summary_v1",
+  "run_date": "2026-08-25",
+  "generation": {
+    "provider": "openai",
+    "model": "gpt-5.6-luna",
+    "reasoning_effort": "high"
+  },
+  "embedding": {
+    "provider": "gemini",
+    "model": "gemini-embedding-2"
+  },
+  "runs": [
+    {
+      "day": 6,
+      "content_units": 14,
+      "knowledge_items": 14,
+      "trackable_kcs": 10,
+      "parent_topics": 6,
+      "leaf_moves": 1,
+      "repair_retries": 1,
+      "wall_seconds": 205.46,
+      "openai_tokens": 39859,
+      "gemini_input_tokens": 2240,
+      "estimated_cost_usd": 0.031586,
+      "verified": true,
+      "run_directory": "runs/benchmark-v1/day06-direct-2"
+    },
+    {
+      "day": 10,
+      "content_units": 45,
+      "knowledge_items": 28,
+      "trackable_kcs": 28,
+      "parent_topics": 11,
+      "leaf_moves": 4,
+      "repair_retries": 0,
+      "wall_seconds": 250.44,
+      "openai_tokens": 64873,
+      "gemini_input_tokens": 14150,
+      "estimated_cost_usd": 0.042282,
+      "verified": true,
+      "run_directory": "runs/benchmark-v1/day10-direct"
+    },
+    {
+      "day": 14,
+      "content_units": 78,
+      "knowledge_items": 40,
+      "trackable_kcs": 40,
+      "parent_topics": 12,
+      "leaf_moves": 4,
+      "repair_retries": 1,
+      "wall_seconds": 351.94,
+      "openai_tokens": 117887,
+      "gemini_input_tokens": 14068,
+      "estimated_cost_usd": 0.067621,
+      "verified": true,
+      "run_directory": "runs/benchmark-v1/day14-direct"
+    }
+  ],
+  "totals": {
+    "content_units": 137,
+    "knowledge_items": 82,
+    "trackable_kcs": 78,
+    "parent_topics": 29,
+    "leaf_moves": 9,
+    "repair_retries": 2,
+    "wall_seconds": 807.84,
+    "openai_tokens": 222619,
+    "gemini_input_tokens": 30458,
+    "estimated_cost_usd": 0.141489,
+    "trackable_kcs_per_content_unit": 0.569,
+    "estimated_cost_per_content_unit_usd": 0.001033,
+    "estimated_cost_per_trackable_kc_usd": 0.001814
+  },
+  "limitations": {
+    "failed_attempt_costs_included": false,
+    "human_quality_judging_completed": false,
+    "auto_publish": false
+  }
+}

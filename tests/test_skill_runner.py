@@ -321,6 +321,8 @@ def test_successful_run_validates_runs_replays_and_returns_draft_summary(
             "run",
             str(bundle),
             str(output),
+            "--embedding-cache",
+            str(tmp_path / "shared-cache.json"),
             "--acknowledge-external-processing",
         ],
         environ={"OPENAI_API_KEY": "gateway", "GEMINI_API_KEY": "gemini"},
@@ -330,6 +332,10 @@ def test_successful_run_validates_runs_replays_and_returns_draft_summary(
 
     assert exit_code == 0
     assert [command[3] for command in calls] == ["validate", "run", "replay"]
+    assert calls[1][-2:] == [
+        "--embedding-cache",
+        str(tmp_path / "shared-cache.json"),
+    ]
     assert summary["status"] == "draft"
     assert summary["verified"] is True
     assert summary["review_required"] is True
