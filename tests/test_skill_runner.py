@@ -341,6 +341,37 @@ def test_successful_run_validates_runs_replays_and_returns_draft_summary(
     assert summary["review_required"] is True
     assert summary["publish_allowed"] is False
 
+def test_run_stops_when_replay_does_not_verify(
+    runner_module, bundle: Path, tmp_path: Path
+) -> None:
+    manifest = {
+        "source_slug": "course-a",
+        "counts": {},
+        "release": {"auto_publish": False, "production_write": False},
+    }
+
+    def fake_run(command, **kwargs):
+        payload = (
+            manifest
+            if command[3] == "run"
+            else {"verified": command[3] == "validate"}
+        )
+        return subprocess.CompletedProcess(
+            command, 0, stdout=json.dumps(payload), stderr=""
+        )
+
+    with pytest.raises(RuntimeError, match="replay verification failed"):
+        runner_module.main(
+            [
+                "run",
+                str(bundle),
+                str(tmp_path / "output"),
+                "--acknowledge-external-processing",
+            ],
+            environ={"OPENAI_API_KEY": "gateway", "GEMINI_API_KEY": "gemini"},
+            runner=fake_run,
+        )
+
 
 def test_build_summary_always_requires_human_review_and_disallows_publish(
     runner_module,

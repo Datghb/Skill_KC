@@ -7,7 +7,7 @@
     "parent_refinement": "80e1356fa734f737263c096cfb08701d69a1e3b04de34381263fa538ab55a5b0"
   },
   "artifact_sha256": {
-    "kc_candidates": "afe78ca4ef5393557d551f480450448322e219defad110b9aa99f81439b61b12",
+    "kc_candidates": "abc5ed56acc0c8b414c5b07a503c62701995de3611b265673ee0b11881d7adeb",
     "embeddings": "07f30871b006eda8724849ded28b9c8c60733ecb4415c676ec16aa2cf6cf0111",
     "ward_candidates": "8a42b5c92651e2915deb06f545ee5140b6e711d31d22d2d01e8301c3c0c48dc2",
     "parent_topics": "d6a54fbb3e7e599b88e1963d04b0a0d70389b818a4d11c353b0e808764eb1d24"

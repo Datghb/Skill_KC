@@ -1,0 +1,2428 @@
+{
+  "schema_version": "reviewed_kc_quarantined_v1",
+  "items": [
+    {
+      "review_key": "4:agent_behavior_contracts",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "agent_behavior_contracts",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:missing_rationale",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 4,
+        "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+        "kc_code": "agent_behavior_contracts",
+        "kc_name_vi": "Xử lý bốn hành vi agent theo contract",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:05:25.252Z"
+      },
+      "kc": {
+        "code": "agent_behavior_contracts",
+        "name_vi": "Xử lý bốn hành vi agent theo contract",
+        "description_vi": "Agent phải phân biệt normal recommend, budget insufficient, clarification và guardrail refusal; mỗi trường hợp có điều kiện, số tool, thông điệp và điểm dừng riêng.",
+        "item_form": "criterion",
+        "primary_capability_vi": "Điều phối tool và câu trả lời theo trạng thái đủ thông tin, ngân sách và an toàn.",
+        "target_bloom_level": "analyze",
+        "bloom_learning_objective_vi": "Có thể ánh xạ từng loại input vào hành vi hỏi lại, từ chối, chạy một phần chuỗi hoặc chạy đủ chuỗi tool.",
+        "bloom_rationale_vi": "Nguồn cung cấp bảng hành vi, điều kiện, output bắt buộc và số tool tương ứng, cùng bản đồ conditional/chaining của lab.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Gộp bốn case vì chúng là các nhánh trong cùng một behavior contract; không tách từng case vì được đánh giá cùng qua quyết định control flow.",
+        "role_reason_vi": "Đây là phần behavior được chấm trực tiếp trong lab và thể hiện khả năng áp dụng toàn bộ nguyên lý.",
+        "evidence_section_ids": [
+          "slide:day04-prompt-engineering-tool-calling-selected:p048",
+          "slide:day04-prompt-engineering-tool-calling-selected:p050",
+          "slide:day04-prompt-engineering-tool-calling-selected:p052",
+          "slide:day04-prompt-engineering-tool-calling-selected:p053"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p048",
+            "source_type": "slide",
+            "page_no": 48,
+            "content": "## Page 48: System Prompt — TravelBuddy (build_system_prompt)\n### Text Extract\nSystem Prompt — TravelBuddy (build_system_prompt)\n\n\n\n      Bạn là TravelBuddy, trợ lý đặt chuyến đi nội địa VN (biết today). Khi đủ thông tin (điểm đến, ngân\n      sách, số đêm), gọi tool theo thứ tự: search_flights → calculate_budget → search_hotels.\n\n Rules                                                     Constraints\n     ■   Trả lời tiếng Việt, ngắn gọn.                       ■   Từ chối yêu cầu bất hợp pháp / nguy hiểm, nhắc\n     ■   Thiếu điểm đến / ngân sách / số đêm → hỏi lại 1         an toàn.\n         câu, chưa gọi tool.                                 ■   Ngân sách thiếu → nói rõ “thiếu” + đề xuất,\n     ■   Chỉ dùng giá từ output tool, không bịa.                 không gợi ý khách sạn.\n\n\n\n\n      1 chuyến bay + 1 khách sạn + tổng chi phí + ngân sách còn lại.\n\n\n\n\nGiảng viên (VinUni)                                   AICB · Ngày 4                                   Tuần 1   37 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p050",
+            "source_type": "slide",
+            "page_no": 50,
+            "content": "## Page 50: 3 Pattern Map Vào 4 Hành Vi Của Lab\n### Text Extract\n3 Pattern Map Vào 4 Hành Vi Của Lab\n\n\n\n\n    1. Conditional: case mơ hồ & case nguy hiểm ⇒ 0 tool (hỏi lại / từ chối).\n    2. Chaining: case bình thường ⇒ flights → budget → hotels (3 tool).\n    3. Budget thiếu: flights → budget rồi dừng (2 tool, không gợi ý khách sạn).\n\n\n\n\nGiảng viên (VinUni)                         AICB · Ngày 4                         Tuần 1   39 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p052",
+            "source_type": "slide",
+            "page_no": 52,
+            "content": "## Page 52: 4 Hành Vi Agent Phải Xử Lý Đúng\n### Text Extract\n4 Hành Vi Agent Phải Xử Lý Đúng\n\n\n\n\n                      Hành vi                  Agent phải làm                         Số tool\n\n                      Normal recommend         1 chuyến bay + 1 khách sạn + tổng      3 (đủ chuỗi)\n                                               chi phí + ngân sách còn lại\n                      Budget insufficient      Nói rõ “thiếu” + đề xuất điều chỉnh,   2 (flights+budget)\n                                               không gợi ý khách sạn (case edge)\n                      Clarification            Hỏi lại điểm đến / ngân sách / số      0\n                                               đêm\n                      Guardrail refusal        Từ chối, nhắc an toàn, hướng tới hỗ    0\n                                               trợ hợp lệ\n\n                                            Lab 4 graded_cases.json — 6 case / 4 loại\n\n\n\n\nGiảng viên (VinUni)                                           AICB · Ngày 4                                Tuần 1   41 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p053",
+            "source_type": "slide",
+            "page_no": 53,
+            "content": "## Page 53: Worked Example: Case Đà Nẵng 5 Triệu (Normal)\n### Text Extract\nWorked Example: Case Đà Nẵng 5 Triệu (Normal)\n\n\n\n    1. search_flights(HCM→Da Nang) (1 khách) ⇒ rẻ nhất VietJet 990k.\n    2. calculate_budget(5tr, 2 dem, 990k) ⇒ trừ vé + dự phòng đi lại, còn ≈ 1,8tr/đêm cho\n       khách sạn.\n    3. search_hotels(Da Nang, max 1.8tr, [gan bien, an sang]) ⇒ Sunset Beach Resort\n       1,1tr/đêm.\n\n\n\n      “Da Nang: bay VietJet 990k, o Sunset Beach Resort 1,1tr/dem x2. Tong chi phi ≈ 3,2tr, con\n      trong budget 5tr.”\n\n\n\n\nGiảng viên (VinUni)                             AICB · Ngày 4                           Tuần 1   42 / 49",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "4:build_grounded_tool_agent",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "build_grounded_tool_agent",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:missing_rationale",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 4,
+        "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+        "kc_code": "build_grounded_tool_agent",
+        "kc_name_vi": "Xây dựng agent tool-calling grounded",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:05:13.947Z"
+      },
+      "kc": {
+        "code": "build_grounded_tool_agent",
+        "name_vi": "Xây dựng agent tool-calling grounded",
+        "description_vi": "Quy trình tích hợp gồm viết system prompt contract, khai báo ba tool bằng @tool, dựng agent bằng create_agent, chạy tool-call trace và trả lời tiếng Việt dựa trên output tool.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Xây dựng một agent hoàn chỉnh kết hợp prompt, tool contract, control flow và grounding.",
+        "target_bloom_level": "create",
+        "bloom_learning_objective_vi": "Có thể triển khai agent với system prompt, chuỗi tool phụ thuộc, create_agent và kết quả cuối có trace và grounding.",
+        "bloom_rationale_vi": "Phần lab ánh xạ trực tiếp từng nguyên lý vào artifact và yêu cầu hoàn thiện các hàm build_system_prompt, build_tools, build_agent và run_agent.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Giữ như một năng lực tổng hợp vì task xây dựng artifact có failure ở mức tích hợp, khác với mastery từng thành phần riêng lẻ.",
+        "role_reason_vi": "Đây là bài áp dụng và deliverable chính của buổi học.",
+        "evidence_section_ids": [
+          "slide:day04-prompt-engineering-tool-calling-selected:p047",
+          "slide:day04-prompt-engineering-tool-calling-selected:p048",
+          "slide:day04-prompt-engineering-tool-calling-selected:p049",
+          "slide:day04-prompt-engineering-tool-calling-selected:p054",
+          "slide:day04-prompt-engineering-tool-calling-selected:p056",
+          "slide:day04-prompt-engineering-tool-calling-selected:p058"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p047",
+            "source_type": "slide",
+            "page_no": 47,
+            "content": "## Page 47: Lab 4: Bạn Xây Gì?\n### Text Extract\nLab 4: Bạn Xây Gì?\n\n\n\n      Cùng cấu trúc với ShopBot ở Phần A: 1 system prompt + một chuỗi 3 tool + agent\n      dựng bằng create_agent, trả lời tiếng Việt grounded trong output tool.\n\n     ■ 3 tool: search_flights → calculate_budget → search_hotels\n     ■ 1 system prompt: thứ tự gọi tool, hỏi lại khi thiếu thông tin, từ chối yêu cầu nguy\n       hiểm, chỉ dùng giá từ tool, tiếng Việt\n     ■ Provider: Gemini (gemini-2.5-flash-lite); nộp: hoàn thiện src/agent/graph.py\n\n\n\n\n      TravelBuddy là một harness nhỏ bạn viết bằng prompt: 1 system prompt + 3 mô\n      tả tool (@tool docstring) + rule grounding + rule cho 4 hành vi — prompt engineering\n      ở quy mô agent.\n\n\nGiảng viên (VinUni)                           AICB · Ngày 4                        Tuần 1   36 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p048",
+            "source_type": "slide",
+            "page_no": 48,
+            "content": "## Page 48: System Prompt — TravelBuddy (build_system_prompt)\n### Text Extract\nSystem Prompt — TravelBuddy (build_system_prompt)\n\n\n\n      Bạn là TravelBuddy, trợ lý đặt chuyến đi nội địa VN (biết today). Khi đủ thông tin (điểm đến, ngân\n      sách, số đêm), gọi tool theo thứ tự: search_flights → calculate_budget → search_hotels.\n\n Rules                                                     Constraints\n     ■   Trả lời tiếng Việt, ngắn gọn.                       ■   Từ chối yêu cầu bất hợp pháp / nguy hiểm, nhắc\n     ■   Thiếu điểm đến / ngân sách / số đêm → hỏi lại 1         an toàn.\n         câu, chưa gọi tool.                                 ■   Ngân sách thiếu → nói rõ “thiếu” + đề xuất,\n     ■   Chỉ dùng giá từ output tool, không bịa.                 không gợi ý khách sạn.\n\n\n\n\n      1 chuyến bay + 1 khách sạn + tổng chi phí + ngân sách còn lại.\n\n\n\n\nGiảng viên (VinUni)                                   AICB · Ngày 4                                   Tuần 1   37 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p049",
+            "source_type": "slide",
+            "page_no": 49,
+            "content": "## Page 49: 3 Tool Contract Của TravelBuddy (chuỗi phụ thuộc)\n### Text Extract\n3 Tool Contract Của TravelBuddy (chuỗi phụ thuộc)\n\n\n\n                      Tool                  Tham số chính                            Trả về (groundable)\n\n                      search_flights        origin,     destination,        depar-   danh sách chuyến bay +\n                                            ture_date, travelers                     giá\n                      calculate_budget      total_budget,      nights,    cheap-     ngân sách còn lại / đêm\n                                            est_flight_total, destination, travel-\n                                            ers\n                      search_hotels         city, max_price_per_night, prefer-       khách sạn hợp ngân\n                                            ences                                    sách\n\n   Mỗi tool = 1 hành động test được (granularity, §7). Chuỗi: search_flights → calculate_budget → search_hotels —\n                                mỗi tool cần output tool trước. Output gọn để model tái dùng.\n                                         Lab 4 tool contract — src/agent/graph.py\n\n\n\n\nGiảng viên (VinUni)                                         AICB · Ngày 4                                      Tuần 1   38 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p054",
+            "source_type": "slide",
+            "page_no": 54,
+            "content": "## Page 54: Bridge: Từ Nguyên Lý Phần A Đến graph.py\n### Text Extract\nBridge: Từ Nguyên Lý Phần A Đến graph.py\n\n\n\n\n                      Nguyên lý (Phần A)                        Hàm bạn hoàn thiện trong Lab 4\n\n                      System prompt như contract                build_system_prompt(today)\n                      @tool + 4 nguyên tắc thiết kế tool        build_tools(store) — 3 tool\n                      create_agent (vòng lặp tool calling)      build_agent(...)\n                      Tool-call trace + grounding               run_agent(...) -> AgentResult\n\n                                                    Concept (Phần A) -> lab artifact\n\n\n\n\nGiảng viên (VinUni)                                              AICB · Ngày 4                   Tuần 1   43 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p056",
+            "source_type": "slide",
+            "page_no": 56,
+            "content": "## Page 56: Lab Scaffold — 4 Hàm Chính Cần Hoàn Thiện (graph.py)\n### Text Extract\nLab Scaffold — 4 Hàm Chính Cần Hoàn Thiện (graph.py)\n\n\n\n      def build_system_prompt(today: str) -> str:\n           ...    # policy: tool order, clarify, refuse, grounding, Vietnamese\n\n\n      def build_tools(store) -> list:\n           # three @tool functions over `store`; compact, reusable output\n           return [search_flights, calculate_budget, search_hotels]\n\n\n      def build_agent(provider=\"google\", today=None):\n           ...    # build the model + tools, then return create_agent(\n           #          model=..., tools=..., system_prompt=...)\n\n\n      def run_agent(query, ...) -> AgentResult:\n           ...    # invoke agent; extract final answer + tool-call trace\n      # + extract_final_answer / extract_tool_calls: 2 helper tuy chon\n\n\n\n\nGiảng viên (VinUni)                                               AICB · Ngày 4   Tuần 1   45 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p058",
+            "source_type": "slide",
+            "page_no": 58,
+            "content": "## Page 58: Lab #4\n### Text Extract\nLab #4\n\n\n\n\n       Mục tiêu: Hoàn thiện src/agent/graph.py: 1 system prompt + 3 tool (@tool) +\n       agent dựng bằng create_agent, xử lý đúng 4 hành vi (recommend / budget thiếu /\n       hỏi lại / từ chối)\n       Deliverable: Deliverable: Agent chạy được + đạt ≥ 80/100 trên grader (6 case,\n       provider Gemini), câu trả lời tiếng Việt grounded trong output tool\n       Thời gian: 150 phút\n\n\n\n\nGiảng viên (VinUni)                         AICB · Ngày 4                      Tuần 1   47 / 49",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "4:create_agent_tool_loop",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "create_agent_tool_loop",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:missing_rationale",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 4,
+        "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+        "kc_code": "create_agent_tool_loop",
+        "kc_name_vi": "Dựng agent bằng create_agent",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:05:28.785Z"
+      },
+      "kc": {
+        "code": "create_agent_tool_loop",
+        "name_vi": "Dựng agent bằng create_agent",
+        "description_vi": "create_agent nhận model, danh sách tools và system prompt rồi chạy vòng decide–call–observe; kết quả cuối được lấy từ state messages sau khi agent hoàn tất.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Dựng và invoke agent dùng tool mà không phải tự viết vòng while.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Có thể cấu hình model, tools, system_prompt, gọi agent.invoke và trích xuất final answer từ state.",
+        "bloom_rationale_vi": "Nguồn cung cấp API, các tham số cần truyền và giải thích abstraction vẫn dựa trên vòng lặp thủ công.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi tool calling thủ công vì đây là cách dùng abstraction/framework với task triển khai và debug khác.",
+        "role_reason_vi": "create_agent là capability được nêu trực tiếp trong mục tiêu và là nền tảng của lab.",
+        "evidence_section_ids": [
+          "slide:day04-prompt-engineering-tool-calling-selected:p036",
+          "slide:day04-prompt-engineering-tool-calling-selected:p054",
+          "slide:day04-prompt-engineering-tool-calling-selected:p056"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p036",
+            "source_type": "slide",
+            "page_no": 36,
+            "content": "## Page 36: Abstraction: create_agent Chạy Vòng Lặp Đó Cho Bạn\n### Text Extract\nAbstraction: create_agent Chạy Vòng Lặp Đó Cho Bạn\n\n\n\n\n      from langchain.agents import create_agent\n\n\n      agent = create_agent(\n           model=model,            # any chat model (OpenAI / Gemini / local)\n           tools=tools,            # [search_products, apply_discount, calculate_shipping]\n           system_prompt=SYSTEM_PROMPT,\n      )\n\n\n      state = agent.invoke({\"messages\": [{\"role\": \"user\", \"content\": query}]})\n      final_answer = state[\"messages\"][-1].content    # create_agent ran the\n                                                       # decide->call->observe loop\n\n\n\n\n Bạn không phải viết while True nữa — nhưng vẫn phải hiểu nó, vì khi agent gọi sai tool thì bạn debug đúng vòng lặp này.\n\n\n\n\nGiảng viên (VinUni)                                              AICB · Ngày 4                              Tuần 1   28 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p054",
+            "source_type": "slide",
+            "page_no": 54,
+            "content": "## Page 54: Bridge: Từ Nguyên Lý Phần A Đến graph.py\n### Text Extract\nBridge: Từ Nguyên Lý Phần A Đến graph.py\n\n\n\n\n                      Nguyên lý (Phần A)                        Hàm bạn hoàn thiện trong Lab 4\n\n                      System prompt như contract                build_system_prompt(today)\n                      @tool + 4 nguyên tắc thiết kế tool        build_tools(store) — 3 tool\n                      create_agent (vòng lặp tool calling)      build_agent(...)\n                      Tool-call trace + grounding               run_agent(...) -> AgentResult\n\n                                                    Concept (Phần A) -> lab artifact\n\n\n\n\nGiảng viên (VinUni)                                              AICB · Ngày 4                   Tuần 1   43 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p056",
+            "source_type": "slide",
+            "page_no": 56,
+            "content": "## Page 56: Lab Scaffold — 4 Hàm Chính Cần Hoàn Thiện (graph.py)\n### Text Extract\nLab Scaffold — 4 Hàm Chính Cần Hoàn Thiện (graph.py)\n\n\n\n      def build_system_prompt(today: str) -> str:\n           ...    # policy: tool order, clarify, refuse, grounding, Vietnamese\n\n\n      def build_tools(store) -> list:\n           # three @tool functions over `store`; compact, reusable output\n           return [search_flights, calculate_budget, search_hotels]\n\n\n      def build_agent(provider=\"google\", today=None):\n           ...    # build the model + tools, then return create_agent(\n           #          model=..., tools=..., system_prompt=...)\n\n\n      def run_agent(query, ...) -> AgentResult:\n           ...    # invoke agent; extract final answer + tool-call trace\n      # + extract_final_answer / extract_tool_calls: 2 helper tuy chon\n\n\n\n\nGiảng viên (VinUni)                                               AICB · Ngày 4   Tuần 1   45 / 49",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "4:dynamic_few_shot_retrieval",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "dynamic_few_shot_retrieval",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:placement_or_removal",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 4,
+        "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+        "kc_code": "dynamic_few_shot_retrieval",
+        "kc_name_vi": "Few-shot động theo độ tương đồng input",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [
+          "move_component"
+        ],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-20T17:08:23.101Z"
+      },
+      "kc": {
+        "code": "dynamic_few_shot_retrieval",
+        "name_vi": "Few-shot động theo độ tương đồng input",
+        "description_vi": "Dynamic few-shot truy xuất các ví dụ gần nhất với input hiện tại theo loại task, sản phẩm, đối tượng, ngân sách hoặc format rồi mới chèn chúng vào prompt thay vì luôn nạp một danh sách cố định.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Chọn và inject bộ example phù hợp với từng input.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Có thể thiết kế cơ chế truy xuất example liên quan và tránh đưa các example khác format vào cùng context.",
+        "bloom_rationale_vi": "Nguồn mô tả rõ static versus dynamic examples, tiêu chí tương đồng và quy trình retrieval trước khi load vào prompt.",
+        "knowledge_role": "extension_kc",
+        "granularity_reason_vi": "Tách khỏi few-shot cơ bản vì đây là quy trình chọn context động với failure mode là example sai format hoặc context quá rối.",
+        "role_reason_vi": "Đây là capability tái sử dụng trong hệ thống extraction và context engineering nhưng không bắt buộc cho mọi prompt đơn giản.",
+        "evidence_section_ids": [
+          "slide:day04-prompt-engineering-tool-calling-selected:p018",
+          "note:day04-prompt-engineering-tool-calling-selected:note-p018-002",
+          "note:day04-prompt-engineering-tool-calling-selected:note-p010-003"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p018",
+            "source_type": "slide",
+            "page_no": 18,
+            "content": "## Page 18: Few-shot — Trích Slot Từ Câu Tự Nhiên (ShopBot)\n### Text Extract\nFew-shot — Trích Slot Từ Câu Tự Nhiên (ShopBot)\n\n\n\n      examples = \"\"\"\n      Input: \"Tim balo laptop duoi 500k, chong nuoc\"\n      Output: {\"category\": \"balo\", \"budget\": 500000, \"qty\": 1,\n                 \"preferences\": [\"chong nuoc\"]}\n\n\n      Input: \"Mua 2 ban phim co gia tot, giao HN\"\n      Output: {\"category\": \"ban phim co\", \"budget\": null, \"qty\": 2,\n                 \"preferences\": [\"gia tot\"]}\n      \"\"\"\n      # few-shot: show the Input -> JSON-slot mapping you want\n      prompt = f\"\"\"Extract shopping intent as JSON keys:\n      category, budget, qty, preferences. Missing field -> null.\n      {examples}\n      Input: \"Tim laptop duoi 20 trieu cho sinh vien, giao HCM\"\n      Output:\"\"\"\n\n\n\n\nGiảng viên (VinUni)                                                AICB · Ngày 4   Tuần 1   13 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "note:day04-prompt-engineering-tool-calling-selected:note-p018-002",
+            "source_type": "lecture_note",
+            "page_no": 18,
+            "content": "Example có thể là static hoặc dynamic. Với dynamic few-shot, hệ thống tìm trong cơ sở dữ liệu những example phù hợp nhất với input hiện tại rồi mới đưa chúng vào prompt. Ví dụ input tìm laptop cho sinh viên cần example liên quan laptop/ngân sách/sinh viên; input tìm TV cho gia đình bốn người cần một nhóm example khác. Tiêu chí chọn example là mức độ tương đồng về loại sản phẩm, đối tượng, ngân sách và format đầu vào.",
+            "note_kind": "procedure",
+            "transcript_evidence": [
+              {
+                "evidence_id": "transcript:day04-prompt-engineering-tool-calling-selected:t002976-003002",
+                "start_seconds": 2976.68,
+                "end_seconds": 3001.72,
+                "source_excerpt": "cái ý kiến nào đấy thì ở đây là cái example này này cái example mà đóng ngoặc nhọn này thì ở đây là mọi người ví dụ như ở đây là mọi người sẽ sẽ chỉ load chỉ load cái example tĩnh này thôi nhưng mà cũng có những cái bài toán mà mọi người cần phải load những cái example động tức là mọi người tìm trong cơ sở dữ"
+              },
+              {
+                "evidence_id": "transcript:day04-prompt-engineering-tool-calling-selected:t002999-003028",
+                "start_seconds": 2999.4,
+                "end_seconds": 3027.48,
+                "source_excerpt": "liệu những cái example nào mà nó phù hợp với cái input đầu vào thì mọi người mới load. Ví dụ ở đây là cận input là tìm laptop dưới 20 triệu cho sinh viên và giao ở Hồ Chí Minh. Thì hai cái example này là hai cái example xác nhất đối với cái input này. Nhưng mà ở đây ví dụ như mọi người sẽ có một cái input là tìm tivi dưới 60 triệu chẳng hạn dành cho hộ gia đình có bốn người. Thì ở đây mình sẽ"
+              },
+              {
+                "evidence_id": "transcript:day04-prompt-engineering-tool-calling-selected:t003025-003054",
+                "start_seconds": 3025.52,
+                "end_seconds": 3053.52,
+                "source_excerpt": "không mình sẽ không thể lấy những cái example ở phía trên được mà mình sẽ phải tìm những cái example khác trong cơ sở dữ liệu mà nó phù hợp với việc là tìm tivi và cho hộ gia đình bốn người và ngân sách là dưới 60 triệu. Đó, đó chính là những cái tiêu chí mà mọi người có thể dùng để mà load load example đúng chỗ. Mọi người mọ mọi người mọi người hiểu cái chỗ này không?"
+              },
+              {
+                "evidence_id": "transcript:day04-prompt-engineering-tool-calling-selected:t003051-003079",
+                "start_seconds": 3051.92,
+                "end_seconds": 3078.88,
+                "source_excerpt": "Đấy, đấy chính là ví dụ của việc là load example đúng chỗ. Và và đây cũng chính là cái field short field short example. Và trong à và trong lang trên lang graph nó có sẵn một cái hàm nó gọi là dynamic field shot example. Chị không nhớ là nó có đổi tên không nhưng mà nó có chữ dynamic short example và nó cũng chính là sử dụng chroma db để nó lưu cái example này."
+              }
+            ]
+          },
+          {
+            "content_unit_id": "note:day04-prompt-engineering-tool-calling-selected:note-p010-003",
+            "source_type": "lecture_note",
+            "page_no": 10,
+            "content": "Không phải mọi input đều nên dùng cùng một bộ example. Chuyển tiền giữa hai cá nhân, thanh toán điện nước, học phí hoặc vé xe có thể có format và các trường dữ liệu khác nhau. Vì vậy nên truy xuất example theo loại input và chỉ load các example gần nhất với format hiện tại; load toàn bộ danh sách dài sẽ làm context rối và gây nhiễu cho model.",
+            "note_kind": "criterion_or_condition",
+            "transcript_evidence": [
+              {
+                "evidence_id": "transcript:day04-prompt-engineering-tool-calling-selected:t002267-002296",
+                "start_seconds": 2267.119,
+                "end_seconds": 2295.92,
+                "source_excerpt": "Tất nhiên là lúc mà mình chuyển khoản trong ngân hàng thì ngoài chuyển khoản cho người A sang người B thì cũng có chuyển khoản cho công ty đúng không? Ví dụ như là thanh toán tiền nước nó lại một cái format khác thì lúc đấy mình lại phải load example của cái chuyển khoản tiền điện tiền nước chứ không phải load example của cái chuyển khoản giữa A và B nữa. Thì lúc này thì sẽ cần đến một cái rá, một cái retrieval trong cơ sở dữ liệu example của mọi người. Đó chính là"
+              },
+              {
+                "evidence_id": "transcript:day04-prompt-engineering-tool-calling-selected:t002294-002322",
+                "start_seconds": 2294.16,
+                "end_seconds": 2321.079,
+                "source_excerpt": "vì sao mà mọi người cần phải load example đúng chỗ. Thì đấy là những cái bài toán thực tế mà lúc mọi người thiết kế thì mọi người có thể suy nghĩ đến chứ không phải lúc nào mình cũng lo một cái example là đều có ờ chuyển khoản giữa A và B xong rồi ờ lại xong rồi chuyển tiền điện, chuyển tiền nước load hết một đống vào trong một cái crom dài bằng như thế sẽ rất dối"
+              },
+              {
+                "evidence_id": "transcript:day04-prompt-engineering-tool-calling-selected:t002318-002347",
+                "start_seconds": 2318.599,
+                "end_seconds": 2346.04,
+                "source_excerpt": "sẽ rất dối cho LM mà mình sẽ kỉ lốt. Ví dụ như là cái alo v cái đoạn tex page vào là dùng để trả tiền điện chẳng hạn thì tất nhiên là tiền điện là nó sẽ có một cái format khác đúng không? Thì lúc đấy mình sẽ phải load những cái example của trả tiền điện nào là mã khách hàng nào là công ty điện miền miền Bắc miền Trung miền Nam"
+              },
+              {
+                "evidence_id": "transcript:day04-prompt-engineering-tool-calling-selected:t002343-002372",
+                "start_seconds": 2343.68,
+                "end_seconds": 2371.88,
+                "source_excerpt": "gì đấy số tiền là bao nhiêu đó đúng không? Tức nó không phải là số tài khoản ngân hàng nữa để dùng không dùng tức là dùng cái bước retrieval của em ấy để em pể em p những cái example đúng với cái format ờ đúng"
+              },
+              {
+                "evidence_id": "transcript:day04-prompt-engineering-tool-calling-selected:t002369-002394",
+                "start_seconds": 2369.28,
+                "end_seconds": 2393.079,
+                "source_excerpt": "với cái format đầu vào chứ không phải lúc nào em cũng load cả một list các những cái example dài Hoằng nào là vừa truyền tiến cho người A, người B, người C, nào là ờ trả tiền điện, tiền nước, tiền học, tiền ăn, kiểu chi phí vé xe các thứ. Kiểu kiểu mỗi một loại chi phí nó sẽ có một cái format khác nhau ấy."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "4:generated_knowledge_prompting",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "generated_knowledge_prompting",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:placement_or_removal",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 4,
+        "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+        "kc_code": "generated_knowledge_prompting",
+        "kc_name_vi": "Generated knowledge prompting",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [
+          "remove_component",
+          "move_component"
+        ],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-20T17:12:09.924Z"
+      },
+      "kc": {
+        "code": "generated_knowledge_prompting",
+        "name_vi": "Generated knowledge prompting",
+        "description_vi": "Yêu cầu model liệt kê các fact liên quan trước rồi dùng chúng để trả lời; kỹ thuật có thể hỗ trợ cung cấp kiến thức trung gian nhưng cần cảnh giác với hallucination.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Đánh giá và áp dụng bước sinh fact trung gian với kiểm soát rủi ro bịa thông tin.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Có thể dùng generated knowledge khi phù hợp và kiểm tra fact trung gian trước khi dựa vào chúng.",
+        "bloom_rationale_vi": "Nguồn nêu cả quy trình liệt kê facts trước khi trả lời và cảnh báo hallucination.",
+        "knowledge_role": "extension_kc",
+        "granularity_reason_vi": "Tách vì kỹ thuật này có bước sinh kiến thức trung gian và failure mode hallucination riêng.",
+        "role_reason_vi": "Đây là kỹ thuật nâng cao có thể tái sử dụng nhưng không bắt buộc cho flow chính.",
+        "evidence_section_ids": [
+          "slide:day04-prompt-engineering-tool-calling-selected:p014"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p014",
+            "source_type": "slide",
+            "page_no": 14,
+            "content": "## Page 14: Các Kỹ Thuật “Cổ Điển” Sau Dòng Thời Gian\n### Text Extract\nCác Kỹ Thuật “Cổ Điển” Sau Dòng Thời Gian\n\n                      Kỹ thuật                 Gốc                 Ý tưởng / khi dùng\n\n                      Self-Consistency         Wang 2022           Lấy nhiều chuỗi CoT rồi vote — khi đáp án\n                                                                   là số/nhãn\n                      Least-to-Most            Zhou 2022           Chia bài toán khó thành các bước dễ, giải\n                                                                   tuần tự\n                      Generated       Knowl-   Liu 2021            Cho model liệt kê facts trước rồi trả lời (coi\n                      edge                                         chừng hallucinate)\n                      Tree-of-Thought          Yao 2023            Suy luận dạng cây + backtrack — chỉ cho\n                                                                   bài tìm kiếm, đắt\n                      ReAct                    Yao 2022            Reason + Act + Observe — nay đã thành\n                                                                   function calling\n                      PAL / PoT                Gao 2022            Model viết code, giao tính toán cho inter-\n                                                                   preter\n                      Prompt chaining          Wu 2022             Chuỗi nhiều lần gọi, mỗi bước nhận output\n                                                                   bước trước\n\n                                                     Origin papers — 2021–2023\n\n\nGiảng viên (VinUni)                                            AICB · Ngày 4                                        Tuần 1   10 / 49",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "4:tool_declaration_with_decorator",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tool_declaration_with_decorator",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:placement_or_removal",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 4,
+        "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+        "kc_code": "tool_declaration_with_decorator",
+        "kc_name_vi": "Khai báo tool bằng @tool",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [
+          "unsure",
+          "remove_component"
+        ],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:03:43.746Z"
+      },
+      "kc": {
+        "code": "tool_declaration_with_decorator",
+        "name_vi": "Khai báo tool bằng @tool",
+        "description_vi": "Với LangChain, tên hàm trở thành tên tool, docstring trở thành description model đọc và type hints tạo JSON schema cho tham số; tool nên trả về output gọn và có thể tái sử dụng.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Khai báo một hàm Python thành tool có schema và mô tả sử dụng rõ ràng.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Có thể viết hàm @tool với docstring hướng dẫn khi gọi, type hints đúng và output compact cho model.",
+        "bloom_rationale_vi": "Nguồn cung cấp code mẫu và ánh xạ rõ giữa tên hàm, docstring, type hints và schema.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi thiết kế schema vì đây là thao tác hiện thực hóa contract trong code, với failure mode là decorator, type hoặc docstring sai.",
+        "role_reason_vi": "Khai báo @tool là kỹ năng triển khai trực tiếp được nêu trong mục tiêu và lab.",
+        "evidence_section_ids": [
+          "slide:day04-prompt-engineering-tool-calling-selected:p035",
+          "slide:day04-prompt-engineering-tool-calling-selected:p047",
+          "slide:day04-prompt-engineering-tool-calling-selected:p049"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p035",
+            "source_type": "slide",
+            "page_no": 35,
+            "content": "## Page 35: Khai Báo Tool Bằng @tool: Docstring = Mô Tả, Type Hint = Schema\n### Text Extract\nKhai Báo Tool Bằng @tool: Docstring = Mô Tả, Type Hint = Schema\n\n\n\n\n      from langchain_core.tools import tool\n\n\n      @tool\n      def search_products(query: str, max_price: int, category: str = \"\") -> str:\n           \"\"\"Search products by keyword and max price.\n           Use when the user states what they want and a budget.\"\"\"\n           # call the data store; return compact text the model can reuse\n           return compact_json(results)\n\n\n\n\n Tên hàm → tên tool        •   docstring → description model đọc để biết KHI NÀO gọi   •   type hints → JSON schema\n tham số.\n\n\n\n\nGiảng viên (VinUni)                                              AICB · Ngày 4                              Tuần 1   27 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p047",
+            "source_type": "slide",
+            "page_no": 47,
+            "content": "## Page 47: Lab 4: Bạn Xây Gì?\n### Text Extract\nLab 4: Bạn Xây Gì?\n\n\n\n      Cùng cấu trúc với ShopBot ở Phần A: 1 system prompt + một chuỗi 3 tool + agent\n      dựng bằng create_agent, trả lời tiếng Việt grounded trong output tool.\n\n     ■ 3 tool: search_flights → calculate_budget → search_hotels\n     ■ 1 system prompt: thứ tự gọi tool, hỏi lại khi thiếu thông tin, từ chối yêu cầu nguy\n       hiểm, chỉ dùng giá từ tool, tiếng Việt\n     ■ Provider: Gemini (gemini-2.5-flash-lite); nộp: hoàn thiện src/agent/graph.py\n\n\n\n\n      TravelBuddy là một harness nhỏ bạn viết bằng prompt: 1 system prompt + 3 mô\n      tả tool (@tool docstring) + rule grounding + rule cho 4 hành vi — prompt engineering\n      ở quy mô agent.\n\n\nGiảng viên (VinUni)                           AICB · Ngày 4                        Tuần 1   36 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p049",
+            "source_type": "slide",
+            "page_no": 49,
+            "content": "## Page 49: 3 Tool Contract Của TravelBuddy (chuỗi phụ thuộc)\n### Text Extract\n3 Tool Contract Của TravelBuddy (chuỗi phụ thuộc)\n\n\n\n                      Tool                  Tham số chính                            Trả về (groundable)\n\n                      search_flights        origin,     destination,        depar-   danh sách chuyến bay +\n                                            ture_date, travelers                     giá\n                      calculate_budget      total_budget,      nights,    cheap-     ngân sách còn lại / đêm\n                                            est_flight_total, destination, travel-\n                                            ers\n                      search_hotels         city, max_price_per_night, prefer-       khách sạn hợp ngân\n                                            ences                                    sách\n\n   Mỗi tool = 1 hành động test được (granularity, §7). Chuỗi: search_flights → calculate_budget → search_hotels —\n                                mỗi tool cần output tool trước. Output gọn để model tái dùng.\n                                         Lab 4 tool contract — src/agent/graph.py\n\n\n\n\nGiảng viên (VinUni)                                         AICB · Ngày 4                                      Tuần 1   38 / 49",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "4:tool_use_control_flow_patterns",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tool_use_control_flow_patterns",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:placement_or_removal",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 4,
+        "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+        "kc_code": "tool_use_control_flow_patterns",
+        "kc_name_vi": "Chọn control flow cho tool use",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [
+          "move_component"
+        ],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:05:54.210Z"
+      },
+      "kc": {
+        "code": "tool_use_control_flow_patterns",
+        "name_vi": "Chọn control flow cho tool use",
+        "description_vi": "Conditional cho phép agent trả lời, hỏi lại hoặc gọi tool theo điều kiện; chaining chạy tuần tự khi tool sau cần output tool trước; parallel fetch plus merge chỉ dùng cho các tool độc lập.",
+        "item_form": "criterion",
+        "primary_capability_vi": "Thiết kế thứ tự và điều kiện gọi tool theo quan hệ dữ liệu và trạng thái task.",
+        "target_bloom_level": "analyze",
+        "bloom_learning_objective_vi": "Có thể phân tích dependency giữa các tool và chọn conditional, sequential chaining hoặc parallel merge phù hợp.",
+        "bloom_rationale_vi": "Nguồn mô tả ba pattern, ví dụ dependency chain và quy tắc không song song hóa khi có phụ thuộc dữ liệu.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Gộp ba pattern vì đây là một năng lực chọn control flow; từng pattern là biến thể của cùng quyết định dựa trên dependency và điều kiện.",
+        "role_reason_vi": "Tool calling được dạy như bài toán control flow và đây là năng lực trực tiếp cần cho agent lab.",
+        "evidence_section_ids": [
+          "slide:day04-prompt-engineering-tool-calling-selected:p040",
+          "slide:day04-prompt-engineering-tool-calling-selected:p041",
+          "slide:day04-prompt-engineering-tool-calling-selected:p049",
+          "slide:day04-prompt-engineering-tool-calling-selected:p050"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p040",
+            "source_type": "slide",
+            "page_no": 40,
+            "content": "## Page 40: Dependency Chain: Output Tool Trước Là Input Tool Sau\n### Text Extract\nDependency Chain: Output Tool Trước Là Input Tool Sau\n\n\n\n\n                                          price                               discounted total\n                      search_products               apply_discount                               calculate_shipping\n\n\n                        ra giá sản phẩm           cần giá → ra giá sau giảm                        cần tổng sau giảm\n                                                                                                     → ra phí ship\n\n\n\n\n      Lưu ý: Đây là sequential / chaining: tool sau cần output tool trước. Không thể song\n      song hoá khi có phụ thuộc dữ liệu.\n\n\n\n\nGiảng viên (VinUni)                                         AICB · Ngày 4                                              Tuần 1   31 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p041",
+            "source_type": "slide",
+            "page_no": 41,
+            "content": "## Page 41: 3 Tool-Use Patterns Thường Gặp\n### Text Extract\n3 Tool-Use Patterns Thường Gặp\n\n\n    1. Conditional: agent tự quyết định có cần tool hay trả lời trực tiếp / hỏi lại.\n         Cho agent tiêu chí quyết định rõ ràng: khi nào dùng tool nào.\n\n    2. Chaining (sequential): output tool A là input tool B (như sơ đồ trên) — chạy tuần\n       tự khi có phụ thuộc dữ liệu.\n    3. Parallel fetch + merge: các tool độc lập chạy cùng lúc rồi tổng hợp (vd: tra giá 2\n       danh mục song song).\n\n\n      Tool calling là bài toán control flow: khi nào gọi, gọi cái gì, theo thứ tự nào, làm gì\n      khi fail. Chỉ song song hoá khi không có phụ thuộc dữ liệu; có phụ thuộc thì giữ tuần\n      tự + merge/verify ở cuối.\n\n\n\nGiảng viên (VinUni)                                         AICB · Ngày 4              Tuần 1   32 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p049",
+            "source_type": "slide",
+            "page_no": 49,
+            "content": "## Page 49: 3 Tool Contract Của TravelBuddy (chuỗi phụ thuộc)\n### Text Extract\n3 Tool Contract Của TravelBuddy (chuỗi phụ thuộc)\n\n\n\n                      Tool                  Tham số chính                            Trả về (groundable)\n\n                      search_flights        origin,     destination,        depar-   danh sách chuyến bay +\n                                            ture_date, travelers                     giá\n                      calculate_budget      total_budget,      nights,    cheap-     ngân sách còn lại / đêm\n                                            est_flight_total, destination, travel-\n                                            ers\n                      search_hotels         city, max_price_per_night, prefer-       khách sạn hợp ngân\n                                            ences                                    sách\n\n   Mỗi tool = 1 hành động test được (granularity, §7). Chuỗi: search_flights → calculate_budget → search_hotels —\n                                mỗi tool cần output tool trước. Output gọn để model tái dùng.\n                                         Lab 4 tool contract — src/agent/graph.py\n\n\n\n\nGiảng viên (VinUni)                                         AICB · Ngày 4                                      Tuần 1   38 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p050",
+            "source_type": "slide",
+            "page_no": 50,
+            "content": "## Page 50: 3 Pattern Map Vào 4 Hành Vi Của Lab\n### Text Extract\n3 Pattern Map Vào 4 Hành Vi Của Lab\n\n\n\n\n    1. Conditional: case mơ hồ & case nguy hiểm ⇒ 0 tool (hỏi lại / từ chối).\n    2. Chaining: case bình thường ⇒ flights → budget → hotels (3 tool).\n    3. Budget thiếu: flights → budget rồi dừng (2 tool, không gợi ý khách sạn).\n\n\n\n\nGiảng viên (VinUni)                         AICB · Ngày 4                         Tuần 1   39 / 49",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "7:ai_data_inventory",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "ai_data_inventory",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:missing_rationale",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "ai_data_inventory",
+        "kc_name_vi": "Lập data inventory cho AI product",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:14:55.119Z"
+      },
+      "kc": {
+        "code": "ai_data_inventory",
+        "name_vi": "Lập data inventory cho AI product",
+        "description_vi": "Lập bảng nguồn dữ liệu gồm loại data, owner, freshness, PII và retrieval fit; ghi rõ nguồn gốc, category, ngày cập nhật và ngôn ngữ để làm cơ sở thiết kế pipeline.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Tạo data inventory có thể dùng để quyết định cách ingest và truy cập dữ liệu.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Có thể lập inventory cho một knowledge base nhỏ và điền các trường owner, source, freshness, PII, retrieval fit cùng metadata tối thiểu.",
+        "bloom_rationale_vi": "Nguồn cung cấp template inventory và yêu cầu lab cụ thể về nguồn, category, date, language, owner và retrieval fit.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Giữ như một procedure tổng hợp; các trường inventory là thuộc tính của cùng một deliverable, không phải năng lực độc lập.",
+        "role_reason_vi": "Đây là deliverable trực tiếp của lab và giúp kiểm soát các quyết định data strategy, governance và retrieval.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p005:l25-31",
+          "day07-data-foundations-embedding-vector-store:p049:l533-546",
+          "day07-data-foundations-embedding-vector-store:p054:l631-643",
+          "day07-data-foundations-embedding-vector-store:p056:l652-663"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p005:l25-31",
+            "source_type": "slide",
+            "page_no": 5,
+            "content": "## Page 5: Deliverable Cuối Ngày\nPage 5: Deliverable Cuối Ngày Text Extract Data inventory + chunking / embedding script + vector store index + semantic search demo + retrieval enabled answer function 1 bộ dữ liệu mẫu đã được chunk và index 1 script truy vấn semantic search có trả kết quả liên quan 1 hàm trả lời sử dụng context retrieve được thay vì hỏi LLM \"chay\"",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p049:l533-546",
+            "source_type": "slide",
+            "page_no": 49,
+            "content": "## Page 49: Lab Step 1: Chọn & Chuẩn Bị Data\nPage 49: Lab Step 1: Chọn & Chuẩn Bị Data Text Extract Yêu cầu tối thiểu 5 15 tài liệu (FAQ, SOP, policy) Mỗi tài liệu 1 5 trang Text đã extract sạch (không còn header/footer lặp) Ghi lại nguồn gốc mỗi file Metadata tối thiểu cần ghi source: tên file gốc category: domain / loại tài liệu date: ngày tạo hoặc cập nhật language: vi / en",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p054:l631-643",
+            "source_type": "slide",
+            "page_no": 54,
+            "content": "## Page 54: Deliverable Và Assessment\nPage 54: Deliverable Và Assessment Text Extract Deliverable Data inventory 1 trang Script chunk + embed + index Query demo với 3 câu hỏi test Mini answer function có dùng retrieved context Query có retrieve đúng tài liệu không? Metadata có giúp lọc tốt hơn không? Câu trả lời có grounded hơn baseline không? Có biết chỉ ra failure case không?",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p056:l652-663",
+            "source_type": "slide",
+            "page_no": 56,
+            "content": "## Page 56: Data Inventory - Mẫu Template\nPage 56: Data Inventory Mẫu Template Tables | Tài liệu | Loại | Owner | Freshness | PII? | Retrieval fit | | | | | | | | | FAQ v3.pdf | Knowledge | Support | Monthly | Không | Cao | | Order status API | Operational | Eng | Real time | Có | Thấp (API) | | User profile | Contextual | Product | Per session | Có | Inject trực tiếp | | Legal contracts | Knowledge | Legal | Quarterly | Có | Cao (cần mask) | Text Extract Template gợi ý điều chỉnh theo domain thực tế",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "7:ai_data_strategy_selection",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "ai_data_strategy_selection",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:evidence_visibility_or_version_mismatch",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "ai_data_strategy_selection",
+        "kc_name_vi": "Chiến lược chọn dữ liệu cho sản phẩm AI",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": "Not grounding",
+        "confirmed_at": "2026-08-21T15:16:25.008Z"
+      },
+      "kc": {
+        "code": "ai_data_strategy_selection",
+        "name_vi": "Chiến lược chọn dữ liệu cho sản phẩm AI",
+        "description_vi": "Xác định dữ liệu nào agent được phép biết và cần truy xuất, thay vì đưa toàn bộ dữ liệu vào hệ thống; ưu tiên dữ liệu đúng, sạch, cập nhật và truy cập được.",
+        "item_form": "criterion",
+        "primary_capability_vi": "Đánh giá và chọn tập dữ liệu phù hợp cho một use case AI cụ thể.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Có thể lập quyết định đưa hoặc không đưa một loại dữ liệu vào agent dựa trên giá trị, độ phù hợp, độ mới và rủi ro.",
+        "bloom_rationale_vi": "Nguồn yêu cầu chọn đúng dữ liệu, nhấn mạnh data quality và cảnh báo không nên nạp mọi thứ vào agent.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Giữ riêng như một criterion vì đây là quyết định cấp chiến lược, khác với việc phân loại hoặc xử lý từng loại dữ liệu.",
+        "role_reason_vi": "Đây là nguyên tắc nền tảng của bài học và ảnh hưởng trực tiếp đến thiết kế retrieval, memory và chất lượng answer.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p006:l32-35",
+          "day07-data-foundations-embedding-vector-store:p007:l36-47",
+          "day07-data-foundations-embedding-vector-store:p008:l48-65",
+          "day07-data-foundations-embedding-vector-store:p064:l760-768"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p006:l32-35",
+            "source_type": "slide",
+            "page_no": 6,
+            "content": "## Page 6: Data Strategy Cho Sản Phẩm AI\nPage 6: Data Strategy Cho Sản Phẩm AI Text Extract Không phải dữ liệu nào cũng nên đưa vào agent; chọn đúng dữ liệu quan trọng hơn nạp thật nhiều",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p007:l36-47",
+            "source_type": "slide",
+            "page_no": 7,
+            "content": "## Page 7: Vì Sao Day 07 Quan Trọng Với AI Product?\nPage 7: Vì Sao Day 07 Quan Trọng Với AI Product? Image Caption Biểu đồ cột bên trái cho thấy AI adoption tăng nhanh qua 2023 và 2024. Các cột so sánh AI use và GenAI theo phần trăm / $B. Bên phải nhấn mạnh: khi tổ chức dùng AI nhiều hơn, câu hỏi chuyển từ “dùng model nào” sang “agent được phép biết gì”. Nếu dữ liệu sai, cũ, bẩn, hoặc không truy được đúng lúc, output sẽ yếu dù model mạnh. Text Extract AI adoption đã tăng rất nhanh. Khi tổ chức dùng AI nhiều hơn, câu hỏi chuyển từ \"dùng model nào\" sang \"agent được phép biết gì\". Nếu dữ liệu sai, cũ, bẩn, hoặc không truy được đúng lúc, output sẽ yếu dù model mạnh.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p008:l48-65",
+            "source_type": "slide",
+            "page_no": 8,
+            "content": "## Page 8: Garbage In, Garbage Out - Tại Sao Data Quyết Định Output\nPage 8: Garbage In, Garbage Out Tại Sao Data Quyết Định Output Text Extract Dữ liệu bẩn / thiếu PDF scan lỗi OCR Policy cũ 2 năm chưa cập nhật Chunk cắt giữa câu Không có metadata Kết quả: Agent hallucinate, trả lời sai, user mất niềm tin. Dữ liệu sạch / đầy đủ Text đã chuẩn hóa, metadata đầy đủ Nguồn rõ ràng, có version Chunk theo section hợp lý Filter theo category + freshness Kết quả: Retrieve đúng, answer grounded, có trích nguồn. Lưu ý: Đổi model đắt hơn không sửa được data bẩn. Hãy sửa data trước.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p064:l760-768",
+            "source_type": "slide",
+            "page_no": 64,
+            "content": "## Page 64: Quay Lại Câu Hỏi Đầu Bài\nPage 64: Quay Lại Câu Hỏi Đầu Bài Text Extract \"Agent trả lời sai vì model yếu, hay vì nó không có đúng dữ liệu để suy luận?\" Hầu hết trường hợp: vì data, không phải vì model. Data bẩn + chunk sai + không metadata → model mạnh nhất cũng hallucinate. Pipeline tốt (clean → chunk → embed → store → retrieve → inject) giải quyết 80% vấn đề. Đầu tư vào data quality và retrieval pipeline trước khi nghĩ đến đổi model.",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "7:data_quality_first_retrieval_principle",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "data_quality_first_retrieval_principle",
+      "status": "quarantined",
+      "reason": "revision_not_actionable:naming_or_content",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "data_quality_first_retrieval_principle",
+        "kc_name_vi": "Ưu tiên chất lượng dữ liệu trước đổi model",
+        "decision": "revise",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 3
+        },
+        "importance_level": null,
+        "suggested_actions": [
+          "edit_content",
+          "rename_component"
+        ],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:16:50.083Z"
+      },
+      "kc": {
+        "code": "data_quality_first_retrieval_principle",
+        "name_vi": "Ưu tiên chất lượng dữ liệu trước đổi model",
+        "description_vi": "Retrieval và answer bị giới hạn bởi dữ liệu bẩn, thiếu, cũ, OCR lỗi, chunk sai hoặc thiếu metadata; đổi sang model đắt hơn không tự sửa được các lỗi đầu vào.",
+        "item_form": "principle",
+        "primary_capability_vi": "Chẩn đoán và ưu tiên remediation cho lỗi chất lượng dữ liệu trong hệ thống AI.",
+        "target_bloom_level": "analyze",
+        "bloom_learning_objective_vi": "Có thể phân tích một answer kém chất lượng để xác định khi nào cần sửa data, chunking hoặc metadata trước khi đổi model.",
+        "bloom_rationale_vi": "Nguồn đưa ra so sánh trước/sau khi clean cùng model và nêu rõ data quality thường quan trọng hơn model đắt.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi data quality pyramid vì pyramid mô tả các tầng xử lý, còn item này là nguyên tắc chẩn đoán nguyên nhân và thứ tự ưu tiên remediation.",
+        "role_reason_vi": "Đây là thông điệp trung tâm của bài và là cách tư duy cần dùng khi debug retrieval.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p008:l48-65",
+          "day07-data-foundations-embedding-vector-store:p014:l140-159",
+          "day07-data-foundations-embedding-vector-store:p064:l760-768",
+          "day07-data-foundations-embedding-vector-store:p067:l780-791"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p008:l48-65",
+            "source_type": "slide",
+            "page_no": 8,
+            "content": "## Page 8: Garbage In, Garbage Out - Tại Sao Data Quyết Định Output\nPage 8: Garbage In, Garbage Out Tại Sao Data Quyết Định Output Text Extract Dữ liệu bẩn / thiếu PDF scan lỗi OCR Policy cũ 2 năm chưa cập nhật Chunk cắt giữa câu Không có metadata Kết quả: Agent hallucinate, trả lời sai, user mất niềm tin. Dữ liệu sạch / đầy đủ Text đã chuẩn hóa, metadata đầy đủ Nguồn rõ ràng, có version Chunk theo section hợp lý Filter theo category + freshness Kết quả: Retrieve đúng, answer grounded, có trích nguồn. Lưu ý: Đổi model đắt hơn không sửa được data bẩn. Hãy sửa data trước.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p014:l140-159",
+            "source_type": "slide",
+            "page_no": 14,
+            "content": "## Page 14: Ví Dụ: Data Quality Ảnh Hưởng Retrieval Như Thế Nào?\nPage 14: Ví Dụ: Data Quality Ảnh Hưởng Retrieval Như Thế Nào? Text Extract Trước khi clean Query: \"thời hạn đổi trả\" Top 1 retrieved: \"...trang 3... header lặp... mục lục... 30 ngày... xem thêm trang 7...\" Answer: Hallucinate vì context quá nhiễu, agent lấy thông tin sai. Sau khi clean + chunk Query: \"thời hạn đổi trả\" Top 1 retrieved: \"Khách hàng có 30 ngày kể từ ngày nhận hàng để yêu cầu đổi trả. Sản phẩm phải còn nguyên seal.\" Answer: Chính xác, grounded, có trích nguồn. Cùng một model, cùng một query chỉ khác data quality đã tạo ra kết quả hoàn toàn khác.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p064:l760-768",
+            "source_type": "slide",
+            "page_no": 64,
+            "content": "## Page 64: Quay Lại Câu Hỏi Đầu Bài\nPage 64: Quay Lại Câu Hỏi Đầu Bài Text Extract \"Agent trả lời sai vì model yếu, hay vì nó không có đúng dữ liệu để suy luận?\" Hầu hết trường hợp: vì data, không phải vì model. Data bẩn + chunk sai + không metadata → model mạnh nhất cũng hallucinate. Pipeline tốt (clean → chunk → embed → store → retrieve → inject) giải quyết 80% vấn đề. Đầu tư vào data quality và retrieval pipeline trước khi nghĩ đến đổi model.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p067:l780-791",
+            "source_type": "slide",
+            "page_no": 67,
+            "content": "## Page 67: Mental Model: Từ Data Đến Grounded Answer\nPage 67: Mental Model: Từ Data Đến Grounded Answer Image Caption Sơ đồ nhân quả từ trái sang phải: Clean Data → Smart Chunks → Rich Embeddings → Indexed Store → Grounded Answer . Các nhãn trên mũi tên lần lượt là quality, structure, meaning. Cảnh báo: mỗi bước yếu sẽ kéo toàn bộ pipeline xuống; cần đầu tư đều vào từng bước thay vì chỉ tối ưu phần cuối. Text Extract quality structure meaning Lưu ý: Mỗi bước yếu sẽ kéo toàn bộ pipeline xuống. Hãy đầu tư đều vào từng bước thay vì chỉ tối ưu phần cuối.",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "7:embedding_generation_pipeline",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "embedding_generation_pipeline",
+      "status": "quarantined",
+      "reason": "revision_not_actionable:naming_or_content",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "embedding_generation_pipeline",
+        "kc_name_vi": "Pipeline tạo embedding bên trong model",
+        "decision": "revise",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 3
+        },
+        "importance_level": null,
+        "suggested_actions": [
+          "rename_component"
+        ],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:11:45.778Z"
+      },
+      "kc": {
+        "code": "embedding_generation_pipeline",
+        "name_vi": "Pipeline tạo embedding bên trong model",
+        "description_vi": "Text đi qua tokenize thành subword units, transformer layers dùng self-attention, pooling gom biểu diễn token thành một vector; contrastive learning kéo câu tương tự lại gần và đẩy câu khác nghĩa ra xa.",
+        "item_form": "concept",
+        "primary_capability_vi": "Mô tả các giai đoạn chính tạo ra embedding và vai trò của chúng.",
+        "target_bloom_level": "understand",
+        "bloom_learning_objective_vi": "Có thể trình bày luồng Input Text → Tokenize → Transformer → Pooling → Output Vector và giải thích mục đích của từng giai đoạn.",
+        "bloom_rationale_vi": "Nguồn mô tả chi tiết pipeline dưới hood, tokenizer, self-attention, pooling và contrastive learning.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Gộp tokenizer, transformer, pooling và training vì chúng là các thành phần liên tiếp của cùng một cơ chế; không tách thành các KC nhỏ hơn.",
+        "role_reason_vi": "Mục tiêu bài học nhấn mạnh embedding không chỉ là một API call.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p029:l314-325"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p029:l314-325",
+            "source_type": "slide",
+            "page_no": 29,
+            "content": "## Page 29: Embedding Dưới Hood - Không Chỉ Là API Call\nPage 29: Embedding Dưới Hood Không Chỉ Là API Call Image Caption Pipeline tạo embedding: Input Text → Tokenize → Transformer Layers → Pooling → Output Vector . Tokenizer chia text thành subword units; Transformer layers dùng self attention; Pooling gom token representations thành 1 vector. Training dùng contrastive learning để câu giống nhau gần, câu khác nhau xa. Text Extract Tokenizer: chia text thành subword units (BPE / SentencePiece) Transformer layers: self attention giúp mỗi token \"nhìn\" toàn bộ context Pooling: gom tất cả token representations thành 1 vector duy nhất Training: contrastive learning câu giống nhau gần, câu khác nhau xa",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "7:embedding_model_selection",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "embedding_model_selection",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:evidence_visibility_or_version_mismatch",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "embedding_model_selection",
+        "kc_name_vi": "Chọn embedding model theo use case",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": "Không thấy grouding",
+        "confirmed_at": "2026-08-21T15:09:10.961Z"
+      },
+      "kc": {
+        "code": "embedding_model_selection",
+        "name_vi": "Chọn embedding model theo use case",
+        "description_vi": "Lựa chọn model dựa trên quality, latency, storage/dimension, chi phí và language coverage; không chọn chỉ theo benchmark score và không có model tốt nhất cho mọi use case.",
+        "item_form": "criterion",
+        "primary_capability_vi": "Đánh giá trade-off và chọn embedding model cho bối cảnh sản phẩm.",
+        "target_bloom_level": "evaluate",
+        "bloom_learning_objective_vi": "Có thể so sánh các lựa chọn embedding model theo yêu cầu chất lượng, tốc độ, chi phí, kích thước lưu trữ và ngôn ngữ.",
+        "bloom_rationale_vi": "Nguồn nêu rõ các tiêu chí lựa chọn và trade-off fast, balanced, high quality; bảng model chỉ minh họa việc chọn theo use case.",
+        "knowledge_role": "extension_kc",
+        "granularity_reason_vi": "Gộp các model và thuộc tính dimensions/token limit vì đây là dữ liệu tham chiếu phục vụ cùng một quyết định lựa chọn.",
+        "role_reason_vi": "Năng lực hữu ích trong triển khai thực tế nhưng lab ngày học không yêu cầu benchmark hoặc tối ưu model.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p026:l274-285",
+          "day07-data-foundations-embedding-vector-store:p027:l286-298"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p026:l274-285",
+            "source_type": "slide",
+            "page_no": 26,
+            "content": "## Page 26: Benchmark Framing: Quality, Speed, Size\nPage 26: Benchmark Framing: Quality, Speed, Size Image Caption Biểu đồ trade off giữa Điểm benchmark và Tốc độ . Ba nhóm model/thiết lập được đặt trên đường chéo: Fast / low cost , Balanced , High quality . Thông điệp: không có model embedding tốt nhất cho mọi use case; cần chọn theo quality, latency, storage, language coverage. Với product thực tế, model cân bằng thường tốt hơn model mạnh nhất nhưng chậm và đắt. Text Extract Không có model embedding \"tốt nhất\" cho mọi use case. Chọn model theo quality, latency, storage, language coverage. Với product thực tế, một model cân bằng thường tốt hơn model mạnh nhất nhưng chậm và đắt.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p027:l286-298",
+            "source_type": "slide",
+            "page_no": 27,
+            "content": "## Page 27: Các Embedding Model Phổ Biến (2025-2026)\nPage 27: Các Embedding Model Phổ Biến (2025 2026) Tables | Model | Dims | Max tokens | Provider | Ghi chú | | | | | | | | text embedding 3 small | 1536 | 8191 | OpenAI | Rẻ, nhanh, baseline tốt | | text embedding 3 large | 3072 | 8191 | OpenAI | Quality cao hơn | | voyage 3 | 1024 | 32000 | Voyage AI | Code & multilingual mạnh | | Cohere embed v4 | 1024 | 512 | Cohere | Multilingual, search tuned | | bge m3 | 1024 | 8192 | BAAI (open) | Open source, MTEB top tier | Text Extract Chọn model theo use case, không chỉ theo MTEB score",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "7:grounded_answer_source_fallback",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "grounded_answer_source_fallback",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:missing_rationale",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "grounded_answer_source_fallback",
+        "kc_name_vi": "Đánh giá câu trả lời grounded và fallback",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:13:49.342Z"
+      },
+      "kc": {
+        "code": "grounded_answer_source_fallback",
+        "name_vi": "Đánh giá câu trả lời grounded và fallback",
+        "description_vi": "Câu trả lời cần dựa trên retrieved source, có thể chỉ ra nguồn để người dùng kiểm chứng và phải fallback rõ ràng khi không tìm thấy thông tin thay vì bịa.",
+        "item_form": "criterion",
+        "primary_capability_vi": "Kiểm tra tính grounded, khả năng cite nguồn và hành vi fallback của answer.",
+        "target_bloom_level": "evaluate",
+        "bloom_learning_objective_vi": "Có thể đánh giá một answer so với context nguồn, xác định hallucination và kiểm tra câu trả lời có fallback khi thiếu thông tin.",
+        "bloom_rationale_vi": "Nguồn đối chiếu LLM chay với RAG-enhanced, yêu cầu cite nguồn, fallback và không chấp nhận câu trả lời chỉ nghe hay.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi thao tác retrieve/inject vì đánh giá output là task kiểm định với failure signal là unsupported claim hoặc thiếu citation.",
+        "role_reason_vi": "Groundedness và trustworthiness là kết quả học tập trực tiếp của retrieval-enabled answer.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p043:l463-478",
+          "day07-data-foundations-embedding-vector-store:p053:l609-630",
+          "day07-data-foundations-embedding-vector-store:p055:l644-651",
+          "day07-data-foundations-embedding-vector-store:p063:l745-759"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p043:l463-478",
+            "source_type": "slide",
+            "page_no": 43,
+            "content": "## Page 43: So Sánh: LLM Chay vs RAG-Enhanced\nPage 43: So Sánh: LLM Chay vs RAG Enhanced Text Extract LLM Chay (No Retrieval) Chỉ dựa vào training data Dễ hallucinate với domain specific Không cite được nguồn cụ thể Không cập nhật được data mới RAG Enhanced Grounded trên dữ liệu thật Giảm hallucination đáng kể Trích nguồn cho user verify Cập nhật bằng re index, không retrain RAG thêm latency (retrieve step) và complexity (pipeline), nhưng đổi lại accuracy và trustworthiness cao hơn nhiều.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p053:l609-630",
+            "source_type": "slide",
+            "page_no": 53,
+            "content": "## Page 53: Lab Step 5: Answer Function Có Retrieved Context\nPage 53: Lab Step 5: Answer Function Có Retrieved Context Text Extract python def answer with context(query, collection, model=\"gpt 4o mini\"): results = collection.query(query texts=[query], n results=3) context = \"\\n \\n\".join(results[\"documents\"][0]) response = client ai.chat.completions.create( model=model, messages=[{ \"role\": \"user\", \"content\": f\"\"\"Dua tren nguon sau, tra loi ngan gon. Neu khong tim thay, noi 'Khong co thong tin'. \"Dựa trên nguồn sau, trả lời ngắn gọn. Nếu không tìm thấy, nói 'Không có thông tin'.\" Nguon: {context} Cau hoi: {query}\"\"\" }] ) return response.choices[0].message.content",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p055:l644-651",
+            "source_type": "slide",
+            "page_no": 55,
+            "content": "## Page 55: Checklist Trước Khi Chốt Lab\nPage 55: Checklist Trước Khi Chốt Lab Text Extract Dữ liệu có owner và source rõ ràng Metadata có ít nhất 2 trường hữu ích Chunking có lý do, không cắt bừa theo số ký tự Có test query semantic, không chỉ test exact keyword Không chấp nhận câu trả lời nghe hay nhưng không chỉ ra được nguồn",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p063:l745-759",
+            "source_type": "slide",
+            "page_no": 63,
+            "content": "## Page 63: Ví Dụ End-to-End: Customer Support Bot\nPage 63: Ví Dụ End to End: Customer Support Bot Image Caption Pipeline end to end từ User Query đến Response + Sources qua Intent Router , Retrieve (Vector DB) , Rerank + Filter , Generate (LLM) . Nguồn dữ liệu gồm knowledge, operational, contextual data. Cấu hình nhấn mạnh chunking theo section heading, metadata như category/language/version, eval với 20 test queries, và fallback khi không tìm thấy thông tin. Text Extract Knowledge data: FAQ đổi trả, chính sách bảo hành, hướng dẫn sử dụng Operational data: trạng thái đơn hàng (qua API) Contextual data: lịch sử chat, user tier (VIP/regular) Chunking: theo section heading Metadata: category, l",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "7:metadata_guided_retrieval",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "metadata_guided_retrieval",
+      "status": "quarantined",
+      "reason": "revision_not_actionable:missing_rationale",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "metadata_guided_retrieval",
+        "kc_name_vi": "Dùng metadata để kiểm soát retrieval",
+        "decision": "revise",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:15:28.658Z"
+      },
+      "kc": {
+        "code": "metadata_guided_retrieval",
+        "name_vi": "Dùng metadata để kiểm soát retrieval",
+        "description_vi": "Kết hợp semantic similarity với metadata như source, category, freshness, access level và section/chunk id để truy vết nguồn, lọc domain, tránh tài liệu cũ, giới hạn quyền và cite chính xác.",
+        "item_form": "principle",
+        "primary_capability_vi": "Thiết kế metadata và kết hợp metadata filtering với semantic search.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Có thể chọn các trường metadata hữu ích và giải thích chúng cải thiện relevance, freshness, access control hoặc citation như thế nào.",
+        "bloom_rationale_vi": "Nguồn nêu rõ từng trường metadata và kết luận retrieval tốt cần semantic similarity kết hợp metadata filtering.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Gộp các trường metadata vì chúng là các thuộc tính phục vụ cùng một nguyên tắc retrieval; tác dụng riêng của từng trường là ví dụ ứng dụng.",
+        "role_reason_vi": "Metadata là năng lực trọng tâm của vector store và được đánh giá trực tiếp trong lab.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p031:l330-335",
+          "day07-data-foundations-embedding-vector-store:p032:l336-348",
+          "day07-data-foundations-embedding-vector-store:p054:l631-643"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p031:l330-335",
+            "source_type": "slide",
+            "page_no": 31,
+            "content": "## Page 31: Vector Store Lưu Những Gì?\nPage 31: Vector Store Lưu Những Gì? Image Caption Sơ đồ từ Original chunk → Embedding vector → Metadata → Search results . Vector store giữ text gốc để inject lại vào prompt, vector phục vụ semantic similarity, metadata gồm source/owner/date/ACL/section. Kết quả truy xuất là top k chunks kèm scores và filters.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p032:l336-348",
+            "source_type": "slide",
+            "page_no": 32,
+            "content": "## Page 32: Metadata Quan Trọng Không Kém Similarity\nPage 32: Metadata Quan Trọng Không Kém Similarity Tables | Trường metadata | Ví dụ | Tác dụng | | | | | | Source / file name | refund policy v3.pdf | truy vết và hiển thị nguồn | | Category | finance, support, legal | lọc đúng domain trước khi search | | Time / freshness | 2026 03 01 | tránh dùng nội dung cũ | | Access level | public internal, restricted | giới hạn truy cập | | Section / chunk id | returns.section.4 | debug và cite chính xác hơn | Text Extract Retrieval tốt cần semantic similarity kết hợp metadata filtering",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p054:l631-643",
+            "source_type": "slide",
+            "page_no": 54,
+            "content": "## Page 54: Deliverable Và Assessment\nPage 54: Deliverable Và Assessment Text Extract Deliverable Data inventory 1 trang Script chunk + embed + index Query demo với 3 câu hỏi test Mini answer function có dùng retrieved context Query có retrieve đúng tài liệu không? Metadata có giúp lọc tốt hơn không? Câu trả lời có grounded hơn baseline không? Có biết chỉ ra failure case không?",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "7:retrieval_vs_memory",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "retrieval_vs_memory",
+      "status": "quarantined",
+      "reason": "revision_not_actionable:naming_or_content",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "retrieval_vs_memory",
+        "kc_name_vi": "Phân biệt retrieval và memory",
+        "decision": "revise",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 2
+        },
+        "importance_level": null,
+        "suggested_actions": [
+          "rename_component"
+        ],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:17:44.693Z"
+      },
+      "kc": {
+        "code": "retrieval_vs_memory",
+        "name_vi": "Phân biệt retrieval và memory",
+        "description_vi": "Retrieval tìm domain context liên quan cho câu hỏi hiện tại, tập trung vào relevance và grounding; memory lưu trạng thái, sở thích và lịch sử chọn lọc, tập trung vào continuity và personalization.",
+        "item_form": "concept",
+        "primary_capability_vi": "Phân biệt mục đích và nguồn dữ liệu của retrieval với memory trong một agent.",
+        "target_bloom_level": "analyze",
+        "bloom_learning_objective_vi": "Có thể quyết định một thông tin nên được xử lý như retrieved knowledge hay user memory và giải thích lý do.",
+        "bloom_rationale_vi": "Nguồn đặt hai cơ chế cạnh nhau theo mục đích, loại dữ liệu và cách sử dụng, đồng thời mô tả cách kết hợp chúng.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi short/long-term memory vì trục phân biệt ở đây là chức năng grounding so với personalization, không phải vị trí lưu trữ.",
+        "role_reason_vi": "Năng lực này giúp tránh gọi mọi dữ liệu được lưu là memory và thiết kế đúng kiến trúc agent.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p018:l184-199",
+          "day07-data-foundations-embedding-vector-store:p020:l213-221",
+          "day07-data-foundations-embedding-vector-store:p041:l434-447"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p018:l184-199",
+            "source_type": "slide",
+            "page_no": 18,
+            "content": "## Page 18: Short-term Memory vs Long-term Memory\nPage 18: Short term Memory vs Long term Memory Text Extract Short term Memory Nằm trong context window Giữ lịch sử gần đây và task hiện tại Rẻ để dùng, nhưng dễ đầy token Phù hợp cho session logic ngắn Long term Memory Nằm ngoài context window Thường là vector store, DB, profile store Phải truy xuất khi cần Phù hợp cho tri thức tích lũy và user history chọn lọc Context window không phải là vector store. Agent chỉ \"nhớ dài hạn\" khi có cơ chế truy xuất hoặc lưu trữ bên ngoài.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p020:l213-221",
+            "source_type": "slide",
+            "page_no": 20,
+            "content": "## Page 20: Cái Gì Không Nên Gọi Là Memory?\nPage 20: Cái Gì Không Nên Gọi Là Memory? Text Extract Một prompt dài hơn không tự biến thành memory. Một file PDF upload một lần không phải memory nếu agent không truy được lại có chủ đích. Toàn bộ chat history không phải lúc nào cũng đáng inject. \"Lưu cho chắc\" thường tạo ra context nhiễu hơn là context hữu ích. Memory là data + policy + retrieval. Thiếu một trong ba thứ đó thì hệ thống khó ổn định.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p041:l434-447",
+            "source_type": "slide",
+            "page_no": 41,
+            "content": "## Page 41: Retrieval Khác Gì Memory?\nPage 41: Retrieval Khác Gì Memory? Text Extract Retrieval tìm context liên quan cho câu hỏi hiện tại thường đọc từ knowledge base trọng tâm là relevance và grounding Memory lưu trạng thái, sở thích, lịch sử chọn lọc có thể từ user profile hoặc interaction history trọng tâm là continuity và personalization Lưu ý: Nhiều hệ thống dùng cả hai: retrieval để biết domain facts, memory để biết user này là ai và đã làm gì trước đó.",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "7:vector_database_selection",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "vector_database_selection",
+      "status": "quarantined",
+      "reason": "revision_not_actionable:naming_or_content",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "vector_database_selection",
+        "kc_name_vi": "Chọn vector database theo giai đoạn sản phẩm",
+        "decision": "revise",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 3
+        },
+        "importance_level": null,
+        "suggested_actions": [
+          "rename_component"
+        ],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": "sai ở \"giai đoạn\""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:09:44.588Z"
+      },
+      "kc": {
+        "code": "vector_database_selection",
+        "name_vi": "Chọn vector database theo giai đoạn sản phẩm",
+        "description_vi": "Chọn Chroma, Pinecone, Weaviate, Qdrant, pgvector hoặc FAISS theo yêu cầu hosting, ngôn ngữ, filtering, scale, SQL integration và mục đích prototype, production hay research.",
+        "item_form": "criterion",
+        "primary_capability_vi": "Đánh giá lựa chọn vector database theo yêu cầu vận hành.",
+        "target_bloom_level": "evaluate",
+        "bloom_learning_objective_vi": "Có thể chọn loại vector database phù hợp cho prototype hoặc production dựa trên scale, filtering và yêu cầu kiểm soát hạ tầng.",
+        "bloom_rationale_vi": "Nguồn cung cấp bảng so sánh theo hosting, language, filtering, scale và best-for, cùng nguyên tắc chọn theo giai đoạn sản phẩm.",
+        "knowledge_role": "extension_kc",
+        "granularity_reason_vi": "Gộp các database và thuộc tính vì chúng chỉ là các phương án trong cùng một quyết định kiến trúc.",
+        "role_reason_vi": "Năng lực này hữu ích khi triển khai nhưng ngày học chỉ yêu cầu hiểu trade-off, không phải trọng tâm mastery.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p034:l358-371"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p034:l358-371",
+            "source_type": "slide",
+            "page_no": 34,
+            "content": "## Page 34: Vector Database Landscape\nPage 34: Vector Database Landscape Tables | DB | Hosting | Language | Filtering | Scale | Best for | | | | | | | | | Chroma | Local | Python | Basic | Small | Prototype, học tập | | Pinecone | Cloud | Any | Tốt | Large | Production SaaS | | Weaviate | Hybrid | Any | Tốt | Large | Hybrid search | | Qdrant | Hybrid | Rust | Rất tốt | Large | Filtering phức tạp | | pgvector | DB addon | SQL | SQL where | Medium | Team đã dùng Postgres | | FAISS | Local lib | C++/Py | Không | Any | Research, benchmark | Text Extract Chọn DB theo giai đoạn sản phẩm và yêu cầu vận hành",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "7:vector_store_data_model",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "vector_store_data_model",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:placement_or_removal",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "vector_store_data_model",
+        "kc_name_vi": "Mô hình dữ liệu của vector store",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [
+          "move_component"
+        ],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:15:15.672Z"
+      },
+      "kc": {
+        "code": "vector_store_data_model",
+        "name_vi": "Mô hình dữ liệu của vector store",
+        "description_vi": "Vector store lưu đồng thời original chunk, embedding vector và metadata như source, owner, date, ACL, section; kết quả truy xuất gồm các chunk top-k, score và thông tin filter.",
+        "item_form": "concept",
+        "primary_capability_vi": "Mô tả những gì vector store lưu và trả về cho retrieval.",
+        "target_bloom_level": "understand",
+        "bloom_learning_objective_vi": "Có thể giải thích vai trò của text gốc, vector và metadata trong một bản ghi vector store.",
+        "bloom_rationale_vi": "Nguồn mô tả trực tiếp data model và luồng Original chunk → Embedding vector → Metadata → Search results.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Gộp text, vector, metadata và search result vì chúng tạo thành một đơn vị dữ liệu và vòng truy xuất hoàn chỉnh.",
+        "role_reason_vi": "Đây là kiến thức cốt lõi để triển khai index và inject context.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p030:l326-329",
+          "day07-data-foundations-embedding-vector-store:p031:l330-335"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p030:l326-329",
+            "source_type": "slide",
+            "page_no": 30,
+            "content": "## Page 30: Vector Store\nPage 30: Vector Store Text Extract Vector store không chỉ lưu vector; nó lưu cả nguồn, metadata, và khả năng lọc để retrieval có ngữ cảnh đúng",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p031:l330-335",
+            "source_type": "slide",
+            "page_no": 31,
+            "content": "## Page 31: Vector Store Lưu Những Gì?\nPage 31: Vector Store Lưu Những Gì? Image Caption Sơ đồ từ Original chunk → Embedding vector → Metadata → Search results . Vector store giữ text gốc để inject lại vào prompt, vector phục vụ semantic similarity, metadata gồm source/owner/date/ACL/section. Kết quả truy xuất là top k chunks kèm scores và filters.",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:human_in_the_loop_placement",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "human_in_the_loop_placement",
+      "status": "quarantined",
+      "reason": "reviewer_conflict_needs_adjudication",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "human_in_the_loop_placement",
+        "kc_name_vi": "Đặt human-in-the-loop trong graph",
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:28:00.666Z",
+        "disagreement": {
+          "kc_key": "9:human_in_the_loop_placement",
+          "reviewer-01": {
+            "decision": "reject",
+            "scores": {
+              "accuracy": 1,
+              "granularity": 1,
+              "naming_clarity": 1
+            }
+          },
+          "reviewer-02": {
+            "decision": "pass",
+            "scores": {
+              "accuracy": 4,
+              "granularity": 4,
+              "naming_clarity": 4
+            }
+          }
+        }
+      },
+      "kc": {
+        "code": "human_in_the_loop_placement",
+        "name_vi": "Đặt human-in-the-loop trong graph",
+        "description_vi": "Chèn human review khi task rủi ro cao, confidence thấp, tool action có side effect không đảo ngược, output sắp gửi ra ngoài hoặc intent chưa rõ; graph interrupt để chờ approve, giữ state và ghi quyết định human vào trace.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Xác định điểm cần human oversight và triển khai handoff có thể tiếp tục trong graph.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Chọn điều kiện human review và mô tả cách interrupt, tiếp tục state và log quyết định của người.",
+        "bloom_rationale_vi": "Nguồn nêu các trigger cụ thể và quy trình implement human review trong LangGraph.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi security và reliability vì đây là cơ chế escalation sang người với state continuity và điều kiện rủi ro riêng.",
+        "role_reason_vi": "Bài nhấn mạnh multi-agent không đồng nghĩa full autonomy và yêu cầu biết khi nào hệ nên dừng.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p024:l207-224",
+          "day09-multi-agent-mcp-a2a:p047:l456-470",
+          "day09-multi-agent-mcp-a2a:p049:l486-490",
+          "day09-multi-agent-mcp-a2a:p052:l545-562"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p024:l207-224",
+            "source_type": "slide",
+            "page_no": 24,
+            "content": "## Page 24: Supervisor Làm Gì, Worker Làm Gì?\nPage 24: Supervisor Làm Gì, Worker Làm Gì? Text Extract Supervisor phân tích yêu cầu ban đầu quyết định worker nào nên tham gia theo dõi trạng thái và retry nếu cần tổng hợp đầu ra cuối cùng biết khi nào cần human review Worker xử lý một năng lực hẹp nhận input rõ ràng, trả output rõ ràng càng stateless càng dễ test thất bại cục bộ không làm hỏng cả kiến trúc có thể được thay thế mà không ảnh hưởng supervisor Supervisor giữ decision flow; worker giữ domain skill. Đừng để một worker vừa làm việc hẹp vừa bí mật điều phối cả hệ thống.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p047:l456-470",
+            "source_type": "slide",
+            "page_no": 47,
+            "content": "## Page 47: LangGraph Đóng Vai Trò Gì?\nPage 47: LangGraph Đóng Vai Trò Gì? Text Extract Biến hệ multi agent thành graph gồm nodes, edges, và state. Tách rõ node nào làm việc gì và khi nào route sang node nào. Giúp hệ thống bớt phụ thuộc vào một prompt điều phối khổng lồ. Hỗ trợ persistence: state có thể được lưu và tiếp tục. Hỗ trợ human in the loop tại bất kỳ điểm nào. Khung nhớ nhanh node = ai làm edge = đi đâu tiếp state = hệ đang biết gì Ba khái niệm này là toàn bộ LangGraph bạn cần cho Day 09.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p049:l486-490",
+            "source_type": "slide",
+            "page_no": 49,
+            "content": "## Page 49: LangGraph Routing Diagram\nPage 49: LangGraph Routing Diagram Image Caption Sơ đồ routing có nhãn \"conditional edges\". Luồng chính: \"Input State\" \"Supervisor\"; từ Supervisor có các mũi tên điều kiện nét đứt (nhãn \"cond\") tới ba node \"Retrieval W.\", \"Tool W.\", \"Synthesis W.\". Node \"Retrieval W.\" dẫn xuống \"Synthesis W.\"; \"Synthesis W.\" dẫn sang \"Human Review\"; và \"Human Review\" dẫn tới \"Output State\". Hộp chú thích phía dưới: \"LangGraph làm lộ rõ route quyết định ở đâu, state đi qua đâu, và human can thiệp ở điểm nào.\"",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p052:l545-562",
+            "source_type": "slide",
+            "page_no": 52,
+            "content": "## Page 52: Human-in-the-Loop Đặt Ở Đâu?\nPage 52: Human in the Loop Đặt Ở Đâu? Text Extract Nên chèn khi task có rủi ro cao (tài chính, y tế, pháp lý) confidence score dưới ngưỡng tool action có side effect không đảo ngược output sẽ đi ra user hoặc stakeholder system không chắc về intent ban đầu Cách implement trong LangGraph thêm node \"human review\" vào graph node này interrupt graph và chờ input sau khi human approve → tiếp tục state được giữ nguyên qua interrupt log lại quyết định của human trong trace Multi agent không đồng nghĩa với full autonomy. Nhiều hệ tốt nhất là hệ biết khi nào nên dừng để con người quyết định.",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:langgraph_orchestration_model",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "langgraph_orchestration_model",
+      "status": "quarantined",
+      "reason": "reviewer_conflict_needs_adjudication",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "langgraph_orchestration_model",
+        "kc_name_vi": "Mental model orchestration của LangGraph",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:28:38.905Z",
+        "disagreement": {
+          "kc_key": "9:langgraph_orchestration_model",
+          "reviewer-01": {
+            "decision": "revise",
+            "scores": {
+              "accuracy": 4,
+              "granularity": 4,
+              "naming_clarity": 4
+            }
+          },
+          "reviewer-02": {
+            "decision": "reject",
+            "scores": {
+              "accuracy": 1,
+              "granularity": 1,
+              "naming_clarity": 1
+            }
+          }
+        }
+      },
+      "kc": {
+        "code": "langgraph_orchestration_model",
+        "name_vi": "Mental model orchestration của LangGraph",
+        "description_vi": "LangGraph biểu diễn hệ multi-agent thành graph gồm nodes, edges và state: node là agent hoặc bước xử lý, edge là hướng chuyển tiếp, state là bộ nhớ TypedDict hoặc Pydantic được truyền qua graph; framework làm routing và human intervention trở nên tường minh.",
+        "item_form": "concept",
+        "primary_capability_vi": "Giải thích cách nodes, edges và state biểu diễn luồng chạy multi-agent.",
+        "target_bloom_level": "understand",
+        "bloom_learning_objective_vi": "Mô tả đúng vai trò của node, edge và state trong một LangGraph.",
+        "bloom_rationale_vi": "Nguồn định nghĩa trực tiếp ba thành phần, unconditional/conditional edge, state schema và lợi ích orchestration.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi conditional routing vì đây là mental model của framework; routing là kỹ năng hiện thực quyết định edge tiếp theo.",
+        "role_reason_vi": "LangGraph là công cụ chính được bài dùng để làm rõ graph, state và routing.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p045:l439-442",
+          "day09-multi-agent-mcp-a2a:p046:l443-455",
+          "day09-multi-agent-mcp-a2a:p047:l456-470",
+          "day09-multi-agent-mcp-a2a:p048:l471-485"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p045:l439-442",
+            "source_type": "slide",
+            "page_no": 45,
+            "content": "## Page 45: Orchestration Với LangGraph\nPage 45: Orchestration Với LangGraph Text Extract Sau khi hiểu vai trò và giao tiếp, ta cần một cách biểu diễn luồng chạy rõ ràng; LangGraph là cách rất trực quan để làm điều đó",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p046:l443-455",
+            "source_type": "slide",
+            "page_no": 46,
+            "content": "## Page 46: Tại Sao Cần Orchestration Framework?\nPage 46: Tại Sao Cần Orchestration Framework? Text Extract Không có framework routing logic nằm trong prompt điều phối dài khó biết hệ đang ở bước nào thêm một nhánh mới = sửa toàn bộ prompt debug bằng print() và hy vọng Lưu ý: Nếu không có orchestration rõ ràng, routing logic thường bị chôn trong prompt và trở nên rất khó debug. Với LangGraph Routing trở thành code tường minh. Graph có thể visualize. State có schema. Human in the loop có điểm rõ ràng.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p047:l456-470",
+            "source_type": "slide",
+            "page_no": 47,
+            "content": "## Page 47: LangGraph Đóng Vai Trò Gì?\nPage 47: LangGraph Đóng Vai Trò Gì? Text Extract Biến hệ multi agent thành graph gồm nodes, edges, và state. Tách rõ node nào làm việc gì và khi nào route sang node nào. Giúp hệ thống bớt phụ thuộc vào một prompt điều phối khổng lồ. Hỗ trợ persistence: state có thể được lưu và tiếp tục. Hỗ trợ human in the loop tại bất kỳ điểm nào. Khung nhớ nhanh node = ai làm edge = đi đâu tiếp state = hệ đang biết gì Ba khái niệm này là toàn bộ LangGraph bạn cần cho Day 09.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p048:l471-485",
+            "source_type": "slide",
+            "page_no": 48,
+            "content": "## Page 48: LangGraph: Nodes và Edges\nPage 48: LangGraph: Nodes và Edges Text Extract Node là một hàm Python nhận state và trả state mới tương ứng với một agent hoặc một bước xử lý có thể là supervisor, worker, hoặc human review Edge Unconditional edge: luôn đi từ A sang B Conditional edge: hàm trả về tên node tiếp theo dựa trên state State Là TypedDict hoặc Pydantic model được truyền qua mỗi node. Mỗi node có thể đọc toàn bộ state và ghi vào các trường được phép. State là \"bộ nhớ\" của cả graph.",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:mcp_capability_surface",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "mcp_capability_surface",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:missing_rationale",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "mcp_capability_surface",
+        "kc_name_vi": "Capability surface của MCP server",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-22T02:35:31.717Z"
+      },
+      "kc": {
+        "code": "mcp_capability_surface",
+        "name_vi": "Capability surface của MCP server",
+        "description_vi": "MCP server có thể công bố tools để thực hiện hành động, resources để đọc dữ liệu và prompts để tái sử dụng hướng dẫn; server không bắt buộc phải có đủ cả ba nhưng agent nhìn chúng qua cách biểu diễn nhất quán.",
+        "item_form": "concept",
+        "primary_capability_vi": "Phân loại capability MCP thành tool, resource và prompt để biết agent có thể sử dụng loại nào.",
+        "target_bloom_level": "understand",
+        "bloom_learning_objective_vi": "Giải thích chức năng và ví dụ sử dụng của tools, resources và prompts trong MCP.",
+        "bloom_rationale_vi": "Nguồn liệt kê ba loại capability, mục đích và ví dụ cụ thể của từng loại.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi khái niệm MCP tổng quát vì đây là taxonomy cần truy xuất và áp dụng khi thiết kế surface của server.",
+        "role_reason_vi": "Người học cần hiểu capability surface để chọn đúng cách expose năng lực trong lab MCP.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p032:l298-309",
+          "day09-multi-agent-mcp-a2a:p034:l315-322",
+          "day09-multi-agent-mcp-a2a:p037:l353-357"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p032:l298-309",
+            "source_type": "slide",
+            "page_no": 32,
+            "content": "## Page 32: MCP Là Gì Theo Cách Hiểu Thực Dụng?\nPage 32: MCP Là Gì Theo Cách Hiểu Thực Dụng? Text Extract MCP là một chuẩn để agent kết nối với external capabilities. Thay vì mỗi tool có một kiểu tích hợp riêng, agent có thể nói chuyện với một MCP server. MCP server công bố các thứ như tools, resources, và prompts. Agent có thể list, describe, và invoke các capability đó theo chuẩn chung. Analogy dễ nhớ Supervisor worker nói về vai trò. MCP nói về ổ cắm chuẩn để agent dùng tài nguyên bên ngoài. Giống USB: mọi thiết bị cùng dùng một chuẩn kết nối.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p034:l315-322",
+            "source_type": "slide",
+            "page_no": 34,
+            "content": "## Page 34: MCP Server Có Thể Mở Ra Những Gì?\nPage 34: MCP Server Có Thể Mở Ra Những Gì? Text Extract Hành động hoặc thao tác: Ví dụ: search, query API, tạo ticket, gọi webhook Tài nguyên để đọc: Ví dụ: file, schema, catalog, config, DB Prompt dùng lại: Giúp chuẩn hóa cách gọi năng lực và giảm lỗi prompt Lưu ý: Không phải MCP server nào cũng phải có đủ cả ba. Điều quan trọng là agent có một cách nhìn nhất quán về các capability được công bố.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p037:l353-357",
+            "source_type": "slide",
+            "page_no": 37,
+            "content": "## Page 37: MCP Trong Bức Tranh Toàn Hệ Thống\nPage 37: MCP Trong Bức Tranh Toàn Hệ Thống Image Caption Sơ đồ tổng thể: \"Supervisor\" ở trên cùng điều phối ba worker bên dưới: \"Retrieval W.\", \"Tool W.\", \"Synthesis W.\". Mỗi worker có một đường nét đứt đi xuống một capability MCP cụ thể ở phía dưới: \"MCP: VectorDB\", \"MCP: API\", \"MCP: Formatter\". Hộp chú thích phía dưới: \"MCP là lớp giữa worker và capability thực. Worker chỉ cần biết MCP surface, không cần biết hệ thống phía sau là gì.\"",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:mcp_tool_discovery_and_invocation",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "mcp_tool_discovery_and_invocation",
+      "status": "quarantined",
+      "reason": "non_pass_not_actionable:missing_rationale",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "mcp_tool_discovery_and_invocation",
+        "kc_name_vi": "Discovery và invocation tool qua MCP",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-22T02:35:38.451Z"
+      },
+      "kc": {
+        "code": "mcp_tool_discovery_and_invocation",
+        "name_vi": "Discovery và invocation tool qua MCP",
+        "description_vi": "Quy trình gồm kết nối server, gọi tools/list, đọc name, description và inputSchema, chọn tool phù hợp, gọi tools/call với parameters đúng, rồi nhận kết quả chuẩn từ server.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Khám phá và gọi một MCP tool theo schema thay vì hard-code tên và giao diện tool.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Thực hiện đúng chuỗi discovery, schema inspection, lựa chọn và invocation của MCP tool.",
+        "bloom_rationale_vi": "Nguồn mô tả tuần tự toàn bộ luồng discovery và giải thích khả năng tự điều chỉnh theo tool sẵn có.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi MCP concept vì đây là kỹ năng thao tác có đầu vào, các bước và failure signal riêng như sai schema hoặc parameters.",
+        "role_reason_vi": "Deliverable yêu cầu ít nhất một worker gọi external capability qua MCP và trace lại lần gọi.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p035:l323-335",
+          "day09-multi-agent-mcp-a2a:p036:l336-352",
+          "day09-multi-agent-mcp-a2a:p073:l801-815"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p035:l323-335",
+            "source_type": "slide",
+            "page_no": 35,
+            "content": "## Page 35: MCP Tool Discovery: Agent Tìm Hiểu Tool Như Thế Nào?\nPage 35: MCP Tool Discovery: Agent Tìm Hiểu Tool Như Thế Nào? Text Extract Luồng discovery Agent kết nối tới MCP server Gọi tools/list để lấy danh sách tool Mỗi tool trả về: name, description, inputSchema Agent đọc schema, quyết định tool nào phù hợp Gọi tools/call với đúng parameters MCP server thực thi và trả kết quả Tại sao quan trọng? Agent không cần được lập trình sẵn biết tool \"X\" tồn tại. Nó có thể khám phá khi chạy và tự điều chỉnh theo tool nào có sẵn.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p036:l336-352",
+            "source_type": "slide",
+            "page_no": 36,
+            "content": "## Page 36: Ví Dụ Thực Tế: MCP Server Cho Hệ Thống Day 09\nPage 36: Ví Dụ Thực Tế: MCP Server Cho Hệ Thống Day 09 Text Extract Kịch bản: Customer Support Agent Tool Worker cần tra policy mới nhất Gọi MCP server \"knowledge base\" Server expose tool: search policy, get faq Worker gọi search policy(query, date after) Kết quả trả về JSON chuẩn với source Lợi ích trực tiếp Team cập nhật policy → chỉ cần update MCP server Supervisor và workers không cần sửa khi tool thay đổi Thêm tool mới = thêm endpoint vào MCP server Dễ audit ai đã gọi tool gì và khi nào MCP quan trọng vì nó tạo ecosystem effect: agent dùng được nhiều năng lực hơn mà không phải mỗi lần đều tích hợp lại từ đầu.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p073:l801-815",
+            "source_type": "slide",
+            "page_no": 73,
+            "content": "## Page 73: Bước 3: Kết Nối MCP\nPage 73: Bước 3: Kết Nối MCP Text Extract Chọn một trong các lựa chọn lab Tùy chọn A: dùng MCP server demo có sẵn (search hoặc weather) Tùy chọn B: tự viết một MCP server đơn giản với 1 tool Tùy chọn C: mock MCP interface với real HTTP call Điều cần chứng minh Tool Worker gọi MCP để lấy dữ liệu Kết quả từ MCP được ghi vào shared state Trace ghi lại lần gọi MCP Điều quan trọng nhất Không quan trọng tool làm gì. Quan trọng là học viên thấy được cách agent kết nối với capability bên ngoài theo chuẩn, không phải hard code.",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:multi_agent_shared_state_schema",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "multi_agent_shared_state_schema",
+      "status": "quarantined",
+      "reason": "reviewer_conflict_needs_adjudication",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "multi_agent_shared_state_schema",
+        "kc_name_vi": "Thiết kế schema và ownership cho shared state",
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:30:43.713Z",
+        "disagreement": {
+          "kc_key": "9:multi_agent_shared_state_schema",
+          "reviewer-01": {
+            "decision": "reject",
+            "scores": {
+              "accuracy": 1,
+              "granularity": 1,
+              "naming_clarity": 1
+            }
+          },
+          "reviewer-02": {
+            "decision": "pass",
+            "scores": {
+              "accuracy": 4,
+              "granularity": 4,
+              "naming_clarity": 4
+            }
+          }
+        }
+      },
+      "kc": {
+        "code": "multi_agent_shared_state_schema",
+        "name_vi": "Thiết kế schema và ownership cho shared state",
+        "description_vi": "Thiết kế state có các trường task, plan, worker results, status, final answer và trace; trong lab có thể mở rộng với user context, retrieval result, tool result, synthesis draft và error. Trace phải append, error hỗ trợ graceful fail, và mỗi field phải có owner rõ.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Xây shared state schema có thể điều phối, truy vết và chịu được lỗi cục bộ.",
+        "target_bloom_level": "create",
+        "bloom_learning_objective_vi": "Tạo schema state typed với field ownership rõ, cập nhật trace đúng cách và hỗ trợ trạng thái lỗi.",
+        "bloom_rationale_vi": "Nguồn cung cấp cả state tối thiểu, schema lab cụ thể và nguyên tắc ownership, append trace, Optional error.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi khái niệm state của LangGraph vì đây là quy trình thiết kế schema ứng dụng cho Day 09, có các field và ownership cụ thể.",
+        "role_reason_vi": "Shared state là thành phần bắt buộc của deliverable và là nền tảng để route, tổng hợp, trace và graceful failure.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p027:l246-261",
+          "day09-multi-agent-mcp-a2a:p028:l262-274",
+          "day09-multi-agent-mcp-a2a:p072:l778-800"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p027:l246-261",
+            "source_type": "slide",
+            "page_no": 27,
+            "content": "## Page 27: Shared State Hay Message Passing?\nPage 27: Shared State Hay Message Passing? Text Extract Shared state dễ xem toàn cảnh tiện cho graph orchestration (LangGraph) nhưng dễ bị \"đụng tay\" lẫn nhau nếu không có kỷ luật cần schema rõ: ai được đọc gì, ai được ghi gì Trong Day 09, học viên chỉ cần nhớ: shared state giúp điều phối, còn message contract giúp giao tiếp không nhập nhằng. Message passing contract rõ hơn giữa các agents ít coupling hơn nhưng phải thiết kế message format cẩn thận cần validation ở mỗi điểm nhận",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p028:l262-274",
+            "source_type": "slide",
+            "page_no": 28,
+            "content": "## Page 28: State Schema Tối Thiểu Cho Day 09\nPage 28: State Schema Tối Thiểu Cho Day 09 Text Extract Những trường cần có trong shared state: task: task gốc từ user plan: danh sách worker cần gọi worker results: dict chứa output từng worker status: pending | running | done | error final answer: tổng hợp cuối trace: log dạng list có timestamp Tại sao trace là trường bắt buộc? Không có trace trong state, sau khi hệ chạy xong không ai biết agent đã đi theo con đường nào để ra kết quả đó.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p072:l778-800",
+            "source_type": "slide",
+            "page_no": 72,
+            "content": "## Page 72: Bước 2: Thiết Kế Shared State\nPage 72: Bước 2: Thiết Kế Shared State Image Caption Bên trái là khung \"State schema gợi ý\" với code: python class Day09State(TypedDict): task: str user context: dict plan: list[str] retrieval result: list[dict] tool result: dict synthesis draft: str final answer: str status: str trace: list[dict] error: Optional[str] Bên phải là phần \"Nguyên tắc thiết kế\" gồm các bullet: trace là list, append không overwrite error là Optional để graceful fail Worker chỉ ghi vào field của mình Supervisor đọc tất cả, ghi plan Không để field “không ai biết ai sở hữu”",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:single_agent_reliability_failure_propagation",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "single_agent_reliability_failure_propagation",
+      "status": "quarantined",
+      "reason": "reviewer_conflict_needs_adjudication",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "single_agent_reliability_failure_propagation",
+        "kc_name_vi": "Lan truyền lỗi trong single agent",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:22:18.564Z",
+        "disagreement": {
+          "kc_key": "9:single_agent_reliability_failure_propagation",
+          "reviewer-01": {
+            "decision": "revise",
+            "scores": {
+              "accuracy": 4,
+              "granularity": 4,
+              "naming_clarity": 4
+            }
+          },
+          "reviewer-02": {
+            "decision": "reject",
+            "scores": {
+              "accuracy": 1,
+              "granularity": 1,
+              "naming_clarity": 1
+            }
+          }
+        }
+      },
+      "kc": {
+        "code": "single_agent_reliability_failure_propagation",
+        "name_vi": "Lan truyền lỗi trong single agent",
+        "description_vi": "Mô tả tình huống agent chọn sai tool hoặc hiểu sai task ở đầu luồng khiến các bước sau tiếp tục dựa trên tiền đề sai; single agent thiếu isolation nên lỗi khó khoanh vùng và dễ ảnh hưởng toàn bộ kết quả.",
+        "item_form": "principle",
+        "primary_capability_vi": "Phân tích cách lỗi đầu luồng lan truyền và xác định nhu cầu isolation trong kiến trúc nhiều agent.",
+        "target_bloom_level": "analyze",
+        "bloom_learning_objective_vi": "Phân tích trace hoặc workflow để xác định lỗi bắt đầu ở routing, tool use hay bước tổng hợp.",
+        "bloom_rationale_vi": "Nguồn nêu trực tiếp lỗi chọn sai tool hoặc task có thể làm toàn hệ đi lệch, đồng thời mô tả nhiều điểm phát sinh lỗi trong multi-agent.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi các giới hạn khác vì failure signal là error propagation và remediation là isolation, fallback hoặc retry.",
+        "role_reason_vi": "Reliability và khả năng khoanh vùng lỗi là trọng tâm của việc tổ chức hệ thống thành các worker.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p010:l65-75",
+          "day09-multi-agent-mcp-a2a:p015:l123-138",
+          "day09-multi-agent-mcp-a2a:p054:l567-580"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p010:l65-75",
+            "source_type": "slide",
+            "page_no": 10,
+            "content": "## Page 10: 4 Giới Hạn Cốt Lõi Của Single-Agent\nPage 10: 4 Giới Hạn Cốt Lõi Của Single Agent Text Extract 1. Context bottleneck Một agent phải giữ quá nhiều mục tiêu, tool outputs, evidence, và state trong cùng một lần suy luận. Context window có giới hạn cứng. 2. Specialization trade off Agent càng ôm nhiều vai, prompt càng dài và khó ổn định. Giỏi đều mọi thứ thường đồng nghĩa với không thật sự giỏi vai nào. 3. Parallelism hạn chế Một agent thường chạy tuần tự. Khi có nhiều việc độc lập, hệ thống vẫn phải chờ từng bước nối nhau tăng latency không cần thiết. 4. Reliability yếu Nếu agent chọn sai tool hoặc hiểu sai task ở đầu luồng, toàn bộ hệ thống dễ đi lệch theo. Không có isolation để k",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p015:l123-138",
+            "source_type": "slide",
+            "page_no": 15,
+            "content": "## Page 15: Ba Câu Hỏi Thiết Kế Trước Khi Viết Code\nPage 15: Ba Câu Hỏi Thiết Kế Trước Khi Viết Code Text Extract Câu hỏi 1 Chia trách nhiệm ở đâu? Task nào cần reasoning? Task nào cần data fetching? Task nào chỉ cần format? Câu hỏi 2 Thông tin đi theo con đường nào? Agent nào cần biết gì? Ai cần đầu ra của ai trước tiên? Câu hỏi 3 Lỗi xảy ra ở đâu là ít tổn hại nhất? Thiết kế để lỗi tại worker không làm hỏng toàn bộ hệ thống. Thiết kế tốt giúp lỗi có địa chỉ rõ ràng thay vì lan ra cả hệ thống.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p054:l567-580",
+            "source_type": "slide",
+            "page_no": 54,
+            "content": "## Page 54: Vì Sao Multi-Agent Khó Debug Hơn?\nPage 54: Vì Sao Multi Agent Khó Debug Hơn? Text Extract Nguồn gốc lỗi khó xác định Lỗi có thể xuất phát từ: routing sai, context sai, tool fail, synthesis sai Lỗi ở bước A có thể chỉ lộ ra ở bước C Nhiều agent = nhiều LLM call = nhiều điểm fail tiềm năng Lưu ý: Không có trace tốt, debugging multi agent gần như là mò mẫm. 3 câu hỏi observability Agent nào đã chạy, theo thứ tự nào? Input/output tại mỗi bước là gì? Lỗi hay warning nào đã xảy ra?",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:supervisor_responsibility_boundary",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "supervisor_responsibility_boundary",
+      "status": "quarantined",
+      "reason": "reviewer_conflict_needs_adjudication",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "supervisor_responsibility_boundary",
+        "kc_name_vi": "Boundary trách nhiệm của supervisor",
+        "decision": "revise",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 3,
+          "naming_clarity": 4
+        },
+        "importance_level": null,
+        "suggested_actions": [
+          "remove_component"
+        ],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:20:39.203Z",
+        "disagreement": {
+          "kc_key": "9:supervisor_responsibility_boundary",
+          "reviewer-01": {
+            "decision": "reject",
+            "scores": {
+              "accuracy": 1,
+              "granularity": 1,
+              "naming_clarity": 1
+            }
+          },
+          "reviewer-02": {
+            "decision": "revise",
+            "scores": {
+              "accuracy": 4,
+              "granularity": 3,
+              "naming_clarity": 4
+            }
+          }
+        }
+      },
+      "kc": {
+        "code": "supervisor_responsibility_boundary",
+        "name_vi": "Boundary trách nhiệm của supervisor",
+        "description_vi": "Supervisor phân tích yêu cầu, quyết định worker tham gia, theo dõi state, retry khi cần, tổng hợp output, và xác định thời điểm cần human review; supervisor giữ decision flow nhưng không trực tiếp làm domain work của worker.",
+        "item_form": "criterion",
+        "primary_capability_vi": "Phân định đúng việc supervisor nên điều phối và việc không nên dồn vào supervisor.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Gán các trách nhiệm planning, routing, monitoring, retry, synthesis và human review vào supervisor mà không biến nó thành god agent.",
+        "bloom_rationale_vi": "Nguồn liệt kê rõ nhiệm vụ của supervisor và cảnh báo supervisor node chỉ route, ghi trace, không làm việc của worker.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi architecture vì người học có thể vẽ đúng sơ đồ nhưng vẫn phân công sai, khiến supervisor ôm domain work.",
+        "role_reason_vi": "Boundary của supervisor quyết định hệ có thực sự giảm tải single agent hay chỉ đổi tên thành god agent.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p024:l207-224",
+          "day09-multi-agent-mcp-a2a:p026:l232-245",
+          "day09-multi-agent-mcp-a2a:p051:l524-544"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p024:l207-224",
+            "source_type": "slide",
+            "page_no": 24,
+            "content": "## Page 24: Supervisor Làm Gì, Worker Làm Gì?\nPage 24: Supervisor Làm Gì, Worker Làm Gì? Text Extract Supervisor phân tích yêu cầu ban đầu quyết định worker nào nên tham gia theo dõi trạng thái và retry nếu cần tổng hợp đầu ra cuối cùng biết khi nào cần human review Worker xử lý một năng lực hẹp nhận input rõ ràng, trả output rõ ràng càng stateless càng dễ test thất bại cục bộ không làm hỏng cả kiến trúc có thể được thay thế mà không ảnh hưởng supervisor Supervisor giữ decision flow; worker giữ domain skill. Đừng để một worker vừa làm việc hẹp vừa bí mật điều phối cả hệ thống.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p026:l232-245",
+            "source_type": "slide",
+            "page_no": 26,
+            "content": "## Page 26: Anti-Pattern: Những Lỗi Thiết Kế Hay Gặp\nPage 26: Anti Pattern: Những Lỗi Thiết Kế Hay Gặp Text Extract God Supervisor Supervisor làm quá nhiều: plan, retrieve, synthesize, monitor. Nó trở thành single agent được đổi tên. Chatty Workers Workers liên tục gọi ngược lại supervisor để hỏi thêm thông tin. Message overhead tăng nhanh. Implicit State State bị truyền qua biến toàn cục hoặc side effect. Không ai biết hệ đang ở bước nào. No Fallback Worker gặp lỗi và không trả về gì. Supervisor chờ mãi không thấy đầu ra để tổng hợp.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p051:l524-544",
+            "source_type": "slide",
+            "page_no": 51,
+            "content": "## Page 51: Một Node Supervisor Tối Giản\nPage 51: Một Node Supervisor Tối Giản Image Caption Ảnh chụp code nền tối với hàm: python def supervisor node(state: AgentState) AgentState: decision = llm.invoke( SUPERVISOR PROMPT.format(task=state[\"task\"]) ) return { state, \"need retrieval\": decision.need retrieval, \"need tool\": decision.need tool, \"trace\": state[\"trace\"] + [ f\"[supervisor] routed: \" f\"retrieval={decision.need retrieval}, \" f\"tool={decision.need tool}\" ] } Bên dưới có khung cảnh báo màu đỏ: \"Lưu ý: Supervisor node không làm việc của worker. Nó chỉ ra quyết định route và ghi trace.\"",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:supervisor_worker_anti_patterns",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "supervisor_worker_anti_patterns",
+      "status": "quarantined",
+      "reason": "reviewer_conflict_needs_adjudication",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "supervisor_worker_anti_patterns",
+        "kc_name_vi": "Nhận diện anti-pattern trong supervisor-worker",
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:20:47.404Z",
+        "disagreement": {
+          "kc_key": "9:supervisor_worker_anti_patterns",
+          "reviewer-01": {
+            "decision": "reject",
+            "scores": {
+              "accuracy": 1,
+              "granularity": 1,
+              "naming_clarity": 1
+            }
+          },
+          "reviewer-02": {
+            "decision": "pass",
+            "scores": {
+              "accuracy": 4,
+              "granularity": 4,
+              "naming_clarity": 4
+            }
+          }
+        }
+      },
+      "kc": {
+        "code": "supervisor_worker_anti_patterns",
+        "name_vi": "Nhận diện anti-pattern trong supervisor-worker",
+        "description_vi": "Nhận diện và remediation các lỗi thiết kế gồm god supervisor, chatty workers gọi ngược quá nhiều, implicit state qua biến toàn cục hoặc side effect, và no fallback khiến supervisor chờ hoặc crash khi worker thất bại.",
+        "item_form": "criterion",
+        "primary_capability_vi": "Chẩn đoán và sửa các anti-pattern làm mất boundary, tăng coupling hoặc làm hệ không chịu được lỗi.",
+        "target_bloom_level": "analyze",
+        "bloom_learning_objective_vi": "Phân tích một thiết kế supervisor-worker để chỉ ra anti-pattern và đề xuất boundary, state hoặc fallback phù hợp.",
+        "bloom_rationale_vi": "Nguồn nêu bốn anti-pattern cùng biểu hiện và hậu quả cụ thể.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Gộp các anti-pattern vì chúng cùng phục vụ task đánh giá chất lượng boundary của một kiến trúc supervisor-worker; từng lỗi là failure mode trong cùng năng lực chẩn đoán.",
+        "role_reason_vi": "Tránh anti-pattern là yêu cầu trực tiếp trong rubric và bảo đảm multi-agent không trở thành hệ thống phức tạp nhưng không kiểm soát được.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p026:l232-245",
+          "day09-multi-agent-mcp-a2a:p075:l832-841"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p026:l232-245",
+            "source_type": "slide",
+            "page_no": 26,
+            "content": "## Page 26: Anti-Pattern: Những Lỗi Thiết Kế Hay Gặp\nPage 26: Anti Pattern: Những Lỗi Thiết Kế Hay Gặp Text Extract God Supervisor Supervisor làm quá nhiều: plan, retrieve, synthesize, monitor. Nó trở thành single agent được đổi tên. Chatty Workers Workers liên tục gọi ngược lại supervisor để hỏi thêm thông tin. Message overhead tăng nhanh. Implicit State State bị truyền qua biến toàn cục hoặc side effect. Không ai biết hệ đang ở bước nào. No Fallback Worker gặp lỗi và không trả về gì. Supervisor chờ mãi không thấy đầu ra để tổng hợp.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p075:l832-841",
+            "source_type": "slide",
+            "page_no": 75,
+            "content": "## Page 75: Rubric Đánh Giá Lab 9\nPage 75: Rubric Đánh Giá Lab 9 Tables | Tiêu chí | Đạt (70%) | Tốt (85%) | Xuất sắc (100%) | | | | | | | Phân vai trò | Có supervisor + 2 workers | Vai trò rõ, không overlap | Anti patterns được tránh có ý thức | | MCP kết nối | Có 1 MCP call hoạt động | Schema rõ, trace ghi được | Discovery đúng, error handling có | | Shared state | State hoạt động | Schema đầy đủ, trace field | Ownership rõ từng field | | Trace quality | Log cơ bản | Đủ 5 trường cần thiết | Actionable, dẫn đến insight | | Routing logic | Routing hoạt động | Conditional edge rõ | Giải thích được quyết định route |",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:supervisor_worker_architecture",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "supervisor_worker_architecture",
+      "status": "quarantined",
+      "reason": "reviewer_conflict_needs_adjudication",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "supervisor_worker_architecture",
+        "kc_name_vi": "Kiến trúc supervisor-worker",
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:19:31.943Z",
+        "disagreement": {
+          "kc_key": "9:supervisor_worker_architecture",
+          "reviewer-01": {
+            "decision": "reject",
+            "scores": {
+              "accuracy": 1,
+              "granularity": 1,
+              "naming_clarity": 1
+            }
+          },
+          "reviewer-02": {
+            "decision": "pass",
+            "scores": {
+              "accuracy": 4,
+              "granularity": 4,
+              "naming_clarity": 4
+            }
+          }
+        }
+      },
+      "kc": {
+        "code": "supervisor_worker_architecture",
+        "name_vi": "Kiến trúc supervisor-worker",
+        "description_vi": "Tổ chức hệ thống với một supervisor nhận yêu cầu, phân nhánh tới các worker chuyên biệt như retrieval, tool use và synthesis, sau đó hội tụ kết quả thành final answer kèm trace.",
+        "item_form": "principle",
+        "primary_capability_vi": "Thiết kế sơ đồ phân vai supervisor-worker cho một bài toán nhiều trách nhiệm.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Vẽ hoặc mô tả đúng luồng từ user request qua supervisor, các worker và kết quả cuối cùng.",
+        "bloom_rationale_vi": "Nguồn cung cấp architecture diagram và mô tả trực tiếp việc supervisor điều phối nhiều worker rồi tổng hợp kết quả.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi chi tiết nhiệm vụ của từng vai trò vì architecture mô tả cấu trúc luồng, còn role responsibility mô tả hành vi và boundary.",
+        "role_reason_vi": "Đây là pattern triển khai trọng tâm của bài và là deliverable chính để nâng cấp artifact Day 08.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p021:l182-197",
+          "day09-multi-agent-mcp-a2a:p022:l198-201",
+          "day09-multi-agent-mcp-a2a:p023:l202-206"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p021:l182-197",
+            "source_type": "slide",
+            "page_no": 21,
+            "content": "## Page 21: Vì Sao Day 09 Chọn Supervisor-Worker?\nPage 21: Vì Sao Day 09 Chọn Supervisor Worker? Text Extract Lý do sư phạm học viên dễ nhìn ra vai trò dễ nối với use case thật dễ giải thích logic route dễ nâng cấp từ artifact Day 08 Lý do triển khai bắt đầu từ 2 3 worker là đủ dễ cắm thêm MCP tool worker trace và testing rõ hơn supervisor thường chỉ cần một LLM call nhỏ Lưu ý: Nếu Day 09 ôm nhiều pattern ngang nhau, người học sẽ nhớ tên pattern nhưng không biết ngày mai nên build theo pattern nào.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p022:l198-201",
+            "source_type": "slide",
+            "page_no": 22,
+            "content": "## Page 22: Supervisor-Worker: Deep Dive\nPage 22: Supervisor Worker: Deep Dive Text Extract Thay vì ép một agent làm hết, ta cho một supervisor phân việc và nhiều worker làm phần việc hẹp, dễ kiểm soát hơn",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p023:l202-206",
+            "source_type": "slide",
+            "page_no": 23,
+            "content": "## Page 23: Supervisor-Worker Architecture\nPage 23: Supervisor Worker Architecture Image Caption Sơ đồ phân cấp: \"User Request\" ở trên cùng đi xuống \"Supervisor\" ở giữa. Supervisor phân nhánh sang ba worker bên dưới: \"Retrieval Worker\" (trái), \"Tool Worker\" (giữa), \"Synthesis Worker\" (phải). Ba worker cùng hội tụ xuống hộp cuối \"Final Answer + Trace\". Các mũi tên thể hiện supervisor điều phối, còn output cuối cùng có cả câu trả lời và trace.",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:upgrade_rag_artifact_to_supervisor_worker_system",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "upgrade_rag_artifact_to_supervisor_worker_system",
+      "status": "quarantined",
+      "reason": "reviewer_conflict_needs_adjudication",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "upgrade_rag_artifact_to_supervisor_worker_system",
+        "kc_name_vi": "Nâng cấp artifact RAG thành hệ supervisor-worker có MCP và trace",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": "Không phải nội dung học mà là phần thực hành",
+        "confirmed_at": "2026-08-21T15:19:14.254Z",
+        "disagreement": {
+          "kc_key": "9:upgrade_rag_artifact_to_supervisor_worker_system",
+          "reviewer-01": {
+            "decision": "pass",
+            "scores": {
+              "accuracy": 4,
+              "granularity": 4,
+              "naming_clarity": 4
+            }
+          },
+          "reviewer-02": {
+            "decision": "reject",
+            "scores": {
+              "accuracy": 1,
+              "granularity": 1,
+              "naming_clarity": 1
+            }
+          }
+        }
+      },
+      "kc": {
+        "code": "upgrade_rag_artifact_to_supervisor_worker_system",
+        "name_vi": "Nâng cấp artifact RAG thành hệ supervisor-worker có MCP và trace",
+        "description_vi": "Quy trình tích hợp gồm tách artifact Day 08 thành supervisor và 2-3 worker, thiết kế shared state có trace, viết message contract, kết nối một external capability qua MCP, route và tổng hợp kết quả, rồi demo output kèm reasoning flow quan sát được.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Xây một hệ multi-agent nhỏ hoàn chỉnh từ artifact RAG hiện có.",
+        "target_bloom_level": "create",
+        "bloom_learning_objective_vi": "Tạo và trình bày một hệ supervisor-worker có routing rõ, worker chuyên biệt, MCP call, state schema, message contract, trace và graceful failure.",
+        "bloom_rationale_vi": "Nguồn mô tả trực tiếp lab, blueprint cần nộp, các bước triển khai và rubric đánh giá toàn bộ artifact.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Giữ như procedure tích hợp ở cấp hệ thống; các item về state, MCP, contract và trace vẫn tách vì có mastery state và bài kiểm tra thành phần độc lập.",
+        "role_reason_vi": "Đây là deliverable cuối ngày và mục tiêu nâng cấp trực tiếp từ Day 08 sang Day 09.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p006:l33-40",
+          "day09-multi-agent-mcp-a2a:p029:l275-280",
+          "day09-multi-agent-mcp-a2a:p069:l748-751",
+          "day09-multi-agent-mcp-a2a:p070:l752-761",
+          "day09-multi-agent-mcp-a2a:p071:l762-777",
+          "day09-multi-agent-mcp-a2a:p072:l778-800",
+          "day09-multi-agent-mcp-a2a:p073:l801-815",
+          "day09-multi-agent-mcp-a2a:p074:l816-831",
+          "day09-multi-agent-mcp-a2a:p075:l832-841"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p006:l33-40",
+            "source_type": "slide",
+            "page_no": 6,
+            "content": "## Page 6: Deliverable Cuối Ngày\nPage 6: Deliverable Cuối Ngày Text Extract Bản nâng cấp từ Day 08 gồm supervisor, 2 3 workers, 1 kết nối tool qua MCP, và trace log cho toàn bộ luồng phối hợp 1 supervisor nhận task, route đúng worker, và tổng hợp kết quả 2 3 worker chuyên vai trò như retrieval, tool use, synthesis 1 kết nối external capability qua MCP 1 trace dễ đọc để giải thích agent nào đã làm gì và khi nào",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p029:l275-280",
+            "source_type": "slide",
+            "page_no": 29,
+            "content": "## Page 29: Nâng Cấp Artifact Day 08 Thành Day 09\nPage 29: Nâng Cấp Artifact Day 08 Thành Day 09 Image Caption Sơ đồ chuyển đổi từ \"Day 08 RAG Agent\" (hộp xanh ở trái) sang \"Day 09 Supervisor\" (hộp đỏ ở giữa), với nhãn trên mũi tên là \"tách vai trò\". Từ Day 09 Supervisor tỏa ra ba mũi tên tới các hộp bên phải: \"Retrieval Worker\" (trên), \"Tool Worker\" (giữa, màu xanh lá), \"Synthesis Worker\" (dưới, màu xám). Hộp chú thích phía dưới: \"Day 09 không bắt đầu từ số 0. Ta lấy năng lực retrieve và answer của Day 08 rồi chia vai trò thành các worker để hệ thống rõ ràng hơn.\"",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p069:l748-751",
+            "source_type": "slide",
+            "page_no": 69,
+            "content": "## Page 69: Hands-on 9\nPage 69: Hands on 9 Text Extract Lấy artifact Day 08 rồi chia lại thành supervisor, workers, và 1 điểm kết nối MCP để học viên thấy rõ giá trị của phân vai trong thực tế",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p070:l752-761",
+            "source_type": "slide",
+            "page_no": 70,
+            "content": "## Page 70: Lab 9: Multi-Agent System + MCP\nPage 70: Lab 9: Multi Agent System + MCP Text Extract Biến một agent RAG đơn thành một hệ multi agent nhỏ có route rõ, capability rõ, và trace rõ để dễ giải thích và debug hơn. tách artifact Day 08 thành supervisor + 2 3 workers thiết kế shared state schema với trường trace chọn 1 worker dùng external capability qua MCP viết message contract tối thiểu giữa supervisor và workers trace lại toàn bộ luồng để biết agent nào đã làm gì demo kết quả cuối cùng kèm reasoning flow ở mức quan sát được",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p071:l762-777",
+            "source_type": "slide",
+            "page_no": 71,
+            "content": "## Page 71: Bước 1: Tách Vai Trò Từ Artifact Day 08\nPage 71: Bước 1: Tách Vai Trò Từ Artifact Day 08 Text Extract Câu hỏi cần trả lời RAG agent Day 08 hiện đang làm bao nhiêu việc khác nhau? Phần nào có thể tách thành worker riêng? Phần nào nên để supervisor quyết định? Gợi ý tách vai trò Retrieval Worker: vector search + rerank Tool Worker: gọi API qua MCP Synthesis Worker: generate final answer Kiểm tra trước khi tách Mỗi phần có thể test độc lập không? Nếu không, chưa tách đủ rõ. Supervisor có thực sự cần ra quyết định về phần đó không? Nếu không, tách ra là dư thừa.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p072:l778-800",
+            "source_type": "slide",
+            "page_no": 72,
+            "content": "## Page 72: Bước 2: Thiết Kế Shared State\nPage 72: Bước 2: Thiết Kế Shared State Image Caption Bên trái là khung \"State schema gợi ý\" với code: python class Day09State(TypedDict): task: str user context: dict plan: list[str] retrieval result: list[dict] tool result: dict synthesis draft: str final answer: str status: str trace: list[dict] error: Optional[str] Bên phải là phần \"Nguyên tắc thiết kế\" gồm các bullet: trace là list, append không overwrite error là Optional để graceful fail Worker chỉ ghi vào field của mình Supervisor đọc tất cả, ghi plan Không để field “không ai biết ai sở hữu”",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p073:l801-815",
+            "source_type": "slide",
+            "page_no": 73,
+            "content": "## Page 73: Bước 3: Kết Nối MCP\nPage 73: Bước 3: Kết Nối MCP Text Extract Chọn một trong các lựa chọn lab Tùy chọn A: dùng MCP server demo có sẵn (search hoặc weather) Tùy chọn B: tự viết một MCP server đơn giản với 1 tool Tùy chọn C: mock MCP interface với real HTTP call Điều cần chứng minh Tool Worker gọi MCP để lấy dữ liệu Kết quả từ MCP được ghi vào shared state Trace ghi lại lần gọi MCP Điều quan trọng nhất Không quan trọng tool làm gì. Quan trọng là học viên thấy được cách agent kết nối với capability bên ngoài theo chuẩn, không phải hard code.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p074:l816-831",
+            "source_type": "slide",
+            "page_no": 74,
+            "content": "## Page 74: Blueprint Cần Nộp\nPage 74: Blueprint Cần Nộp Text Extract System pieces 1 supervisor với routing logic rõ 2 3 workers rõ vai trò 1 MCP connected capability Shared state schema có trace field Evidence trace/logs đọc được output cuối cùng với source ghi chú: route hợp lý chưa? tại sao? ít nhất 1 ví dụ về worker fail gracefully Lưu ý: Không cần build hệ enterprise. Điều cần chứng minh là việc chia vai trò giúp hệ thống rõ hơn, dễ kiểm soát hơn, và mở rộng tốt hơn.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p075:l832-841",
+            "source_type": "slide",
+            "page_no": 75,
+            "content": "## Page 75: Rubric Đánh Giá Lab 9\nPage 75: Rubric Đánh Giá Lab 9 Tables | Tiêu chí | Đạt (70%) | Tốt (85%) | Xuất sắc (100%) | | | | | | | Phân vai trò | Có supervisor + 2 workers | Vai trò rõ, không overlap | Anti patterns được tránh có ý thức | | MCP kết nối | Có 1 MCP call hoạt động | Schema rõ, trace ghi được | Discovery đúng, error handling có | | Shared state | State hoạt động | Schema đầy đủ, trace field | Ownership rõ từng field | | Trace quality | Log cơ bản | Đủ 5 trường cần thiết | Actionable, dẫn đến insight | | Routing logic | Routing hoạt động | Conditional edge rõ | Giải thích được quyết định route |",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:worker_design_boundary",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "worker_design_boundary",
+      "status": "quarantined",
+      "reason": "reviewer_conflict_needs_adjudication",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "worker_design_boundary",
+        "kc_name_vi": "Thiết kế worker chuyên biệt và có thể kiểm thử",
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:20:45.219Z",
+        "disagreement": {
+          "kc_key": "9:worker_design_boundary",
+          "reviewer-01": {
+            "decision": "reject",
+            "scores": {
+              "accuracy": 1,
+              "granularity": 1,
+              "naming_clarity": 1
+            }
+          },
+          "reviewer-02": {
+            "decision": "pass",
+            "scores": {
+              "accuracy": 4,
+              "granularity": 4,
+              "naming_clarity": 4
+            }
+          }
+        }
+      },
+      "kc": {
+        "code": "worker_design_boundary",
+        "name_vi": "Thiết kế worker chuyên biệt và có thể kiểm thử",
+        "description_vi": "Mỗi worker tập trung vào một năng lực chính, nhận input hiện tại đủ dùng, trả output rõ theo contract, ưu tiên stateless và có thể test độc lập; lỗi của worker nên được cô lập và worker có thể thay thế mà không ảnh hưởng supervisor.",
+        "item_form": "criterion",
+        "primary_capability_vi": "Thiết kế worker có scope hẹp, interface rõ và failure boundary độc lập.",
+        "target_bloom_level": "apply",
+        "bloom_learning_objective_vi": "Đề xuất worker với một năng lực chính, input/output rõ, state tối thiểu và cách kiểm thử độc lập.",
+        "bloom_rationale_vi": "Nguồn nêu trực tiếp ba đặc điểm của worker tốt, vai trò stateless, contract input/output và khả năng thay thế.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi supervisor boundary vì worker có failure signal và remediation riêng: scope mơ hồ, input thiếu hoặc output không kiểm thử được.",
+        "role_reason_vi": "Worker chuyên biệt, stateless và testable là điều kiện để hệ multi-agent dễ kiểm soát và mở rộng.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p024:l207-224",
+          "day09-multi-agent-mcp-a2a:p025:l225-231",
+          "day09-multi-agent-mcp-a2a:p071:l762-777"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p024:l207-224",
+            "source_type": "slide",
+            "page_no": 24,
+            "content": "## Page 24: Supervisor Làm Gì, Worker Làm Gì?\nPage 24: Supervisor Làm Gì, Worker Làm Gì? Text Extract Supervisor phân tích yêu cầu ban đầu quyết định worker nào nên tham gia theo dõi trạng thái và retry nếu cần tổng hợp đầu ra cuối cùng biết khi nào cần human review Worker xử lý một năng lực hẹp nhận input rõ ràng, trả output rõ ràng càng stateless càng dễ test thất bại cục bộ không làm hỏng cả kiến trúc có thể được thay thế mà không ảnh hưởng supervisor Supervisor giữ decision flow; worker giữ domain skill. Đừng để một worker vừa làm việc hẹp vừa bí mật điều phối cả hệ thống.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p025:l225-231",
+            "source_type": "slide",
+            "page_no": 25,
+            "content": "## Page 25: Thiết Kế Worker Tốt Có 3 Đặc Điểm\nPage 25: Thiết Kế Worker Tốt Có 3 Đặc Điểm Text Extract Một worker nên có một năng lực chính: retrieve, gọi tool, tóm tắt, kiểm tra policy... Nếu có thể, worker chỉ cần input hiện tại thay vì ôm cả lịch sử hệ thống. Có input/output rõ để test độc lập trước khi cắm vào supervisor. Lưu ý: Worker mơ hồ thường làm debugging cực khó: không biết lỗi do route sai, prompt sai, hay contract đầu vào chưa đủ rõ.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p071:l762-777",
+            "source_type": "slide",
+            "page_no": 71,
+            "content": "## Page 71: Bước 1: Tách Vai Trò Từ Artifact Day 08\nPage 71: Bước 1: Tách Vai Trò Từ Artifact Day 08 Text Extract Câu hỏi cần trả lời RAG agent Day 08 hiện đang làm bao nhiêu việc khác nhau? Phần nào có thể tách thành worker riêng? Phần nào nên để supervisor quyết định? Gợi ý tách vai trò Retrieval Worker: vector search + rerank Tool Worker: gọi API qua MCP Synthesis Worker: generate final answer Kiểm tra trước khi tách Mỗi phần có thể test độc lập không? Nếu không, chưa tách đủ rõ. Supervisor có thực sự cần ra quyết định về phần đó không? Nếu không, tách ra là dư thừa.",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "review_key": "9:worker_failure_handling_and_graceful_degradation",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "kc_code": "worker_failure_handling_and_graceful_degradation",
+      "status": "quarantined",
+      "reason": "reviewer_conflict_needs_adjudication",
+      "applied_actions": [],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 9,
+        "lesson_slug": "day09-multi-agent-mcp-a2a",
+        "kc_code": "worker_failure_handling_and_graceful_degradation",
+        "kc_name_vi": "Xử lý lỗi worker và graceful degradation",
+        "decision": "pass",
+        "scores": {
+          "accuracy": 4,
+          "granularity": 4,
+          "naming_clarity": 4
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": null,
+        "confirmed_at": "2026-08-21T15:20:49.878Z",
+        "disagreement": {
+          "kc_key": "9:worker_failure_handling_and_graceful_degradation",
+          "reviewer-01": {
+            "decision": "reject",
+            "scores": {
+              "accuracy": 1,
+              "granularity": 1,
+              "naming_clarity": 1
+            }
+          },
+          "reviewer-02": {
+            "decision": "pass",
+            "scores": {
+              "accuracy": 4,
+              "granularity": 4,
+              "naming_clarity": 4
+            }
+          }
+        }
+      },
+      "kc": {
+        "code": "worker_failure_handling_and_graceful_degradation",
+        "name_vi": "Xử lý lỗi worker và graceful degradation",
+        "description_vi": "Thiết kế timeout rõ, retry có giới hạn, fallback khi retry thất bại, tổng hợp partial result từ worker thành công và báo cáo rõ khi không đủ tự tin; lỗi cục bộ không được crash toàn bộ hệ thống.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Thiết kế luồng thất bại có kiểm soát cho worker và supervisor.",
+        "target_bloom_level": "create",
+        "bloom_learning_objective_vi": "Tạo chiến lược timeout, retry, fallback và partial synthesis cho một worker có thể thất bại.",
+        "bloom_rationale_vi": "Nguồn yêu cầu thiết kế trước các cơ chế timeout/retry/fallback và định nghĩa partial failure, graceful degradation.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi anti-pattern no fallback vì item này là procedure reliability hoàn chỉnh, bao gồm cả partial success và báo cáo độ tin cậy.",
+        "role_reason_vi": "Reliability là tiêu chí trực tiếp của blueprint và rubric, với yêu cầu ít nhất một ví dụ worker fail gracefully.",
+        "evidence_section_ids": [
+          "day09-multi-agent-mcp-a2a:p026:l232-245",
+          "day09-multi-agent-mcp-a2a:p062:l658-669",
+          "day09-multi-agent-mcp-a2a:p074:l816-831"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p026:l232-245",
+            "source_type": "slide",
+            "page_no": 26,
+            "content": "## Page 26: Anti-Pattern: Những Lỗi Thiết Kế Hay Gặp\nPage 26: Anti Pattern: Những Lỗi Thiết Kế Hay Gặp Text Extract God Supervisor Supervisor làm quá nhiều: plan, retrieve, synthesize, monitor. Nó trở thành single agent được đổi tên. Chatty Workers Workers liên tục gọi ngược lại supervisor để hỏi thêm thông tin. Message overhead tăng nhanh. Implicit State State bị truyền qua biến toàn cục hoặc side effect. Không ai biết hệ đang ở bước nào. No Fallback Worker gặp lỗi và không trả về gì. Supervisor chờ mãi không thấy đầu ra để tổng hợp.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p062:l658-669",
+            "source_type": "slide",
+            "page_no": 62,
+            "content": "## Page 62: Reliability: Khi Worker Thất Bại\nPage 62: Reliability: Khi Worker Thất Bại Text Extract Cần thiết kế trước Worker có timeout rõ ràng Supervisor có retry logic: thử lại bao nhiêu lần? Nếu retry cũng fail: fallback là gì? Thất bại cục bộ không nên crash toàn bộ hệ thống Partial failure: tổng hợp kết quả với những worker đã thành công Graceful degradation Hệ thống không cần làm tốt mọi trường hợp. Nó cần thất bại theo cách kiểm soát được và báo cáo rõ ràng khi không đủ tự tin.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day09-multi-agent-mcp-a2a:p074:l816-831",
+            "source_type": "slide",
+            "page_no": 74,
+            "content": "## Page 74: Blueprint Cần Nộp\nPage 74: Blueprint Cần Nộp Text Extract System pieces 1 supervisor với routing logic rõ 2 3 workers rõ vai trò 1 MCP connected capability Shared state schema có trace field Evidence trace/logs đọc được output cuối cùng với source ghi chú: route hợp lý chưa? tại sao? ít nhất 1 ví dụ về worker fail gracefully Lưu ý: Không cần build hệ enterprise. Điều cần chứng minh là việc chia vai trò giúp hệ thống rõ hơn, dễ kiểm soát hơn, và mở rộng tốt hơn.",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    }
+  ]
+}

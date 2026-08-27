@@ -283,9 +283,13 @@ def main(
         environ=active_environ,
     )
     replay_payload = _json_stdout(replay_result)
+    if replay_payload.get("verified") is not True:
+        raise RuntimeError(
+            "replay verification failed; keep the output quarantined and do not use it"
+        )
     summary = {
         **build_summary(manifest),
-        "verified": replay_payload.get("verified") is True,
+        "verified": True,
         "status": "draft",
         "output_dir": str(output),
     }

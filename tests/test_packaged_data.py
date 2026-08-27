@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 from vlearn_kc.contracts import load_material_bundle
+from vlearn_kc.replay import replay_run
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,3 +33,12 @@ def test_phase1_leaf_snapshot_has_expected_day_and_kc_totals() -> None:
         for day in range(1, 16)
     )
 
+def test_packaged_day01_recorded_run_replays_successfully() -> None:
+    result = replay_run(
+        input_dir=ROOT / "examples/day01/material-bundle",
+        recorded_dir=ROOT / "examples/day01/recorded-run",
+    )
+
+    assert result["verified"] is True
+    assert result["trackable_kcs"] == 36
+    assert result["parent_topics"] == 15

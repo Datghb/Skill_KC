@@ -1,0 +1,98 @@
+{
+  "schema_version": "reviewed_kc_revised_v1",
+  "items": [
+    {
+      "review_key": "4:tool_output_grounding",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "kc_code": "tool_output_grounding",
+      "status": "revised",
+      "reason": "retained_as_underlying_kc_after_lab_boundary_review",
+      "applied_actions": [
+        {
+          "action": "retain_as_underlying_kc",
+          "reason": "Lab and hands-on content are assessment sources. Do not create standalone KCs from exercise names, steps, or deliverables; link assessment tasks to underlying KCs."
+        }
+      ],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 4,
+        "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+        "kc_code": "tool_output_grounding",
+        "kc_name_vi": "Grounding câu trả lời bằng output tool",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": "Trong bài lab không phải bài giảng",
+        "confirmed_at": "2026-08-21T15:06:18.084Z"
+      },
+      "kc": {
+        "code": "tool_output_grounding",
+        "name_vi": "Grounding câu trả lời bằng output tool",
+        "description_vi": "Tool output là nguồn sự thật cho tên, giá và các con số; agent chỉ được sử dụng dữ liệu tool trả về, không được bịa sản phẩm, giá hoặc khách sạn không tồn tại trong output.",
+        "item_form": "criterion",
+        "primary_capability_vi": "Tạo câu trả lời chỉ dựa trên dữ liệu đã quan sát từ tool và phát hiện phần không có căn cứ.",
+        "target_bloom_level": "evaluate",
+        "bloom_learning_objective_vi": "Có thể kiểm tra câu trả lời của agent để xác định mọi thông tin định lượng và thực thể có được grounded trong tool output hay không.",
+        "bloom_rationale_vi": "Nguồn đối chiếu trực tiếp grounded với hallucinated và quy định grounding là tiêu chí chấm lab.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Tách khỏi tool calling flow vì flow có thể chạy đúng nhưng câu trả lời cuối vẫn hallucinate; failure và remediation là kiểm soát nguồn dữ liệu.",
+        "role_reason_vi": "Grounding là yêu cầu bắt buộc của agent trong lab và là cơ chế bảo vệ độ chính xác.",
+        "evidence_section_ids": [
+          "slide:day04-prompt-engineering-tool-calling-selected:p047",
+          "slide:day04-prompt-engineering-tool-calling-selected:p048",
+          "slide:day04-prompt-engineering-tool-calling-selected:p051",
+          "slide:day04-prompt-engineering-tool-calling-selected:p054",
+          "slide:day04-prompt-engineering-tool-calling-selected:p058"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p047",
+            "source_type": "slide",
+            "page_no": 47,
+            "content": "## Page 47: Lab 4: Bạn Xây Gì?\n### Text Extract\nLab 4: Bạn Xây Gì?\n\n\n\n      Cùng cấu trúc với ShopBot ở Phần A: 1 system prompt + một chuỗi 3 tool + agent\n      dựng bằng create_agent, trả lời tiếng Việt grounded trong output tool.\n\n     ■ 3 tool: search_flights → calculate_budget → search_hotels\n     ■ 1 system prompt: thứ tự gọi tool, hỏi lại khi thiếu thông tin, từ chối yêu cầu nguy\n       hiểm, chỉ dùng giá từ tool, tiếng Việt\n     ■ Provider: Gemini (gemini-2.5-flash-lite); nộp: hoàn thiện src/agent/graph.py\n\n\n\n\n      TravelBuddy là một harness nhỏ bạn viết bằng prompt: 1 system prompt + 3 mô\n      tả tool (@tool docstring) + rule grounding + rule cho 4 hành vi — prompt engineering\n      ở quy mô agent.\n\n\nGiảng viên (VinUni)                           AICB · Ngày 4                        Tuần 1   36 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p048",
+            "source_type": "slide",
+            "page_no": 48,
+            "content": "## Page 48: System Prompt — TravelBuddy (build_system_prompt)\n### Text Extract\nSystem Prompt — TravelBuddy (build_system_prompt)\n\n\n\n      Bạn là TravelBuddy, trợ lý đặt chuyến đi nội địa VN (biết today). Khi đủ thông tin (điểm đến, ngân\n      sách, số đêm), gọi tool theo thứ tự: search_flights → calculate_budget → search_hotels.\n\n Rules                                                     Constraints\n     ■   Trả lời tiếng Việt, ngắn gọn.                       ■   Từ chối yêu cầu bất hợp pháp / nguy hiểm, nhắc\n     ■   Thiếu điểm đến / ngân sách / số đêm → hỏi lại 1         an toàn.\n         câu, chưa gọi tool.                                 ■   Ngân sách thiếu → nói rõ “thiếu” + đề xuất,\n     ■   Chỉ dùng giá từ output tool, không bịa.                 không gợi ý khách sạn.\n\n\n\n\n      1 chuyến bay + 1 khách sạn + tổng chi phí + ngân sách còn lại.\n\n\n\n\nGiảng viên (VinUni)                                   AICB · Ngày 4                                   Tuần 1   37 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p051",
+            "source_type": "slide",
+            "page_no": 51,
+            "content": "## Page 51: Grounding: Tool Output Là Nguồn Sự Thật\n### Text Extract\nGrounding: Tool Output Là Nguồn Sự Thật\n\n\n\n    Grounded                                                     Hallucinated\n    Bay VietJet 990k, ở Sunset Beach Resort 1,1tr/đêm.           “Có chuyến bay tầm 700k và một resort 5 sao tầm\n    Tổng ≈ 3,2tr, còn dư trong ngân sách 5tr.                    900k...”\n    Mọi con số đến từ output tool.                               Bịa giá / khách sạn không có ⇒ mất điểm.\n\n\n\n\n      Lưu ý: Agent chỉ được dùng giá & tên lấy từ output tool; bịa giá hoặc khách sạn\n      không có ⇒ sai. (Cách grader khớp keyword: xem slide Grader bên dưới.)\n\n\n\n\nGiảng viên (VinUni)                                      AICB · Ngày 4                                      Tuần 1   40 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p054",
+            "source_type": "slide",
+            "page_no": 54,
+            "content": "## Page 54: Bridge: Từ Nguyên Lý Phần A Đến graph.py\n### Text Extract\nBridge: Từ Nguyên Lý Phần A Đến graph.py\n\n\n\n\n                      Nguyên lý (Phần A)                        Hàm bạn hoàn thiện trong Lab 4\n\n                      System prompt như contract                build_system_prompt(today)\n                      @tool + 4 nguyên tắc thiết kế tool        build_tools(store) — 3 tool\n                      create_agent (vòng lặp tool calling)      build_agent(...)\n                      Tool-call trace + grounding               run_agent(...) -> AgentResult\n\n                                                    Concept (Phần A) -> lab artifact\n\n\n\n\nGiảng viên (VinUni)                                              AICB · Ngày 4                   Tuần 1   43 / 49",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "slide:day04-prompt-engineering-tool-calling-selected:p058",
+            "source_type": "slide",
+            "page_no": 58,
+            "content": "## Page 58: Lab #4\n### Text Extract\nLab #4\n\n\n\n\n       Mục tiêu: Hoàn thiện src/agent/graph.py: 1 system prompt + 3 tool (@tool) +\n       agent dựng bằng create_agent, xử lý đúng 4 hành vi (recommend / budget thiếu /\n       hỏi lại / từ chối)\n       Deliverable: Deliverable: Agent chạy được + đạt ≥ 80/100 trên grader (6 case,\n       provider Gemini), câu trả lời tiếng Việt grounded trong output tool\n       Thời gian: 150 phút\n\n\n\n\nGiảng viên (VinUni)                         AICB · Ngày 4                      Tuần 1   47 / 49",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    }
+  ]
+}

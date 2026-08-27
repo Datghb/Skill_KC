@@ -136,6 +136,23 @@ The audit fails its quality gate when a non-pass decision lacks an actionable
 rationale, a move lacks a target group, or high scores conflict with an
 unexplained non-pass decision.
 
+Create a conservative pilot snapshot from teacher reviews without changing the
+source KC or review artifacts:
+
+```bash
+.venv/bin/vlearn-kc review-snapshot \
+  artifacts/phase1-leaf-review-snapshot \
+  artifacts/teacher-reviews/processed/analysis-ready-reviews.json \
+  artifacts/teacher-reviews/processed/normalized-reviews.json \
+  artifacts/teacher-reviews/processed/disagreements.json \
+  artifacts/teacher-reviews/processed/error-analysis.json \
+  artifacts/reviewed-kc-v1
+```
+
+Only teacher passes and fully actionable revisions enter the pilot inventory.
+Conflicts and non-actionable non-pass decisions are preserved in quarantine;
+they are never silently deleted or treated as prompt-tuning labels.
+
 ## Run with providers
 
 Export configuration explicitly; the package does not load `.env` by itself.

@@ -1,0 +1,29 @@
+{
+  "schema_version": "reviewed_kc_actions_v1",
+  "actions": [
+    {
+      "review_key": "4:tool_output_grounding",
+      "kc_code": "tool_output_grounding",
+      "status": "revised",
+      "reason": "retained_as_underlying_kc_after_lab_boundary_review",
+      "actions": [
+        {
+          "action": "retain_as_underlying_kc",
+          "reason": "Lab and hands-on content are assessment sources. Do not create standalone KCs from exercise names, steps, or deliverables; link assessment tasks to underlying KCs."
+        }
+      ]
+    },
+    {
+      "review_key": "7:mini_retrieval_integration",
+      "kc_code": "mini_retrieval_integration",
+      "status": "rejected",
+      "reason": "reclassified_as_assessment_task",
+      "actions": [
+        {
+          "action": "reclassify_as_assessment_task",
+          "reason": "Lab and hands-on content are assessment sources. Do not create standalone KCs from exercise names, steps, or deliverables; link assessment tasks to underlying KCs."
+        }
+      ]
+    }
+  ]
+}

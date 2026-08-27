@@ -1,0 +1,28 @@
+{
+  "schema_version": "reviewed_kc_snapshot_manifest_v1",
+  "source_dataset_id": "phase1_mixed_source_deepseek_2026-08-19",
+  "policy": {
+    "preserve_source_artifacts": true,
+    "exclude_conflicts": true,
+    "exclude_inactionable_non_pass_reviews": true,
+    "pilot_statuses": [
+      "accepted",
+      "revised"
+    ]
+  },
+  "counts": {
+    "reviewed": 100,
+    "accepted": 69,
+    "revised": 1,
+    "rejected": 1,
+    "quarantined": 29,
+    "pilot_ready": 70
+  },
+  "input_hashes": {
+    "analysis_ready_reviews": "35140b1b85a14466efd8a837b0754cc4e555da0a006971a2de1187e96018eff7",
+    "normalized_reviews": "30c4c6598ef63d339b1e224b3df0a65a865ecc34b3a10396dcea3a8c03958675",
+    "disagreements": "62f8497ad0fadd4437df275ad6e92ffc50a542348c563be61ac08a2340dbe357",
+    "error_analysis": "5e66fd882485b955afedd4e546152af370db971616ffb513537e5ee8f628aa81",
+    "inventories": "331aa07c1fae0e26435641c89a21d24281790b1ff6833ede06b904c0612cbdbf"
+  }
+}

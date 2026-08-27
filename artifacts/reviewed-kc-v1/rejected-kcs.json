@@ -1,0 +1,114 @@
+{
+  "schema_version": "reviewed_kc_rejected_v1",
+  "items": [
+    {
+      "review_key": "7:mini_retrieval_integration",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "kc_code": "mini_retrieval_integration",
+      "status": "rejected",
+      "reason": "reclassified_as_assessment_task",
+      "applied_actions": [
+        {
+          "action": "reclassify_as_assessment_task",
+          "reason": "Lab and hands-on content are assessment sources. Do not create standalone KCs from exercise names, steps, or deliverables; link assessment tasks to underlying KCs."
+        }
+      ],
+      "review": {
+        "reviewer_key": "reviewer-02",
+        "lesson_day": 7,
+        "lesson_slug": "day07-data-foundations-embedding-vector-store",
+        "kc_code": "mini_retrieval_integration",
+        "kc_name_vi": "Xây mini retrieval integration",
+        "decision": "reject",
+        "scores": {
+          "accuracy": 1,
+          "granularity": 1,
+          "naming_clarity": 1
+        },
+        "importance_level": null,
+        "suggested_actions": [],
+        "criterion_notes": {
+          "accuracy": "",
+          "granularity": "",
+          "naming_clarity": ""
+        },
+        "review_note": "Trong bài lab không phải bài giảng",
+        "confirmed_at": "2026-08-21T15:14:35.515Z"
+      },
+      "kc": {
+        "code": "mini_retrieval_integration",
+        "name_vi": "Xây mini retrieval integration",
+        "description_vi": "Xây hệ thống tối thiểu từ bộ tài liệu nhỏ: làm sạch và gắn metadata, chunk, embed, lưu index, chạy semantic search và dùng top-k context trong answer function hoặc mini agent.",
+        "item_form": "procedure",
+        "primary_capability_vi": "Tạo một integration retrieval end-to-end cho dữ liệu riêng.",
+        "target_bloom_level": "create",
+        "bloom_learning_objective_vi": "Có thể xây và trình diễn một mini retrieval integration có data inventory, index, semantic search và grounded answer function.",
+        "bloom_rationale_vi": "Mục tiêu ngày học yêu cầu build mini retrieval integration; các bước lab 1–5 cung cấp quy trình triển khai và deliverable cụ thể.",
+        "knowledge_role": "core_kc",
+        "granularity_reason_vi": "Giữ như procedure tổng hợp cấp deliverable; các item pipeline, chunking, search và answer function mô tả các năng lực con có thể kiểm tra độc lập.",
+        "role_reason_vi": "Đây là năng lực thực hành và deliverable cuối ngày, trực tiếp chứng minh người học nối được dữ liệu riêng vào agent.",
+        "evidence_section_ids": [
+          "day07-data-foundations-embedding-vector-store:p047:l518-521",
+          "day07-data-foundations-embedding-vector-store:p048:l522-532",
+          "day07-data-foundations-embedding-vector-store:p049:l533-546",
+          "day07-data-foundations-embedding-vector-store:p050:l547-570",
+          "day07-data-foundations-embedding-vector-store:p051:l571-593",
+          "day07-data-foundations-embedding-vector-store:p052:l594-608",
+          "day07-data-foundations-embedding-vector-store:p053:l609-630"
+        ],
+        "resolved_evidence": [
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p047:l518-521",
+            "source_type": "slide",
+            "page_no": 47,
+            "content": "## Page 47: Hands-on 7\nPage 47: Hands on 7 Text Extract Mục tiêu của lab là nối được dữ liệu riêng vào hệ thống AI theo pipeline tối thiểu nhưng đúng bản chất",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p048:l522-532",
+            "source_type": "slide",
+            "page_no": 48,
+            "content": "## Page 48: Lab 7: Vector Store Integration - Overview\nPage 48: Lab 7: Vector Store Integration Overview Text Extract Chọn một bộ tài liệu nhỏ: FAQ, SOP, policy, internal docs Chuẩn hóa text và quyết định metadata tối thiểu Chunk dữ liệu theo section Embed và lưu vào vector store Viết semantic search demo Inject top k results vào answer function hoặc mini agent Một knowledge base nhỏ nhưng truy đúng và trả lời grounded tốt có giá trị học tập hơn một data set lớn nhưng nhiễu.",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p049:l533-546",
+            "source_type": "slide",
+            "page_no": 49,
+            "content": "## Page 49: Lab Step 1: Chọn & Chuẩn Bị Data\nPage 49: Lab Step 1: Chọn & Chuẩn Bị Data Text Extract Yêu cầu tối thiểu 5 15 tài liệu (FAQ, SOP, policy) Mỗi tài liệu 1 5 trang Text đã extract sạch (không còn header/footer lặp) Ghi lại nguồn gốc mỗi file Metadata tối thiểu cần ghi source: tên file gốc category: domain / loại tài liệu date: ngày tạo hoặc cập nhật language: vi / en",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p050:l547-570",
+            "source_type": "slide",
+            "page_no": 50,
+            "content": "## Page 50: Lab Step 2: Chunking Code Example\nPage 50: Lab Step 2: Chunking Code Example Text Extract python from langchain.text splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter( chunk size=512, chunk overlap=64, separators=[\"\\n\\n\", \"\\n\", \". \", \" \"] ) docs = load documents(\"./data/\") your loader chunks = [] for doc in docs: parts = splitter.split text(doc[\"text\"]) for i, part in enumerate(parts): chunks.append({ \"id\": f\"{doc['source']} chunk {i}\", \"text\": part, \"metadata\": {\"source\": doc[\"source\"], \"category\": doc[\"category\"]} })",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p051:l571-593",
+            "source_type": "slide",
+            "page_no": 51,
+            "content": "## Page 51: Lab Step 3: Embed & Store\nPage 51: Lab Step 3: Embed & Store Text Extract python import chromadb from openai import OpenAI client ai = OpenAI() client db = chromadb.Client() collection = client db.create collection(\"lab7 kb\") for chunk in chunks: resp = client ai.embeddings.create( model=\"text embedding 3 small\", input=[chunk[\"text\"]] ) collection.add( ids=[chunk[\"id\"]], embeddings=[resp.data[0].embedding], documents=[chunk[\"text\"]], metadatas=[chunk[\"metadata\"]] )",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p052:l594-608",
+            "source_type": "slide",
+            "page_no": 52,
+            "content": "## Page 52: Lab Step 4: Semantic Search Demo\nPage 52: Lab Step 4: Semantic Search Demo Text Extract python query = \"thoi han doi tra san pham\" \"thời hạn đổi trả sản phẩm\" results = collection.query( query texts=[query], n results=3, where={\"category\": \"support\"} metadata filter ) for i, doc in enumerate(results[\"documents\"][0]): score = results[\"distances\"][0][i] print(f\"[{i+1}] score={score:.3f}\") print(f\" {doc[:120]}...\")",
+            "transcript_evidence": []
+          },
+          {
+            "content_unit_id": "day07-data-foundations-embedding-vector-store:p053:l609-630",
+            "source_type": "slide",
+            "page_no": 53,
+            "content": "## Page 53: Lab Step 5: Answer Function Có Retrieved Context\nPage 53: Lab Step 5: Answer Function Có Retrieved Context Text Extract python def answer with context(query, collection, model=\"gpt 4o mini\"): results = collection.query(query texts=[query], n results=3) context = \"\\n \\n\".join(results[\"documents\"][0]) response = client ai.chat.completions.create( model=model, messages=[{ \"role\": \"user\", \"content\": f\"\"\"Dua tren nguon sau, tra loi ngan gon. Neu khong tim thay, noi 'Khong co thong tin'. \"Dựa trên nguồn sau, trả lời ngắn gọn. Nếu không tìm thấy, nói 'Không có thông tin'.\" Nguon: {context} Cau hoi: {query}\"\"\" }] ) return response.choices[0].message.content",
+            "transcript_evidence": []
+          }
+        ]
+      }
+    }
+  ]
+}

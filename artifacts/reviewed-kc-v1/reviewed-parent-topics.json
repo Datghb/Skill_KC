@@ -1,0 +1,917 @@
+{
+  "schema_version": "reviewed_parent_topics_v1",
+  "source_dataset_id": "phase1_mixed_source_deepseek_2026-08-19",
+  "status": "review_audit_only",
+  "groups": [
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "group_code": "tool_calling_execution_loop",
+      "group_name_vi": "Vòng lặp thực thi tool calling",
+      "member_kc_codes": [
+        "react_thought_action_observation_loop",
+        "tool_calling_flow"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:05:21.183Z",
+      "pilot_member_kc_codes": [
+        "react_thought_action_observation_loop",
+        "tool_calling_flow"
+      ],
+      "excluded_member_kc_codes": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "group_code": "prompt_and_system_contracts",
+      "group_name_vi": "Thiết kế prompt và system contract",
+      "member_kc_codes": [
+        "prompt_scope_types",
+        "prompt_quality_specificity",
+        "prompt_evaluation_versioning",
+        "prompt_four_components",
+        "structured_prompting",
+        "token_budget_context_rot",
+        "system_prompt_contract",
+        "system_prompt_antipatterns"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:06:51.187Z",
+      "pilot_member_kc_codes": [
+        "prompt_scope_types",
+        "prompt_quality_specificity",
+        "prompt_evaluation_versioning",
+        "prompt_four_components",
+        "structured_prompting",
+        "token_budget_context_rot",
+        "system_prompt_contract",
+        "system_prompt_antipatterns"
+      ],
+      "excluded_member_kc_codes": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "group_code": "context_selection_and_lifecycle",
+      "group_name_vi": "Chọn lọc và quản trị vòng đời context",
+      "member_kc_codes": [
+        "dynamic_few_shot_retrieval",
+        "context_engineering",
+        "context_compression",
+        "context_window_management",
+        "memory_injection",
+        "prompt_caching_static_prefix"
+      ],
+      "decision": "reject",
+      "scores": {
+        "grouping_fit": 1,
+        "topic_name_fit": 1,
+        "topic_distinctness": 1,
+        "learning_objective_alignment": 1
+      },
+      "suggested_actions": [
+        "rename_topic",
+        "clarify_boundary"
+      ],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-20T17:11:14.302Z",
+      "pilot_member_kc_codes": [
+        "context_engineering",
+        "context_compression",
+        "context_window_management",
+        "memory_injection",
+        "prompt_caching_static_prefix"
+      ],
+      "excluded_member_kc_codes": [
+        "dynamic_few_shot_retrieval"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "group_code": "iterative_self_improvement",
+      "group_name_vi": "Vòng lặp lập kế hoạch và tự cải thiện",
+      "member_kc_codes": [
+        "plan_and_solve",
+        "reflexion",
+        "self_refine"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:01:46.075Z",
+      "pilot_member_kc_codes": [
+        "plan_and_solve",
+        "reflexion",
+        "self_refine"
+      ],
+      "excluded_member_kc_codes": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "group_code": "reasoning_strategy_selection",
+      "group_name_vi": "Chọn chiến lược reasoning và ngân sách suy luận",
+      "member_kc_codes": [
+        "cot_task_fit",
+        "reasoning_model_and_budget"
+      ],
+      "decision": "revise",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 3,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [
+        "rename_topic"
+      ],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:02:31.110Z",
+      "pilot_member_kc_codes": [
+        "cot_task_fit",
+        "reasoning_model_and_budget"
+      ],
+      "excluded_member_kc_codes": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "group_code": "tool_interface_design",
+      "group_name_vi": "Thiết kế giao diện và độ tin cậy của tool",
+      "member_kc_codes": [
+        "reliable_tool_design_principles",
+        "tool_granularity",
+        "tool_creation_criterion",
+        "tool_schema_contract",
+        "tool_declaration_with_decorator"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:03:58.698Z",
+      "pilot_member_kc_codes": [
+        "reliable_tool_design_principles",
+        "tool_granularity",
+        "tool_creation_criterion",
+        "tool_schema_contract"
+      ],
+      "excluded_member_kc_codes": [
+        "tool_declaration_with_decorator"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "group_code": "harness_error_remediation",
+      "group_name_vi": "Kỹ thuật hóa harness và vá lỗi lặp lại",
+      "member_kc_codes": [
+        "harness_engineering",
+        "harness_error_remediation"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:04:23.909Z",
+      "pilot_member_kc_codes": [
+        "harness_engineering",
+        "harness_error_remediation"
+      ],
+      "excluded_member_kc_codes": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 4,
+      "lesson_slug": "day04-prompt-engineering-tool-calling-selected",
+      "group_code": "grounded_tool_agent_building",
+      "group_name_vi": "Xây dựng agent tool-calling grounded",
+      "member_kc_codes": [
+        "build_grounded_tool_agent",
+        "agent_behavior_contracts",
+        "create_agent_tool_loop",
+        "tool_use_control_flow_patterns",
+        "tool_output_grounding"
+      ],
+      "decision": "reject",
+      "scores": {
+        "grouping_fit": 1,
+        "topic_name_fit": 1,
+        "topic_distinctness": 1,
+        "learning_objective_alignment": 1
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": "Trong bài lab không phải bài giảng",
+      "confirmed_at": "2026-08-21T15:06:25.413Z",
+      "pilot_member_kc_codes": [
+        "tool_output_grounding"
+      ],
+      "excluded_member_kc_codes": [
+        "build_grounded_tool_agent",
+        "agent_behavior_contracts",
+        "create_agent_tool_loop",
+        "tool_use_control_flow_patterns"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "group_code": "context_and_chunk_design",
+      "group_name_vi": "Thiết kế context và chunk",
+      "member_kc_codes": [
+        "context_window_token_budget",
+        "chunking_design",
+        "chunking_strategy_selection"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:08:07.495Z",
+      "pilot_member_kc_codes": [
+        "context_window_token_budget",
+        "chunking_design",
+        "chunking_strategy_selection"
+      ],
+      "excluded_member_kc_codes": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "group_code": "retrieval_architecture_choices",
+      "group_name_vi": "Lựa chọn kiến trúc và công nghệ retrieval",
+      "member_kc_codes": [
+        "embedding_model_selection",
+        "vector_database_selection",
+        "rag_use_case_decision",
+        "hosted_vs_self_managed_retrieval"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:11:08.227Z",
+      "pilot_member_kc_codes": [
+        "rag_use_case_decision",
+        "hosted_vs_self_managed_retrieval"
+      ],
+      "excluded_member_kc_codes": [
+        "embedding_model_selection",
+        "vector_database_selection"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "group_code": "embedding_foundations",
+      "group_name_vi": "Nền tảng embedding và biểu diễn ngữ nghĩa",
+      "member_kc_codes": [
+        "embedding_semantic_representation",
+        "embedding_use_cases",
+        "embedding_generation_pipeline"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:11:51.194Z",
+      "pilot_member_kc_codes": [
+        "embedding_semantic_representation",
+        "embedding_use_cases"
+      ],
+      "excluded_member_kc_codes": [
+        "embedding_generation_pipeline"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "group_code": "retrieval_execution_and_evaluation",
+      "group_name_vi": "Vận hành và đánh giá retrieval",
+      "member_kc_codes": [
+        "standard_retrieval_pipeline",
+        "topk_threshold_attribute_filtering",
+        "retrieve_and_inject_context",
+        "grounded_answer_source_fallback",
+        "retrieval_failure_debugging",
+        "retrieval_quality_evaluation",
+        "mini_retrieval_integration"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:14:39.651Z",
+      "pilot_member_kc_codes": [
+        "standard_retrieval_pipeline",
+        "topk_threshold_attribute_filtering",
+        "retrieval_failure_debugging",
+        "retrieval_quality_evaluation"
+      ],
+      "excluded_member_kc_codes": [
+        "retrieve_and_inject_context",
+        "grounded_answer_source_fallback",
+        "mini_retrieval_integration"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "group_code": "data_governance_and_metadata",
+      "group_name_vi": "Governance dữ liệu và metadata cho retrieval",
+      "member_kc_codes": [
+        "ai_data_inventory",
+        "data_governance_for_retrieval",
+        "pii_masking_before_embedding",
+        "vector_store_data_model",
+        "metadata_guided_retrieval"
+      ],
+      "decision": "revise",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 2,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [
+        "rename_topic"
+      ],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:15:45.361Z",
+      "pilot_member_kc_codes": [
+        "data_governance_for_retrieval",
+        "pii_masking_before_embedding"
+      ],
+      "excluded_member_kc_codes": [
+        "ai_data_inventory",
+        "vector_store_data_model",
+        "metadata_guided_retrieval"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "group_code": "data_strategy_and_quality",
+      "group_name_vi": "Chiến lược phân loại và chất lượng dữ liệu",
+      "member_kc_codes": [
+        "ai_data_strategy_selection",
+        "data_quality_first_retrieval_principle",
+        "agent_data_type_access_pattern",
+        "data_quality_processing_pyramid"
+      ],
+      "decision": "revise",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:17:27.457Z",
+      "pilot_member_kc_codes": [
+        "agent_data_type_access_pattern",
+        "data_quality_processing_pyramid"
+      ],
+      "excluded_member_kc_codes": [
+        "ai_data_strategy_selection",
+        "data_quality_first_retrieval_principle"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "group_code": "agent_memory_lifecycle",
+      "group_name_vi": "Memory và vòng đời ghi nhớ của agent",
+      "member_kc_codes": [
+        "short_term_long_term_memory",
+        "retrieval_vs_memory",
+        "memory_lifecycle_policy"
+      ],
+      "decision": "revise",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:18:04.299Z",
+      "pilot_member_kc_codes": [
+        "short_term_long_term_memory",
+        "memory_lifecycle_policy"
+      ],
+      "excluded_member_kc_codes": [
+        "retrieval_vs_memory"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 7,
+      "lesson_slug": "day07-data-foundations-embedding-vector-store",
+      "group_code": "vector_similarity_metrics",
+      "group_name_vi": "Metric đo độ gần vector",
+      "member_kc_codes": [
+        "cosine_similarity",
+        "distance_metric_selection"
+      ],
+      "decision": "reject",
+      "scores": {
+        "grouping_fit": 1,
+        "topic_name_fit": 1,
+        "topic_distinctness": 1,
+        "learning_objective_alignment": 1
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:18:25.851Z",
+      "pilot_member_kc_codes": [
+        "cosine_similarity",
+        "distance_metric_selection"
+      ],
+      "excluded_member_kc_codes": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "group_code": "supervisor_worker_thiet_ke_va_do_tin_cay",
+      "group_name_vi": "Thiết kế và độ tin cậy của supervisor-worker",
+      "member_kc_codes": [
+        "upgrade_rag_artifact_to_supervisor_worker_system",
+        "supervisor_worker_architecture",
+        "supervisor_responsibility_boundary",
+        "worker_design_boundary",
+        "supervisor_worker_anti_patterns",
+        "worker_failure_handling_and_graceful_degradation"
+      ],
+      "decision": "revise",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 3,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [
+        "rename_topic"
+      ],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:21:03.599Z",
+      "pilot_member_kc_codes": [],
+      "excluded_member_kc_codes": [
+        "upgrade_rag_artifact_to_supervisor_worker_system",
+        "supervisor_worker_architecture",
+        "supervisor_responsibility_boundary",
+        "worker_design_boundary",
+        "supervisor_worker_anti_patterns",
+        "worker_failure_handling_and_graceful_degradation"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "group_code": "gioi_han_single_agent",
+      "group_name_vi": "Các giới hạn cốt lõi của single agent",
+      "member_kc_codes": [
+        "single_agent_context_bottleneck",
+        "single_agent_parallelism_limit",
+        "single_agent_specialization_tradeoff"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:22:01.873Z",
+      "pilot_member_kc_codes": [
+        "single_agent_context_bottleneck",
+        "single_agent_parallelism_limit",
+        "single_agent_specialization_tradeoff"
+      ],
+      "excluded_member_kc_codes": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "group_code": "phan_tach_trach_nhiem_va_chan_doan_loi",
+      "group_name_vi": "Phân tách trách nhiệm và chẩn đoán lỗi hệ thống",
+      "member_kc_codes": [
+        "single_agent_reliability_failure_propagation",
+        "system_first_responsibility_decomposition",
+        "multi_agent_observability_diagnosis"
+      ],
+      "decision": "revise",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:26:31.043Z",
+      "pilot_member_kc_codes": [
+        "system_first_responsibility_decomposition",
+        "multi_agent_observability_diagnosis"
+      ],
+      "excluded_member_kc_codes": [
+        "single_agent_reliability_failure_propagation"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "group_code": "lua_chon_kien_truc_va_dieu_phoi",
+      "group_name_vi": "Lựa chọn kiến trúc và cơ chế điều phối",
+      "member_kc_codes": [
+        "multi_agent_adoption_criteria",
+        "multi_agent_pattern_selection",
+        "sync_async_agent_coordination",
+        "multi_agent_cost_latency_tradeoff"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:27:05.375Z",
+      "pilot_member_kc_codes": [
+        "multi_agent_adoption_criteria",
+        "multi_agent_pattern_selection",
+        "sync_async_agent_coordination",
+        "multi_agent_cost_latency_tradeoff"
+      ],
+      "excluded_member_kc_codes": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "group_code": "dieu_phoi_langgraph_va_human_review",
+      "group_name_vi": "Điều phối LangGraph và human review",
+      "member_kc_codes": [
+        "human_in_the_loop_placement",
+        "langgraph_orchestration_model",
+        "langgraph_conditional_routing"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:29:50.420Z",
+      "pilot_member_kc_codes": [
+        "langgraph_conditional_routing"
+      ],
+      "excluded_member_kc_codes": [
+        "human_in_the_loop_placement",
+        "langgraph_orchestration_model"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "group_code": "shared_state_va_message_passing",
+      "group_name_vi": "Shared state và message passing",
+      "member_kc_codes": [
+        "multi_agent_shared_state_schema",
+        "shared_state_vs_message_passing"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-21T15:32:04.794Z",
+      "pilot_member_kc_codes": [
+        "shared_state_vs_message_passing"
+      ],
+      "excluded_member_kc_codes": [
+        "multi_agent_shared_state_schema"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "group_code": "trace_va_cai_tien_he_thong",
+      "group_name_vi": "Trace và cải tiến hệ thống",
+      "member_kc_codes": [
+        "trace_log_schema_design",
+        "trace_driven_system_improvement"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:20.056Z",
+      "pilot_member_kc_codes": [
+        "trace_log_schema_design",
+        "trace_driven_system_improvement"
+      ],
+      "excluded_member_kc_codes": []
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "group_code": "tich_hop_capability_qua_mcp",
+      "group_name_vi": "Kết nối capability bên ngoài qua MCP",
+      "member_kc_codes": [
+        "mcp_external_capability_standard",
+        "mcp_capability_surface",
+        "mcp_tool_discovery_and_invocation"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:41.325Z",
+      "pilot_member_kc_codes": [
+        "mcp_external_capability_standard"
+      ],
+      "excluded_member_kc_codes": [
+        "mcp_capability_surface",
+        "mcp_tool_discovery_and_invocation"
+      ]
+    },
+    {
+      "reviewer_key": "reviewer-02",
+      "lesson_day": 9,
+      "lesson_slug": "day09-multi-agent-mcp-a2a",
+      "group_code": "hop_dong_giao_tiep_agent_va_ranh_gioi_tin_cay",
+      "group_name_vi": "Giao tiếp agent, message contract và trust boundary",
+      "member_kc_codes": [
+        "mcp_vs_a2a_boundary",
+        "a2a_message_contract_design",
+        "a2a_need_to_know_context",
+        "agent_communication_security_boundary"
+      ],
+      "decision": "pass",
+      "scores": {
+        "grouping_fit": 4,
+        "topic_name_fit": 4,
+        "topic_distinctness": 4,
+        "learning_objective_alignment": 4
+      },
+      "suggested_actions": [],
+      "criterion_notes": {
+        "grouping_fit": "",
+        "topic_name_fit": "",
+        "topic_distinctness": "",
+        "learning_objective_alignment": ""
+      },
+      "review_note": null,
+      "confirmed_at": "2026-08-22T02:35:57.345Z",
+      "pilot_member_kc_codes": [
+        "mcp_vs_a2a_boundary",
+        "a2a_message_contract_design",
+        "a2a_need_to_know_context",
+        "agent_communication_security_boundary"
+      ],
+      "excluded_member_kc_codes": []
+    }
+  ]
+}
